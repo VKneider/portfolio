@@ -1,0 +1,26 @@
+slice-mynavigation {
+  display: block;
+  width: 100%;
+  margin-left: 300px; /* Account for sidebar */
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.navigation-container {
+  width: 100%;
+  padding: 2rem;
+  padding-top: 100px; /* Account for navbar */
+  min-height: calc(100vh - 100px);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  slice-mynavigation {
+    margin-left: 0;
+  }
+  
+  .navigation-container {
+    padding: 1rem;
+    padding-top: 80px;
+  }
+}

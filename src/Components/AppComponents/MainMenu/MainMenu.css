@@ -1,0 +1,35 @@
+slice-mainmenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: var(--font-family);
+  background-color: var(--primary-background-color);
+  border-right: 1px solid var(--primary-color-shade);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  width: 300px;
+  transition: transform 0.3s ease;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 99;
+}
+
+.mainmenu-container {
+  width: 100%;
+  padding: 1rem;
+  padding-top: 80px; /* Account for navbar */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  slice-mainmenu {
+    width: 280px;
+    transform: translateX(-100%);
+  }
+  
+  slice-mainmenu.active {
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,226 @@
+slice-about-section {
+  display: block;
+  width: 100%;
+}
+
+.about-container {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--primary-background-color) 0%, var(--secondary-background-color) 100%);
+  margin-bottom: 4rem;
+  border-radius: var(--border-radius-slice);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-color);
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  align-self: center;
+  align-items: center;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.hero-text h2 {
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+  color: var(--font-secondary-color);
+  font-weight: 400;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--font-primary-color);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+/* About Content */
+.about-content {
+  margin-bottom: 4rem;
+}
+
+/* Skills Section */
+.skills-section {
+  margin-bottom: 4rem;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  background-color: var(--secondary-background-color);
+  padding: 2rem;
+  border-radius: var(--border-radius-slice);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.skill-category {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background-color: var(--primary-color);
+  color: var(--primary-color-contrast);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background-color: var(--secondary-color);
+  color: var(--secondary-color-contrast);
+  transform: scale(1.05);
+}
+
+/* Interests Section */
+.interests-section {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.interests-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.interest-tag {
+  background-color: var(--tertiary-background-color);
+  color: var(--font-primary-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius-slice);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 2px solid var(--primary-color-shade);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.interest-tag:hover {
+  background-color: var(--primary-color);
+  color: var(--primary-color-contrast);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.3rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.1rem;
+  }
+  
+  .skill-card {
+    padding: 1.5rem;
+  }
+}

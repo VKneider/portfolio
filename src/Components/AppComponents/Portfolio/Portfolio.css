@@ -1,0 +1,121 @@
+slice-portfolio {
+  display: block;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  color: var(--font-primary-color);
+  background-color: var(--primary-background-color);
+}
+
+.portfolio-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-main {
+  flex: 1;
+  padding-top: 80px; /* Account for fixed navbar */
+  min-height: calc(100vh - 120px);
+}
+
+.portfolio-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.content-transition {
+  opacity: 0.7;
+}
+
+/* Footer Styles */
+.portfolio-footer {
+  background-color: var(--secondary-background-color);
+  padding: 3rem 2rem 2rem;
+  margin-top: auto;
+  border-top: 1px solid var(--primary-color-shade);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--primary-color-contrast);
+  text-decoration: none;
+  border-radius: var(--border-radius-slice);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.social-link:hover {
+  background-color: var(--secondary-color);
+  color: var(--secondary-color-contrast);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.footer-info {
+  text-align: center;
+  color: var(--font-secondary-color);
+}
+
+.footer-info p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.footer-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portfolio-content {
+    padding: 1rem;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .social-link {
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+/* Animation for content changes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-content > * {
+  animation: fadeIn 0.6s ease-out;
+}
