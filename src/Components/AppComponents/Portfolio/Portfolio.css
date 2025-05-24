@@ -19,6 +19,22 @@ slice-portfolio {
   min-height: calc(100vh - 120px);
 }
 
+
+.portfolio-content.smooth-transitions {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.content-transition-out {
+  opacity: 0.7;
+  transform: translateY(10px);
+}
+
+.content-transition-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .portfolio-content {
   width: 100%;
   max-width: 1200px;

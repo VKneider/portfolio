@@ -66,7 +66,7 @@ export default class Portfolio extends HTMLElement {
             { path: '/', component: 'AboutSection' },
             { path: '/experience', component: 'ExperienceSection' },
             { path: '/education', component: 'EducationSection' },
-            { path: '/slice-js', component: 'SliceJsSection' },
+            { path: '/slice-js', component: 'WhatIsSlice' },
             { path: '/projects', component: 'ProjectsSection' }
          ]
       });
@@ -119,16 +119,11 @@ export default class Portfolio extends HTMLElement {
    }
 
    handleRouteChange() {
-      // Add smooth transitions between sections
-      const observer = new MutationObserver(() => {
-         this.$content.classList.add('content-transition');
-         setTimeout(() => {
-            this.$content.classList.remove('content-transition');
-         }, 300);
-      });
+   // Simplemente añadir una clase CSS para transiciones suaves
+   this.$content.classList.add('smooth-transitions');
+}
 
-      observer.observe(this.$content, { childList: true, subtree: true });
-   }
+
 }
 
 customElements.define('slice-portfolio', Portfolio);

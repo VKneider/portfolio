@@ -6,7 +6,7 @@ const components = {
   "MyNavigation": "AppComponents",
   "Portfolio": "AppComponents",
   "ProjectsSection": "AppComponents",
-  "SliceJsSection": "AppComponents",
+  "WhatIsSlice": "AppComponents",
   "Button": "Visual",
   "Card": "Visual",
   "Checkbox": "Visual",
