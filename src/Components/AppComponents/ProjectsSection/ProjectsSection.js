@@ -18,11 +18,11 @@ export default class ProjectsSection extends HTMLElement {
             id: 1,
             title: 'Slice.js Framework',
             description: 'A modern, lightweight component-based framework for building web applications using vanilla JavaScript and web standards.',
-            image: '/images/projects/slice-js.png',
+            image: 'https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG',
             technologies: ['JavaScript', 'Web Components', 'CSS3', 'HTML5'],
             category: 'Framework',
             status: 'Active',
-            githubUrl: 'https://github.com/victorkneider/slice-js',
+            githubUrl: 'https://github.com/vkneider/slice.js',
             liveUrl: 'https://slice-js-demo.vercel.app',
             featured: true,
             date: '2024-01-15'
@@ -117,119 +117,16 @@ export default class ProjectsSection extends HTMLElement {
       });
 
       for (const [index, project] of sortedProjects.entries()) {
-         const projectCard = await this.createProjectCard(project, index);
+         const projectCard = await slice.build('ProjectCard', {
+            project: project,
+            animationDelay: index * 0.1
+         });
+         
          projectsGrid.appendChild(projectCard);
       }
 
       this.$grid.appendChild(sectionTitle);
       this.$grid.appendChild(projectsGrid);
-   }
-
-   async createProjectCard(project, index) {
-      const card = document.createElement('div');
-      card.classList.add('project-card');
-      if (project.featured) {
-         card.classList.add('featured');
-      }
-      card.style.animationDelay = `${index * 0.1}s`;
-
-      // Project image
-      const imageContainer = document.createElement('div');
-      imageContainer.classList.add('project-image-container');
-      
-      const image = document.createElement('img');
-      image.src = project.image;
-      image.alt = project.title;
-      image.classList.add('project-image');
-      image.loading = 'lazy';
-      image.onerror = () => {
-         // Fallback to placeholder
-         image.src = '/images/projects/placeholder.png';
-      };
-
-      // Status badge
-      const statusBadge = document.createElement('span');
-      statusBadge.classList.add('status-badge', `status-${project.status.toLowerCase().replace(' ', '-')}`);
-      statusBadge.textContent = project.status;
-
-      // Featured badge
-      if (project.featured) {
-         const featuredBadge = document.createElement('span');
-         featuredBadge.classList.add('featured-badge');
-         featuredBadge.textContent = '⭐ Featured';
-         imageContainer.appendChild(featuredBadge);
-      }
-
-      imageContainer.appendChild(image);
-      imageContainer.appendChild(statusBadge);
-
-      // Project content
-      const content = document.createElement('div');
-      content.classList.add('project-content');
-
-      // Title
-      const title = document.createElement('h3');
-      title.classList.add('project-title');
-      title.textContent = project.title;
-
-      // Description
-      const description = document.createElement('p');
-      description.classList.add('project-description');
-      description.textContent = project.description;
-
-      // Tech stack
-      const techStack = document.createElement('div');
-      techStack.classList.add('tech-stack');
-      
-      project.technologies.forEach(tech => {
-         const techTag = document.createElement('span');
-         techTag.classList.add('tech-tag');
-         techTag.textContent = tech;
-         techStack.appendChild(techTag);
-      });
-
-      // Actions
-      const actions = document.createElement('div');
-      actions.classList.add('project-actions');
-
-      // GitHub button
-      if (project.githubUrl) {
-         const githubBtn = await slice.build('Button', {
-            value: 'GitHub',
-            customColor: {
-               button: 'var(--secondary-background-color)',
-               label: 'var(--font-primary-color)'
-            },
-            onClickCallback: () => window.open(project.githubUrl, '_blank')
-         });
-         githubBtn.classList.add('action-button');
-         actions.appendChild(githubBtn);
-      }
-
-      // Live demo button
-      if (project.liveUrl) {
-         const liveBtn = await slice.build('Button', {
-            value: 'Live Demo',
-            customColor: {
-               button: 'var(--primary-color)',
-               label: 'var(--primary-color-contrast)'
-            },
-            onClickCallback: () => window.open(project.liveUrl, '_blank')
-         });
-         liveBtn.classList.add('action-button');
-         actions.appendChild(liveBtn);
-      }
-
-      // Assemble card
-      content.appendChild(title);
-      content.appendChild(description);
-      content.appendChild(techStack);
-      content.appendChild(actions);
-
-      card.appendChild(imageContainer);
-      card.appendChild(content);
-
-      return card;
    }
 }
 

@@ -35,6 +35,10 @@
             "Service":{
                 "path":"/Components/Service",
                 "type":"Service"
+            },
+            "AtomicAppComponents":{
+                "path":"/Components/AtomicAppComponents",
+                "type":"Visual"
             }
         },
         "themes": "/Themes",

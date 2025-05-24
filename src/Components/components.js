@@ -30,5 +30,6 @@ const components = {
   "IndexedDbManager": "Service",
   "Link": "Service",
   "LocalStorageManager": "Service",
-  "Translator": "Service"
+  "Translator": "Service",
+  "ProjectCard": "AtomicAppComponents"
 }; export default components;
