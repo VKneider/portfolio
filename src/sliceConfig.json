@@ -8,7 +8,7 @@
     },
     "themeManager": {
         "enabled":true,
-        "defaultTheme": "Slice",
+        "defaultTheme": "Blue",
         "saveThemeLocally": false,
         "useBrowserTheme": false
     },

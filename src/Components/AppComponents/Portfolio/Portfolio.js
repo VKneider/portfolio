@@ -48,13 +48,10 @@ export default class Portfolio extends HTMLElement {
                },
                onClickCallback: async () => {
                   const currentTheme = slice.stylesManager.themeManager.currentTheme;
-                  if (currentTheme === 'Slice') {
-                     await slice.setTheme('Light');
-                  } else if (currentTheme === 'Light') {
-                     await slice.setTheme('Dark');
-                  } else {
-                     await slice.setTheme('Slice');
-                  }
+                  const themes = ["Slice", "Light", "Dark", "Blue", "Purple"];
+                  const nextThemeIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+                  await slice.setTheme(themes[nextThemeIndex]);
+                  
                }
             }
          ]
