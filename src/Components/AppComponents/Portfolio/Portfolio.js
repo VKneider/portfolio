@@ -27,20 +27,6 @@ export default class Portfolio extends HTMLElement {
          ],
          buttons: [
             {
-               value: 'Download CV',
-               customColor: {
-                  button: 'var(--primary-color)',
-                  label: 'var(--primary-color-contrast)'
-               },
-               onClickCallback: () => {
-                  // Create download link for CV
-                  const link = document.createElement('a');
-                  link.href = '/assets/Victor_Kneider_CV.pdf';
-                  link.download = 'Victor_Kneider_CV.pdf';
-                  link.click();
-               }
-            },
-            {
                value: 'Change Theme',
                customColor: {
                   button: 'var(--secondary-color)',
