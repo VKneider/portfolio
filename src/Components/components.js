@@ -24,6 +24,7 @@ const components = {
   "Route": "Visual",
   "Select": "Visual",
   "Switch": "Visual",
+  "ThemeSelector": "Visual",
   "TreeItem": "Visual",
   "TreeView": "Visual",
   "FetchManager": "Service",
