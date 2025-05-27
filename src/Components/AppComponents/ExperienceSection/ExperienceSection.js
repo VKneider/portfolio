@@ -10,7 +10,7 @@ export default class ExperienceSection extends HTMLElement {
       
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
-      this.experienceData = [];
+      this.experienceData = experienceData  || [];
    }
 
    async init() {
