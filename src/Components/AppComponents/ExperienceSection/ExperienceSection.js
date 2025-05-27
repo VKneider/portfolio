@@ -1,3 +1,5 @@
+import {experienceData} from './data.js';
+
 export default class ExperienceSection extends HTMLElement {
    constructor(props) {
       super();

@@ -1,4 +1,4 @@
-this.experienceData = [
+export const experienceData = [
          {
             id: 1,
             company: 'Tech Innovations Inc.',
