@@ -92,7 +92,7 @@ export default class Portfolio extends HTMLElement {
       this.appendChild(footer);
 
       // Handle route changes
-      this.handleRouteChange();
+      //this.handleRouteChange();
    }
 
    async createFooter() {
