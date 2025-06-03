@@ -66,20 +66,6 @@ export default class AboutSection extends HTMLElement {
             I combine deep technical expertise with a drive for continuous learning to build 
             scalable applications and contribute to the developer community.
          </p>
-         <div class="hero-stats">
-            <div class="stat-item">
-               <span class="stat-number">5+</span>
-               <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-item">
-               <span class="stat-number">15+</span>
-               <span class="stat-label">Technologies Mastered</span>
-            </div>
-            <div class="stat-item">
-               <span class="stat-number">100%</span>
-               <span class="stat-label">Passion for Innovation</span>
-            </div>
-         </div>
       `;
 
       // Enhanced CTA Buttons
