@@ -1,0 +1,49 @@
+<div class="slice-image-container">
+  <!-- Skeleton loader -->
+  <div class="image-skeleton">
+    <div class="skeleton-shimmer"></div>
+  </div>
+  
+  <!-- Progress bar para carga -->
+  <div class="loading-progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+  
+  <!-- Imagen principal -->
+  <img class="slice-image" loading="lazy" decoding="async" />
+  
+  <!-- Imagen de fallback (oculta por defecto) -->
+  <img class="image-fallback" style="display: none;" />
+  
+  <!-- Overlay de error -->
+  <div class="image-error-overlay">
+    <div class="error-content">
+      <div class="error-icon">⚠️</div>
+      <p class="error-message">Failed to load image</p>
+      <button class="retry-button">Retry</button>
+    </div>
+  </div>
+  
+  <!-- Overlay para conexión lenta -->
+  <div class="low-connection-overlay">
+    <div class="connection-content">
+      <div class="connection-icon">📶</div>
+      <p class="connection-message">Slow connection detected</p>
+      <button class="manual-load-btn">Load anyway</button>
+    </div>
+  </div>
+  
+  <!-- Overlay offline -->
+  <div class="offline-overlay">
+    <div class="offline-content">
+      <div class="offline-icon">📡</div>
+      <p class="offline-message">You're offline</p>
+      <p class="offline-subtitle">Image will load when connection is restored</p>
+    </div>
+  </div>
+  
+  <!-- Indicador de loading -->
+  <div class="loading-indicator">
+    <div class="loading-spinner"></div>
+  </div>
+</div>
