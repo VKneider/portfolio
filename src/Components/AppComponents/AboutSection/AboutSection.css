@@ -7,14 +7,14 @@ slice-about-section {
   width: 100%;
 }
 
-/* Enhanced Hero Section */
+/* Enhanced Hero Section - COMPACTO */
 .hero-section {
   position: relative;
   text-align: center;
-  padding: 2rem 1rem;
-  padding-top: 2.5rem;
+  padding: 1.5rem 1rem; /* Reducido de 2rem */
+  padding-top: 1.8rem; /* Reducido de 2.5rem */
   background-color: var(--secondary-background-color);
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem; /* Reducido de 4rem */
   border-radius: var(--border-radius-slice);
   overflow: hidden;
   border: 2px solid var(--primary-color-shade);
@@ -131,45 +131,45 @@ slice-about-section {
   z-index: 2;
 }
 
-/* Enhanced Profile Image */
+/* Enhanced Profile Image - COMPACTO */
 .profile-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reducido de 1.5rem */
 }
 
 .profile-ring {
   position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  border: 4px solid transparent;
+  top: -15px; /* Reducido de -20px */
+  left: -15px; /* Reducido de -20px */
+  right: -15px; /* Reducido de -20px */
+  bottom: -15px; /* Reducido de -20px */
+  border: 3px solid transparent; /* Reducido de 4px */
   border-radius: 50%;
-  border-top: 4px solid var(--primary-color);
-  border-right: 4px solid var(--secondary-color);
-  border-bottom: 4px solid var(--success-color);
-  border-left: 4px solid var(--warning-color);
+  border-top: 3px solid var(--primary-color);
+  border-right: 3px solid var(--secondary-color);
+  border-bottom: 3px solid var(--success-color);
+  border-left: 3px solid var(--warning-color);
   animation: rotateRing 4s linear infinite;
   /* Glowing ring effect */
   box-shadow: 
-    0 0 30px rgba(var(--primary-color-rgb), 0.6),
-    inset 0 0 30px rgba(var(--primary-color-rgb), 0.3);
+    0 0 25px rgba(var(--primary-color-rgb), 0.6), /* Reducido de 0 0 30px */
+    inset 0 0 25px rgba(var(--primary-color-rgb), 0.3); /* Reducido de inset 0 0 30px */
 }
 
 .profile-ring::before {
   content: '';
   position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-  border: 2px solid var(--primary-color);
+  top: -6px; /* Reducido de -8px */
+  left: -6px; /* Reducido de -8px */
+  right: -6px; /* Reducido de -8px */
+  bottom: -6px; /* Reducido de -8px */
+  border: 1px solid var(--primary-color); /* Reducido de 2px */
   border-radius: 50%;
   opacity: 0.3;
   animation: rotateRing 6s linear infinite reverse;
   /* Outer ring glow */
-  box-shadow: 0 0 40px rgba(var(--primary-color-rgb), 0.5);
+  box-shadow: 0 0 30px rgba(var(--primary-color-rgb), 0.5); /* Reducido de 0 0 40px */
 }
 
 @keyframes rotateRing {
@@ -178,14 +178,14 @@ slice-about-section {
 }
 
 .profile-image {
-  width: 220px;
-  height: 220px;
+  width: 160px; /* Reducido de 220px */
+  height: 160px; /* Reducido de 220px */
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--primary-background-color);
+  border: 4px solid var(--primary-background-color); /* Reducido de 6px */
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(var(--primary-color-rgb), 0.3);
+    0 15px 30px rgba(0, 0, 0, 0.2), /* Reducido de 0 20px 40px */
+    0 0 25px rgba(var(--primary-color-rgb), 0.3); /* Reducido de 0 0 30px */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
   z-index: 3;
@@ -198,23 +198,23 @@ slice-about-section {
     0 0 50px rgba(var(--primary-color-rgb), 0.6);
 }
 
-/* Enhanced Hero Text */
+/* Enhanced Hero Text - COMPACTO */
 .title-container {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Reducido de 1rem */
 }
 
 .hero-text h1 {
-  font-size: 2.8rem;
+  font-size: 2.2rem; /* Reducido de 2.8rem */
   margin: 0;
   color: var(--primary-color);
   font-weight: 800;
   position: relative;
   /* Text glow effect */
   text-shadow: 
-    0 0 10px rgba(var(--primary-color-rgb), 0.5),
-    0 0 20px rgba(var(--primary-color-rgb), 0.3),
-    0 0 30px rgba(var(--primary-color-rgb), 0.1);
+    0 0 8px rgba(var(--primary-color-rgb), 0.5), /* Reducido de 0 0 10px */
+    0 0 15px rgba(var(--primary-color-rgb), 0.3), /* Reducido de 0 0 20px */
+    0 0 20px rgba(var(--primary-color-rgb), 0.1); /* Reducido de 0 0 30px */
 }
 
 .title-accent {
@@ -233,19 +233,19 @@ slice-about-section {
 }
 
 .roles-container {
-  height: 60px;
+  height: 45px; /* Reducido de 60px */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem; /* Reducido de 2rem */
 }
 
 .role-title {
-  font-size: 2rem;
+  font-size: 1.6rem; /* Reducido de 2rem */
   margin: 0;
   color: var(--font-secondary-color);
   font-weight: 500;
-  min-height: 2.5rem;
+  min-height: 2rem; /* Reducido de 2.5rem */
 }
 
 .role-switcher {
@@ -257,35 +257,35 @@ slice-about-section {
 }
 
 .hero-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1rem; /* Reducido de 1.1rem */
+  line-height: 1.6; /* Reducido de 1.8 */
   color: var(--font-primary-color);
-  margin-bottom: 2rem;
-  max-width: 700px;
+  margin-bottom: 1.5rem; /* Reducido de 2rem */
+  max-width: 600px; /* Reducido de 700px */
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Hero Stats */
+/* Hero Stats - COMPACTO */
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem; /* Reducido de 1.5rem */
+  margin-bottom: 1rem; /* Reducido de 1.5rem */
   flex-wrap: wrap;
 }
 
 .stat-item {
   text-align: center;
-  padding: 1rem;
+  padding: 0.8rem; /* Reducido de 1rem */
   background: var(--tertiary-background-color);
   border-radius: var(--border-radius-slice);
   border: 2px solid var(--primary-color-shade);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   /* Stat item glow */
   box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.1),
-    0 0 20px rgba(var(--primary-color-rgb), 0.1);
+    0 3px 12px rgba(0, 0, 0, 0.1), /* Reducido de 0 4px 15px */
+    0 0 15px rgba(var(--primary-color-rgb), 0.1); /* Reducido de 0 0 20px */
 }
 
 .stat-item:hover {
@@ -299,12 +299,12 @@ slice-about-section {
 
 .stat-number {
   display: block;
-  font-size: 2.5rem;
+  font-size: 2rem; /* Reducido de 2.5rem */
   font-weight: bold;
   color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* Reducido de 0.5rem */
   /* Number glow */
-  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
+  text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3); /* Reducido de 0 0 10px */
 }
 
 .stat-label {
@@ -322,18 +322,18 @@ slice-about-section {
   flex-wrap: wrap;
 }
 
-/* Section Titles */
+/* Section Titles - COMPACTO */
 .section-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem; /* Reducido de 3rem */
   font-weight: 700;
   position: relative;
   /* Section title glow */
   text-shadow: 
-    0 0 15px rgba(var(--primary-color-rgb), 0.4),
-    0 0 30px rgba(var(--primary-color-rgb), 0.2);
+    0 0 12px rgba(var(--primary-color-rgb), 0.4), /* Reducido de 0 0 15px */
+    0 0 20px rgba(var(--primary-color-rgb), 0.2); /* Reducido de 0 0 30px */
 }
 
 .section-title::after {
@@ -352,9 +352,9 @@ slice-about-section {
     0 0 30px rgba(var(--secondary-color-rgb), 0.3);
 }
 
-/* About Section using Slice Cards */
+/* About Section using Slice Cards - COMPACTO */
 .about-content {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reducido de 4rem */
 }
 
 .about-slice-card {
@@ -389,9 +389,9 @@ slice-about-section {
     0 0 40px rgba(var(--primary-color-rgb), 0.3);
 }
 
-/* Technical Skills Section - MODIFICADO PARA 4 COLUMNAS */
+/* Technical Skills Section - COMPACTO */
 .skills-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reducido de 4rem */
 }
 
 .technical-skills-container {
@@ -464,9 +464,9 @@ slice-about-section {
     0 0 25px rgba(var(--secondary-color-rgb), 0.4);
 }
 
-/* Values Section */
+/* Values Section - COMPACTO */
 .values-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reducido de 4rem */
 }
 
 .values-container {
@@ -522,9 +522,9 @@ slice-about-section {
   font-size: 0.95rem;
 }
 
-/* Interests Section */
+/* Interests Section - COMPACTO */
 .interests-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem; /* Reducido de 4rem */
   text-align: center;
 }
 
@@ -631,7 +631,7 @@ slice-about-section {
   animation: rotateRing 4s linear infinite, pulseGlow 3s ease-in-out infinite;
 }
 
-/* Responsive Design */
+/* Responsive Design - COMPACTO */
 @media (max-width: 1200px) {
   .technical-skills-container {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -650,152 +650,157 @@ slice-about-section {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 1.5rem 1rem;
-      padding-top: 2.5rem;
-
+    padding: 1rem 1rem;
+    padding-top: 1.5rem; /* Reducido */
+    margin-bottom: 2rem; /* Reducido de 2.5rem */
   }
   
   .hero-text h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* Reducido de 2.2rem */
   }
   
   .role-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* Reducido de 1.6rem */
   }
   
   .hero-description {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.95rem; /* Reducido de 1rem */
+    margin-bottom: 1rem; /* Reducido de 1.5rem */
   }
   
   .profile-image {
-    width: 140px;
-    height: 140px;
+    width: 120px; /* Reducido de 160px */
+    height: 120px; /* Reducido de 160px */
   }
   
   .profile-container {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem; /* Reducido de 1rem */
   }
   
   .roles-container {
-    height: 50px;
-    margin-bottom: 1.5rem;
+    height: 35px; /* Reducido de 45px */
+    margin-bottom: 1rem; /* Reducido de 1.2rem */
   }
   
   .stat-item {
-    padding: 0.8rem;
+    padding: 0.6rem; /* Reducido de 0.8rem */
   }
   
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Reducido de 2rem */
+  }
+  
+  .section-title {
+    font-size: 2rem; /* Reducido */
   }
 }
 
-
 @media (max-width: 480px) {
   .hero-section {
-    padding: 1rem 0.8rem;
-      padding-top: 2.5rem;
-
+    padding: 0.8rem 0.8rem;
+    padding-top: 1.2rem; /* Reducido */
+    margin-bottom: 1.5rem; /* Reducido */
   }
   
   .hero-text h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Reducido de 1.8rem */
   }
   
   .profile-image {
-    width: 120px;
-    height: 120px;
+    width: 100px; /* Reducido de 120px */
+    height: 100px; /* Reducido de 120px */
   }
   
   .profile-container {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
   }
   
   .roles-container {
-    height: 40px;
-    margin-bottom: 1rem;
+    height: 30px; /* Reducido de 35px */
+    margin-bottom: 0.8rem; /* Reducido de 1rem */
   }
   
   .role-title {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Reducido de 1.2rem */
   }
   
   .hero-description {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    font-size: 0.9rem; /* Reducido de 0.95rem */
+    margin-bottom: 0.8rem; /* Reducido de 1rem */
+    line-height: 1.5; /* Reducido de 1.6 */
   }
   
   .hero-stats {
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem; /* Reducido de 1rem */
+    margin-bottom: 0.8rem; /* Reducido de 1rem */
   }
   
   .stat-item {
-    padding: 0.6rem;
+    padding: 0.5rem; /* Reducido de 0.6rem */
   }
   
   .stat-number {
-    font-size: 1.8rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.5rem; /* Reducido de 1.8rem */
+    margin-bottom: 0.2rem; /* Reducido de 0.3rem */
   }
   
   .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Reducido */
   }
   
   .cta-buttons {
-    gap: 1rem;
+    gap: 1rem; /* Reducido de 1.5rem */
   }
 }
 
 @media (max-width: 360px) {
   .hero-section {
-    padding: 0.8rem 0.5rem;
+    padding: 0.6rem 0.5rem; /* Reducido */
+    padding-top: 1rem; /* Reducido */
+    margin-bottom: 1.2rem; /* Reducido */
   }
   
   .hero-text h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Reducido de 1.6rem */
   }
   
   .profile-image {
-    width: 100px;
-    height: 100px;
+    width: 80px; /* Reducido de 100px */
+    height: 80px; /* Reducido de 100px */
   }
   
   .profile-ring {
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
+    top: -12px; /* Reducido de -15px */
+    left: -12px; /* Reducido de -15px */
+    right: -12px; /* Reducido de -15px */
+    bottom: -12px; /* Reducido de -15px */
   }
   
   .roles-container {
-    height: 35px;
-    margin-bottom: 0.8rem;
+    height: 25px; /* Reducido de 30px */
+    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
   }
   
   .role-title {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reducido de 1rem */
   }
   
   .hero-description {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
+    font-size: 0.85rem; /* Reducido de 0.9rem */
+    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
   }
   
   .hero-stats {
     flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 0.8rem;
+    gap: 0.6rem; /* Reducido de 0.8rem */
+    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
   }
   
   .stat-item {
-    padding: 0.5rem;
+    padding: 0.4rem; /* Reducido de 0.5rem */
   }
   
   .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Reducido de 1.5rem */
   }
 }
