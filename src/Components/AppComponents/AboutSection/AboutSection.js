@@ -210,47 +210,19 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createTechnicalSkillsSection() {
-      const skillsTitle = document.createElement('h2');
-      skillsTitle.innerHTML = '💻 Technical Expertise';
-      skillsTitle.classList.add('section-title');
-
-      const skillsData = [
-         { category: 'Frontend Development', skills: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'HTML5', 'CSS3', 'Slice.js'] },
-         { category: 'Backend Development', skills: ['Node.js', 'Express', 'Python', 'PHP', 'RESTful APIs', 'GraphQL', 'Microservices'] },
-         { category: 'Database & Cloud', skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'AWS', 'Docker', 'Kubernetes'] },
-         { category: 'Tools & Methodologies', skills: ['Git', 'CI/CD', 'Agile', 'Scrum', 'Testing', 'TDD', 'System Design'] }
-      ];
-
-      const skillsContainer = document.createElement('div');
-      skillsContainer.classList.add('technical-skills-container');
-
-      for (const skillGroup of skillsData) {
-         const skillCard = document.createElement('div');
-         skillCard.classList.add('technical-skill-card');
-         
-         const categoryTitle = document.createElement('h3');
-         categoryTitle.textContent = skillGroup.category;
-         categoryTitle.classList.add('skill-category');
-         
-         const skillsList = document.createElement('div');
-         skillsList.classList.add('skills-tags-list');
-         
-         skillGroup.skills.forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.classList.add('skill-tag');
-            skillTag.textContent = skill;
-            skillsList.appendChild(skillTag);
-         });
-         
-         skillCard.appendChild(categoryTitle);
-         skillCard.appendChild(skillsList);
-         skillsContainer.appendChild(skillCard);
-      }
-
-      this.$skills.appendChild(skillsTitle);
-      this.$skills.appendChild(skillsContainer);
+   const technicalSkillsSection = await slice.build('TechnicalSkillsSection', {
+      title: '💻 Technical Expertise',
+      maxSkillsPerCard: 8,
+      showLevelBadges: true
+   });
+   
+   // Asegúrate de que el componente se construyó correctamente
+   if (technicalSkillsSection && this.$skills) {
+      this.$skills.appendChild(technicalSkillsSection);
+   } else {
+      console.error('Error: TechnicalSkillsSection component not built correctly');
    }
-
+}
    async createSoftSkillsSection() {
       const valuesTitle = document.createElement('h2');
       valuesTitle.innerHTML = '🎯 Core Values & Philosophy';

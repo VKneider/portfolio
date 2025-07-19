@@ -389,80 +389,8 @@ slice-about-section {
     0 0 40px rgba(var(--primary-color-rgb), 0.3);
 }
 
-/* Technical Skills Section - COMPACTO */
-.skills-section {
-  margin-bottom: 3rem; /* Reducido de 4rem */
-}
 
-.technical-skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.8rem;
-  margin-top: 3rem;
-}
 
-.technical-skill-card {
-  background: var(--secondary-background-color);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.1),
-    0 0 20px rgba(var(--primary-color-rgb), 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid var(--primary-color-shade);
-}
-
-.technical-skill-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary-color);
-  /* Enhanced skill card glow */
-  box-shadow: 
-    0 12px 35px rgba(0, 0, 0, 0.15),
-    0 0 40px rgba(var(--primary-color-rgb), 0.4);
-}
-
-.skill-category {
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  text-align: center;
-  /* Category title glow */
-  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
-}
-
-.skills-tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-}
-
-.skill-tag {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  /* Skill tag glow */
-  box-shadow: 
-    0 2px 8px rgba(var(--primary-color-rgb), 0.3),
-    0 0 15px rgba(var(--primary-color-rgb), 0.2);
-}
-
-.skill-tag:hover {
-  background-color: var(--secondary-color);
-  color: var(--secondary-color-contrast);
-  transform: scale(1.05);
-  border-color: var(--secondary-color);
-  /* Enhanced tag glow on hover */
-  box-shadow: 
-    0 4px 15px rgba(var(--secondary-color-rgb), 0.5),
-    0 0 25px rgba(var(--secondary-color-rgb), 0.4);
-}
 
 /* Values Section - COMPACTO */
 .values-section {

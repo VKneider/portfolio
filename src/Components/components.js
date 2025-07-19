@@ -15,6 +15,7 @@ const components = {
   "DropDown": "Visual",
   "Grid": "Visual",
   "Icon": "Visual",
+  "Image": "Visual",
   "Input": "Visual",
   "Layout": "Visual",
   "Loading": "Visual",
@@ -32,5 +33,6 @@ const components = {
   "Link": "Service",
   "LocalStorageManager": "Service",
   "Translator": "Service",
-  "ProjectCard": "AtomicAppComponents"
+  "ProjectCard": "AtomicAppComponents",
+  "TechnicalSkillsSection": "AtomicAppComponents"
 }; export default components;
