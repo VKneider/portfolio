@@ -56,6 +56,7 @@ export default class Portfolio extends HTMLElement {
          position: 'fixed',
          logo: {
             src: '/images/Slice.js-logo.png',
+            path: '/',
          },
          items: [
             { text: 'About', path: '/' },
