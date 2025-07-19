@@ -5,15 +5,13 @@ export default class TechnicalSkillsSection extends HTMLElement {
       
       this.$mainContainer = this.querySelector('.technical-skills-section');
       this.$skillsContainer = this.querySelector('.technical-skills-container');
-            this.setDefaults();
+      this.setDefaults();
 
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = ['skillsData', 'title', 'maxSkillsPerCard', 'showLevelBadges'];
    }
 
    async init() {
-      // Configurar valores por defecto
-      
       // Crear el título
       await this.createTitle();
       
@@ -31,8 +29,9 @@ export default class TechnicalSkillsSection extends HTMLElement {
       if (this.maxSkillsPerCard === undefined) {
          this.maxSkillsPerCard = 6;
       }
+      // CAMBIADO: showLevelBadges por defecto a false
       if (this.showLevelBadges === undefined) {
-         this.showLevelBadges = true;
+         this.showLevelBadges = false;
       }
    }
 
@@ -42,43 +41,43 @@ export default class TechnicalSkillsSection extends HTMLElement {
             category: 'Frontend', 
             icon: '🎨',
             color: 'var(--primary-color)',
-            skills: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'HTML5', 'CSS3', 'Slice.js'],
-            level: 'Expert'
+            skills: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'HTML5', 'CSS3', 'Slice.js']
+            // ELIMINADO: level: 'Expert'
          },
          { 
             category: 'Backend', 
             icon: '⚙️',
             color: 'var(--secondary-color)',
-            skills: ['Node.js', 'Express', 'Python', 'PHP', 'RESTful APIs', 'GraphQL'],
-            level: 'Advanced'
+            skills: ['Node.js', 'Express', 'Python', 'PHP', 'RESTful APIs', 'GraphQL']
+            // ELIMINADO: level: 'Advanced'
          },
          { 
             category: 'Database & Cloud', 
             icon: '☁️',
             color: 'var(--success-color)',
-            skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'AWS', 'Docker'],
-            level: 'Advanced'
+            skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'AWS', 'Docker']
+            // ELIMINADO: level: 'Advanced'
          },
          { 
             category: 'DevOps & Tools', 
             icon: '🛠️',
             color: 'var(--warning-color)',
-            skills: ['Git', 'CI/CD', 'Kubernetes', 'Testing', 'Agile', 'Scrum'],
-            level: 'Intermediate'
+            skills: ['Git', 'CI/CD', 'Kubernetes', 'Testing', 'Agile', 'Scrum']
+            // ELIMINADO: level: 'Intermediate'
          },
          { 
             category: 'Mobile & Desktop', 
             icon: '📱',
             color: 'var(--accent-color)',
-            skills: ['React Native', 'Electron', 'PWA', 'Ionic', 'Flutter'],
-            level: 'Intermediate'
+            skills: ['React Native', 'Electron', 'PWA', 'Ionic', 'Flutter']
+            // ELIMINADO: level: 'Intermediate'
          },
          { 
             category: 'AI & Data', 
             icon: '🤖',
             color: 'var(--danger-color)',
-            skills: ['Machine Learning', 'TensorFlow', 'Python', 'Data Analysis', 'APIs'],
-            level: 'Beginner'
+            skills: ['Machine Learning', 'TensorFlow', 'Python', 'Data Analysis', 'APIs']
+            // ELIMINADO: level: 'Beginner'
          }
       ];
    }
@@ -107,7 +106,7 @@ export default class TechnicalSkillsSection extends HTMLElement {
       skillCard.classList.add('technical-skill-card');
       skillCard.style.animationDelay = `${index * 0.1}s`;
       
-      // Header con icono y categoría
+      // Header con icono y categoría (SIN level badge)
       const header = this.createSkillHeader(skillGroup);
       
       // Lista de skills más compacta
@@ -124,30 +123,26 @@ export default class TechnicalSkillsSection extends HTMLElement {
       header.classList.add('skill-header');
       header.style.borderLeft = `4px solid ${skillGroup.color}`;
       
-      const iconElement = document.createElement('div');
-      iconElement.classList.add('skill-icon');
-      iconElement.textContent = skillGroup.icon;
-      iconElement.style.background = skillGroup.color;
+      // Icono
+      const icon = document.createElement('div');
+      icon.classList.add('skill-icon');
+      icon.style.backgroundColor = skillGroup.color;
+      icon.textContent = skillGroup.icon;
       
+      // Info del header (solo categoría, SIN level badge)
       const headerInfo = document.createElement('div');
       headerInfo.classList.add('skill-header-info');
       
-      const categoryTitle = document.createElement('h3');
-      categoryTitle.textContent = skillGroup.category;
-      categoryTitle.classList.add('skill-category');
+      const category = document.createElement('h3');
+      category.classList.add('skill-category');
+      category.textContent = skillGroup.category;
       
-      headerInfo.appendChild(categoryTitle);
+      headerInfo.appendChild(category);
       
-      // Badge de nivel si está habilitado
-      if (this.showLevelBadges && skillGroup.level) {
-         const levelBadge = document.createElement('span');
-         levelBadge.textContent = skillGroup.level;
-         levelBadge.classList.add('skill-level-badge');
-         levelBadge.style.background = skillGroup.color;
-         headerInfo.appendChild(levelBadge);
-      }
+      // ELIMINADO: Creación y adición del level badge
+      // Ya no se crea ni se agrega el badge de nivel
       
-      header.appendChild(iconElement);
+      header.appendChild(icon);
       header.appendChild(headerInfo);
       
       return header;
@@ -157,20 +152,18 @@ export default class TechnicalSkillsSection extends HTMLElement {
       const skillsList = document.createElement('div');
       skillsList.classList.add('skills-compact-list');
       
-      // Mostrar solo los primeros N skills
       const skillsToShow = skillGroup.skills.slice(0, this.maxSkillsPerCard);
       
       skillsToShow.forEach(skill => {
-         const skillTag = document.createElement('span');
+         const skillTag = document.createElement('div');
          skillTag.classList.add('skill-tag-compact');
          skillTag.textContent = skill;
-         skillTag.style.borderColor = skillGroup.color;
          skillsList.appendChild(skillTag);
       });
       
-      // Indicador si hay más skills
+      // Indicador de más skills si hay
       if (skillGroup.skills.length > this.maxSkillsPerCard) {
-         const moreIndicator = document.createElement('span');
+         const moreIndicator = document.createElement('div');
          moreIndicator.classList.add('skill-more-indicator');
          moreIndicator.textContent = `+${skillGroup.skills.length - this.maxSkillsPerCard} more`;
          skillsList.appendChild(moreIndicator);

@@ -47,7 +47,7 @@ slice-technical-skills-section {
   margin-right: auto;
 }
 
-/* Tarjetas de skills */
+/* Tarjetas de skills - SIN barra de carga en hover */
 .technical-skill-card {
   background: var(--secondary-background-color);
   padding: 1.5rem;
@@ -64,21 +64,7 @@ slice-technical-skills-section {
   transform: translateY(30px);
 }
 
-.technical-skill-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    var(--primary-color) 0%, 
-    var(--secondary-color) 50%, 
-    var(--success-color) 100%);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
+/* ELIMINADO: ::before que creaba la barra de carga */
 
 .technical-skill-card:hover {
   transform: translateY(-8px);
@@ -88,9 +74,7 @@ slice-technical-skills-section {
   border-color: var(--primary-color);
 }
 
-.technical-skill-card:hover::before {
-  transform: scaleX(1);
-}
+/* ELIMINADO: :hover::before que animaba la barra de carga */
 
 /* Header de la tarjeta */
 .skill-header {
@@ -103,6 +87,7 @@ slice-technical-skills-section {
   transition: all 0.3s ease;
 }
 
+/* Iconos SIN borde */
 .skill-icon {
   width: 45px;
   height: 45px;
@@ -112,10 +97,9 @@ slice-technical-skills-section {
   justify-content: center;
   font-size: 1.5rem;
   color: var(--primary-color-contrast);
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* ELIMINADO: box-shadow que creaba el borde */
   transition: all 0.3s ease;
+  background: var(--primary-color); /* Agregado para mantener el color de fondo */
 }
 
 .skill-header-info {
@@ -133,18 +117,7 @@ slice-technical-skills-section {
   line-height: 1.2;
 }
 
-.skill-level-badge {
-  background: var(--primary-color);
-  color: var(--primary-color-contrast);
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  width: fit-content;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+/* ELIMINADO: .skill-level-badge - Ya no se mostrarán los badges de nivel */
 
 /* Lista de skills compacta */
 .skills-compact-list {
@@ -213,9 +186,7 @@ slice-technical-skills-section {
 /* Efectos hover para la tarjeta completa */
 .technical-skill-card:hover .skill-icon {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  /* ELIMINADO: box-shadow del hover */
 }
 
 .technical-skill-card:hover .skill-category {
@@ -223,10 +194,7 @@ slice-technical-skills-section {
   text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3);
 }
 
-.technical-skill-card:hover .skill-level-badge {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+/* ELIMINADO: hover para .skill-level-badge */
 
 /* Animaciones */
 @keyframes slideInUp {
