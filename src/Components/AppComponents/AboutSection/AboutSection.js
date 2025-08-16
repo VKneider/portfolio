@@ -26,8 +26,6 @@ export default class AboutSection extends HTMLElement {
       // Create values section
       await this.createSoftSkillsSection();
       
-      // Create interests/hobbies section
-      await this.createInterestsSection();
    }
 
    async setupEnhancedHero() {
@@ -79,7 +77,7 @@ export default class AboutSection extends HTMLElement {
             label: 'var(--primary-color-contrast)'
          },
          onClickCallback: () => {
-            window.location.href = 'mailto:victor.kneider@email.com';
+              window.location.href = 'mailto:victorkneider@gmail.com';
          }
       });
 
@@ -258,39 +256,7 @@ export default class AboutSection extends HTMLElement {
       this.$values.appendChild(valuesContainer);
    }
 
-   async createInterestsSection() {
-      const interestsTitle = document.createElement('h2');
-      interestsTitle.innerHTML = '🌟 Interests & Passions';
-      interestsTitle.classList.add('section-title');
-
-      const interests = [
-         { name: 'Open Source Development', icon: '🔓' },
-         { name: 'Educational Technology', icon: '💡' },
-         { name: 'Technical Writing', icon: '✍️' },
-         { name: 'Photography', icon: '📸' },
-         { name: 'Continuous Learning', icon: '📖' },
-         { name: 'Innovation & Research', icon: '🔬' },
-         { name: 'Mentoring Students', icon: '🎓' },
-         { name: 'Tech Communities', icon: '🌐' }
-      ];
-
-      const interestsContainer = document.createElement('div');
-      interestsContainer.classList.add('interests-container');
-
-      interests.forEach((interest, index) => {
-         const interestTag = document.createElement('div');
-         interestTag.classList.add('interest-tag');
-         interestTag.style.animationDelay = `${index * 0.1}s`;
-         interestTag.innerHTML = `
-            <span class="interest-icon">${interest.icon}</span>
-            <span class="interest-name">${interest.name}</span>
-         `;
-         interestsContainer.appendChild(interestTag);
-      });
-
-      this.$interests.appendChild(interestsTitle);
-      this.$interests.appendChild(interestsContainer);
-   }
+   
 }
 
 customElements.define('slice-about-section', AboutSection);

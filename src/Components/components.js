@@ -2,6 +2,7 @@ const components = {
   "AboutSection": "AppComponents",
   "EducationSection": "AppComponents",
   "ExperienceSection": "AppComponents",
+  "ImageDemo": "AppComponents",
   "MainMenu": "AppComponents",
   "MyNavigation": "AppComponents",
   "Portfolio": "AppComponents",
@@ -33,6 +34,7 @@ const components = {
   "Link": "Service",
   "LocalStorageManager": "Service",
   "Translator": "Service",
+  "CertificateCard": "AtomicAppComponents",
   "ProjectCard": "AtomicAppComponents",
   "TechnicalSkillsSection": "AtomicAppComponents"
 }; export default components;

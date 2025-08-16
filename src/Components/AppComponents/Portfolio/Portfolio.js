@@ -103,10 +103,10 @@ export default class Portfolio extends HTMLElement {
       const socialLinks = document.createElement('div');
       socialLinks.classList.add('social-links');
       
-      const socialData = [
-         { name: 'GitHub', url: 'https://github.com/vkneider', icon: 'github' },
+            const socialData = [
+         { name: 'GitHub', url: 'https://github.com/VKneider', icon: 'github' },
          { name: 'LinkedIn', url: 'https://www.linkedin.com/in/vkneider/', icon: 'linkedin' },
-         { name: 'Email', url: 'mailto:victor.kneider@email.com', icon: 'email' }
+         { name: 'Email', url: 'mailto:victorkneider@gmail.com', icon: 'email' }
       ];
 
       for (const social of socialData) {

@@ -1,131 +1,123 @@
 export const studiesData = [
-         {
-            id: 1,
-            institution: 'Universidad Tecnológica',
-            degree: 'Bachelor\'s Degree in Computer Engineering',
-            period: '2016 - 2020',
-            location: 'San José, Costa Rica',
-            description: 'Comprehensive program covering software development, computer systems, algorithms, data structures, and software engineering principles.',
-            achievements: [
-               'Graduated Magna Cum Laude with GPA 3.8/4.0',
-               'Dean\'s List for 6 consecutive semesters',
-               'Outstanding Final Project: Web Framework Development',
-               'Active member of Computer Science Student Association'
-            ],
-            coursework: [
-               'Data Structures and Algorithms',
-               'Software Engineering',
-               'Database Systems',
-               'Web Development',
-               'Computer Networks',
-               'Operating Systems',
-               'Machine Learning Fundamentals'
-            ],
-            logo: '/images/education/universidad-tecnologica.png'
-         },
-         {
-            id: 2,
-            institution: 'Colegio Técnico Don Bosco',
-            degree: 'Technical High School Diploma in Computer Science',
-            period: '2012 - 2015',
-            location: 'San José, Costa Rica',
-            description: 'Technical education focused on programming fundamentals, computer hardware, and basic software development.',
-            achievements: [
-               'Valedictorian of Computer Science track',
-               'First place in National Programming Competition',
-               'Led development of school\'s website',
-               'Peer tutor for programming courses'
-            ],
-            coursework: [
-               'Programming Fundamentals (C++, Java)',
-               'Web Development (HTML, CSS, JavaScript)',
-               'Database Design',
-               'Computer Hardware',
-               'Technical English',
-               'Mathematics for Computing'
-            ],
-            logo: '/images/education/don-bosco.png'
-         }
-      ];
-
+  {
+  id: 1,
+  institution: 'Universidad Rafael Urdaneta (URU)',
+  degree: 'Computer Engineering',
+  period: '2020 - 2024',
+  location: 'Maracaibo, Venezuela',
+  description: 'Bachelor\'s degree in Computer Engineering with focus on software development, algorithms, data structures, and system design. Graduated Magna Cum Laude with academic honors.',
+  achievements: [
+    'Graduated Magna Cum Laude with academic honors',
+    'Maintained excellent academic performance throughout the program',
+    'Developed expertise in modern web technologies and framework development',
+    'Created Slice.js framework as part of academic and research work',
+    'Recognized for outstanding academic achievement and technical innovation'
+  ],
+  coursework: [
+    'Programming Fundamentals',
+    'Data Structures and Algorithms', 
+    'Software Engineering',
+    'Database Systems',
+    'Web Development Technologies',
+    'Computer Networks',
+    'Systems Analysis and Design',
+    'Component-Based Programming'
+  ],
+  logo: '/images/education/uru-logo.png'
+},
+  {
+    id: 2,
+    institution: 'Centro Electrónico de Idiomas',
+    degree: 'Advanced C1 English Program',
+    period: 'Completed',
+    location: 'Maracaibo, Venezuela',
+    description: 'Advanced English language certification program achieving C1 level proficiency.',
+    achievements: [
+      'Achieved C1 (Advanced) level English proficiency',
+      'Completed comprehensive language program',
+      'Enhanced technical communication skills in English'
+    ],
+    coursework: [
+      'Advanced Grammar and Syntax',
+      'Technical English Communication',
+      'Academic Writing',
+      'Professional Presentation Skills'
+    ],
+    logo: '/images/education/idiomas-logo.png'
+  }
+];
 
 export const certificatesData = [
-         {
-            id: 1,
-            title: 'AWS Certified Solutions Architect',
-            issuer: 'Amazon Web Services',
-            date: '2024-03-15',
-            validUntil: '2027-03-15',
-            credentialId: 'AWS-SAA-2024-VK001',
-            description: 'Validates expertise in designing distributed systems on AWS platform.',
-            skills: ['Cloud Architecture', 'AWS Services', 'Security', 'Cost Optimization'],
-            certificateUrl: 'https://aws.amazon.com/verification/VK12345',
-            image: '/images/certificates/aws-solutions-architect.png',
-            issuerLogo: '/images/certificates/aws-logo.png'
-         },
-         {
-            id: 2,
-            title: 'Google Cloud Professional Developer',
-            issuer: 'Google Cloud',
-            date: '2024-01-20',
-            validUntil: '2026-01-20',
-            credentialId: 'GCP-PD-2024-VK002',
-            description: 'Demonstrates ability to build scalable applications on Google Cloud Platform.',
-            skills: ['GCP Services', 'Kubernetes', 'Cloud Functions', 'CI/CD'],
-            certificateUrl: 'https://cloud.google.com/certification/verify/VK67890',
-            image: '/images/certificates/gcp-developer.png',
-            issuerLogo: '/images/certificates/gcp-logo.png'
-         },
-         {
-            id: 3,
-            title: 'React Advanced Certification',
-            issuer: 'Meta (Facebook)',
-            date: '2023-11-10',
-            validUntil: null,
-            credentialId: 'META-REACT-2023-VK003',
-            description: 'Advanced React development patterns, hooks, and performance optimization.',
-            skills: ['React Hooks', 'Context API', 'Performance Optimization', 'Testing'],
-            certificateUrl: 'https://coursera.org/verify/VK13579',
-            image: '/images/certificates/react-advanced.png',
-            issuerLogo: '/images/certificates/meta-logo.png'
-         },
-         {
-            id: 4,
-            title: 'MongoDB Developer Certification',
-            issuer: 'MongoDB University',
-            date: '2023-09-05',
-            validUntil: '2025-09-05',
-            credentialId: 'MONGODB-DEV-2023-VK004',
-            description: 'Comprehensive MongoDB development and database design certification.',
-            skills: ['NoSQL Design', 'Aggregation Pipeline', 'Indexing', 'Performance Tuning'],
-            certificateUrl: 'https://university.mongodb.com/verify/VK24680',
-            image: '/images/certificates/mongodb-developer.png',
-            issuerLogo: '/images/certificates/mongodb-logo.png'
-         },
-         {
-            id: 5,
-            title: 'Docker Certified Associate',
-            issuer: 'Docker Inc.',
-            date: '2023-07-22',
-            validUntil: '2025-07-22',
-            credentialId: 'DOCKER-DCA-2023-VK005',
-            description: 'Container orchestration and Docker platform administration.',
-            skills: ['Container Management', 'Docker Compose', 'Swarm Mode', 'Security'],
-            certificateUrl: 'https://success.docker.com/verify/VK97531',
-            image: '/images/certificates/docker-associate.png',
-            issuerLogo: '/images/certificates/docker-logo.png'
-         },
-         {
-            id: 6,
-            title: 'Kubernetes Administrator (CKA)',
-            issuer: 'Cloud Native Computing Foundation',
-            date: '2023-05-18',
-            validUntil: '2026-05-18',
-            credentialId: 'CKA-2023-VK006',
-            description: 'Certified Kubernetes Administrator with hands-on cluster management skills.',
-            skills: ['Cluster Administration', 'Pod Management', 'Networking', 'Troubleshooting'],
-            certificateUrl: 'https://www.credly.com/verify/VK86420',
-            image: '/images/certificates/kubernetes-admin.png',
-            issuerLogo: '/images/certificates/cncf-logo.png'
-         }
-      ];
+  {
+    id: 1,
+    title: '2nd Place ChatBOT Hackathon',
+    issuer: 'Social Oplesk',
+    date: '2024-01-01',
+    credentialId: 'CHATBOT-HACKATHON-2024',
+    description: 'Second place achievement in ChatBOT development hackathon, demonstrating conversational user experience development skills.',
+    skills: ['AI Development', 'Chatbot Design', 'Natural Language Processing', 'JavaScript', 'Problem Solving'],
+    certificateUrl: 'https://www.socialoplesk.com/certificates/chatbot-hackathon-2024-victor-kneider',
+    verified: true,
+    logo: '/images/certificates/social-oplesk.png'
+  },
+  {
+    id: 2,
+    title: 'FullStack Development',
+    issuer: 'Social Oplesk',
+    date: '2024-01-01',
+    credentialId: 'FULLSTACK-DEV-2024',
+    description: 'Comprehensive full-stack development certification covering frontend and backend technologies.',
+    skills: ['Full-Stack Development', 'JavaScript', 'Node.js', 'Database Design', 'Web APIs'],
+    certificateUrl: 'https://www.socialoplesk.com/certificates/fullstack-development-victor-kneider',
+    verified: true,
+    logo: '/images/certificates/social-oplesk.png'
+  },
+  {
+    id: 4,
+    title: 'Catholic Leadership',
+    issuer: 'Acción Católica de Venezuela',
+    date: '2023-12-01',
+    credentialId: 'CATHOLIC-LEADERSHIP-2023',
+    description: 'Leadership development program focused on community service, organizational management, and ethical leadership principles.',
+    skills: ['Leadership', 'Team Management', 'Community Service', 'Project Coordination', 'Ethics'],
+    certificateUrl: 'https://accioncatolica.org.ve/certificates/leadership-victor-kneider-2023',
+    verified: true,
+    logo: '/images/certificates/accion-catolica.png'
+  },
+  {
+    id: 5,
+    title: 'Advanced C1 English Program',
+    issuer: 'Centro Electrónico de Idiomas',
+    date: '2023-11-01',
+    credentialId: 'ADVANCED-ENGLISH-C1-2023',
+    description: 'Advanced English language certification achieving C1 level proficiency in reading, writing, speaking, and listening.',
+    skills: ['Advanced English', 'Technical Communication', 'Academic Writing', 'Professional Presentation'],
+    certificateUrl: 'https://centroelectronicodeidiomas.com/certificates/advanced-english-c1-victor-kneider',
+    verified: true,
+    logo: '/images/certificates/centro-idiomas.png'
+  },
+  {
+    id: 6,
+    title: 'National Deutsch Competition',
+    issuer: 'Goethe Institut',
+    date: '2023-10-01',
+    credentialId: 'DEUTSCH-COMPETITION-2023',
+    description: 'Participation in the National German Language Competition, demonstrating proficiency in German language and cross-cultural communication skills.',
+    skills: ['German Language', 'Cross-cultural Communication', 'Language Proficiency', 'Cultural Awareness'],
+    certificateUrl: 'https://www.goethe.de/certificates/deutsch-competition-venezuela-2023-victor-kneider',
+    verified: true,
+    logo: '/images/certificates/goethe-institut.png'
+  },
+    {
+    id: 3,
+    title: 'Python Basics',
+    issuer: 'Social Oplesk',
+    date: '2024-01-01',
+    credentialId: 'PYTHON-BASICS-2024',
+    description: 'Fundamental Python programming certification covering core concepts and practical applications.',
+    skills: ['Python Programming', 'Data Structures', 'Object-Oriented Programming', 'Algorithm Design'],
+    certificateUrl: 'https://www.socialoplesk.com/certificates/python-basics-victor-kneider',
+    verified: true,
+    logo: '/images/certificates/social-oplesk.png'
+  },
+];
