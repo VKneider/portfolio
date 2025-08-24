@@ -1,4 +1,25 @@
 export default class Button extends HTMLElement {
+
+   static props = {
+      value: { 
+         type: 'string', 
+         default: 'Button', 
+         required: false 
+      },
+      onClickCallback: { 
+         type: 'function', 
+         default: null 
+      },
+      customColor: { 
+         type: 'object', 
+         default: null 
+      },
+      icon: { 
+         type: 'object', 
+         default: null 
+      }
+   };
+
    constructor(props) {
       super();
       slice.attachTemplate(this);
@@ -12,13 +33,13 @@ export default class Button extends HTMLElement {
       }
 
       slice.controller.setComponentProps(this, props);
-      this.debuggerProps = ['value', 'onClickCallback', 'customColor', 'icon'];
    }
 
    async init() {
       if (this.icon) {
          this.$icon = await slice.build('Icon', {
-            name: this.icon,
+            name: this.icon.name,           // ✅ CORREGIDO: usar this.icon.name
+            iconStyle: this.icon.iconStyle, // ✅ AÑADIDO: pasar también iconStyle
             size: '20px',
             color: 'currentColor',
          });

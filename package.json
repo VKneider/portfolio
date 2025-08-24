@@ -9,8 +9,21 @@
     "slice:delete": "node node_modules/slicejs-cli/client.js component delete",
     "slice:init": "node node_modules/slicejs-cli/client.js init",
     "run": "node api/index.js",
-    "slice:start": "node api/index.js",
-    "development": "node api/index.js"
+    "slice:start": "node node_modules/slicejs-cli/client.js start",
+    "development": "node node_modules/slicejs-cli/client.js dev",
+    "slice:version": "node node_modules/slicejs-cli/client.js version",
+    "slice:update": "node node_modules/slicejs-cli/client.js update",
+    "slice:get": "node node_modules/slicejs-cli/client.js get",
+    "slice:browse": "node node_modules/slicejs-cli/client.js browse",
+    "slice:sync": "node node_modules/slicejs-cli/client.js sync",
+    "slice:registry-get": "node node_modules/slicejs-cli/client.js registry get",
+    "slice:registry-list": "node node_modules/slicejs-cli/client.js registry list",
+    "slice:registry-sync": "node node_modules/slicejs-cli/client.js registry sync",
+    "slice:dev": "node node_modules/slicejs-cli/client.js dev",
+    "slice:build": "node node_modules/slicejs-cli/client.js build",
+    "slice:build-serve": "node node_modules/slicejs-cli/client.js build --serve",
+    "slice:build-preview": "node node_modules/slicejs-cli/client.js build --preview",
+    "slice:build-analyze": "node node_modules/slicejs-cli/client.js build --analyze"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +31,10 @@
   "description": "",
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": ">=20.0.0"
   },
   "dependencies": {
-    "slicejs-cli": "^2.0.14",
-    "slicejs-web-framework": "^1.0.31"
+    "slicejs-cli": "^2.2.5",
+    "slicejs-web-framework": "^1.0.34"
   }
 }
