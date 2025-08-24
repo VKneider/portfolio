@@ -280,3 +280,45 @@ slice-navbar {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Global Section Titles - Centered */
+.section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  position: relative;
+  text-shadow:
+    0 0 12px rgba(var(--primary-color-rgb), 0.4),
+    0 0 20px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--secondary-color);
+  border-radius: 2px;
+  box-shadow:
+    0 0 15px rgba(var(--secondary-color-rgb), 0.6),
+    0 0 30px rgba(var(--secondary-color-rgb), 0.3);
+}
+
+/* Responsive section titles */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+}

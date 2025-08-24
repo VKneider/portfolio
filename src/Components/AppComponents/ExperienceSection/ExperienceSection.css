@@ -11,7 +11,7 @@ slice-experience-section {
 
 /* Filters Section */
 .experience-filters {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem; /* Increased from 3rem */
   text-align: center;
 }
 
@@ -60,7 +60,7 @@ slice-experience-section {
 /* Experience Cards */
 .experience-card {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem; /* Increased from 3rem */
   background-color: var(--secondary-background-color);
   border-radius: var(--border-radius-slice);
   padding: 2rem;

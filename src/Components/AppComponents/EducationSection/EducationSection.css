@@ -20,13 +20,13 @@ slice-education-section {
 
 /* Studies Section */
 .education-studies {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem; /* Increased from 5rem */
 }
 
 .studies-container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 4rem; /* Increased from 3rem */
 }
 
 /* Study Cards */
@@ -183,13 +183,13 @@ slice-education-section {
 
 /* Certificates Section */
 .education-certificates {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem; /* Increased from 3rem */
 }
 
 .certificates-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: 3rem; /* Increased from 2rem */
 }
 
 /* Certificate Cards */

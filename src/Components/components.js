@@ -34,7 +34,10 @@ const components = {
   "Link": "Service",
   "LocalStorageManager": "Service",
   "Translator": "Service",
+  "AboutCard": "AtomicAppComponents",
   "CertificateCard": "AtomicAppComponents",
+  "ExperienceCard": "AtomicAppComponents",
   "ProjectCard": "AtomicAppComponents",
+  "StudyCard": "AtomicAppComponents",
   "TechnicalSkillsSection": "AtomicAppComponents"
 }; export default components;

@@ -1,0 +1,197 @@
+.certificate-card-container {
+   width: 100%;
+}
+
+/* Certificate Cards - Ultra Compact Vertical Layout */
+.certificate-card {
+   background-color: var(--secondary-background-color);
+   border-radius: var(--border-radius-slice);
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+   overflow: hidden;
+   transition: all 0.3s ease;
+   animation: fadeInUp 0.6s ease-out forwards;
+   opacity: 0;
+   transform: translateY(30px);
+   border: 1px solid var(--primary-color-shade);
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   margin-bottom: 1rem; /* Ultra reduced from 1.5rem */
+}
+
+.certificate-card:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Certificate Image - Super Compact */
+.certificate-image-container {
+   position: relative;
+   height: 70px; /* Super reduced from 100px */
+   overflow: hidden;
+   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.certificate-image {
+   width: 80%;
+   height: 80%;
+   object-fit: contain;
+   transition: transform 0.3s ease;
+   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.certificate-card:hover .certificate-image {
+   transform: scale(1.05);
+}
+
+.issuer-logo {
+   position: absolute;
+   bottom: 6px;
+   right: 6px;
+   width: 24px; /* Ultra reduced from 32px */
+   height: 24px;
+   object-fit: contain;
+   background-color: white;
+   border-radius: 50%;
+   padding: 3px;
+   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Certificate Content - Super Compact */
+.certificate-content {
+   padding: 0.4rem; /* Super reduced from 0.6rem */
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+}
+
+.certificate-header {
+   margin-bottom: 0.3rem; /* Super reduced from 0.5rem */
+}
+
+.certificate-title {
+   font-size: 0.8rem; /* Super reduced from 0.9rem */
+   color: var(--primary-color);
+   margin: 0 0 0.1rem 0; /* Super reduced from 0.2rem */
+   font-weight: 600;
+   line-height: 1.1;
+}
+
+.certificate-issuer {
+   font-size: 0.7rem; /* Super reduced from 0.8rem */
+   color: var(--font-secondary-color);
+   margin: 0 0 0.3rem 0; /* Super reduced from 0.5rem */
+   font-weight: 500;
+}
+
+.certificate-description {
+   color: var(--font-primary-color);
+   line-height: 1.2; /* Super reduced from 1.3 */
+   margin-bottom: 0.4rem; /* Super reduced from 0.6rem */
+   text-align: justify;
+   flex: 1;
+   font-size: 0.65rem; /* Super reduced from 0.75rem */
+}
+
+.certificate-meta {
+   margin-bottom: 0.4rem; /* Super reduced from 0.6rem */
+   padding: 0.3rem; /* Super reduced from 0.5rem */
+   background-color: var(--tertiary-background-color);
+   border-radius: var(--border-radius-slice);
+}
+
+.certificate-dates {
+   font-size: 0.6rem; /* Super reduced from 0.7rem */
+   color: var(--font-primary-color);
+   margin-bottom: 0.1rem; /* Super reduced from 0.2rem */
+   font-weight: 500;
+}
+
+.credential-id {
+   font-size: 0.55rem; /* Super reduced from 0.65rem */
+   color: var(--font-secondary-color);
+   font-family: monospace;
+}
+
+/* Certificate Skills - Super Compact */
+.certificate-skills {
+   margin-bottom: 0.4rem; /* Super reduced from 0.6rem */
+}
+
+.certificate-skills h5 {
+   font-size: 0.65rem; /* Super reduced from 0.75rem */
+   color: var(--primary-color);
+   margin-bottom: 0.2rem; /* Super reduced from 0.3rem */
+   font-weight: 600;
+}
+
+.skills-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.15rem; /* Super reduced from 0.25rem */
+}
+
+.skill-tag {
+   background-color: var(--primary-color);
+   color: var(--primary-color-contrast);
+   padding: 0.1rem 0.25rem; /* Super reduced from 0.15rem 0.3rem */
+   border-radius: 8px;
+   font-size: 0.55rem; /* Super reduced from 0.65rem */
+   font-weight: 500;
+   transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+   background-color: var(--secondary-color);
+   color: var(--secondary-color-contrast);
+   transform: scale(1.05);
+}
+
+/* Certificate Actions */
+.certificate-actions {
+   margin-top: auto;
+}
+
+.view-certificate-btn {
+   width: 100%;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+/* Responsive Design - Super Compact */
+@media (max-width: 768px) {
+   .certificate-content {
+      padding: 0.3rem; /* Super reduced from 0.5rem */
+   }
+   
+   .certificate-image-container {
+      height: 60px; /* Super reduced from 80px */
+   }
+}
+
+@media (max-width: 480px) {
+   .certificate-content {
+      padding: 0.25rem; /* Super reduced from 0.4rem */
+   }
+   
+   .certificate-title {
+      font-size: 0.75rem; /* Super reduced from 0.85rem */
+   }
+   
+   .certificate-issuer {
+      font-size: 0.65rem; /* Super reduced from 0.75rem */
+   }
+   
+   .certificate-image-container {
+      height: 50px; /* Super reduced from 70px */
+   }
+}

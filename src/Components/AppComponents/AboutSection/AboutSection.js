@@ -175,17 +175,15 @@ export default class AboutSection extends HTMLElement {
       });
 
       for (const [index, cardData] of aboutData.entries()) {
-         const card = await slice.build('Card', {
+         const aboutCard = await slice.build('AboutCard', {
             title: cardData.title,
             text: cardData.text,
             icon: cardData.icon,
-            customColor: cardData.customColor
+            customColor: cardData.customColor,
+            animationDelay: index * 0.2
          });
          
-         card.style.animationDelay = `${index * 0.2}s`;
-         card.classList.add('about-slice-card');
-         
-         await grid.setItem(card);
+         await grid.setItem(aboutCard);
       }
 
       // Make responsive for mobile
