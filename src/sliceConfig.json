@@ -51,8 +51,9 @@
     "loading":{
         "enabled": true
     },
-    "production": {
-        "enabled": false
+    "server": {
+        "port": 3001,
+        "host": "localhost"
     }
 }
 
