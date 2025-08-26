@@ -1,6 +1,6 @@
 /* Modern Card Component - Compact & Scrollable */
 .slice-card {
-  --card-height: 240px;
+  --card-height: 280px; /* Aumentado de 240px a 280px para más espacio de texto */
   --card-width: 100%;
   --card-max-width: 280px;
   --card-bg: var(--secondary-background-color);
@@ -207,7 +207,7 @@
   margin-bottom: 8px;
   position: relative;
   overflow-y: auto;
-  max-height: 120px;
+  max-height: 160px; /* Aumentado de 120px a 160px para 4 líneas */
 }
 
 .card-text {
@@ -363,18 +363,18 @@
 @media (max-width: 1024px) {
   .slice-card {
     --card-max-width: 260px;
-    --card-height: 220px;
+    --card-height: 260px; /* Ajustado de 220px a 260px */
   }
   
   .card-body {
-    max-height: 100px;
+    max-height: 140px; /* Ajustado de 100px a 140px */
   }
 }
 
 @media (max-width: 768px) {
   .slice-card {
     --card-max-width: 100%;
-    --card-height: 200px;
+    --card-height: 240px; /* Ajustado de 200px a 240px */
     margin: 0 6px;
   }
   
@@ -391,7 +391,7 @@
   }
   
   .card-body {
-    max-height: 80px;
+    max-height: 120px; /* Ajustado de 80px a 120px */
     margin-bottom: 6px;
   }
   
@@ -403,7 +403,7 @@
 
 @media (max-width: 480px) {
   .slice-card {
-    --card-height: 180px;
+    --card-height: 220px; /* Ajustado de 180px a 220px */
     margin: 0 4px;
   }
   
@@ -420,7 +420,7 @@
   }
   
   .card-body {
-    max-height: 60px;
+    max-height: 100px; /* Ajustado de 60px a 100px */
   }
   
   .card-header {

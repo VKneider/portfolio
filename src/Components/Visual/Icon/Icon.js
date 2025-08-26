@@ -57,7 +57,9 @@ export default class Icon extends HTMLElement {
    set iconStyle(value) {
       if (value !== 'filled' && value !== 'outlined') value = 'filled';
       this._iconStyle = value;
-      this.name = this._name;
+      if (this._name) {
+         this.name = this._name;
+      }
    }
 
    get size() {

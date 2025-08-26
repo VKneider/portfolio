@@ -86,13 +86,15 @@ export default class Card extends HTMLElement {
    }
 
    async init() {
-      
-      
-      
       // Setup everything
       this.setupVariant();
       this.setupContent();
-      await this.setupMedia();
+      
+      // Solo configurar media si hay icono o imagen
+      if (this._icon || this._image) {
+         await this.setupMedia();
+      }
+      
       await this.setupActions();
       this.setupToggle();
       this.setupEventListeners();
@@ -172,8 +174,10 @@ export default class Card extends HTMLElement {
    }
 
    async setupMedia() {
-      // Clear previous content
-      this.$mediaContent.innerHTML = '';
+      // Clear previous content to prevent duplicates
+      if (this.$mediaContent) {
+         this.$mediaContent.innerHTML = '';
+      }
 
       if (this.image) {
          // If image URL is provided
@@ -188,25 +192,55 @@ export default class Card extends HTMLElement {
          this.$mediaContent.appendChild(img);
       } else if (this.icon) {
          // Use icon
-         this.setupIconInMedia();
+         await this.setupIconInMedia();
       } else {
          // Hide media section if no content
-         this.$media.style.display = 'none';
+         if (this.$media) {
+            this.$media.style.display = 'none';
+         }
          return;
       }
 
-      this.$media.style.display = 'flex';
+      if (this.$media) {
+         this.$media.style.display = 'flex';
+      }
    }
 
    async setupIconInMedia() {
       try {
+         // Verificar que el contenedor existe
+         if (!this.$mediaContent) {
+            console.warn('Card: mediaContent not found');
+            return;
+         }
+         
+         // Verificar que no hay iconos existentes antes de limpiar
+         const existingIcons = this.$mediaContent.querySelectorAll('slice-icon');
+         if (existingIcons.length > 0) {
+            console.log(`Card: Found ${existingIcons.length} existing icons, clearing...`);
+         }
+         
+         // Limpiar contenido anterior para evitar duplicados
+         this.$mediaContent.innerHTML = '';
+         
+         // Verificar que el icono existe
+         if (!this.icon || !this.icon.name) {
+            console.warn('Card: No valid icon provided');
+            return;
+         }
+         
          const iconElement = await slice.build('Icon', {
-            name: this.icon?.name || 'sliceJs',
-            iconStyle: this.icon?.iconStyle || 'filled',
+            name: this.icon.name,
+            iconStyle: this.icon.iconStyle || 'filled',
             size: '32px',
             color: 'var(--primary-color-contrast)'
          });
-         this.$mediaContent.appendChild(iconElement);
+         
+         // Verificar que el icono se construyó correctamente
+         if (iconElement) {
+            this.$mediaContent.appendChild(iconElement);
+            console.log(`Card: Icon "${this.icon.name}" added successfully`);
+         }
       } catch (error) {
          console.warn('Card: Failed to create icon', error);
       }
@@ -456,7 +490,8 @@ export default class Card extends HTMLElement {
    get icon() { return this._icon; }
    set icon(value) {
       this._icon = value;
-      if (this.$media) {
+      // Solo llamar setupMedia si el componente está inicializado, no hay imagen, y no estamos en el constructor
+      if (this._initialized && this.$media && !this._image && this.$mediaContent) {
          this.setupMedia();
       }
    }
@@ -464,7 +499,8 @@ export default class Card extends HTMLElement {
    get image() { return this._image; }
    set image(value) {
       this._image = value;
-      if (this.$media) {
+      // Solo llamar setupMedia si el componente está inicializado, no hay icono, y no estamos en el constructor
+      if (this._initialized && this.$media && !this._icon && this.$mediaContent) {
          this.setupMedia();
       }
    }
@@ -522,6 +558,31 @@ export default class Card extends HTMLElement {
    disable() {
       this.disabled = true;
    }
+
+   // Método para forzar la actualización del media
+   async refreshMedia() {
+      if (this._initialized && this.$media) {
+         await this.setupMedia();
+      }
+   }
+
+   // Método para cambiar el icono dinámicamente
+   async setIcon(iconData) {
+      this._icon = iconData;
+      if (this._initialized && this.$media && !this._image) {
+         await this.setupMedia();
+      }
+   }
+
+   // Método para cambiar la imagen dinámicamente
+   async setImage(imageUrl) {
+      this._image = imageUrl;
+      if (this._initialized && this.$media && !this._icon) {
+         await this.setupMedia();
+      }
+   }
+
+   
 }
 
 customElements.define('slice-card', Card);

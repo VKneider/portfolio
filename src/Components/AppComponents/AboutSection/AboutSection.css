@@ -11,19 +11,25 @@ slice-about-section {
 .hero-section {
   position: relative;
   text-align: center;
-  padding: 1.5rem 1rem; /* Reducido de 2rem */
-  padding-top: 1.8rem; /* Reducido de 2.5rem */
+  padding: 4rem 2rem; /* Aumentado aún más */
+  padding-top: 4.5rem; /* Aumentado para dar más espacio arriba */
   background-color: var(--secondary-background-color);
-  margin-bottom: 2.5rem; /* Reducido de 4rem */
-  border-radius: var(--border-radius-slice);
+  margin-bottom: 3rem;
+  /* Remover border-radius y border para que ocupe todo el ancho */
+  border-radius: 0;
+  border: none;
   overflow: hidden;
-  border: 2px solid var(--primary-color-shade);
-  /* Glowing border effect */
-  box-shadow: 
-    0 0 20px rgba(var(--primary-color-rgb), 0.3),
-    0 0 40px rgba(var(--primary-color-rgb), 0.1),
-    0 8px 32px rgba(0, 0, 0, 0.1);
+
   animation: heroGlow 4s ease-in-out infinite alternate;
+  /* Hacer que ocupe toda la altura horizontal */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Extender para ocupar todo el ancho */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
 }
 
 .hero-section::before {
@@ -40,21 +46,7 @@ slice-about-section {
   pointer-events: none;
 }
 
-/* Hero glowing animation */
-@keyframes heroGlow {
-  0% {
-    box-shadow: 
-      0 0 20px rgba(var(--primary-color-rgb), 0.3),
-      0 0 40px rgba(var(--primary-color-rgb), 0.1),
-      0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-  100% {
-    box-shadow: 
-      0 0 30px rgba(var(--primary-color-rgb), 0.5),
-      0 0 60px rgba(var(--primary-color-rgb), 0.2),
-      0 12px 48px rgba(0, 0, 0, 0.15);
-  }
-}
+
 
 /* Floating Background Elements */
 .hero-background-elements {
@@ -135,41 +127,41 @@ slice-about-section {
 .profile-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 1rem; /* Reducido de 1.5rem */
+  margin-bottom: 2.5rem; /* Reducido de 3rem para mejor balance */
 }
 
 .profile-ring {
   position: absolute;
-  top: -15px; /* Reducido de -20px */
-  left: -15px; /* Reducido de -20px */
-  right: -15px; /* Reducido de -20px */
-  bottom: -15px; /* Reducido de -20px */
-  border: 3px solid transparent; /* Reducido de 4px */
+  top: -25px; /* Ajustado para la nueva imagen */
+  left: -25px; /* Ajustado para la nueva imagen */
+  right: -25px; /* Ajustado para la nueva imagen */
+  bottom: -25px; /* Ajustado para la nueva imagen */
+  border: 4px solid transparent; /* Aumentado de 3px */
   border-radius: 50%;
-  border-top: 3px solid var(--primary-color);
-  border-right: 3px solid var(--secondary-color);
-  border-bottom: 3px solid var(--success-color);
-  border-left: 3px solid var(--warning-color);
+  border-top: 4px solid var(--primary-color);
+  border-right: 4px solid var(--secondary-color);
+  border-bottom: 4px solid var(--success-color);
+  border-left: 4px solid var(--warning-color);
   animation: rotateRing 4s linear infinite;
   /* Glowing ring effect */
   box-shadow: 
-    0 0 25px rgba(var(--primary-color-rgb), 0.6), /* Reducido de 0 0 30px */
-    inset 0 0 25px rgba(var(--primary-color-rgb), 0.3); /* Reducido de inset 0 0 30px */
+    0 0 35px rgba(var(--primary-color-rgb), 0.6), /* Aumentado */
+    inset 0 0 35px rgba(var(--primary-color-rgb), 0.3); /* Aumentado */
 }
 
 .profile-ring::before {
   content: '';
   position: absolute;
-  top: -6px; /* Reducido de -8px */
-  left: -6px; /* Reducido de -8px */
-  right: -6px; /* Reducido de -8px */
-  bottom: -6px; /* Reducido de -8px */
-  border: 1px solid var(--primary-color); /* Reducido de 2px */
+  top: -10px; /* Ajustado para la nueva imagen */
+  left: -10px; /* Ajustado para la nueva imagen */
+  right: -10px; /* Ajustado para la nueva imagen */
+  bottom: -10px; /* Ajustado para la nueva imagen */
+  border: 2px solid var(--primary-color); /* Aumentado de 1px */
   border-radius: 50%;
   opacity: 0.3;
   animation: rotateRing 6s linear infinite reverse;
   /* Outer ring glow */
-  box-shadow: 0 0 30px rgba(var(--primary-color-rgb), 0.5); /* Reducido de 0 0 40px */
+  box-shadow: 0 0 40px rgba(var(--primary-color-rgb), 0.5); /* Aumentado */
 }
 
 @keyframes rotateRing {
@@ -178,14 +170,14 @@ slice-about-section {
 }
 
 .profile-image {
-  width: 160px; /* Reducido de 220px */
-  height: 160px; /* Reducido de 220px */
+  width: 280px; /* Aumentado significativamente de 160px */
+  height: 280px; /* Aumentado significativamente de 160px */
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--primary-background-color); /* Reducido de 6px */
+  border: 6px solid var(--primary-background-color); /* Aumentado de 4px */
   box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.2), /* Reducido de 0 20px 40px */
-    0 0 25px rgba(var(--primary-color-rgb), 0.3); /* Reducido de 0 0 30px */
+    0 25px 50px rgba(0, 0, 0, 0.3), /* Aumentado significativamente */
+    0 0 40px rgba(var(--primary-color-rgb), 0.4); /* Aumentado */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
   z-index: 3;
@@ -201,51 +193,51 @@ slice-about-section {
 /* Enhanced Hero Text - COMPACTO */
 .title-container {
   position: relative;
-  margin-bottom: 0.8rem; /* Reducido de 1rem */
+  margin-bottom: 1.5rem; /* Ajustado de 1.8rem */
 }
 
 .hero-text h1 {
-  font-size: 2.2rem; /* Reducido de 2.8rem */
+  font-size: 3.8rem; /* Reducido de 4.5rem para mejor balance */
   margin: 0;
   color: var(--primary-color);
-  font-weight: 800;
+  font-weight: 900;
   position: relative;
   /* Text glow effect */
   text-shadow: 
-    0 0 8px rgba(var(--primary-color-rgb), 0.5), /* Reducido de 0 0 10px */
-    0 0 15px rgba(var(--primary-color-rgb), 0.3), /* Reducido de 0 0 20px */
-    0 0 20px rgba(var(--primary-color-rgb), 0.1); /* Reducido de 0 0 30px */
+    0 0 18px rgba(var(--primary-color-rgb), 0.6),
+    0 0 30px rgba(var(--primary-color-rgb), 0.4),
+    0 0 40px rgba(var(--primary-color-rgb), 0.2);
 }
 
 .title-accent {
   position: absolute;
-  bottom: -10px;
+  bottom: -18px; /* Ajustado de -20px */
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
+  width: 130px; /* Reducido de 150px */
+  height: 5px; /* Reducido de 6px */
   background-color: var(--secondary-color);
-  border-radius: 2px;
+  border-radius: 3px;
   /* Accent glow */
   box-shadow: 
-    0 0 10px rgba(var(--secondary-color-rgb), 0.8),
-    0 0 20px rgba(var(--secondary-color-rgb), 0.4);
+    0 0 18px rgba(var(--secondary-color-rgb), 0.8),
+    0 0 30px rgba(var(--secondary-color-rgb), 0.5);
 }
 
 .roles-container {
-  height: 45px; /* Reducido de 60px */
+  height: 70px; /* Reducido de 80px para mejor balance */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.2rem; /* Reducido de 2rem */
+  margin-bottom: 1.8rem; /* Ajustado de 2rem */
 }
 
 .role-title {
-  font-size: 1.6rem; /* Reducido de 2rem */
+  font-size: 2.4rem; /* Reducido de 2.8rem para mejor balance */
   margin: 0;
   color: var(--font-secondary-color);
-  font-weight: 500;
-  min-height: 2rem; /* Reducido de 2.5rem */
+  font-weight: 600;
+  min-height: 3rem; /* Ajustado de 3.5rem */
 }
 
 .role-switcher {
@@ -257,13 +249,14 @@ slice-about-section {
 }
 
 .hero-description {
-  font-size: 1rem; /* Reducido de 1.1rem */
-  line-height: 1.6; /* Reducido de 1.8 */
+  font-size: 1.3rem; /* Reducido de 1.5rem para mejor balance */
+  line-height: 1.7; /* Ajustado de 1.8 */
   color: var(--font-primary-color);
-  margin-bottom: 1.5rem; /* Reducido de 2rem */
-  max-width: 600px; /* Reducido de 700px */
+  margin-bottom: 2.2rem; /* Ajustado de 2.5rem */
+  max-width: 750px; /* Ajustado de 800px */
   margin-left: auto;
   margin-right: auto;
+  font-weight: 500;
 }
 
 /* Hero Stats - COMPACTO */
@@ -357,12 +350,7 @@ slice-about-section {
   margin-bottom: 3rem; /* Reducido de 4rem */
 }
 
-.about-slice-card {
-  animation: slideInUp 0.8s ease-out forwards;
-  opacity: 0;
-  transform: translateY(50px);
-  margin: 1rem;
-}
+
 
 /* Ensure proper spacing for Slice Grid component */
 .about-content slice-grid {
@@ -376,17 +364,15 @@ slice-about-section {
 /* Override default Card styles for better integration */
 .about-content slice-card {
   height: 100%;
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.1),
-    0 0 20px rgba(var(--primary-color-rgb), 0.1);
+  align-items: center;
+  align-self: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
 .about-content slice-card:hover {
   transform: translateY(-8px);
-  box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.15),
-    0 0 40px rgba(var(--primary-color-rgb), 0.3);
+  
 }
 
 
@@ -578,157 +564,496 @@ slice-about-section {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 1rem 1rem;
-    padding-top: 1.5rem; /* Reducido */
-    margin-bottom: 2rem; /* Reducido de 2.5rem */
+    padding: 2.5rem 2rem; /* Ajustado */
+    padding-top: 3rem; /* Ajustado */
+    margin-bottom: 2.5rem; /* Ajustado */
+    min-height: 80vh; /* Ajustado */
+    /* Mantener el ancho completo en mobile */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
   
   .hero-text h1 {
-    font-size: 1.8rem; /* Reducido de 2.2rem */
+    font-size: 3rem; /* Ajustado de 3.5rem */
   }
   
   .role-title {
-    font-size: 1.2rem; /* Reducido de 1.6rem */
+    font-size: 2rem; /* Ajustado de 2.2rem */
   }
   
   .hero-description {
-    font-size: 0.95rem; /* Reducido de 1rem */
-    margin-bottom: 1rem; /* Reducido de 1.5rem */
+    font-size: 1.2rem; /* Ajustado de 1.3rem */
+    margin-bottom: 1.8rem; /* Ajustado */
   }
   
   .profile-image {
-    width: 120px; /* Reducido de 160px */
-    height: 120px; /* Reducido de 160px */
+    width: 200px; /* Ajustado de 220px */
+    height: 200px; /* Ajustado de 220px */
   }
   
   .profile-container {
-    margin-bottom: 0.8rem; /* Reducido de 1rem */
+    margin-bottom: 2rem; /* Ajustado */
   }
   
   .roles-container {
-    height: 35px; /* Reducido de 45px */
-    margin-bottom: 1rem; /* Reducido de 1.2rem */
+    height: 60px; /* Ajustado de 65px */
+    margin-bottom: 1.5rem; /* Ajustado */
   }
   
   .stat-item {
-    padding: 0.6rem; /* Reducido de 0.8rem */
+    padding: 0.9rem; /* Ajustado */
   }
   
   .stat-number {
-    font-size: 1.8rem; /* Reducido de 2rem */
+    font-size: 2rem; /* Ajustado */
   }
   
   .section-title {
-    font-size: 2rem; /* Reducido */
+    font-size: 2.2rem; /* Ajustado */
   }
 }
 
 @media (max-width: 480px) {
   .hero-section {
-    padding: 0.8rem 0.8rem;
-    padding-top: 1.2rem; /* Reducido */
-    margin-bottom: 1.5rem; /* Reducido */
+    padding: 2rem 1.5rem; /* Ajustado */
+    padding-top: 2.5rem; /* Ajustado */
+    margin-bottom: 2rem; /* Ajustado */
+    min-height: 70vh; /* Ajustado */
+    /* Mantener el ancho completo en mobile */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
   
   .hero-text h1 {
-    font-size: 1.6rem; /* Reducido de 1.8rem */
+    font-size: 2.5rem; /* Ajustado de 2.8rem */
   }
   
   .profile-image {
-    width: 100px; /* Reducido de 120px */
-    height: 100px; /* Reducido de 120px */
+    width: 160px; /* Ajustado de 180px */
+    height: 160px; /* Ajustado de 180px */
   }
   
   .profile-container {
-    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
+    margin-bottom: 1.8rem; /* Ajustado */
   }
   
   .roles-container {
-    height: 30px; /* Reducido de 35px */
-    margin-bottom: 0.8rem; /* Reducido de 1rem */
+    height: 50px; /* Ajustado de 55px */
+    margin-bottom: 1.3rem; /* Ajustado */
   }
   
   .role-title {
-    font-size: 1rem; /* Reducido de 1.2rem */
+    font-size: 1.6rem; /* Ajustado de 1.8rem */
   }
   
   .hero-description {
-    font-size: 0.9rem; /* Reducido de 0.95rem */
-    margin-bottom: 0.8rem; /* Reducido de 1rem */
-    line-height: 1.5; /* Reducido de 1.6 */
+    font-size: 1.1rem; /* Ajustado de 1.2rem */
+    margin-bottom: 1.5rem; /* Ajustado */
+    line-height: 1.6; /* Ajustado */
   }
   
   .hero-stats {
-    gap: 0.8rem; /* Reducido de 1rem */
-    margin-bottom: 0.8rem; /* Reducido de 1rem */
+    gap: 1rem; /* Ajustado */
+    margin-bottom: 1rem; /* Ajustado */
   }
   
   .stat-item {
-    padding: 0.5rem; /* Reducido de 0.6rem */
+    padding: 0.8rem; /* Ajustado */
   }
   
   .stat-number {
-    font-size: 1.5rem; /* Reducido de 1.8rem */
-    margin-bottom: 0.2rem; /* Reducido de 0.3rem */
+    font-size: 1.8rem; /* Ajustado */
+    margin-bottom: 0.3rem; /* Ajustado */
   }
   
   .stat-label {
-    font-size: 0.8rem; /* Reducido */
+    font-size: 0.85rem; /* Ajustado */
   }
   
   .cta-buttons {
-    gap: 1rem; /* Reducido de 1.5rem */
+    gap: 1.3rem; /* Ajustado */
   }
 }
 
 @media (max-width: 360px) {
   .hero-section {
-    padding: 0.6rem 0.5rem; /* Reducido */
-    padding-top: 1rem; /* Reducido */
-    margin-bottom: 1.2rem; /* Reducido */
+    padding: 1.8rem 1rem; /* Ajustado */
+    padding-top: 2.2rem; /* Ajustado */
+    margin-bottom: 1.8rem; /* Ajustado */
+    min-height: 65vh; /* Ajustado */
+    /* Mantener el ancho completo en mobile */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
   
   .hero-text h1 {
-    font-size: 1.4rem; /* Reducido de 1.6rem */
+    font-size: 2rem; /* Ajustado de 2.2rem */
   }
   
   .profile-image {
-    width: 80px; /* Reducido de 100px */
-    height: 80px; /* Reducido de 100px */
+    width: 130px; /* Ajustado de 140px */
+    height: 130px; /* Ajustado de 140px */
+  }
+  
+  .profile-container {
+    margin-bottom: 1.5rem; /* Ajustado */
   }
   
   .profile-ring {
-    top: -12px; /* Reducido de -15px */
-    left: -12px; /* Reducido de -15px */
-    right: -12px; /* Reducido de -15px */
-    bottom: -12px; /* Reducido de -15px */
+    top: -18px; /* Ajustado para la nueva imagen */
+    left: -18px; /* Ajustado para la nueva imagen */
+    right: -18px; /* Ajustado para la nueva imagen */
+    bottom: -18px; /* Ajustado para la nueva imagen */
   }
   
   .roles-container {
-    height: 25px; /* Reducido de 30px */
-    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
+    height: 42px; /* Ajustado de 45px */
+    margin-bottom: 1.1rem; /* Ajustado */
   }
   
   .role-title {
-    font-size: 0.9rem; /* Reducido de 1rem */
+    font-size: 1.3rem; /* Ajustado de 1.5rem */
   }
   
   .hero-description {
-    font-size: 0.85rem; /* Reducido de 0.9rem */
-    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
+    font-size: 1rem; /* Ajustado de 1.1rem */
+    margin-bottom: 1.3rem; /* Ajustado */
+    line-height: 1.5; /* Ajustado */
   }
   
   .hero-stats {
     flex-direction: column;
-    gap: 0.6rem; /* Reducido de 0.8rem */
-    margin-bottom: 0.6rem; /* Reducido de 0.8rem */
+    gap: 0.9rem; /* Ajustado */
+    margin-bottom: 0.9rem; /* Ajustado */
   }
   
   .stat-item {
-    padding: 0.4rem; /* Reducido de 0.5rem */
+    padding: 0.7rem; /* Ajustado */
   }
   
   .stat-number {
-    font-size: 1.3rem; /* Reducido de 1.5rem */
+    font-size: 1.6rem; /* Ajustado */
+    margin-bottom: 0.3rem; /* Ajustado */
+  }
+  
+  .stat-label {
+    font-size: 0.8rem; /* Ajustado */
+  }
+}
+
+/* Nueva sección Journey & Experiences */
+.journey-container {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.carousel-section {
+  width: 100%;
+}
+
+/* Footer del carrusel con estadísticas */
+.carousel-footer {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: var(--border-radius-slice);
+  border: var(--slice-border) solid var(--border-color);
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px 8px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--font-secondary-color);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background: var(--secondary-background-color);
+  border-radius: var(--border-radius-slice);
+  border: var(--slice-border) solid var(--primary-color-shade);
+}
+
+.personal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.personal-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--font-secondary-color);
+  margin: 0 0 24px 0;
+}
+
+.personal-description strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  background: var(--background-color);
+  border-radius: var(--border-radius-slice);
+  border: var(--slice-border) solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--primary-color-rgb), 0.15);
+  border-color: var(--primary-color);
+}
+
+.highlight-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: var(--primary-color-contrast);
+  border-radius: 50%;
+}
+
+.highlight-content {
+  flex: 1;
+}
+
+.highlight-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--font-primary-color);
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.highlight-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--font-secondary-color);
+  margin: 0;
+}
+
+/* Responsive para la nueva sección */
+@media (max-width: 1024px) {
+  .journey-container {
+    grid-template-columns: 50% 50%;
+    gap: 24px;
+  }
+  
+  .carousel-footer {
+    margin-top: 20px;
+    padding: 18px;
+  }
+  
+  .stats-container {
+    gap: 14px;
+  }
+  
+  .stat-number {
+    font-size: 1.6rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  
+  .text-section {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .personal-title {
+    font-size: 1.4rem;
+  }
+  
+  .highlight-item {
+    padding: 14px;
+    gap: 14px;
+  }
+  
+  .highlight-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .carousel-section {
+    order: 1;
+  }
+  
+  .carousel-footer {
+    margin-top: 20px;
+    padding: 16px;
+  }
+  
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .stat-item {
+    padding: 20px 16px;
+  }
+  
+  .stat-number {
+    font-size: 1.7rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
+  }
+  
+  .text-section {
+    order: 2;
+    padding: 20px;
+  }
+  
+  .personal-title {
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+  
+  .personal-description {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  
+  .highlights-list {
+    gap: 16px;
+  }
+  
+  .highlight-item {
+    padding: 16px;
+    gap: 14px;
+  }
+  
+  .highlight-title {
+    font-size: 1rem;
+  }
+  
+  .highlight-description {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .journey-container {
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .carousel-footer {
+    margin-top: 16px;
+    padding: 14px;
+  }
+  
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .stat-item {
+    padding: 16px 12px;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  
+  .text-section {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .personal-title {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .personal-description {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .highlights-list {
+    gap: 14px;
+  }
+  
+  .highlight-item {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .highlight-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  
+  .highlight-title {
+    font-size: 0.95rem;
+  }
+  
+  .highlight-description {
+    font-size: 0.8rem;
   }
 }

@@ -24,7 +24,7 @@ export default class AboutSection extends HTMLElement {
       await this.createTechnicalSkillsSection();
       
       // Create values section
-      await this.createSoftSkillsSection();
+      await this.createCarruselSection();
       
    }
 
@@ -143,7 +143,7 @@ export default class AboutSection extends HTMLElement {
          {
             title: 'Engineering Excellence',
             text: 'Computer Engineer with 5+ years creating robust, scalable web applications. Expert in modern JavaScript frameworks, cloud architecture, and agile methodologies. Creator of Slice.js framework.',
-            icon: { name: 'code', iconStyle: 'filled' },
+            icon: { name: 'file-code', iconStyle: 'filled' },
             customColor: {
                card: 'var(--primary-color)',
                icon: 'var(--primary-color-contrast)'
@@ -152,7 +152,7 @@ export default class AboutSection extends HTMLElement {
          {
             title: 'Educational Leadership',
             text: 'University Professor passionate about making complex technology concepts accessible. Experienced in curriculum development, innovative teaching methodologies, and mentoring the next generation of developers.',
-            icon: { name: 'graduation-cap', iconStyle: 'filled' },
+            icon: { name: 'book-open', iconStyle: 'filled' },
             customColor: {
                card: 'var(--secondary-color)',
                icon: 'var(--secondary-color-contrast)'
@@ -175,7 +175,7 @@ export default class AboutSection extends HTMLElement {
       });
 
       for (const [index, cardData] of aboutData.entries()) {
-         const aboutCard = await slice.build('AboutCard', {
+         const aboutCard = await slice.build('Card', {
             title: cardData.title,
             text: cardData.text,
             icon: cardData.icon,
@@ -219,39 +219,137 @@ export default class AboutSection extends HTMLElement {
       console.error('Error: TechnicalSkillsSection component not built correctly');
    }
 }
-   async createSoftSkillsSection() {
+   async createCarruselSection() {
       const valuesTitle = document.createElement('h2');
-      valuesTitle.innerHTML = '🎯 Core Values & Philosophy';
+      valuesTitle.innerHTML = '🌟 My Journey & Experiences';
       valuesTitle.classList.add('section-title');
 
-      const valuesData = [
-         { name: 'Continuous Learning', icon: '📚', description: 'Always exploring new technologies and teaching methodologies to stay at the forefront of innovation' },
-         { name: 'Knowledge Sharing', icon: '🤝', description: 'Passionate about sharing expertise through teaching, mentoring, and open-source contributions' },
-         { name: 'Quality & Excellence', icon: '⭐', description: 'Committed to delivering high-quality solutions and educational experiences that exceed expectations' },
-         { name: 'Innovation & Creativity', icon: '💡', description: 'Developing creative solutions to complex problems and inspiring students to think outside the box' },
-         { name: 'Collaboration', icon: '🌟', description: 'Building strong relationships with teams, students, and the tech community for mutual growth' },
-         { name: 'Ethical Technology', icon: '🛡️', description: 'Promoting responsible development practices and ethical use of technology in education and industry' }
-      ];
+      // Crear contenedor principal con grid 60/40
+      const mainContainer = document.createElement('div');
+      mainContainer.classList.add('journey-container');
 
-      const valuesContainer = document.createElement('div');
-      valuesContainer.classList.add('values-container');
+      // Carrusel de imágenes (60%)
+      const carouselSection = document.createElement('div');
+      carouselSection.classList.add('carousel-section');
 
-      valuesData.forEach((value, index) => {
-         const valueCard = document.createElement('div');
-         valueCard.classList.add('value-card');
-         valueCard.style.animationDelay = `${index * 0.1}s`;
-         
-         valueCard.innerHTML = `
-            <div class="value-icon">${value.icon}</div>
-            <h4 class="value-name">${value.name}</h4>
-            <p class="value-description">${value.description}</p>
-         `;
-         
-         valuesContainer.appendChild(valueCard);
+      const carousel = await slice.build('ImageCarrousel', {
+         images: [
+            {
+               url: './images/aboutSection/estudiantes.jpeg',
+               label: 'Computer Engineering Project Showcase',
+               date: 'July 2025',
+               alt: 'Eng. Ing. Victor Kneiders Project exposition for the Engineering Faculty in Universidad Rafael Urdaneta'
+            },
+            {
+               url: './images/aboutSection/firma.jpeg',
+               label: 'Professional Development',
+               date: 'August 2024',
+               alt: 'My graduation day at Universidad Rafael Urdaneta Victor Kneider'
+            }
+         ],
+         autoplay: true,
+         autoplaySpeed: 4000,
+         showIndicators: true,
+         showNavigation: true
       });
 
+      carouselSection.appendChild(carousel);
+
+      // Contenido adicional debajo del carrusel para PC
+      const carouselFooter = document.createElement('div');
+      carouselFooter.classList.add('carousel-footer');
+      
+      const statsContainer = document.createElement('div');
+      statsContainer.classList.add('stats-container');
+      
+      const stats = [
+         { number: '5+', label: 'Years Experience' },
+         { number: '50+', label: 'Projects Completed' },
+         { number: '100+', label: 'Students Taught' },
+         { number: '15+', label: 'Open Source Contributions' }
+      ];
+      
+      stats.forEach(stat => {
+         const statItem = document.createElement('div');
+         statItem.classList.add('stat-item');
+         
+         statItem.innerHTML = `
+            <div class="stat-number">${stat.number}</div>
+            <div class="stat-label">${stat.label}</div>
+         `;
+         
+         statsContainer.appendChild(statItem);
+      });
+      
+      carouselFooter.appendChild(statsContainer);
+      carouselSection.appendChild(carouselFooter);
+
+      // Sección de texto (40%)
+      const textSection = document.createElement('div');
+      textSection.classList.add('text-section');
+
+      const personalTitle = document.createElement('h3');
+      personalTitle.textContent = 'Beyond the Code';
+      personalTitle.classList.add('personal-title');
+
+      const personalDescription = document.createElement('p');
+      personalDescription.innerHTML = `
+         My journey in technology goes far beyond writing code. I'm passionate about 
+         <strong>sharing knowledge</strong> and <strong>building communities</strong> that drive innovation forward.
+      `;
+      personalDescription.classList.add('personal-description');
+
+      const highlightsList = document.createElement('div');
+      highlightsList.classList.add('highlights-list');
+
+      const highlights = [
+         {
+            icon: '🎯',
+            title: 'Community Building',
+            description: 'Creating spaces where developers can learn, grow, and collaborate together.'
+         },
+         {
+            icon: '🚀',
+            title: 'Innovation Leadership',
+            description: 'Leading by example in adopting and promoting cutting-edge technologies.'
+         },
+         {
+            icon: '💡',
+            title: 'Knowledge Sharing',
+            description: 'Committed to making complex concepts accessible to everyone.'
+         },
+         {
+            icon: '🌟',
+            title: 'Mentorship',
+            description: 'Guiding the next generation of developers and engineers.'
+         }
+      ];
+
+      highlights.forEach(highlight => {
+         const highlightItem = document.createElement('div');
+         highlightItem.classList.add('highlight-item');
+         
+         highlightItem.innerHTML = `
+            <div class="highlight-icon">${highlight.icon}</div>
+            <div class="highlight-content">
+               <h4 class="highlight-title">${highlight.title}</h4>
+               <p class="highlight-description">${highlight.description}</p>
+            </div>
+         `;
+         
+         highlightsList.appendChild(highlightItem);
+      });
+
+      textSection.appendChild(personalTitle);
+      textSection.appendChild(personalDescription);
+      textSection.appendChild(highlightsList);
+
+      // Ensamblar el contenedor principal
+      mainContainer.appendChild(carouselSection);
+      mainContainer.appendChild(textSection);
+
       this.$values.appendChild(valuesTitle);
-      this.$values.appendChild(valuesContainer);
+      this.$values.appendChild(mainContainer);
    }
 
    

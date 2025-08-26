@@ -15,6 +15,11 @@ export default class Grid extends HTMLElement {
          type: 'array', 
          default: [], 
          required: false 
+      },
+      centerItems: {
+         type: 'boolean',
+         default: true,
+         required: false
       }
    };
 
@@ -59,14 +64,45 @@ export default class Grid extends HTMLElement {
       return this._items;
    }
 
+   set centerItems(value) {
+      this._centerItems = value;
+      this.updateGridItemStyles();
+   }
+
+   get centerItems() {
+      return this._centerItems;
+   }
+
    async setItem(item) {
       item.classList.add('grid-item');
+      this.updateItemStyles(item);
       this.$grid.appendChild(item);
+   }
+
+   updateItemStyles(item) {
+      if (this._centerItems) {
+         item.style.display = 'flex';
+         item.style.justifyContent = 'center';
+         item.style.alignItems = 'center';
+         item.style.width = '100%';
+         item.style.height = '100%';
+      } else {
+         item.style.display = '';
+         item.style.justifyContent = '';
+         item.style.alignItems = '';
+         item.style.width = '';
+         item.style.height = '';
+      }
+   }
+
+   updateGridItemStyles() {
+      const gridItems = this.$grid.querySelectorAll('.grid-item');
+      gridItems.forEach(item => this.updateItemStyles(item));
    }
 
    async setItems(items) {
       for (let i = 0; i < items.length; i++) {
-         this.setItem(items[i]);
+         await this.setItem(items[i]);
       }
    }
 }
