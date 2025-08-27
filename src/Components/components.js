@@ -40,6 +40,9 @@ const components = {
   "ProjectCard": "AtomicAppComponents",
   "StudyCard": "AtomicAppComponents",
   "TechnicalSkillsSection": "AtomicAppComponents",
+  "TechExpertise": "AtomicAppComponents",
+  "TechCarousel": "AtomicAppComponents",
+  "BadgeCarousel": "AtomicAppComponents",
   "ImageCarrousel": "Visual",
   "JourneySection": "AtomicAppComponents"
 }; export default components;

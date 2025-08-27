@@ -206,17 +206,20 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createTechnicalSkillsSection() {
-   const technicalSkillsSection = await slice.build('TechnicalSkillsSection', {
+   const techExpertise = await slice.build('TechExpertise', {
       title: '💻 Technical Expertise',
-      maxSkillsPerCard: 8,
-      showLevelBadges: true
+      subtitle: 'Technologies & tools I\'ve mastered through years of development',
+      showcaseTitle: 'Featured Skills',
+      autoPlay: true,
+      autoPlaySpeed: 5000,
+      marqueeSpeed: 5
    });
    
    // Asegúrate de que el componente se construyó correctamente
-   if (technicalSkillsSection && this.$skills) {
-      this.$skills.appendChild(technicalSkillsSection);
+   if (techExpertise && this.$skills) {
+      this.$skills.appendChild(techExpertise);
    } else {
-      console.error('Error: TechnicalSkillsSection component not built correctly');
+      console.error('Error: TechExpertise component not built correctly');
    }
 }
    async createCarruselSection() {

@@ -1,0 +1,179 @@
+/* Componente principal */
+slice-techexpertise {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+
+  background: linear-gradient(135deg, 
+    var(--primary-background-color) 0%, 
+    var(--secondary-background-color) 50%, 
+    var(--tertiary-background-color) 100%);
+}
+
+
+.modern-tech-expertise {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Estilo para ocupar 100% del ancho como hero-section */
+slice-techexpertise {
+  position: relative;
+  /* Hacer que ocupe toda la altura horizontal */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  /* Remover border-radius y border para que ocupe todo el ancho */
+  border-radius: 0;
+  border: none;
+  overflow: hidden;
+}
+
+/* Header de la sección */
+.expertise-header {
+  padding-top: 1rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.expertise-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+  text-shadow: 
+    0 0 20px rgba(var(--primary-color-rgb), 0.3),
+    0 0 40px rgba(var(--primary-color-rgb), 0.2);
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.expertise-subtitle {
+  font-size: 1.1rem;
+  color: var(--font-secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Contenido principal */
+.expertise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .modern-tech-expertise {
+    padding: 1.5rem;
+  }
+  
+  .expertise-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .expertise-title {
+    font-size: 2rem;
+  }
+  
+  .expertise-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-tech-expertise {
+    padding: 1.2rem;
+  }
+  
+  .expertise-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Carruseles individuales con patrón zigzag */
+.individual-carousels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espaciado uniforme entre carruseles */
+}
+
+.individual-carousels-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 15px rgba(var(--primary-color-rgb), 0.3),
+    0 0 30px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* Patrón zigzag para los carruseles - usando margin en lugar de transform */
+.individual-carousels slice-badge-carousel.zigzag-left {
+  margin-left: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+.individual-carousels slice-badge-carousel.zigzag-right {
+  margin-right: 2rem;
+  transition: margin-right 0.3s ease;
+}
+
+
+
+/* Responsive para carruseles individuales */
+@media (max-width: 768px) {
+  .individual-carousels-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .individual-carousels {
+    gap: 1.5rem; /* Reducir espaciado en móviles */
+  }
+  
+  /* Ajustar el zigzag en móviles */
+  .individual-carousels slice-badge-carousel.zigzag-left {
+    margin-left: 1rem;
+  }
+  
+  .individual-carousels slice-badge-carousel.zigzag-right {
+    margin-right: 1rem;
+  }
+  
+  .individual-carousels slice-badge-carousel.zigzag-left:hover {
+    margin-left: 1.5rem;
+  }
+  
+  .individual-carousels slice-badge-carousel.zigzag-right:hover {
+    margin-right: 1.5rem;
+  }
+}
