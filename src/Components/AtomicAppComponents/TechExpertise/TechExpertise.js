@@ -127,10 +127,9 @@ export default class TechExpertise extends HTMLElement {
     
     individualCarouselsContainer.appendChild(sectionTitle);
     
-    // Crear cada carrusel de badges individual con patrón zigzag y colores únicos
+    // Crear cada carrusel de badges individual centrado
     for (let i = 0; i < this.badgeCarousels.length; i++) {
       const carouselData = this.badgeCarousels[i];
-      const isEven = i % 2 === 0;
       
       const carousel = await slice.build('BadgeCarousel', {
         title: carouselData.title,
@@ -142,19 +141,11 @@ export default class TechExpertise extends HTMLElement {
         marqueeSpeed: this.marqueeSpeed,
         showControls: this.showPauseButton,
         borderRadius: '12px',
-        shadow: true,
-        zigzagPosition: isEven ? 'left' : 'right' // Posición zigzag para el carrusel
+        shadow: true
       });
       
       // Aplicar tema CSS usando variables CSS directamente
       carousel.classList.add(carouselData.theme);
-      
-      // Aplicar patrón zigzag al carrusel
-      if (isEven) {
-        carousel.classList.add('zigzag-left');
-      } else {
-        carousel.classList.add('zigzag-right');
-      }
       
       individualCarouselsContainer.appendChild(carousel);
     }

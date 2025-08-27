@@ -49,11 +49,6 @@ export default class BadgeCarousel extends HTMLElement {
       type: 'boolean', 
       default: true, 
       required: false 
-    },
-    zigzagPosition: { 
-      type: 'string', 
-      default: 'left', 
-      required: false 
     }
   };
 
@@ -73,7 +68,7 @@ export default class BadgeCarousel extends HTMLElement {
     this.currentPosition = 0;
 
     slice.controller.setComponentProps(this, props);
-    this.debuggerProps = ['title', 'badges', 'primaryColor', 'secondaryColor', 'accentColor', 'autoPlay', 'marqueeSpeed', 'showControls', 'borderRadius', 'shadow', 'zigzagPosition'];
+    this.debuggerProps = ['title', 'badges', 'primaryColor', 'secondaryColor', 'accentColor', 'autoPlay', 'marqueeSpeed', 'showControls', 'borderRadius', 'shadow'];
   }
 
   async init() {
@@ -136,7 +131,7 @@ export default class BadgeCarousel extends HTMLElement {
       cancelAnimationFrame(this.marqueeAnimation);
     }
     
-    console.log(`BadgeCarousel starting smooth marquee with speed: ${this.marqueeSpeed}ms, direction: ${this.zigzagPosition}`);
+    console.log(`BadgeCarousel starting smooth marquee with speed: ${this.marqueeSpeed}`);
     
     this.animateMarquee();
   }
@@ -145,11 +140,8 @@ export default class BadgeCarousel extends HTMLElement {
     if (this.isMarqueePaused) return;
     
     // Dirección del movimiento según la posición zigzag
-    if (this.zigzagPosition === 'left') {
-      this.currentPosition -= 1; // Movimiento hacia la izquierda
-    } else {
-      this.currentPosition += 1; // Movimiento hacia la derecha
-    }
+    // El zigzagPosition ya no se usa, por lo que el movimiento es siempre hacia la izquierda
+    this.currentPosition -= 1; // Movimiento hacia la izquierda
     
     // Si un badge sale completamente de la vista, lo movemos al final
     const track = this.$marqueeTrack;
@@ -160,12 +152,8 @@ export default class BadgeCarousel extends HTMLElement {
       const trackRect = track.getBoundingClientRect();
       
       // Si el badge sale por la izquierda (movimiento hacia izquierda)
-      if (this.zigzagPosition === 'left' && badgeRect.right < trackRect.left) {
+      if (badgeRect.right < trackRect.left) {
         track.appendChild(badge);
-      }
-      // Si el badge sale por la derecha (movimiento hacia derecha)
-      else if (this.zigzagPosition === 'right' && badgeRect.left > trackRect.right) {
-        track.insertBefore(badge, track.firstElementChild);
       }
     });
     
@@ -260,8 +248,7 @@ export default class BadgeCarousel extends HTMLElement {
       marqueeSpeed: this.marqueeSpeed,
       showControls: this.showControls,
       borderRadius: this.borderRadius,
-      shadow: this.shadow,
-      zigzagPosition: this.zigzagPosition
+      shadow: this.shadow
     };
   }
 

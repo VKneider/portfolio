@@ -212,7 +212,7 @@ export default class AboutSection extends HTMLElement {
       showcaseTitle: 'Featured Skills',
       autoPlay: true,
       autoPlaySpeed: 5000,
-      marqueeSpeed: 5
+      marqueeSpeed: 1
    });
    
    // Asegúrate de que el componente se construyó correctamente

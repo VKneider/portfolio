@@ -119,11 +119,12 @@ slice-techexpertise {
   }
 }
 
-/* Carruseles individuales con patrón zigzag */
+/* Carruseles individuales centrados */
 .individual-carousels {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Espaciado uniforme entre carruseles */
+  gap: 2rem; /* Espaciado uniforme entre carruseles */
+  align-items: center; /* Centrar todos los carruseles */
 }
 
 .individual-carousels-title {
@@ -136,19 +137,6 @@ slice-techexpertise {
     0 0 30px rgba(var(--primary-color-rgb), 0.2);
 }
 
-/* Patrón zigzag para los carruseles - usando margin en lugar de transform */
-.individual-carousels slice-badge-carousel.zigzag-left {
-  margin-left: 2rem;
-  transition: margin-left 0.3s ease;
-}
-
-.individual-carousels slice-badge-carousel.zigzag-right {
-  margin-right: 2rem;
-  transition: margin-right 0.3s ease;
-}
-
-
-
 /* Responsive para carruseles individuales */
 @media (max-width: 768px) {
   .individual-carousels-title {
@@ -158,22 +146,5 @@ slice-techexpertise {
   
   .individual-carousels {
     gap: 1.5rem; /* Reducir espaciado en móviles */
-  }
-  
-  /* Ajustar el zigzag en móviles */
-  .individual-carousels slice-badge-carousel.zigzag-left {
-    margin-left: 1rem;
-  }
-  
-  .individual-carousels slice-badge-carousel.zigzag-right {
-    margin-right: 1rem;
-  }
-  
-  .individual-carousels slice-badge-carousel.zigzag-left:hover {
-    margin-left: 1.5rem;
-  }
-  
-  .individual-carousels slice-badge-carousel.zigzag-right:hover {
-    margin-right: 1.5rem;
   }
 }
