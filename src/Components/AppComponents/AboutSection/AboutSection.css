@@ -383,6 +383,11 @@ slice-about-section {
   margin-bottom: 3rem; /* Reducido de 4rem */
 }
 
+/* Teaching Section - COMPACTO */
+.teaching-section {
+  margin-bottom: 3rem; /* Reducido de 4rem */
+}
+
 .values-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

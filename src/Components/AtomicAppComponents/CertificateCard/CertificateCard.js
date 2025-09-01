@@ -32,20 +32,29 @@ export default class CertificateCard extends HTMLElement {
    }
 
    async populateTemplate() {
-      // Set certificate image
-      this.$image.src = this.certificate.image;
-      this.$image.alt = this.certificate.title;
-      this.$image.loading = 'lazy';
-      this.$image.onerror = () => {
-         this.$image.src = '/images/certificates/certificate-placeholder.png';
-      };
+      // Set certificate image as cover background
+      if (this.certificate.image) {
+         this.$image.src = this.certificate.image;
+         this.$image.alt = this.certificate.title;
+         this.$image.loading = 'lazy';
+         this.$image.onerror = () => {
+            // Fallback to gradient if image fails to load
+            this.$image.style.display = 'none';
+         };
+      } else {
+         this.$image.style.display = 'none';
+      }
 
       // Set issuer logo
-      this.$issuerLogo.src = this.certificate.issuerLogo;
-      this.$issuerLogo.alt = `${this.certificate.issuer} logo`;
-      this.$issuerLogo.onerror = () => {
+      if (this.certificate.issuerLogo) {
+         this.$issuerLogo.src = this.certificate.issuerLogo;
+         this.$issuerLogo.alt = `${this.certificate.issuer} logo`;
+         this.$issuerLogo.onerror = () => {
+            this.$issuerLogo.style.display = 'none';
+         };
+      } else {
          this.$issuerLogo.style.display = 'none';
-      };
+      }
 
       // Set basic info
       this.$title.textContent = this.certificate.title;
@@ -81,7 +90,8 @@ export default class CertificateCard extends HTMLElement {
          this.$skillsList.appendChild(skillTag);
       });
 
-      // Create view certificate button
+      // Clear existing buttons and create view certificate button
+      this.$actions.innerHTML = '';
       const viewBtn = await slice.build('Button', {
          value: 'View Certificate',
          customColor: {
@@ -101,9 +111,8 @@ export default class CertificateCard extends HTMLElement {
 
    set certificate(value) {
       this._certificate = value;
-      if (this.$card) {
-         this.populateTemplate();
-      }
+      // Don't call populateTemplate here to avoid duplication
+      // It will be called in init() when the component is ready
    }
 
    get animationDelay() {

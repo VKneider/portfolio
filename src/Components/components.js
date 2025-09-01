@@ -43,6 +43,7 @@ const components = {
   "TechExpertise": "AtomicAppComponents",
   "TechCarousel": "AtomicAppComponents",
   "BadgeCarousel": "AtomicAppComponents",
+  "TeachingSection": "AtomicAppComponents",
   "ImageCarrousel": "Visual",
   "JourneySection": "AtomicAppComponents"
 }; export default components;

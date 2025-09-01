@@ -1,0 +1,5 @@
+---
+description:Use always Slice.js CSS variables when building slicejs frontend projects, check /Themes folder for the Themes.
+globs:
+alwaysApply: false
+---

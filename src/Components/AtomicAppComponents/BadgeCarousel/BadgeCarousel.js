@@ -32,7 +32,7 @@ export default class BadgeCarousel extends HTMLElement {
     },
     marqueeSpeed: { 
       type: 'number', 
-      default: 30, 
+      default: 15, 
       required: false 
     },
     showControls: { 
@@ -66,6 +66,8 @@ export default class BadgeCarousel extends HTMLElement {
     this.isMarqueePaused = false;
     this.marqueeAnimation = null;
     this.currentPosition = 0;
+    this.badgeWidth = 0;
+    this.trackWidth = 0;
 
     slice.controller.setComponentProps(this, props);
     this.debuggerProps = ['title', 'badges', 'primaryColor', 'secondaryColor', 'accentColor', 'autoPlay', 'marqueeSpeed', 'showControls', 'borderRadius', 'shadow'];
@@ -75,20 +77,41 @@ export default class BadgeCarousel extends HTMLElement {
     // Inicializar el componente
     this.initializeContent();
     this.setupEventListeners();
-    this.startMarquee();
+    
+    // Esperar a que el DOM esté listo
+    await this.waitForDOM();
     
     // Aplicar estilos personalizados
     this.applyCustomStyles();
     
+    // Iniciar animación
+    this.startMarquee();
+    
     // Aplicar animaciones iniciales
     this.animateInitialLoad();
+  }
+
+  waitForDOM() {
+    return new Promise(resolve => {
+      if (this.$marqueeTrack.children.length > 0) {
+        resolve();
+      } else {
+        const observer = new MutationObserver(() => {
+          if (this.$marqueeTrack.children.length > 0) {
+            observer.disconnect();
+            resolve();
+          }
+        });
+        observer.observe(this.$marqueeTrack, { childList: true });
+      }
+    });
   }
 
   initializeContent() {
     // Establecer título
     this.$carouselTitle.textContent = this.title;
 
-    // Generar badges del marquee
+    // Generar badges del marquee con duplicación para efecto infinito
     this.generateMarqueeBadges();
     
     // Ocultar controles si no se requiere
@@ -101,14 +124,20 @@ export default class BadgeCarousel extends HTMLElement {
   generateMarqueeBadges() {
     this.$marqueeTrack.innerHTML = '';
     
-    // Crear badges simples sin zigzag individual
-    this.badges.forEach((badge, index) => {
-      const badgeElement = document.createElement('div');
-      badgeElement.className = 'skill-badge';
-      badgeElement.textContent = badge;
-      badgeElement.style.animationDelay = `${index * 0.1}s`;
-      this.$marqueeTrack.appendChild(badgeElement);
-    });
+    // Crear múltiples copias para el efecto infinito
+    const copies = 4; // Más copias para asegurar continuidad
+    
+    for (let copy = 0; copy < copies; copy++) {
+      this.badges.forEach((badge, index) => {
+        const badgeElement = document.createElement('div');
+        badgeElement.className = 'skill-badge';
+        badgeElement.textContent = badge;
+        badgeElement.style.animationDelay = `${index * 0.1}s`;
+        this.$marqueeTrack.appendChild(badgeElement);
+      });
+    }
+    
+    console.log(`BadgeCarousel generated ${copies} copies of ${this.badges.length} badges`);
   }
 
   setupEventListeners() {
@@ -126,54 +155,17 @@ export default class BadgeCarousel extends HTMLElement {
   startMarquee() {
     if (this.isMarqueePaused) return;
     
-    // Limpiar cualquier animación existente
-    if (this.marqueeAnimation) {
-      cancelAnimationFrame(this.marqueeAnimation);
-    }
+    // Aplicar animación CSS simple
+    this.$marqueeTrack.style.animation = `marquee ${this.marqueeSpeed}s linear infinite`;
     
-    console.log(`BadgeCarousel starting smooth marquee with speed: ${this.marqueeSpeed}`);
-    
-    this.animateMarquee();
-  }
-
-  animateMarquee() {
-    if (this.isMarqueePaused) return;
-    
-    // Dirección del movimiento según la posición zigzag
-    // El zigzagPosition ya no se usa, por lo que el movimiento es siempre hacia la izquierda
-    this.currentPosition -= 1; // Movimiento hacia la izquierda
-    
-    // Si un badge sale completamente de la vista, lo movemos al final
-    const track = this.$marqueeTrack;
-    const badges = track.querySelectorAll('.skill-badge');
-    
-    badges.forEach((badge, index) => {
-      const badgeRect = badge.getBoundingClientRect();
-      const trackRect = track.getBoundingClientRect();
-      
-      // Si el badge sale por la izquierda (movimiento hacia izquierda)
-      if (badgeRect.right < trackRect.left) {
-        track.appendChild(badge);
-      }
-    });
-    
-    // Aplicar transformación suave
-    track.style.transform = `translateX(${this.currentPosition}px)`;
-    
-    // Continuar la animación
-    this.marqueeAnimation = requestAnimationFrame(() => {
-      setTimeout(() => this.animateMarquee(), this.marqueeSpeed);
-    });
+    console.log(`BadgeCarousel starting marquee with duration: ${this.marqueeSpeed}s`);
   }
 
   pauseMarquee() {
     if (!this.showControls) return;
     
     this.isMarqueePaused = true;
-    if (this.marqueeAnimation) {
-      cancelAnimationFrame(this.marqueeAnimation);
-      this.marqueeAnimation = null;
-    }
+    this.$marqueeTrack.style.animationPlayState = 'paused';
     
     this.$pauseBtn.style.display = 'none';
     this.$playBtn.style.display = 'block';
@@ -183,7 +175,7 @@ export default class BadgeCarousel extends HTMLElement {
     if (!this.showControls) return;
     
     this.isMarqueePaused = false;
-    this.startMarquee();
+    this.$marqueeTrack.style.animationPlayState = 'running';
     
     this.$playBtn.style.display = 'none';
     this.$pauseBtn.style.display = 'block';
@@ -234,6 +226,11 @@ export default class BadgeCarousel extends HTMLElement {
   updateBadges(newBadges) {
     this.badges = newBadges;
     this.generateMarqueeBadges();
+    
+    // Reiniciar el marquee si está activo
+    if (!this.isMarqueePaused) {
+      this.startMarquee();
+    }
   }
 
   // Getters y Setters

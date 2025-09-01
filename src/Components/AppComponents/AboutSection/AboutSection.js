@@ -8,6 +8,7 @@ export default class AboutSection extends HTMLElement {
       this.$skills = this.querySelector('.skills-section');
       this.$values = this.querySelector('.values-section');
       this.$interests = this.querySelector('.interests-section');
+      this.$teaching = this.querySelector('.teaching-section');
       
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
@@ -25,6 +26,9 @@ export default class AboutSection extends HTMLElement {
       
       // Create values section
       await this.createCarruselSection();
+      
+      // Create teaching section
+      await this.createTeachingSection();
       
    }
 
@@ -212,7 +216,7 @@ export default class AboutSection extends HTMLElement {
       showcaseTitle: 'Featured Skills',
       autoPlay: true,
       autoPlaySpeed: 5000,
-      marqueeSpeed: 1
+      marqueeSpeed: 15
    });
    
    // Asegúrate de que el componente se construyó correctamente
@@ -353,6 +357,25 @@ export default class AboutSection extends HTMLElement {
 
       this.$values.appendChild(valuesTitle);
       this.$values.appendChild(mainContainer);
+   }
+
+   async createTeachingSection() {
+      // Import teaching data
+      const { teachingData } = await import('../../AtomicAppComponents/TeachingSection/data.js');
+      
+      const teachingSection = await slice.build('TeachingSection', {
+         title: '🎓 Courses Taught',
+         subtitle: 'My experience as a university professor and outstanding student projects',
+         subjects: teachingData.subjects,
+         showStudentProjects: true,
+         animationDelay: 0.2
+      });
+      
+      if (teachingSection && this.$teaching) {
+         this.$teaching.appendChild(teachingSection);
+      } else {
+         console.error('Error: TeachingSection component not built correctly');
+      }
    }
 
    
