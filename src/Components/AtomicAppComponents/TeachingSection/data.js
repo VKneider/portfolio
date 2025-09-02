@@ -1,152 +1,114 @@
 export const teachingData = {
   subjects: [
     {
-      name: "Web Programming I",
+      name: "Web Client Languages",
       university: "Universidad Rafael Urdaneta",
-      description: "Fundamentals of modern web development with HTML5, CSS3, JavaScript ES6+ and responsive design. Students create interactive and functional web applications.",
+      description: "Introduction to modern web development. Fundamentals of HTML, CSS, JavaScript, user interfaces, UX/UI, asynchronous programming and HTTP API communication. Includes LocalStorage management and interactive web application development.",
       semester: "3rd Semester",
       students: "45 students",
-      credits: "4 credits",
-      year: "2024",
+      credits: "3 HC",
+      year: "2025",
       isCurrentlyTeaching: true,
-      technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "Git", "VS Code", "Responsive Design"],
+      technologies: ["HTML5", "CSS3", "JavaScript", "HTTP APIs", "LocalStorage", "UI/UX", "Asynchronous Programming", "Interfaces"],
       studentProjects: [
         {
-          name: "E-commerce Platform",
+          name: "Interactive Web Application",
           student: "María González",
-          url: "https://github.com/mariagonzalez/ecommerce-platform"
+          url: "https://github.com/mariagonzalez/web-app"
         },
         {
-          name: "Portfolio Website",
+          name: "API Dashboard",
           student: "Carlos Rodríguez",
-          url: "https://carlosrodriguez.dev"
+          url: "https://github.com/carlosrodriguez/api-dashboard"
         },
         {
-          name: "Task Management App",
+          name: "Local Storage Management System",
           student: "Ana Martínez",
-          url: "https://github.com/anamartinez/task-manager"
-        },
-        {
-          name: "Weather Dashboard",
-          student: "Luis Pérez",
-          url: "https://github.com/luisperez/weather-dashboard"
+          url: "https://github.com/anamartinez/local-storage-app"
         }
       ]
     },
     {
-      name: "Mobile Application Development",
+      name: "Component-Based Programming",
       university: "Universidad Rafael Urdaneta",
-      description: "Development of native and hybrid mobile applications with React Native and Flutter. Creation of cross-platform apps with modern interfaces.",
-      semester: "5th Semester",
-      students: "38 students",
-      credits: "5 credits",
-      year: "2024",
+      description: "Component-based programming paradigm, design patterns and modular project development. Use of component frameworks and libraries such as React, Angular, Shadcn, Material UI, SliceJS and other modern technologies.",
+      semester: "Elective",
+      students: "32 students",
+      credits: "3 HC",
+      year: "2025",
       isCurrentlyTeaching: true,
-      technologies: ["React Native", "Flutter", "JavaScript", "Dart", "Firebase", "Expo", "State Management"],
+      technologies: ["React", "Angular", "Shadcn", "Material UI", "SliceJS", "Components", "Design Patterns", "Frameworks"],
       studentProjects: [
         {
-          name: "Health Tracker App",
+          name: "Component System",
           student: "Luis Fernández",
-          url: "https://github.com/luisfernandez/health-tracker"
+          url: "https://github.com/luisfernandez/component-system"
         },
         {
-          name: "Social Media App",
+          name: "React Application",
           student: "Sofia Herrera",
-          url: "https://github.com/sofiaherrera/social-app"
+          url: "https://github.com/sofiaherrera/react-app"
         },
         {
-          name: "Delivery Service App",
+          name: "Angular Dashboard",
           student: "Diego Morales",
-          url: "https://github.com/diegomorales/delivery-app"
+          url: "https://github.com/diegomorales/angular-dashboard"
         }
       ]
     },
     {
-      name: "Advanced Databases",
+      name: "Programming Algorithms",
       university: "Universidad Rafael Urdaneta",
-      description: "Design and implementation of relational and NoSQL databases. Query optimization and handling of large data volumes.",
-      semester: "4th Semester",
-      students: "42 students",
-      credits: "4 credits",
-      year: "2023",
-      isCurrentlyTeaching: false,
-      technologies: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "SQL", "NoSQL", "Query Optimization"],
-      studentProjects: [
-        {
-          name: "Analytics Dashboard",
-          student: "Roberto Silva",
-          url: "https://github.com/robertosilva/analytics-dashboard"
-        },
-        {
-          name: "Inventory Management System",
-          student: "Patricia López",
-          url: "https://github.com/patricialopez/inventory-system"
-        },
-        {
-          name: "Real-time Chat System",
-          student: "Miguel Torres",
-          url: "https://github.com/migueltorres/chat-system"
-        }
-      ]
-    },
-    {
-      name: "Software Architecture",
-      university: "Universidad Rafael Urdaneta",
-      description: "Software design principles, architectural patterns and agile methodologies. Scalable and maintainable systems following best practices.",
-      semester: "6th Semester",
-      students: "35 students",
-      credits: "5 credits",
-      year: "2023",
-      isCurrentlyTeaching: false,
-      technologies: ["Design Patterns", "Microservices", "Docker", "Kubernetes", "AWS", "Clean Architecture", "SOLID"],
-      studentProjects: [
-        {
-          name: "Microservices E-commerce",
-          student: "Gabriel Torres",
-          url: "https://github.com/gabrieltorres/microservices-ecommerce"
-        },
-        {
-          name: "API Gateway System",
-          student: "Valentina Ruiz",
-          url: "https://github.com/valentinaruiz/api-gateway"
-        },
-        {
-          name: "Event-Driven Architecture",
-          student: "Andrés Vargas",
-          url: "https://github.com/andresvargas/event-driven-arch"
-        },
-        {
-          name: "Distributed Cache System",
-          student: "Carmen Vega",
-          url: "https://github.com/carmenvega/cache-system"
-        }
-      ]
-    },
-    {
-      name: "Applied Artificial Intelligence",
-      university: "Universidad Rafael Urdaneta",
-      description: "Fundamental concepts of AI, machine learning and deep learning. Practical projects with Python and modern AI frameworks.",
-      semester: "7th Semester",
-      students: "28 students",
-      credits: "4 credits",
-      year: "2024",
+      description: "Introductory course to Computer Engineering. Fundamentals of pseudocode, variable theory, data types, flowcharts and algorithmic thinking. Fundamental foundation for software development.",
+      semester: "1st Semester",
+      students: "50 students",
+      credits: "3 HC",
+      year: "2025",
       isCurrentlyTeaching: true,
-      technologies: ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Neural Networks"],
+      technologies: ["Pseudocode", "Algorithms", "Flowcharts", "Variables", "Data Types", "Programming Logic", "Algorithmic Thinking"],
       studentProjects: [
         {
-          name: "Image Recognition System",
-          student: "Camila Herrera",
-          url: "https://github.com/camilaherrera/image-recognition"
+          name: "Algorithmic Calculator",
+          student: "Roberto Silva",
+          url: "https://github.com/robertosilva/algorithm-calculator"
         },
         {
-          name: "Chatbot with NLP",
-          student: "Sebastián Jiménez",
-          url: "https://github.com/sebastianjimenez/chatbot-nlp"
+          name: "Sorting System",
+          student: "Patricia López",
+          url: "https://github.com/patricialopez/sorting-system"
         },
         {
-          name: "Predictive Analytics Tool",
-          student: "Isabella Castro",
-          url: "https://github.com/isabellacastro/predictive-analytics"
+          name: "Algorithm Simulator",
+          student: "Miguel Torres",
+          url: "https://github.com/migueltorres/algorithm-simulator"
+        }
+      ]
+    },
+    {
+      name: "Programming 2",
+      university: "Universidad Rafael Urdaneta",
+      description: "Advanced C++ programming with focus on pointers, file handling, Object-Oriented Programming (OOP) and libraries. Differences between dynamic vs static memory management and practical project development.",
+      semester: "2nd Semester",
+      students: "42 students",
+      credits: "4 HC (Theory and Practice)",
+      year: "2025",
+      isCurrentlyTeaching: true,
+      technologies: ["C++", "Pointers", "OOP", "File Handling", "Dynamic Memory", "Libraries", "Advanced Programming"],
+      studentProjects: [
+        {
+          name: "File Management System",
+          student: "Gabriel Torres",
+          url: "https://github.com/gabrieltorres/file-management"
+        },
+        {
+          name: "Memory Simulator",
+          student: "Valentina Ruiz",
+          url: "https://github.com/valentinaruiz/memory-simulator"
+        },
+        {
+          name: "Complete OOP Application",
+          student: "Andrés Vargas",
+          url: "https://github.com/andresvargas/oop-application"
         }
       ]
     }

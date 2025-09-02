@@ -200,13 +200,16 @@ export default class TeachingSection extends HTMLElement {
     titleContainer.appendChild(title);
     titleContainer.appendChild(university);
     
-    // Status indicator in top right corner
-    const statusIndicator = document.createElement('div');
-    statusIndicator.className = `detail-status-indicator ${subject.isCurrentlyTeaching ? 'currently-teaching' : 'not-teaching'}`;
-    statusIndicator.innerHTML = `
-      <div class="status-icon">${subject.isCurrentlyTeaching ? '🎓' : '✅'}</div>
-      <div class="status-text">${subject.isCurrentlyTeaching ? 'Teaching' : 'Taught'}</div>
-    `;
+    // Status indicator in top right corner - only show when currently teaching
+    let statusIndicator = null;
+    if (subject.isCurrentlyTeaching) {
+      statusIndicator = document.createElement('div');
+      statusIndicator.className = 'detail-status-indicator currently-teaching';
+      statusIndicator.innerHTML = `
+        <div class="status-icon">🎓</div>
+        <div class="status-text">Teaching</div>
+      `;
+    }
     
     const metaInfo = document.createElement('div');
     metaInfo.className = 'detail-meta';
@@ -233,8 +236,12 @@ export default class TeachingSection extends HTMLElement {
     }
     
     header.appendChild(titleContainer);
-    header.appendChild(statusIndicator);
     header.appendChild(metaInfo);
+    
+    // Add status indicator only if it exists (when currently teaching)
+    if (statusIndicator) {
+      header.appendChild(statusIndicator);
+    }
 
     // Main content
     const mainContent = document.createElement('div');

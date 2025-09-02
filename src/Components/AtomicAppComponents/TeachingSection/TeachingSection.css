@@ -942,29 +942,29 @@ slice-teaching-section {
   }
   
   .subjects-container {
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding: 0 0.5rem;
   }
   
   .selection-card {
-    width: 160px;
-    height: 160px;
-    padding: 1rem;
+    width: 140px;
+    height: 140px;
+    padding: 0.8rem;
   }
   
   .selection-icon {
-    font-size: 2rem;
-    margin-bottom: 0.6rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
   }
   
   .selection-title {
-    font-size: 0.85rem;
-    margin-bottom: 0.6rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
   }
   
   .selection-status {
-    font-size: 0.65rem;
-    padding: 0.25rem 0.6rem;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
   }
   
   .detail-content {
@@ -1014,29 +1014,30 @@ slice-teaching-section {
   }
   
   .subjects-container {
-    gap: 0.5rem;
+    gap: 0.4rem;
     padding: 0 0.3rem;
   }
   
   .selection-card {
-    width: 140px;
-    height: 140px;
-    padding: 0.8rem;
+    width: 110px;
+    height: 110px;
+    padding: 0.6rem;
   }
   
   .selection-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
   }
   
   .selection-title {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.1;
   }
   
   .selection-status {
-    font-size: 0.6rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.55rem;
+    padding: 0.15rem 0.4rem;
   }
   
   .detail-content {
