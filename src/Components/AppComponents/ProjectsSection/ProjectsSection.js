@@ -1,4 +1,4 @@
-import { projectsData } from "./data.js";
+import  projectsData from "./data.js";
 
 export default class ProjectsSection extends HTMLElement {
    constructor(props) {
@@ -25,9 +25,6 @@ export default class ProjectsSection extends HTMLElement {
       sectionTitle.textContent = `My Projects (${this.projectsData.length})`;
       sectionTitle.classList.add('section-title');
 
-      const projectsGrid = document.createElement('div');
-      projectsGrid.classList.add('projects-grid-container');
-
       // Sort projects: featured first, then by date
       const sortedProjects = [...this.projectsData].sort((a, b) => {
          if (a.featured !== b.featured) {
@@ -35,18 +32,15 @@ export default class ProjectsSection extends HTMLElement {
          }
          return new Date(b.date) - new Date(a.date);
       });
-
-      for (const [index, project] of sortedProjects.entries()) {
-         const projectCard = await slice.build('ProjectCard', {
-            project: project,
-            animationDelay: index * 0.1
-         });
-         
-         projectsGrid.appendChild(projectCard);
-      }
-
+      
       this.$grid.appendChild(sectionTitle);
-      this.$grid.appendChild(projectsGrid);
+
+      // Call the Master-Detail Project Viewer
+      const projectViewer = await slice.build('ProjectViewer', {
+          projects: sortedProjects
+      });
+      
+      this.$grid.appendChild(projectViewer);
    }
 }
 

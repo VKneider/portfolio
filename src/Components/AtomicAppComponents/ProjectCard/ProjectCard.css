@@ -32,6 +32,7 @@ slice-project-card {
   flex-direction: column;
   height: 100%;
   cursor: default;
+  min-width: 320px; /* Wider card */
 }
 
 .project-card:hover {
@@ -164,6 +165,13 @@ slice-project-card {
   margin-bottom: 1.5rem;
   text-align: justify;
   flex: 1;
+  
+  /* Handle long texts */
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Limit to 4 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Tech Stack */

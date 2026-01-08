@@ -57,6 +57,7 @@ export default class TeachingSection extends HTMLElement {
     // Component state
     this.selectedSubject = null;
     this.selectedIndex = 0;
+    this.reducedEffects = false;
 
     slice.controller.setComponentProps(this, props);
     this.debuggerProps = ['title', 'subtitle', 'subjects', 'primaryColor', 'secondaryColor', 'accentColor', 'showStudentProjects', 'animationDelay'];
@@ -70,10 +71,10 @@ export default class TeachingSection extends HTMLElement {
     this.applyCustomStyles();
     
     // Create selection cards
-    await this.createSelectionCards();
+    this.createSelectionCards();
     
     // Create detail view
-    await this.createDetailView();
+    this.createDetailView();
     
     // Select first subject by default
     if (this.subjects.length > 0) {
@@ -90,25 +91,29 @@ export default class TeachingSection extends HTMLElement {
     this.$subtitle.textContent = this.subtitle;
   }
 
-  async createSelectionCards() {
+  createSelectionCards() {
     this.$subjectsContainer.innerHTML = '';
+    const fragment = document.createDocumentFragment();
 
     for (const [index, subject] of this.subjects.entries()) {
-      const selectionCard = await this.createSelectionCard(subject, index);
-      this.$subjectsContainer.appendChild(selectionCard);
+      const selectionCard = this.createSelectionCard(subject, index);
+      fragment.appendChild(selectionCard);
     }
+
+    this.$subjectsContainer.appendChild(fragment);
   }
 
-  async createDetailView() {
+  createDetailView() {
     this.$detailView.innerHTML = '';
     // Detail view will be populated when a subject is selected
   }
 
-  async createSelectionCard(subject, index) {
+  createSelectionCard(subject, index) {
     const card = document.createElement('div');
     card.className = 'selection-card';
     card.dataset.index = index;
-    card.style.animationDelay = `${index * this.animationDelay}s`;
+    const delay = this.reducedEffects ? 0 : index * this.animationDelay;
+    card.style.animationDelay = `${delay}s`;
 
     // Subject icon
     const icon = document.createElement('div');
@@ -148,7 +153,10 @@ export default class TeachingSection extends HTMLElement {
     return iconMap[subjectName] || '📚';
   }
 
-  async selectSubject(index) {
+  selectSubject(index) {
+    if (this.selectedIndex === index && this.selectedSubject) {
+      return;
+    }
 
     // Update state
     this.selectedIndex = index;
@@ -168,10 +176,10 @@ export default class TeachingSection extends HTMLElement {
     });
 
     // Update detail view
-    await this.updateDetailView();
+    this.updateDetailView();
   }
 
-  async updateDetailView() {
+  updateDetailView() {
 
     if (!this.selectedSubject) return;
 
@@ -342,23 +350,39 @@ export default class TeachingSection extends HTMLElement {
 
 
     // Update detail view with animation
-    this.$detailView.style.opacity = '0';
-    this.$detailView.style.transform = 'translateY(20px)';
+    const targetTransform = this.reducedEffects ? 'none' : 'translateY(20px)';
+    this.$detailView.style.opacity = this.reducedEffects ? '1' : '0';
+    this.$detailView.style.transform = targetTransform;
 
-    
-    setTimeout(() => {
+    const renderContent = () => {
       this.$detailView.innerHTML = '';
       this.$detailView.appendChild(detailContent);
-      this.$detailView.style.opacity = '1';
-      this.$detailView.style.transform = 'translateY(0)';
 
-    }, 150);
+      if (this.reducedEffects) {
+        this.$detailView.style.opacity = '1';
+        this.$detailView.style.transform = 'none';
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        this.$detailView.style.opacity = '1';
+        this.$detailView.style.transform = 'translateY(0)';
+      });
+    };
+
+    if (this.reducedEffects) {
+      renderContent();
+      return;
+    }
+
+    requestAnimationFrame(renderContent);
   }
 
 
 
   applyCustomStyles() {
     const section = this.querySelector('.teaching-section');
+    if (!section) return;
 
     
     // Apply custom colors
@@ -366,9 +390,24 @@ export default class TeachingSection extends HTMLElement {
     section.style.setProperty('--teaching-secondary', this.secondaryColor);
     section.style.setProperty('--teaching-accent', this.accentColor);
 
+    this.reducedEffects = this.shouldReduceEffects();
+    section.classList.toggle('teaching-reduced-effects', this.reducedEffects);
+
   }
 
   animateInitialLoad() {
+
+    if (this.reducedEffects) {
+      this.$title.style.opacity = '1';
+      this.$subtitle.style.opacity = '1';
+      const cards = this.$subjectsContainer.querySelectorAll('.selection-card');
+      cards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+        card.style.animation = 'none';
+      });
+      return;
+    }
 
     // Title entrance animation
     this.$title.style.animation = 'fadeInDown 0.8s ease-out forwards';
@@ -394,10 +433,8 @@ export default class TeachingSection extends HTMLElement {
 
   addSubject(subject) {
     this.subjects.push(subject);
-    this.createSelectionCard(subject, this.subjects.length - 1)
-      .then(card => {
-        this.$subjectsContainer.appendChild(card);
-      });
+    const card = this.createSelectionCard(subject, this.subjects.length - 1);
+    this.$subjectsContainer.appendChild(card);
   }
 
   // Getters and Setters
@@ -419,6 +456,23 @@ export default class TeachingSection extends HTMLElement {
     this.initializeContent();
     this.applyCustomStyles();
     this.createSelectionCards();
+  }
+
+  mediaQueryMatches(query) {
+    return typeof window !== 'undefined'
+      && typeof window.matchMedia === 'function'
+      && window.matchMedia(query).matches;
+  }
+
+  shouldReduceEffects() {
+    const lowPowerDevice = typeof navigator !== 'undefined'
+      && typeof navigator.hardwareConcurrency === 'number'
+      && navigator.hardwareConcurrency <= 4;
+
+    return lowPowerDevice
+      || this.mediaQueryMatches('(prefers-reduced-motion: reduce)')
+      || this.mediaQueryMatches('(prefers-reduced-transparency: reduce)')
+      || this.mediaQueryMatches('(max-width: 768px)');
   }
 }
 

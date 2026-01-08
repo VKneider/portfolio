@@ -11,31 +11,82 @@
    padding: 0.8rem; /* Ultra reduced from 1.5rem */
    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
    border-left: 3px solid var(--primary-color);
-   animation: slideInFromRight 0.6s ease-out forwards;
+   animation: gentleFadeIn 0.5s ease-out forwards;
    opacity: 0;
-   transform: translateX(50px);
+   transform: translateY(10px);
    transition: all 0.3s ease;
 }
 
+@keyframes gentleFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .experience-card:hover {
-   transform: translateX(0) translateY(-5px);
-   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+   transform: translateY(-2px);
+   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Timeline dot - will be positioned by parent container */
-.experience-card::before {
-   content: '';
-   position: absolute;
-   left: -2.75rem;
-   top: 1rem; /* Ultra adjusted for compact header */
-   width: 10px;
-   height: 10px;
-   background-color: var(--primary-color);
-   border-radius: 50%;
-   border: 2px solid var(--primary-background-color);
+/* Achievements Grid */
+.achievements-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   gap: 1rem;
+   margin-top: 0.8rem;
 }
 
-/* Experience Header - Ultra Compact */
+.achievement-item {
+   display: flex;
+   align-items: flex-start;
+   gap: 0.8rem;
+   background-color: var(--primary-background-color);
+   padding: 1rem;
+   border-radius: var(--border-radius-slice);
+   border: 1px solid var(--disabled-color);
+   transition: all 0.2s ease;
+}
+
+.achievement-item:hover {
+   transform: translateY(-2px);
+   border-color: var(--success-color);
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.achievement-icon {
+   font-size: 1.2rem;
+   line-height: 1;
+}
+
+.achievement-text {
+   font-size: 0.9rem;
+   color: var(--font-secondary-color);
+   line-height: 1.5;
+}
+
+/* Responsibilities - Enhanced */
+.responsibilities-section {
+    margin: 1.5rem 0;
+}
+
+.responsibilities-list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.responsibilities-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--font-secondary-color);
+    font-size: 0.95rem;
+}
+
+.responsibilities-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
 .experience-header {
    display: flex;
    align-items: flex-start;

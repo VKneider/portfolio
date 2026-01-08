@@ -1,4 +1,4 @@
-import {experienceData} from './data.js';
+import experienceData from '../ExperienceSection/data.js';
 
 export default class ExperienceSection extends HTMLElement {
    constructor(props) {
@@ -35,18 +35,32 @@ export default class ExperienceSection extends HTMLElement {
 
       // Sort by date (most recent first)
       const sortedExperience = [...this.experienceData].sort((a, b) => {
-         return new Date(b.date) - new Date(a.date);
+         // Assuming format like "2024 - Present" or "2023"
+         // Simple parsing to force most recent first
+         return a.id - b.id; // Or keep original order since data.js seems ordered
       });
 
+      const cards = [];
       for (const [index, experience] of sortedExperience.entries()) {
          const experienceCard = await slice.build('ExperienceCard', {
             experience: experience,
-            animationDelay: index * 0.1
+            // Remove huge margin/padding in card if handled by carousel slide
          });
-         timelineContainer.appendChild(experienceCard);
+         // Ensure card takes full width needed
+         experienceCard.style.width = '100%';
+         experienceCard.style.maxWidth = '800px'; 
+         cards.push(experienceCard);
       }
 
-      this.$timeline.appendChild(timelineContainer);
+      const carousel = await slice.build('Tabs', {
+         items: cards.map((card, index) => ({
+             label: sortedExperience[index].company, // Use company name as tab label
+             content: card
+         })),
+         orientation: 'horizontal'
+      });
+      
+      this.$timeline.appendChild(carousel);
    }
 
 }

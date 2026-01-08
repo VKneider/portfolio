@@ -1,6 +1,32 @@
-export const experienceData = [
+ const experienceData = [
+  /*
   {
     id: 1,
+    company: 'Automation Labs',
+    position: 'Full Stack Engineer & Cloud Specialist',
+    logo: '/images/companies/cloud.png',
+    period: '2025 - Present',
+    type: 'Full-time',
+    location: 'Remote',
+    description:
+      'Remote engineer architecting robust full-stack solutions on Azure. Specializing in high-performance backends using FastAPI/Fastify and process automation, while leveraging MCP and Generative AI for accelerated development.',
+    responsibilities: [
+      'Develop scalable backend services using FastAPI, Fastify, and Express',
+      'Configure production-grade servers with Uvicorn/Gunicorn and Cloud Workers',
+      'Design and implement cloud infrastructure solutions on Azure',
+      'Integrate Model Context Protocol (MCP) in development workflows',
+      'Utilize advanced AI coding assistants (Claude Code, Cursor) for rapid development'
+    ],
+    technologies: ['Azure', 'FastAPI', 'Fastify', 'Express', 'Uvicorn', 'MCP', 'Python', 'Node.js'],
+    achievements: [
+      'Accelerated delivery timelines using AI-assisted development',
+      'Architected reliable cloud automation systems on Azure',
+      'Built high-performance APIs utilizing modern ASGI/WSGI servers'
+    ]
+  },
+  */
+  {
+    id: 2,
     company: 'Universidad Rafael Urdaneta (URU)',
     position: 'Computer Engineer Professor',
     logo: '/images/uru-logo-seo.png',
@@ -24,7 +50,7 @@ export const experienceData = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     company: 'Polipopileno de Venezuela (PROPILVEN S.A.)',
     position: 'Computer Engineer - AIT Department Internship',
     logo: '/images/companies/propilven.png',
@@ -47,7 +73,7 @@ export const experienceData = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     company: 'Freelance / Personal Projects',
     position: 'Full-Stack Developer & Framework Creator',
     logo: '/images/companies/freelance.png',
@@ -71,3 +97,5 @@ export const experienceData = [
     ]
   }
 ];
+
+export default experienceData;

@@ -1,9 +1,14 @@
-export const projectsData = [
+const projectsData = [
          {
             id: 1,
             title: 'Slice.js Framework',
-            description: 'A modern, lightweight component-based framework for building web applications using vanilla JavaScript and web standards.',
+            description: 'A dedicated Custom Web Component framework built to master the fundamentals of modern frontend architecture. Features a reactive state system without VDOM overhead, scoped styling, and a component-based dependency injection system. Includes a custom CLI for scaffolding and bundling, proving that you don\'t need React to build complex, scalable applications.',
             image: 'https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG',
+            images: [
+                'https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG',
+                './images/projects/slice2.png',
+                'https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/code-example.JPG' 
+            ],
             technologies: ['JavaScript', 'Web Components', 'CSS3', 'HTML5'],
             category: 'Framework',
             status: 'Active',
@@ -14,67 +19,20 @@ export const projectsData = [
          },
          {
             id: 2,
-            title: 'E-Commerce Platform',
-            description: 'Full-stack e-commerce solution with modern payment integration, inventory management, and admin dashboard.',
-            image: '/images/projects/ecommerce.png',
-            technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Redux'],
-            category: 'Web App',
-            status: 'Active',
-            githubUrl: 'https://github.com/victorkneider/ecommerce-platform',
-            liveUrl: 'https://ecommerce-demo.vercel.app',
+            title: 'Parish Automated Ecosystem',
+            description: 'Zero-cost digital ecosystem for San Ramón Nonato Parish. Engineered an automated content pipeline using Google Sheets/Forms as a Headless CMS. Custom ETL scripts transform administration data into a performant web experience, streamlining information flow for parish groups without recurring costs.',
+            image: './images/projects/sanramonmcbo.png',
+            images: [
+                './images/projects/sanramonmcbo.png',
+                './images/projects/sanramonmcbo2.png'
+            ],
+            technologies: ['Google Apps Script', 'Process Automation', 'ETL Pipelines', 'Cost Optimization', 'Vercel'],
+            category: 'Engineering & Automation',
+            status: 'Live',
+            liveUrl: 'https://sanramonmcbo.vercel.app',
             featured: true,
-            date: '2023-08-20'
-         },
-         {
-            id: 3,
-            title: 'Task Management App',
-            description: 'Collaborative task management application with real-time updates, team management, and project tracking.',
-            image: '/images/projects/task-manager.png',
-            technologies: ['Vue.js', 'Express', 'MongoDB', 'Socket.io', 'JWT'],
-            category: 'Web App',
-            status: 'Active',
-            githubUrl: 'https://github.com/victorkneider/task-manager',
-            liveUrl: 'https://task-manager-demo.vercel.app',
-            featured: false,
-            date: '2023-05-10'
-         },
-         {
-            id: 4,
-            title: 'Weather Dashboard',
-            description: 'Modern weather application with location-based forecasts, interactive maps, and weather alerts.',
-            image: '/images/projects/weather-app.png',
-            technologies: ['React', 'TypeScript', 'OpenWeather API', 'Mapbox'],
-            category: 'Web App',
-            status: 'Completed',
-            githubUrl: 'https://github.com/victorkneider/weather-dashboard',
-            liveUrl: 'https://weather-dashboard-demo.vercel.app',
-            featured: false,
-            date: '2023-03-15'
-         },
-         {
-            id: 5,
-            title: 'Portfolio Website Builder',
-            description: 'Drag-and-drop portfolio website builder with customizable templates and hosting integration.',
-            image: '/images/projects/portfolio-builder.png',
-            technologies: ['React', 'Node.js', 'MySQL', 'AWS S3', 'Docker'],
-            category: 'Tool',
-            status: 'In Development',
-            githubUrl: 'https://github.com/victorkneider/portfolio-builder',
-            liveUrl: null,
-            featured: false,
-            date: '2024-02-01'
-         },
-         {
-            id: 6,
-            title: 'API Gateway Service',
-            description: 'Microservices API gateway with rate limiting, authentication, and request/response transformation.',
-            image: '/images/projects/api-gateway.png',
-            technologies: ['Node.js', 'Express', 'Redis', 'JWT', 'Docker', 'Nginx'],
-            category: 'Backend',
-            status: 'Completed',
-            githubUrl: 'https://github.com/victorkneider/api-gateway',
-            liveUrl: null,
-            featured: false,
-            date: '2023-11-20'
+            date: '2024-06-01'
          }
       ];
+
+export default projectsData;

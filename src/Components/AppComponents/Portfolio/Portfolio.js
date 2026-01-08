@@ -86,9 +86,13 @@ export default class Portfolio extends HTMLElement {
       // Populate footer using template
       this.populateFooter();
 
+      // Create "Built with Slice" badge
+      const badge = await slice.build('BuiltWithBadge', {});
+
       // Append components to layout
       this.insertBefore(navbar, this.firstChild);
       this.$content.appendChild(portfolioRoutes);
+      this.appendChild(badge);
 
       // Handle route changes
       //this.handleRouteChange();

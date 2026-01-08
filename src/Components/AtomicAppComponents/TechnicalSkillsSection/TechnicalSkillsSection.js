@@ -52,17 +52,17 @@ export default class TechnicalSkillsSection extends HTMLElement {
             // ELIMINADO: level: 'Advanced'
          },
          { 
-            category: 'Database & Cloud', 
+            category: 'Cloud & Database', 
             icon: '☁️',
             color: 'var(--success-color)',
-            skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'AWS', 'Docker']
+            skills: ['Azure', 'Process Automation', 'PostgreSQL', 'MongoDB', 'Docker', 'Redis']
             // ELIMINADO: level: 'Advanced'
          },
          { 
-            category: 'DevOps & Tools', 
-            icon: '🛠️',
+            category: 'AI & Modern Tools', 
+            icon: '🤖',
             color: 'var(--warning-color)',
-            skills: ['Git', 'CI/CD', 'Kubernetes', 'Testing', 'Agile', 'Scrum']
+            skills: ['MCP', 'Claude Code', 'Cursor', 'GenAI', 'Prompt Engineering', 'Git']
             // ELIMINADO: level: 'Intermediate'
          },
          { 
@@ -73,10 +73,10 @@ export default class TechnicalSkillsSection extends HTMLElement {
             // ELIMINADO: level: 'Intermediate'
          },
          { 
-            category: 'AI & Data', 
-            icon: '🤖',
+            category: 'Other', 
+            icon: '🛠️',
             color: 'var(--danger-color)',
-            skills: ['Machine Learning', 'TensorFlow', 'Python', 'Data Analysis', 'APIs']
+            skills: ['Testing', 'CI/CD', 'Agile', 'Scrum', 'Data Analysis']
             // ELIMINADO: level: 'Beginner'
          }
       ];

@@ -1,0 +1,43 @@
+/* The trigger wrapper matches the content */
+slice-tooltip {
+  display: inline; /* Or inline-block, acts like text wrapper */
+}
+
+.tooltip-trigger {
+  display: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+/* The bubble element (appended to body) */
+.slice-tooltip-bubble {
+  position: fixed;
+  background-color: var(--primary-color);
+  color: var(--primary-color-contrast);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  max-width: 300px;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  line-height: 1.4;
+  text-align: justify;
+  word-wrap: break-word;
+}
+
+.slice-tooltip-bubble.visible {
+  opacity: 1;
+}
+
+/* Arrow */
+.slice-tooltip-bubble::after {
+  content: '';
+  position: absolute;
+  border-width: 6px;
+  border-style: solid;
+  /* Styles will be adjusted via JS depending on position, default to bottom arrow */
+}

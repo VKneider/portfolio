@@ -1,3 +1,5 @@
+import teachingData from '../../AtomicAppComponents/TeachingSection/data.js';
+
 export default class AboutSection extends HTMLElement {
    constructor(props) {
       super();
@@ -60,13 +62,13 @@ export default class AboutSection extends HTMLElement {
          </div>
          <div class="roles-container">
             <h2 class="role-title">
-               <span class="role-switcher" data-roles='["Computer Engineer", "Full-Stack Developer", "Tech Innovator", "Open Source Contributor", "Solution Architect"]'>Computer Engineer</span>
+               <span class="role-switcher" data-roles='["Computer Engineer", "Cloud Specialist", "University Professor", "Process Automation Expert", "Full-Stack Developer"]'>Computer Engineer</span>
             </h2>
          </div>
          <p class="hero-description">
-            Passionate about creating innovative technology solutions and sharing knowledge. 
-            I combine deep technical expertise with a drive for continuous learning to build 
-            scalable applications and contribute to the developer community.
+            Computer Engineer blending academic expertise with practical remote industry experience. 
+            specializing in Cloud Platforms (Azure), Process Automation, and Model Context Protocol (MCP). 
+            I leverage cutting-edge AI tools like Claude Code and Cursor to architect scalable, efficient solutions.
          </p>
       `;
 
@@ -145,9 +147,9 @@ export default class AboutSection extends HTMLElement {
    async createEnhancedAboutCards() {
       const aboutData = [
          {
-            title: 'Engineering Excellence',
-            text: 'Computer Engineer with 5+ years creating robust, scalable web applications. Expert in modern JavaScript frameworks, cloud architecture, and agile methodologies. Creator of Slice.js framework.',
-            icon: { name: 'file-code', iconStyle: 'filled' },
+            title: 'Cloud & Engineering',
+            text: 'Remote Engineer with 1+ year experience in Cloud Platforms (Azure) and Process Automation. Expert in building scalable architectures and leveraging AI tools like Claude Code & Cursor for efficient development.',
+            icon: { name: 'cloud', iconStyle: 'filled' },
             customColor: {
                card: 'var(--primary-color)',
                icon: 'var(--primary-color-contrast)'
@@ -163,8 +165,8 @@ export default class AboutSection extends HTMLElement {
             }
          },
          {
-            title: 'Innovation & Research',
-            text: 'Dedicated to continuous learning and innovation. Active in open-source development, technical research, and bridging the gap between academic theory and industry practice.',
+            title: 'AI & Innovation',
+            text: 'Early adopter of Model Context Protocol (MCP) and AI-driven development. Dedicated to researching new technologies and bridging the gap between academic theory, cloud infrastructure, and automation.',
             icon: { name: 'lightbulb', iconStyle: 'filled' },
             customColor: {
                card: 'var(--success-color)',
@@ -361,7 +363,6 @@ export default class AboutSection extends HTMLElement {
 
    async createTeachingSection() {
       // Import teaching data
-      const { teachingData } = await import('../../AtomicAppComponents/TeachingSection/data.js');
       
       const teachingSection = await slice.build('TeachingSection', {
          title: '🎓 Courses Taught',

@@ -59,13 +59,58 @@ export default class ProjectCard extends HTMLElement {
       // Configure image with better error handling
       this.loadProjectImage(project);
 
+      // Make image clickable
+      if (project.liveUrl || project.githubUrl) {
+         this.$imageContainer.style.cursor = 'pointer';
+         const targetUrl = project.liveUrl || project.githubUrl;
+         
+         // Remove previous event listeners
+         const newImageContainer = this.$imageContainer.cloneNode(true);
+         this.$imageContainer.parentNode.replaceChild(newImageContainer, this.$imageContainer);
+         this.$imageContainer = newImageContainer;
+         this.$image = this.$imageContainer.querySelector('.project-image');
+         this.$statusBadge = this.$imageContainer.querySelector('.status-badge');
+         this.$featuredBadge = this.$imageContainer.querySelector('.featured-badge');
+
+         this.$imageContainer.addEventListener('click', () => {
+            window.open(targetUrl, '_blank');
+         });
+         
+         // Re-attach load handler to new image element
+         this.loadProjectImage(project);
+      }
+
       // Configure status badge
       this.$statusBadge.className = `status-badge status-${project.status.toLowerCase().replace(' ', '-')}`;
       this.$statusBadge.textContent = project.status;
 
       // Configure title and description
       this.$title.textContent = project.title;
-      this.$description.textContent = project.description;
+      
+      // Clear description
+      this.$description.innerHTML = '';
+      this.$description.title = ''; // Remove native tooltip
+      
+      // Create ToolTip component for description
+      const descriptionTooltip = await slice.build('ToolTip', {
+         text: project.description
+      });
+      
+      // Set visible text content directly into the slot
+      descriptionTooltip.textContent = project.description;
+      
+      // Append tooltip to description container
+      this.$description.appendChild(descriptionTooltip);
+
+      // Allow clicking description to view project (useful if text is truncated)
+      if (project.liveUrl || project.githubUrl) {
+         const targetUrl = project.liveUrl || project.githubUrl;
+         this.$description.style.cursor = 'pointer';
+         this.$description.onclick = () => window.open(targetUrl, '_blank');
+      } else {
+         this.$description.style.cursor = 'default';
+         this.$description.onclick = null;
+      }
 
       // Configure tech stack
       this.renderTechStack(project.technologies);

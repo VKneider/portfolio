@@ -1,0 +1,50 @@
+slice-built-with-badge {
+    position: fixed !important;
+    bottom: 2rem !important;
+    left: 2rem !important;
+    z-index: 10000 !important;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: block; /* Ensure it has layout */
+}
+
+slice-built-with-badge:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+slice-built-with-badge .built-with-badge {
+    background: var(--primary-background-color);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--font-secondary-color);
+    border: 1px solid var(--disabled-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+slice-built-with-badge .framework-name {
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    slice-built-with-badge {
+        bottom: 1rem !important;
+        left: 1rem !important;
+    }
+    
+    slice-built-with-badge .built-with-badge {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}

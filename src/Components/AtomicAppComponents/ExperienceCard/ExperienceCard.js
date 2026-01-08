@@ -15,7 +15,7 @@ export default class ExperienceCard extends HTMLElement {
       this.$description = this.querySelector('.experience-description');
       this.$responsibilitiesList = this.querySelector('.responsibilities-list');
       this.$techList = this.querySelector('.tech-list');
-      this.$achievementsList = this.querySelector('.achievements-list');
+      // this.$achievementsList removed in favor of grid
       
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = ['experience', 'animationDelay'];
@@ -73,11 +73,17 @@ export default class ExperienceCard extends HTMLElement {
       });
 
       // Populate achievements
-      this.$achievementsList.innerHTML = '';
+      const achievementsGrid = this.querySelector('.achievements-grid');
+      achievementsGrid.innerHTML = '';
+      
       this.experience.achievements.forEach(achievement => {
-         const li = document.createElement('li');
-         li.textContent = achievement;
-         this.$achievementsList.appendChild(li);
+         const card = document.createElement('div');
+         card.className = 'achievement-item';
+         card.innerHTML = `
+            <span class="achievement-icon">🚀</span>
+            <span class="achievement-text">${achievement}</span>
+         `;
+         achievementsGrid.appendChild(card);
       });
    }
 

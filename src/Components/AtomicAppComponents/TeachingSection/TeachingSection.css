@@ -6,6 +6,68 @@ slice-teaching-section {
 .teaching-section {
   width: 100%;
   padding: 2rem 0;
+  --teaching-surface-shadow-strong: 0 20px 40px rgba(var(--primary-color-rgb), 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  --teaching-surface-shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.teaching-section.teaching-reduced-effects {
+  --teaching-surface-shadow-strong: 0 6px 20px rgba(0, 0, 0, 0.3);
+  --teaching-surface-shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.teaching-section.teaching-reduced-effects :is(
+  .selection-card,
+  .detail-content,
+  .detail-status-indicator,
+  .detail-projects .project-item,
+  .detail-projects .project-link,
+  .detail-technologies .tech-badge,
+  .meta-item,
+  .tech-badge
+) {
+  backdrop-filter: none;
+  box-shadow: var(--teaching-surface-shadow-soft);
+}
+
+.teaching-section.teaching-reduced-effects :is(
+  .selection-icon,
+  .status-icon,
+  .project-link,
+  .selection-card.selected .selection-title,
+  .teaching-title
+) {
+  filter: none;
+  text-shadow: none;
+}
+
+.teaching-section.teaching-reduced-effects :is(
+  .selection-card,
+  .detail-projects .project-item,
+  .detail-projects .project-link,
+  .tech-badge
+) {
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.teaching-section.teaching-reduced-effects :is(
+  .selection-card:hover,
+  .detail-projects .project-item:hover,
+  .detail-projects .project-link:hover,
+  .tech-badge:hover
+) {
+  transform: translateY(-4px);
+  box-shadow: var(--teaching-surface-shadow-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teaching-title,
+  .teaching-subtitle,
+  .selection-card,
+  .detail-view {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Header Section */
@@ -73,7 +135,9 @@ slice-teaching-section {
   border-radius: 15px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -112,9 +176,7 @@ slice-teaching-section {
 .selection-card:hover {
   transform: translateY(-8px) scale(1.05);
   border-color: rgba(var(--primary-color-rgb), 0.3);
-  box-shadow: 
-    0 20px 40px rgba(var(--primary-color-rgb), 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.1),
+  box-shadow: var(--teaching-surface-shadow-strong),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -125,9 +187,7 @@ slice-teaching-section {
 .selection-card.selected {
   transform: translateY(-8px) scale(1.05);
   border-color: var(--primary-color);
-  box-shadow: 
-    0 20px 40px rgba(var(--primary-color-rgb), 0.4),
-    0 8px 16px rgba(0, 0, 0, 0.1),
+  box-shadow: var(--teaching-surface-shadow-strong),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     0 0 30px rgba(var(--primary-color-rgb), 0.3);
 }
@@ -181,7 +241,8 @@ slice-teaching-section {
 /* Vista Detallada */
 .detail-view {
   margin-top: 3rem;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
 }
 
 .detail-content {

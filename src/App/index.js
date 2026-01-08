@@ -16,7 +16,6 @@ const urlsToCache = [
 self.addEventListener('install', (event) => {
    event.waitUntil(
       caches.open(CACHE_NAME).then((cache) => {
-         console.log('Opened cache');
          return cache.addAll(urlsToCache);
       })
    );
@@ -54,10 +53,10 @@ if ('serviceWorker' in navigator) {
       navigator.serviceWorker
          .register('/service-worker.js')
          .then((registration) => {
-            console.log('Service Worker registrado con éxito:', registration);
+            // Service Worker registered
          })
          .catch((error) => {
-            console.log('Error al registrar el Service Worker:', error);
+            // Service Worker registration failed
          });
    });
 }

@@ -1,4 +1,4 @@
-export const teachingData = {
+const teachingData = {
   subjects: [
     {
       name: "Web Client Languages",
@@ -114,3 +114,5 @@ export const teachingData = {
     }
   ]
 };
+
+export default teachingData;
