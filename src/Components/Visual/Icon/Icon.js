@@ -24,13 +24,13 @@ export default class Icon extends HTMLElement {
       super();
 
       slice.attachTemplate(this);
-      this.$icon = this.querySelector('i');
+      this.$icon = this;
 
       slice.controller.setComponentProps(this, props);
    }
 
    get random() {
-      return this.$icon.classList;
+      return this.classList;
    }
 
    set random(value) {}
@@ -45,9 +45,14 @@ export default class Icon extends HTMLElement {
    }
 
    set name(value) {
+      // Remove previous icon class if exists
+      if (this._name && this._iconStyle) {
+         this.classList.remove(`slc-${styleTypes[this._iconStyle]}${this._name}`);
+      }
+      
       this._name = value;
-      this.$icon.className = '';
-      this.$icon.classList.add(`slc-${styleTypes[this._iconStyle]}${value}`);
+      // Add new icon class
+      this.classList.add(`slc-${styleTypes[this._iconStyle]}${value}`);
    }
 
    get iconStyle() {
@@ -56,9 +61,17 @@ export default class Icon extends HTMLElement {
 
    set iconStyle(value) {
       if (value !== 'filled' && value !== 'outlined') value = 'filled';
+      
+      // Remove old style class
+      if (this._name && this._iconStyle) {
+         this.classList.remove(`slc-${styleTypes[this._iconStyle]}${this._name}`);
+      }
+
       this._iconStyle = value;
+      
+      // Add new style class
       if (this._name) {
-         this.name = this._name;
+         this.classList.add(`slc-${styleTypes[this._iconStyle]}${this._name}`);
       }
    }
 
@@ -67,21 +80,22 @@ export default class Icon extends HTMLElement {
    }
 
    set size(value) {
+      if (!value) return;
+      
+      let pixelValue = value;
       switch (value) {
          case 'small':
-            this._size = '16px';
+            pixelValue = '16px';
             break;
          case 'medium':
-            this._size = '20px';
+            pixelValue = '20px';
             break;
          case 'large':
-            this._size = '24px';
+            pixelValue = '24px';
             break;
-         default:
-            this._size = value;
       }
-
-      this.$icon.style.fontSize = value;
+      this._size = pixelValue;
+      this.style.fontSize = pixelValue;
    }
 
    get color() {
@@ -90,7 +104,7 @@ export default class Icon extends HTMLElement {
 
    set color(value) {
       this._color = value;
-      this.$icon.style.color = value;
+      this.style.color = value;
    }
 }
 

@@ -62,13 +62,12 @@ export default class AboutSection extends HTMLElement {
          </div>
          <div class="roles-container">
             <h2 class="role-title">
-               <span class="role-switcher" data-roles='["Computer Engineer", "Cloud Specialist", "University Professor", "Process Automation Expert", "Full-Stack Developer"]'>Computer Engineer</span>
+               <span class="role-switcher" data-roles='["Computer Engineer", "Framework Creator", "University Professor", "Software Engineer", "Web Architect"]'>Computer Engineer</span>
             </h2>
          </div>
          <p class="hero-description">
-            Computer Engineer blending academic expertise with practical remote industry experience. 
-            specializing in Cloud Platforms (Azure), Process Automation, and Model Context Protocol (MCP). 
-            I leverage cutting-edge AI tools like Claude Code and Cursor to architect scalable, efficient solutions.
+            Computer Engineer, Professor, and creator of Slice.js. 
+            I specialize in building efficient software solutions and modern web architectures, bridging academic theory with practical application.
          </p>
       `;
 

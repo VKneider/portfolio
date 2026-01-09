@@ -25,11 +25,10 @@ export default class Button extends HTMLElement {
       slice.attachTemplate(this);
       this.$value = this.querySelector('.slice_button_value');
       this.$button = this.querySelector('.slice_button');
-      this.$container = this.querySelector('.slice_button_container');
       
       if (props.onClickCallback) {
          this.onClickCallback = props.onClickCallback;
-         this.$container.addEventListener('click', async () => await this.onClickCallback());
+         this.addEventListener('click', async () => await this.onClickCallback());
       }
 
       slice.controller.setComponentProps(this, props);
@@ -73,22 +72,24 @@ export default class Button extends HTMLElement {
 
    set customColor(value) {
       this._customColor = value;
-      if (!value) return;
+      
+      if (!value) {
+         this.style.removeProperty('--btn-bg');
+         this.style.removeProperty('--btn-border-color');
+         this.style.removeProperty('--btn-text-color');
+         return;
+      }
 
-      // Mantener la misma API: { button: 'color', label: 'color' }
+      // Modern CSS Variable approach
       if (value.button) {
-         this.$button.style.backgroundColor = value.button;
-         this.$button.style.borderColor = value.button;
+         this.style.setProperty('--btn-bg', value.button);
+         this.style.setProperty('--btn-border-color', value.button);
       }
       if (value.label) {
-         this.$button.style.color = value.label;
-         this.$value.style.color = value.label;
-         // También aplicar al icono si existe
-         if (this.$icon) {
-            this.$icon.style.color = value.label;
-         }
+         this.style.setProperty('--btn-text-color', value.label);
       }
    }
+
 }
 
 customElements.define('slice-button', Button);

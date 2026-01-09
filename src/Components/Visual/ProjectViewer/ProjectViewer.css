@@ -202,6 +202,7 @@ slice-project-viewer {
                     background: white;
                     min-height: 200px; /* Force minimum height visibility if loading fails/lags */
                     object-fit: cover; /* Change to cover to ensure it fills the space if min-height hits */
+                    cursor: zoom-in;
                 }
             }
         }
@@ -277,12 +278,12 @@ slice-project-viewer {
                     margin-bottom: 2rem;
 
                     & .tech-tag {
-                        padding: 0.5rem 0.8rem;
+                        padding: 0.3rem 0.6rem;
                         background: var(--primary-background-color);
                         border: 1px solid var(--disabled-color);
                         color: var(--font-primary-color);
-                        border-radius: 6px;
-                        font-size: 0.85rem;
+                        border-radius: 4px;
+                        font-size: 0.75rem;
                         font-weight: 500;
                         box-shadow: 0 1px 2px rgba(0,0,0,0.03);
                         transition: transform 0.2s;
@@ -297,14 +298,19 @@ slice-project-viewer {
             }
 
             & .project-actions {
-                margin-top: auto;
+                margin: 0 0 2rem 0;
                 display: flex;
-                gap: 1rem;
-                padding-top: 1.5rem;
-                border-top: 1px solid var(--disabled-color);
+                flex-direction: row; /* Explicitly force row */
+                gap: 0.8rem; /* Slightly reduced gap */
+                padding-top: 0;
+                border-top: none;
+                justify-content: center; /* Keep centered */
+                flex-wrap: nowrap; /* Prevent wrapping */
 
                 & button {
-                    min-width: 120px;
+                    min-width: unset; /* Allow flexibility */
+                    flex: 1; /* Distribute space evenly */
+                    max-width: 160px; /* Cap width */
                     height: 44px;
                 }
             }
@@ -539,3 +545,71 @@ slice-project-viewer {
         height: 90px;
     }
 }
+
+/* --- Image Modal --- */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.95); /* Increased opacity to replace backdrop-filter */
+    opacity: 0;
+    transition: opacity 0.25s ease-out; /* Faster, simpler transition */
+    align-items: center;
+    justify-content: center;
+    will-change: opacity;
+}
+
+.image-modal.show {
+    opacity: 1;
+}
+
+.image-modal .modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    transform: scale(0.95);
+    transition: transform 0.25s ease-out; /* Removed expensive elastic bounce */
+    border-radius: 4px; /* Reduced radius for performance */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    will-change: transform;
+}
+
+.image-modal.show .modal-content {
+    transform: scale(1);
+}
+
+.image-modal .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #f1f1f1;
+    font-size: 32px; /* Adjusted size */
+    font-weight: 300; /* Thinner weight */
+    cursor: pointer;
+    z-index: 10001;
+    line-height: 1;
+    background: rgba(255, 255, 255, 0.15);
+    width: 44px;
+    height: 44px;
+    min-width: 44px; /* Ensure circular shape */
+    min-height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Reset padding */
+    transition: background 0.2s ease, transform 0.2s ease;
+    backdrop-filter: blur(4px); /* Keep blur only on small button if needed */
+}
+
+.image-modal .close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    transform: scale(1.05);
+}
+

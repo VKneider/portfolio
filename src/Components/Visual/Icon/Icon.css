@@ -8,6 +8,15 @@
        url('/Components/Visual/Icon/slc.svg?t=1714090352079#slc') format('svg'); /* iOS 4.1- */
 }
 
+/* Host Element Defaults */
+slice-icon {
+  display: inline-block;
+  line-height: 1; /* Prevent weird height */
+  font-style: normal; /* Override i defaults if browser applied them */
+  vertical-align: middle;
+}
+
+/* Apply font to elements with slc- class (including the host) */
 [class^="slc-"], [class*=" slc-"] {
   font-family: 'slc' !important;
   font-style:normal;

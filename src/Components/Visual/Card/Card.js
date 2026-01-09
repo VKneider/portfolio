@@ -66,9 +66,12 @@ export default class Card extends HTMLElement {
    constructor(props) {
       super();
       slice.attachTemplate(this);
+
+      // Ensure class for CSS (legacy/compatibility)
+      this.classList.add('slice-card');
       
       // DOM caching - TODOS los elementos necesarios para setters
-      this.$card = this.querySelector('.slice-card');
+      this.$card = this;
       this.$title = this.querySelector('.card-title');
       this.$text = this.querySelector('.card-text');
       this.$textTooltip = this.querySelector('.card-text-tooltip');

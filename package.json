@@ -19,6 +19,7 @@
     "slice:registry-get": "node node_modules/slicejs-cli/client.js registry get",
     "slice:registry-list": "node node_modules/slicejs-cli/client.js registry list",
     "slice:registry-sync": "node node_modules/slicejs-cli/client.js registry sync",
+    "slice:bundle": "node node_modules/slicejs-cli/client.js bundle",
     "slice:dev": "node api/index.js --development"
   },
   "keywords": [],
@@ -30,7 +31,11 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "slicejs-cli": "^2.3.0",
     "slicejs-web-framework": "^2.2.11"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
+    "slicejs-cli": "^2.7.9"
   }
 }

@@ -1,24 +1,35 @@
 /* Modern Card Component - Compact & Scrollable */
-.slice-card {
-  --card-height: 280px; /* Aumentado de 240px a 280px para más espacio de texto */
+slice-card, .slice-card {
+  /* Host Defaults */
+  display: flex !important; /* Force flex to prevent inline collapse */
+  flex-direction: column;
+  box-sizing: border-box;
+  
+  /* CSS Variables for Dimensions with defaults */
+  --card-height: 280px; 
   --card-width: 100%;
   --card-max-width: 280px;
+  
+  /* CSS Variables for Theme */
   --card-bg: var(--secondary-background-color);
   --card-text: var(--font-primary-color);
   --card-text-secondary: var(--font-secondary-color);
-  --card-border: var(--primary-color-shade);
+  --card-border-color: var(--primary-color-shade);
   --card-accent: var(--primary-color);
   --card-radius: calc(var(--border-radius-slice) * 3);
   --card-shadow: 0 8px 32px rgba(var(--primary-color-rgb), 0.12);
   --card-shadow-hover: 0 16px 48px rgba(var(--primary-color-rgb), 0.24);
   
   position: relative;
+  
+  /* Use the variables */
   height: var(--card-height);
   width: var(--card-width);
   max-width: var(--card-max-width);
+  
   background: var(--card-bg);
   border-radius: var(--card-radius);
-  border: var(--slice-border) solid var(--card-border);
+  border: var(--slice-border) solid var(--card-border-color);
   font-family: var(--font-family);
   cursor: pointer;
   overflow: hidden;
@@ -27,34 +38,32 @@
   transform-origin: center bottom;
 }
 
-/* Card Variants */
-
-
-.card-elevated {
+/* Card Variants (Applied as classes to the host) */
+slice-card.card-elevated, .slice-card.card-elevated {
   box-shadow: var(--card-shadow-hover);
   transform: translateY(-4px);
   border: none;
 }
 
-.card-outlined {
+slice-card.card-outlined, .slice-card.card-outlined {
   border: calc(var(--slice-border) * 2) solid var(--card-accent);
   background: transparent;
 }
 
-.card-minimal {
+slice-card.card-minimal, .slice-card.card-minimal {
   border: none;
   box-shadow: none;
   background: transparent;
 }
 
 /* Hover Effects - Reduced elevation to prevent scrollbar */
-.slice-card:hover {
+slice-card:hover, .slice-card:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: var(--card-shadow-hover);
   border-color: var(--card-accent);
 }
 
-.slice-card:active {
+slice-card:active, .slice-card:active {
   transform: translateY(-4px) scale(1.01);
   transition: all 0.1s ease;
 }
@@ -78,7 +87,7 @@
   z-index: 1;
 }
 
-.slice-card:hover .card-overlay {
+slice-card:hover .card-overlay, .slice-card:hover .card-overlay {
   opacity: 1;
 }
 
@@ -86,6 +95,11 @@
 .card-media {
   position: relative;
   height: 40%;
+  flex-basis: 40%; /* More robust for flex items */
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%; /* Ensure full width */
+  
   background: var(--card-accent);
   display: flex;
   align-items: center;
@@ -103,7 +117,7 @@
   transition: all 0.4s ease;
 }
 
-.card-media:hover .card-media-content {
+slice-card:hover .card-media-content, .slice-card:hover .card-media-content {
   transform: scale(1.05);
 }
 

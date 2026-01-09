@@ -4,46 +4,67 @@
   user-select: none;
   cursor: pointer;
   right: 10px;
+  z-index: 2;
 }
+
 .input_area::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .input_area {
   color: var(--font-primary-color);
   width: 100%;
+  height: 100%; /* Fill the host */
   background: none;
   outline: none;
   border: none;
+  padding: 10px 10px 10px 10px; /* Adjust padding as needed */
+  box-sizing: border-box;
 }
-.slice_input {
+
+/* Host Element */
+slice-input {
   display: flex;
   align-items: center;
-  padding: 10px;
+  position: relative;
+  
+  /* Layout Defaults */
+  width: 100%;
   max-width: 100%;
+  
+  /* Theming */
   border-radius: var(--border-radius-slice);
   font-family: var(--font-family);
   border: var(--slice-border) solid var(--primary-color);
   background-color: var(--primary-background-color);
-  margin-bottom: 25px;
-  margin-top: 25px;
-  position: relative;
+  
+  /* Remove fixed margins to allow external layout control */
+  /* margin-bottom: 25px; margin-top: 25px; */
+  
+  box-sizing: border-box;
 }
+
 .slice_input_placeholder {
   color: var(--primary-color);
   position: absolute;
   transition: all 0.5s;
   user-select: none;
   cursor: text;
+  left: 10px; /* Adjust based on padding */
+  pointer-events: none; /* Let clicks pass to input/host */
 }
+
 .slice_input_value {
   scale: 0.8;
-  transform: translateY(-200%);
-  transition: all 0.5s;
+  transform: translateY(-24px); /* Adjust based on height */
+  transform-origin: left top;
+  background-color: var(--primary-background-color); 
+  padding: 0 5px;
 }
-.required,
-.required label,
-.required input {
+
+/* Required state applied to the host */
+slice-input.required {
   border-color: var(--danger-color);
   --primary-color: var(--danger-color);
 }

@@ -15,6 +15,24 @@ export default class ProjectViewer extends HTMLElement {
       this.$previewOverlay = this.querySelector('.preview-overlay');
       this.$statusBadge = this.querySelector('.status-badge');
 
+      // Modal Elements
+      this.$modal = this.querySelector('.image-modal');
+      this.$modalImage = this.querySelector('#expanded-image');
+      this.$closeModal = this.querySelector('.close-modal');
+
+      if (this.$modal) {
+          this.$closeModal.addEventListener('click', () => this.closeModal());
+          this.$modal.addEventListener('click', (e) => {
+              if (e.target === this.$modal) this.closeModal();
+          });
+          // Close on Escape key
+          document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape' && this.$modal.classList.contains('show')) {
+                  this.closeModal();
+              }
+          });
+      }
+
       this.projects = [];
       this.activeProject = null;
 
@@ -94,8 +112,10 @@ export default class ProjectViewer extends HTMLElement {
                        img.className = 'preview-image';
                        img.src = imgSrc;
                        img.alt = `${project.title} - View ${idx + 1}`;
-                       img.loading = "eager"; // Changed from lazy to ensure immediate visibility
+                       img.loading = "eager"; 
                        
+                       img.onclick = () => this.openModal(imgSrc);
+
                        // Error handling for image
                        img.onerror = () => { img.style.display = 'none'; };
                        wrapper.appendChild(img);
@@ -141,6 +161,24 @@ export default class ProjectViewer extends HTMLElement {
            }
            
        }, 200);
+   }
+
+   openModal(src) {
+       if (!this.$modal) return;
+       this.$modalImage.src = src;
+       this.$modal.style.display = 'flex';
+       // Force reflow
+       void this.$modal.offsetWidth;
+       this.$modal.classList.add('show');
+   }
+
+   closeModal() {
+       if (!this.$modal) return;
+       this.$modal.classList.remove('show');
+       setTimeout(() => {
+           this.$modal.style.display = 'none';
+           this.$modalImage.src = '';
+       }, 300);
    }
    
    async createActionButtons(project) {

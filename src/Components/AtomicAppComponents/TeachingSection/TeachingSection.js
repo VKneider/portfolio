@@ -1,3 +1,5 @@
+import teachingData from './data.js';
+
 export default class TeachingSection extends HTMLElement {
   static props = {
     title: { 
@@ -12,7 +14,7 @@ export default class TeachingSection extends HTMLElement {
     },
     subjects: { 
       type: 'array', 
-      default: [], 
+      default: teachingData.subjects, 
       required: false 
     },
     primaryColor: { 

@@ -36,7 +36,10 @@ export default class Input extends HTMLElement {
    constructor(props) {
       super();
       slice.attachTemplate(this);
-      this.$inputContainer = this.querySelector('.slice_input');
+      
+      // The host is the container
+      this.$inputContainer = this; 
+      
       this.$input = this.querySelector('input');
       this.$placeholder = this.querySelector('.slice_input_placeholder');
       this.$eyeIcon = this.querySelector('.slice_eye_icon');
