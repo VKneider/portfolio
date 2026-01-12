@@ -1,3 +1,5 @@
+import { techExpertiseData } from '../TechExpertise/data.js';
+
 export default class TechnicalSkillsSection extends HTMLElement {
    constructor(props) {
       super();
@@ -24,7 +26,7 @@ export default class TechnicalSkillsSection extends HTMLElement {
          this.skillsData = this.getDefaultSkillsData();
       }
       if (!this.title) {
-         this.title = '💻 Technical Expertise';
+         this.title = 'Technical Expertise';
       }
       if (this.maxSkillsPerCard === undefined) {
          this.maxSkillsPerCard = 6;
@@ -36,50 +38,8 @@ export default class TechnicalSkillsSection extends HTMLElement {
    }
 
    getDefaultSkillsData() {
-      return [
-         { 
-            category: 'Frontend', 
-            icon: '🎨',
-            color: 'var(--primary-color)',
-            skills: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'HTML5', 'CSS3', 'Slice.js']
-            // ELIMINADO: level: 'Expert'
-         },
-         { 
-            category: 'Backend', 
-            icon: '⚙️',
-            color: 'var(--secondary-color)',
-            skills: ['Node.js', 'Express', 'Python', 'PHP', 'RESTful APIs', 'GraphQL']
-            // ELIMINADO: level: 'Advanced'
-         },
-         { 
-            category: 'Cloud & Database', 
-            icon: '☁️',
-            color: 'var(--success-color)',
-            skills: ['Azure', 'Process Automation', 'PostgreSQL', 'MongoDB', 'Docker', 'Redis']
-            // ELIMINADO: level: 'Advanced'
-         },
-         { 
-            category: 'AI & Modern Tools', 
-            icon: '🤖',
-            color: 'var(--warning-color)',
-            skills: ['MCP', 'Claude Code', 'Cursor', 'GenAI', 'Prompt Engineering', 'Git']
-            // ELIMINADO: level: 'Intermediate'
-         },
-         { 
-            category: 'Mobile & Desktop', 
-            icon: '📱',
-            color: 'var(--accent-color)',
-            skills: ['React Native', 'Electron', 'PWA', 'Ionic', 'Flutter']
-            // ELIMINADO: level: 'Intermediate'
-         },
-         { 
-            category: 'Other', 
-            icon: '🛠️',
-            color: 'var(--danger-color)',
-            skills: ['Testing', 'CI/CD', 'Agile', 'Scrum', 'Data Analysis']
-            // ELIMINADO: level: 'Beginner'
-         }
-      ];
+      // Data is already in the correct format { category, color, skills }
+      return techExpertiseData;
    }
 
    async createTitle() {
@@ -123,11 +83,14 @@ export default class TechnicalSkillsSection extends HTMLElement {
       header.classList.add('skill-header');
       header.style.borderLeft = `4px solid ${skillGroup.color}`;
       
-      // Icono
-      const icon = document.createElement('div');
-      icon.classList.add('skill-icon');
-      icon.style.backgroundColor = skillGroup.color;
-      icon.textContent = skillGroup.icon;
+      // Icono (solo si existe)
+      if (skillGroup.icon) {
+         const icon = document.createElement('div');
+         icon.classList.add('skill-icon');
+         icon.style.backgroundColor = skillGroup.color;
+         icon.textContent = skillGroup.icon;
+         header.appendChild(icon);
+      }
       
       // Info del header (solo categoría, SIN level badge)
       const headerInfo = document.createElement('div');
@@ -142,7 +105,7 @@ export default class TechnicalSkillsSection extends HTMLElement {
       // ELIMINADO: Creación y adición del level badge
       // Ya no se crea ni se agrega el badge de nivel
       
-      header.appendChild(icon);
+      // header.appendChild(icon); // Adición movida arriba
       header.appendChild(headerInfo);
       
       return header;

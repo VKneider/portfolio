@@ -102,8 +102,7 @@ export default class Tabs extends HTMLElement {
          btn.innerHTML = `<span>${item.label}</span>`;
          btn.setAttribute('role', 'tab');
          btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-         btn.setAttribute('aria-controls', `panel-${index}`);
-         btn.id = `tab-${index}`;
+         btn.dataset.index = index; // Robust selection
          
          if (index === 0) btn.classList.add('active');
          
@@ -169,6 +168,22 @@ export default class Tabs extends HTMLElement {
       });
 
       this.updateHighlight(btn);
+      
+      // Emit event
+      this.dispatchEvent(new CustomEvent('tab-change', {
+          detail: { index: index }
+      }));
+   }
+   
+   activateTab(index) {
+       console.log('Activating tab', index);
+       // Use data attribute selector which is safer than ID
+       const btn = this.$tabList.querySelector(`.tab-button[data-index="${index}"]`);
+       if (btn) {
+           this.switchTab(index, btn);
+       } else {
+           console.warn('Tab button not found for index', index);
+       }
    }
 
    updateHighlight(targetBtn) {

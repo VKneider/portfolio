@@ -4,7 +4,7 @@ export default class TeachingSection extends HTMLElement {
   static props = {
     title: { 
       type: 'string', 
-      default: '🎓 Courses Taught', 
+      default: 'Courses Taught', 
       required: false 
     },
     subtitle: { 

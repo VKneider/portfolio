@@ -939,20 +939,35 @@ slice-about-section {
   
   .carousel-section {
     order: 1;
+    min-width: 0; /* Prevents grid item from expanding beyond viewport */
+    max-width: 100%;
   }
   
   .carousel-footer {
     margin-top: 20px;
     padding: 16px;
+    max-width: 100%;
+    overflow: hidden; /* Contains the scrollable area */
   }
   
   .stats-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 12px;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
   
   .stat-item {
+    flex: 0 0 140px;
+    scroll-snap-align: start;
     padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-slice);
+    background: var(--background-color);
   }
   
   .stat-number {
@@ -1008,11 +1023,12 @@ slice-about-section {
   }
   
   .stats-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 12px;
+    padding-bottom: 8px;
   }
   
   .stat-item {
+    flex: 0 0 120px;
     padding: 16px 12px;
   }
   

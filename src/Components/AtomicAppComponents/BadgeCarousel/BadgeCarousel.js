@@ -155,10 +155,29 @@ export default class BadgeCarousel extends HTMLElement {
   startMarquee() {
     if (this.isMarqueePaused) return;
     
-    // Aplicar animación CSS simple
-    this.$marqueeTrack.style.animation = `marquee ${this.marqueeSpeed}s linear infinite`;
+    // Calculate duration based on content width to ensure consistent speed across different carousels
+    // We use a reference width (e.g., 1000px) and scale the duration linearly.
+    // This solves the issue where shorter carousels appear slower and longer ones appear faster
+    // when using a fixed duration.
+    let duration = this.marqueeSpeed;
     
-    console.log(`BadgeCarousel starting marquee with duration: ${this.marqueeSpeed}s`);
+    // Try to measure the width of the content
+    // We divide by 4 because we created 4 copies in generateMarqueeBadges
+    const totalWidth = this.$marqueeTrack.scrollWidth;
+    const singleSetWidth = totalWidth > 0 ? totalWidth / 4 : 0;
+    
+    // Default reference width (approximate screen width or standard content width)
+    const referenceWidth = 1000;
+    
+    if (singleSetWidth > 0) {
+      // Formula: NewDuration = BaseDuration * (ActualWidth / ReferenceWidth)
+      duration = this.marqueeSpeed * (singleSetWidth / referenceWidth);
+    }
+
+    // Aplicar animación CSS simple
+    this.$marqueeTrack.style.animation = `marquee ${duration}s linear infinite`;
+    
+    console.log(`BadgeCarousel starting marquee with calculated duration: ${duration.toFixed(2)}s (base: ${this.marqueeSpeed}s, width: ${singleSetWidth}px)`);
   }
 
   pauseMarquee() {

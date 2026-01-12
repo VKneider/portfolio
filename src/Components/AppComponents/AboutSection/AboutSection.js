@@ -1,5 +1,3 @@
-import teachingData from '../../AtomicAppComponents/TeachingSection/data.js';
-
 export default class AboutSection extends HTMLElement {
    constructor(props) {
       super();
@@ -12,7 +10,7 @@ export default class AboutSection extends HTMLElement {
       this.$interests = this.querySelector('.interests-section');
       this.$teaching = this.querySelector('.teaching-section');
       
-      slice.controller.setComponentProps(this, props);
+      this.randomFacts = this.querySelector('.random-facts');
       this.debuggerProps = [];
    }
 
@@ -29,8 +27,8 @@ export default class AboutSection extends HTMLElement {
       // Create values section
       await this.createCarruselSection();
       
-      // Create teaching section
-      await this.createTeachingSection();
+      // Create random facts section
+      await this.createRandomFactsSection();
       
    }
 
@@ -212,7 +210,7 @@ export default class AboutSection extends HTMLElement {
 
    async createTechnicalSkillsSection() {
    const techExpertise = await slice.build('TechExpertise', {
-      title: '💻 Technical Expertise',
+      title: 'Technical Expertise',
       subtitle: 'Technologies & tools I\'ve mastered through years of development',
       showcaseTitle: 'Featured Skills',
       autoPlay: true,
@@ -229,7 +227,7 @@ export default class AboutSection extends HTMLElement {
 }
    async createCarruselSection() {
       const valuesTitle = document.createElement('h2');
-      valuesTitle.innerHTML = '🌟 My Journey & Experiences';
+      valuesTitle.innerHTML = 'My Journey & Experiences';
       valuesTitle.classList.add('section-title');
 
       // Crear contenedor principal con grid 60/40
@@ -271,11 +269,15 @@ export default class AboutSection extends HTMLElement {
       statsContainer.classList.add('stats-container');
       
       const stats = [
-         { number: '5+', label: 'Years Experience' },
-         { number: '50+', label: 'Projects Completed' },
-         { number: '100+', label: 'Students Taught' },
-         { number: '15+', label: 'Open Source Contributions' }
-      ];
+      { number: '4+', label: 'Years Building Software' },
+      { number: '10+', label: 'Academic & Personal Projects' },
+      { number: '120+', label: 'Students Mentored' },
+      { number: '1', label: 'Custom Framework Built' },
+      { number: '100+', label: 'Slice features forgotten (too powerful)' },
+      { number: '0', label: 'Fear of refactoring' },
+      { number: 'Early', label: 'Technology Adoption' },
+      { number: '∞', label: 'Console Logs Written' },
+    ];
       
       stats.forEach(stat => {
          const statItem = document.createElement('div');
@@ -360,21 +362,13 @@ export default class AboutSection extends HTMLElement {
       this.$values.appendChild(mainContainer);
    }
 
-   async createTeachingSection() {
-      // Import teaching data
+   async createRandomFactsSection() {
+      const randomFacts = await slice.build('RandomFacts', {});
       
-      const teachingSection = await slice.build('TeachingSection', {
-         title: '🎓 Courses Taught',
-         subtitle: 'My experience as a university professor and outstanding student projects',
-         subjects: teachingData.subjects,
-         showStudentProjects: true,
-         animationDelay: 0.2
-      });
-      
-      if (teachingSection && this.$teaching) {
-         this.$teaching.appendChild(teachingSection);
+      if (randomFacts && this.$randomFacts) {
+         this.$randomFacts.appendChild(randomFacts);
       } else {
-         console.error('Error: TeachingSection component not built correctly');
+         console.error('Error: RandomFacts component not built correctly');
       }
    }
 

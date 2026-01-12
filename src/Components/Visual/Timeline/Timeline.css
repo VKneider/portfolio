@@ -1,0 +1,240 @@
+/* Styles for Timeline component */
+
+.slice-timeline-wrapper {
+    /* Reduced top padding since header handles spacing, kept bottom for graph droops */
+    padding: 1rem 1rem 8rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.timeline-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    z-index: 1; /* Above SVG */
+}
+
+.slice-timeline-wrapper.horizontal .timeline-list {
+    flex-direction: row;
+    /* justify-content handled mostly by flex spacing */
+}
+
+.slice-timeline-wrapper.vertical {
+    align-items: flex-start; /* Or center? */
+}
+
+.slice-timeline-wrapper.vertical .timeline-list {
+    flex-direction: column;
+    /* Need height? Or just flow */
+    height: auto;
+    width: auto;
+    min-height: 500px; /* Arbitrary, maybe 100% */
+}
+
+/* Base item styles */
+.timeline-item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: grab; /* Show grab cursor */
+    flex: 1;
+    opacity: 0.7;
+    transition: transform 0.4s ease, opacity 0.4s ease; /* Animate transform and opacity */
+    min-width: 80px;
+    user-select: none; /* Prevent text params during drag */
+}
+
+.timeline-item.dragging {
+    cursor: grabbing;
+    z-index: 100; /* Top most when dragging */
+    opacity: 1;
+    /* transition: none; handled in JS for transform */
+}
+
+/* Orientation Specific Layouts - Transforms are handled inline now */
+.slice-timeline-wrapper.horizontal .timeline-item {
+    /* transform handled by JS */
+}
+
+.slice-timeline-wrapper.vertical .timeline-item {
+    /* transform handled by JS */
+    flex-direction: row; /* Align content horizontally */
+    margin: 2rem 0;
+    width: 200px; /* Or variable */
+}
+
+/* Vertical Timeline Item Internal Layout */
+.slice-timeline-wrapper.vertical .timeline-dot {
+    order: 0;
+    margin: 0 1rem;
+}
+.slice-timeline-wrapper.vertical .timeline-date {
+    order: -1;
+    text-align: right;
+    min-width: 60px;
+}
+.slice-timeline-wrapper.vertical .timeline-label {
+    order: 1;
+    text-align: left;
+}
+
+.timeline-item:hover {
+    opacity: 1;
+}
+
+.timeline-item.active {
+    opacity: 1;
+    z-index: 2; /* Bring active to front if overlaps */
+}
+
+/* Date / Top Label */
+.timeline-date {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--font-secondary-color);
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+    opacity: 0.8;
+}
+
+.timeline-item.active .timeline-date {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+/* The Node Dot */
+.timeline-dot {
+    width: 18px;
+    height: 18px;
+    background: var(--background-color);
+    border: 3px solid var(--primary-color); /* Primary color border */
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 4px var(--background-color); /* Separation from line */
+}
+
+/* Active Node Style */
+.timeline-item.active .timeline-dot {
+    background: var(--primary-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 6px var(--background-color);
+}
+
+.timeline-label {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 500;
+    color: var(--font-primary-color);
+    max-width: 120px;
+    transition: all 0.3s;
+    opacity: 0.9;
+}
+
+.timeline-item.active .timeline-label {
+    font-weight: 700;
+}
+
+/* Mobile / Vertical Variant */
+@media (max-width: 768px) {
+    .slice-timeline-wrapper.horizontal {
+        align-items: flex-start;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Hide the complex graph SVG on mobile only if horizontal? 
+       Or maybe users want the graph on mobile too? 
+       Previous req said hide it. Let's keep it hidden for simplicity */
+    .slice-timeline-wrapper.horizontal .timeline-svg {
+        display: none;
+    }
+    
+    .slice-timeline-wrapper.horizontal .timeline-list {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    /* Mobile Track Line */
+    .slice-timeline-wrapper.horizontal .timeline-list::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        left: 20px; 
+        width: 3px;
+        background: var(--primary-color);
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    .slice-timeline-wrapper.horizontal .timeline-item {
+        display: grid;
+        grid-template-columns: 40px 1fr; 
+        grid-template-rows: auto auto;
+        column-gap: 0;
+        row-gap: 0.2rem;
+        
+        width: 100%;
+        margin-bottom: 2rem;
+        flex-direction: row; 
+        align-items: start;
+        text-align: left;
+        
+        /* Disable ZigZag/Drag Transform on Mobile */
+        transform: none !important;
+        opacity: 1; 
+        cursor: pointer; /* No grab on mobile usually */
+    }
+    
+    .timeline-dot {
+        grid-row: 1 / span 2;
+        grid-column: 1;
+        justify-self: center;
+        margin-top: 5px;
+        /* Center on the track line (20px) */
+    }
+    
+    .timeline-date {
+        grid-row: 1;
+        grid-column: 2;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    
+    .timeline-label {
+        grid-row: 2;
+        grid-column: 2;
+        text-align: left;
+        max-width: 100%;
+        margin-top: 0.2rem;
+    }
+}
+

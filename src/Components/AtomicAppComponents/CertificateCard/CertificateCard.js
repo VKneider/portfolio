@@ -5,6 +5,7 @@ export default class CertificateCard extends HTMLElement {
       
       // Get template elements
       this.$card = this.querySelector('.certificate-card');
+      this.$imageContainer = this.querySelector('.certificate-image-container');
       this.$image = this.querySelector('.certificate-image');
       this.$issuerLogo = this.querySelector('.issuer-logo');
       this.$title = this.querySelector('.certificate-title');
@@ -41,8 +42,20 @@ export default class CertificateCard extends HTMLElement {
             // Fallback to gradient if image fails to load
             this.$image.style.display = 'none';
          };
+         this.$image.style.display = 'block';
       } else {
          this.$image.style.display = 'none';
+      }
+
+      // Clickable image container
+      if (this.certificate.certificateUrl) {
+         this.$imageContainer.onclick = () => window.open(this.certificate.certificateUrl, '_blank');
+         this.$imageContainer.style.cursor = 'pointer';
+         this.$imageContainer.setAttribute('title', 'View Certificate');
+      } else {
+         this.$imageContainer.style.cursor = 'default';
+         this.$imageContainer.onclick = null;
+         this.$imageContainer.removeAttribute('title');
       }
 
       // Set issuer logo
