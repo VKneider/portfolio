@@ -10,7 +10,7 @@ export default class AboutSection extends HTMLElement {
       this.$interests = this.querySelector('.interests-section');
       this.$teaching = this.querySelector('.teaching-section');
       
-      this.randomFacts = this.querySelector('.random-facts');
+      this.$randomFacts = this.querySelector('.random-facts-section');
       this.debuggerProps = [];
    }
 
