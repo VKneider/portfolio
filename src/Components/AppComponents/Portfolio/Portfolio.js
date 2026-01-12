@@ -48,34 +48,9 @@ export default class Portfolio extends HTMLElement {
             description: 'Navy blue with yellow accents'
          },
          {
-            name: "SunsetOrange",
-            colors: { primary: '#FF5E00', secondary: '#FFCC00' },
-            description: 'Warm sunset vibrance'
-         },
-         {
-            name: "ForestGreen",
-            colors: { primary: '#228B22', secondary: '#DAA520' },
-            description: 'Deep nature tones'
-         },
-         {
-            name: "OceanBreeze",
-            colors: { primary: '#008B8B', secondary: '#40E0D0' },
-            description: 'Fresh teal and turquoise'
-         },
-         {
             name: "CrimsonRed",
             colors: { primary: '#990000', secondary: '#4A4A4A' },
             description: 'Elegant deep crimson'
-         },
-         {
-            name: "LavenderMist",
-            colors: { primary: '#9C27B0', secondary: '#E1BEE7' },
-            description: 'Soft pastel purple'
-         },
-         {
-            name: "MidnightGold",
-            colors: { primary: '#0F172A', secondary: '#D4AF37' },
-            description: 'Luxury dark blue and gold'
          },
          {
             name: "NeonCyberpunk",
