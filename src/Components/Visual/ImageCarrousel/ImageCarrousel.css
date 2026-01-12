@@ -97,6 +97,9 @@
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   will-change: transform, background, box-shadow;
+  font-size: 1.5rem;
+  color: var(--primary-color, #333);
+  padding-bottom: 3px;
 }
 
 .carousel-prev {
@@ -120,13 +123,6 @@
   transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.carousel-prev slice-icon,
-.carousel-next slice-icon {
-  color: var(--primary-color, #333);
-  font-size: 20px;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Indicadores */
 .carousel-indicators {
   position: absolute;
@@ -147,6 +143,7 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, background, border-color;
+  padding: 0;
 }
 
 .carousel-indicator:hover {
@@ -276,9 +273,9 @@
     height: 36px;
   }
   
-  .carousel-prev slice-icon,
-  .carousel-next slice-icon {
-    font-size: 18px;
+  .carousel-prev,
+  .carousel-next {
+    font-size: 1.2rem;
   }
   
   .carousel-overlay {
