@@ -19,16 +19,38 @@ export default class ProjectViewer extends HTMLElement {
       this.$modal = this.querySelector('.image-modal');
       this.$modalImage = this.querySelector('#expanded-image');
       this.$closeModal = this.querySelector('.close-modal');
+      this.$prevBtn = this.querySelector('.modal-nav-btn.prev-btn');
+      this.$nextBtn = this.querySelector('.modal-nav-btn.next-btn');
+      
+      this.currentProjectImages = [];
+      this.currentImageIndex = 0;
 
       if (this.$modal) {
           this.$closeModal.addEventListener('click', () => this.closeModal());
+          
+          this.$prevBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.navigateModalImage(-1);
+          });
+          
+          this.$nextBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.navigateModalImage(1);
+          });
+
           this.$modal.addEventListener('click', (e) => {
               if (e.target === this.$modal) this.closeModal();
           });
           // Close on Escape key
           document.addEventListener('keydown', (e) => {
-              if (e.key === 'Escape' && this.$modal.classList.contains('show')) {
+              if (!this.$modal.classList.contains('show')) return;
+              
+              if (e.key === 'Escape') {
                   this.closeModal();
+              } else if (e.key === 'ArrowLeft') {
+                  this.navigateModalImage(-1);
+              } else if (e.key === 'ArrowRight') {
+                  this.navigateModalImage(1);
               }
           });
       }
@@ -114,7 +136,7 @@ export default class ProjectViewer extends HTMLElement {
                        img.alt = `${project.title} - View ${idx + 1}`;
                        img.loading = "eager"; 
                        
-                       img.onclick = () => this.openModal(imgSrc);
+                       img.onclick = () => this.openModal(images, idx);
 
                        // Error handling for image
                        img.onerror = () => { img.style.display = 'none'; };
@@ -163,13 +185,52 @@ export default class ProjectViewer extends HTMLElement {
        }, 200);
    }
 
-   openModal(src) {
+   openModal(images, index) {
        if (!this.$modal) return;
-       this.$modalImage.src = src;
+       
+       this.currentProjectImages = images || [];
+       this.currentImageIndex = index || 0;
+       
+       this.updateModalImage();
+       
        this.$modal.style.display = 'flex';
        // Force reflow
        void this.$modal.offsetWidth;
        this.$modal.classList.add('show');
+   }
+
+   updateModalImage() {
+       if (!this.currentProjectImages || this.currentProjectImages.length === 0) return;
+       
+       const src = this.currentProjectImages[this.currentImageIndex];
+       this.$modalImage.src = src;
+       
+       // Handle buttons visibility
+       if (this.currentProjectImages.length <= 1) {
+           this.$prevBtn.style.display = 'none';
+           this.$nextBtn.style.display = 'none';
+       } else {
+           this.$prevBtn.style.display = 'flex';
+           this.$nextBtn.style.display = 'flex';
+       }
+   }
+
+   navigateModalImage(direction) {
+       if (!this.currentProjectImages || this.currentProjectImages.length <= 1) return;
+       
+       let newIndex = this.currentImageIndex + direction;
+       
+       // Loop
+       if (newIndex < 0) {
+           newIndex = this.currentProjectImages.length - 1;
+       } else if (newIndex >= this.currentProjectImages.length) {
+           newIndex = 0;
+       }
+       
+       this.currentImageIndex = newIndex;
+       
+       // Add a small fade effect could be nice, but for now just switch
+       this.updateModalImage();
    }
 
    closeModal() {
