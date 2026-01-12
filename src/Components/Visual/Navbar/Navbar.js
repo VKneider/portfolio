@@ -17,11 +17,18 @@ export default class Navbar extends HTMLElement {
       });
 
       this.$closeMenu.addEventListener('click', () => {
-         this.$navBar.style.transform = 'translateX(100%)';
+         this.closeMobileMenu();
       });
 
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = ['logo', 'items', 'buttons', 'elements'];
+   }
+
+   closeMobileMenu() {
+      // Only useful for mobile view
+      if (window.innerWidth <= 1024) {
+         this.$navBar.style.transform = 'translateX(100%)';
+      }
    }
 
    async init() {
@@ -121,6 +128,9 @@ export default class Navbar extends HTMLElement {
       if (className) {
          element.classList.add(className);
       }
+
+      // Close menu on click
+      element.addEventListener('click', () => this.closeMobileMenu());
 
       // Para navegación, envolver en li con efectos
       const navSections = ['navigation', 'nav', 'center', 'central', 'mid', 'menu'];
@@ -257,6 +267,12 @@ export default class Navbar extends HTMLElement {
       img.src = value.src;
       this.$logoContainer.appendChild(img);
       this.$logoContainer.href = value.path;
+
+      this.$logoContainer.addEventListener('click', (e) => {
+         e.preventDefault();
+         slice.router.navigate(value.path);
+         this.closeMobileMenu();
+      });
    }
 
    get items() {
@@ -307,6 +323,7 @@ export default class Navbar extends HTMLElement {
             path: value.path,
             classes: 'item',
          });
+         link.addEventListener('click', () => this.closeMobileMenu());
          item.appendChild(link);
       }
       if (value.type === 'dropdown') {
