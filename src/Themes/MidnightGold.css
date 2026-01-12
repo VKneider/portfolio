@@ -1,0 +1,43 @@
+:root {
+  /* Tipografía lujosa */
+  --font-primary-color: #F0E6D2; /* Crema dorado */
+  --font-secondary-color: #B8A078; /* Dorado apagado */
+
+  /** Primary - Midnight Blue **/
+  --primary-color: #0F172A; /* Azul noche muy oscuro */
+  --primary-color-rgb: 15, 23, 42;
+  --primary-background-color: #020408; /* Casi negro */
+  --primary-color-contrast: #F0E6D2;
+  --primary-color-shade: #000000;
+
+  /** Secondary - Luxury Gold **/
+  --secondary-color: #D4AF37; /* Oro metálico */
+  --secondary-color-rgb: 212, 175, 55;
+  --secondary-background-color: #1E293B; /* Azul pizarra oscuro */
+  --secondary-color-contrast: #0F172A;
+
+  /** Tertiary - Gris oscuro rico **/
+  --tertiary-background-color: #172033;
+
+  /** Success */
+  --success-color: #10B981;
+  --success-contrast: #000000;
+
+  /** Warning */
+  --warning-color: #F59E0B;
+  --warning-contrast: #000000;
+
+  /** Danger */
+  --danger-color: #EF4444;
+  --danger-contrast: #FFFFFF;
+
+  /** Medium */
+  --medium-color: #64748B;
+  --medium-contrast: #FFFFFF;
+
+  /** Disabled */
+  --disabled-color: #334155;
+
+  /** Accent */
+  --accent-color: #FFD700; /* Oro brillante */
+}

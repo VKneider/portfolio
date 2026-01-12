@@ -1,0 +1,43 @@
+:root {
+  /* Tipografía cálida */
+  --font-primary-color: #2b1d0e; /* Marrón muy oscuro */
+  --font-secondary-color: #5c3a21; /* Marrón medio */
+
+  /** Primary - Naranja Atardecer Vibrante **/
+  --primary-color: #FF5E00; /* Naranja intenso */
+  --primary-color-rgb: 255, 94, 0;
+  --primary-background-color: #FFF8F0; /* Crema muy claro */
+  --primary-color-contrast: #FFFFFF;
+  --primary-color-shade: #cc4b00;
+
+  /** Secondary - Amarillo dorado **/
+  --secondary-color: #FFCC00; /* Amarillo cálido */
+  --secondary-color-rgb: 255, 204, 0;
+  --secondary-background-color: #FFFDF5; /* Amarillo muy pálido */
+  --secondary-color-contrast: #2b1d0e;
+
+  /** Tertiary - Melocotón suave **/
+  --tertiary-background-color: #FFF0E6;
+
+  /** Success */
+  --success-color: #2e7d32;
+  --success-contrast: #FFFFFF;
+
+  /** Warning */
+  --warning-color: #f9a825;
+  --warning-contrast: #2b1d0e;
+
+  /** Danger */
+  --danger-color: #c62828;
+  --danger-contrast: #FFFFFF;
+
+  /** Medium */
+  --medium-color: #8d6e63;
+  --medium-contrast: #FFFFFF;
+
+  /** Disabled */
+  --disabled-color: #d7ccc8;
+
+  /** Accent */
+  --accent-color: #FF3D00;
+}

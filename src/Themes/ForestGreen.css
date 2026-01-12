@@ -1,0 +1,43 @@
+:root {
+  /* Tipografía natural */
+  --font-primary-color: #1b3d2f; /* Verde bosque muy oscuro */
+  --font-secondary-color: #2d5a45;
+
+  /** Primary - Verde Bosque **/
+  --primary-color: #228B22; /* Verde bosque */
+  --primary-color-rgb: 34, 139, 34;
+  --primary-background-color: #F1F8F1; /* Verde muy claro */
+  --primary-color-contrast: #FFFFFF;
+  --primary-color-shade: #1a6b1a;
+
+  /** Secondary - Dorado Terroso **/
+  --secondary-color: #DAA520; /* Goldenrod */
+  --secondary-color-rgb: 218, 165, 32;
+  --secondary-background-color: #FAF8F0; /* Beige claro */
+  --secondary-color-contrast: #FFFFFF;
+
+  /** Tertiary - Verde musgo claro **/
+  --tertiary-background-color: #E8F5E9;
+
+  /** Success */
+  --success-color: #2e7d32;
+  --success-contrast: #FFFFFF;
+
+  /** Warning */
+  --warning-color: #fbc02d;
+  --warning-contrast: #1b3d2f;
+
+  /** Danger */
+  --danger-color: #d32f2f;
+  --danger-contrast: #FFFFFF;
+
+  /** Medium */
+  --medium-color: #6d8e7f;
+  --medium-contrast: #FFFFFF;
+
+  /** Disabled */
+  --disabled-color: #c8e6c9;
+
+  /** Accent */
+  --accent-color: #32CD32;
+}
