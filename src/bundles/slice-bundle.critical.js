@@ -1,7 +1,7 @@
 /**
  * Slice.js Bundle
  * Type: critical
- * Generated: 2026-01-12T06:03:11.329Z
+ * Generated: 2026-01-24T04:41:17.222Z
  * Strategy: hybrid
  * Components: 1
  * Total Size: 1.1 KB
@@ -12,8 +12,8 @@ export const SLICE_BUNDLE = {
   "version": "2.0.0",
   "type": "critical",
   "route": null,
-  "generated": "2026-01-12T06:03:11.329Z",
-  "totalSize": 1174,
+  "generated": "2026-01-24T04:41:17.222Z",
+  "totalSize": 1112,
   "componentCount": 1,
   "strategy": "hybrid"
 },
@@ -23,12 +23,12 @@ export const SLICE_BUNDLE = {
     "name": "Layout",
     "category": "Visual",
     "categoryType": "Visual",
-    "js": "class Layout extends HTMLElement {\r\n\r\n   static props = {\r\n      layout: { \r\n         type: 'object', \r\n         default: null, \r\n         required: false \r\n      },\r\n      view: { \r\n         type: 'object', \r\n         default: null, \r\n         required: false \r\n      }\r\n   };\r\n\r\n   constructor(props) {\r\n      super();\r\n      slice.attachTemplate(this);\r\n\r\n      slice.controller.setComponentProps(this, props);\r\n      this.currentView = null;\r\n   }\r\n\r\n   async init() {\r\n      if (this.layout) {\r\n         await this.onLayOut(this.layout);\r\n      }\r\n      if (this.view) {\r\n         await this.showing(this.view);\r\n      }\r\n   }\r\n\r\n   get layout() {\r\n      return this._layout;\r\n   }\r\n\r\n   set layout(value) {\r\n      this._layout = value;\r\n   }\r\n\r\n   get view() {\r\n      return this._view;\r\n   }\r\n\r\n   set view(value) {\r\n      this._view = value;\r\n   }\r\n\r\n   async showing(view) {\r\n      if (this.currentView) {\r\n         this.removeChild(this.currentView);\r\n      }\r\n      this.appendChild(view);\r\n      this.currentView = view;\r\n   }\r\n\r\n   async onLayOut(view) {\r\n      this.appendChild(view);\r\n   }\r\n}\r\n\r\nwindow.Layout = Layout;\ncustomElements.define('slice-layout', Layout);\r\n\nreturn Layout;",
+    "js": "class Layout extends HTMLElement {\n\n   static props = {\n      layout: { \n         type: 'object', \n         default: null, \n         required: false \n      },\n      view: { \n         type: 'object', \n         default: null, \n         required: false \n      }\n   };\n\n   constructor(props) {\n      super();\n      slice.attachTemplate(this);\n\n      slice.controller.setComponentProps(this, props);\n      this.currentView = null;\n   }\n\n   async init() {\n      if (this.layout) {\n         await this.onLayOut(this.layout);\n      }\n      if (this.view) {\n         await this.showing(this.view);\n      }\n   }\n\n   get layout() {\n      return this._layout;\n   }\n\n   set layout(value) {\n      this._layout = value;\n   }\n\n   get view() {\n      return this._view;\n   }\n\n   set view(value) {\n      this._view = value;\n   }\n\n   async showing(view) {\n      if (this.currentView) {\n         this.removeChild(this.currentView);\n      }\n      this.appendChild(view);\n      this.currentView = view;\n   }\n\n   async onLayOut(view) {\n      this.appendChild(view);\n   }\n}\n\nwindow.Layout = Layout;\ncustomElements.define('slice-layout', Layout);\n\nreturn Layout;",
     "externalDependencies": {},
     "componentDependencies": [],
     "html": "",
     "css": "",
-    "size": 1174
+    "size": 1112
   }
 }
 };

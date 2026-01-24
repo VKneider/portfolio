@@ -30,12 +30,12 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "dependencies": {
-    "slicejs-web-framework": "^2.2.11"
-  },
   "devDependencies": {
     "@babel/parser": "^7.28.5",
     "@babel/traverse": "^7.28.5",
     "slicejs-cli": "^2.7.9"
+  },
+  "dependencies": {
+    "slicejs-web-framework": "^2.2.11"
   }
 }
