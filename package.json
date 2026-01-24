@@ -36,6 +36,6 @@
     "slicejs-cli": "^2.7.9"
   },
   "dependencies": {
-    "slicejs-web-framework": "^2.2.11"
+    "slicejs-web-framework": "^2.2.12"
   }
 }
