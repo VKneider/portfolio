@@ -16,6 +16,7 @@ slice-theimpostergame {
     align-items: stretch;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .the-imposter-game-container::before,
