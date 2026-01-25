@@ -1,0 +1,35 @@
+<div class="setup-container">
+    <h2>Configuración del Juego</h2>
+    <p class="setup-subtitle">Elige la modalidad, categoria y la cantidad de jugadores.</p>
+    
+    <div class="form-group" id="mode-container">
+        <label>Modo de Juego</label>
+        <div class="mode-toggle"></div>
+    </div>
+
+    <div class="form-group" id="players-container">
+        <label>Número de Jugadores</label>
+    </div>
+
+    <div class="form-group" id="imposters-container">
+        <label>Cantidad de Impostores</label>
+        <p class="inline-hint" id="imposters-hint">Max: 1</p>
+    </div>
+
+    <div id="category-container" class="form-group">
+        <!-- Category select will be injected here -->
+    </div>
+
+    <div id="custom-word-container" class="form-group" style="display: none;">
+        <label>Palabra Secreta</label>
+        <div class="custom-word-input"></div>
+        <p class="hint">Pasa el dispositivo a los demás después de escribirla.</p>
+    </div>
+
+    <div class="form-feedback" id="form-feedback" aria-live="polite"></div>
+
+    <div class="actions">
+        <div id="start-button-container"></div>
+        <p class="actions-hint">Pasa el dispositivo para revelar los roles.</p>
+    </div>
+</div>

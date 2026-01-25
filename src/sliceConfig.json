@@ -39,6 +39,10 @@
             "AtomicAppComponents":{
                 "path":"/Components/AtomicAppComponents",
                 "type":"Visual"
+            },
+            "ExtraGames":{
+                "path":"/Components/Games/ImposterGame",
+                "type":"Visual"
             }
         },
         "themes": "/Themes",

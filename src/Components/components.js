@@ -49,7 +49,11 @@ const components = {
   "StudyCard": "AtomicAppComponents",
   "TeachingSection": "AtomicAppComponents",
   "TechExpertise": "AtomicAppComponents",
-  "TechnicalSkillsSection": "AtomicAppComponents"
+  "TechnicalSkillsSection": "AtomicAppComponents",
+  "GameFlow": "ExtraGames",
+  "GameSetup": "ExtraGames",
+  "TheImposterGame": "ExtraGames",
+  "WordReveal": "ExtraGames"
 };
 
 export default components;

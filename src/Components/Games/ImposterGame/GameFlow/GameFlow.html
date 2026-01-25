@@ -1,0 +1,47 @@
+<div class="flow-container">
+    <h2>¡Juego en Progreso!</h2>
+    <p class="flow-subtitle">Completa las rondas de pistas y discutan antes de votar.</p>
+    
+    <div class="steps-guide" id="steps-guide">
+        <div class="step">
+            <span class="step-number">1</span>
+            <p><strong>Dar Pistas:</strong> Por turnos, cada jugador dice una palabra relacionada con la palabra secreta. ¡El impostor debe fingir!</p>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <p><strong>Discusión:</strong> Debatan quién dio la pista más sospechosa.</p>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <p><strong>Votación:</strong> A la cuenta de 3, señalen al sospechoso.</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div id="reveal-button-container"></div>
+        <div id="new-game-button-container"></div>
+    </div>
+
+    <div id="results-modal" class="results-modal" aria-hidden="true">
+        <div class="results-card">
+            <div class="results-header">Resultado final</div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-label">Impostores</span>
+                    <span class="result-value" id="imposters-list">-</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-label">Palabra secreta</span>
+                    <span class="result-value" id="secret-word">-</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-label">Categoria</span>
+                    <span class="result-value" id="secret-category">-</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <div id="close-modal-button-container"></div>
+            </div>
+        </div>
+    </div>
+</div>

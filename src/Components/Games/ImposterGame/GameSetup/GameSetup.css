@@ -1,0 +1,142 @@
+.setup-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    width: 100%;
+    max-width: 520px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: calc(var(--border-radius-slice) * 3);
+    border: var(--slice-border) solid var(--primary-color-shade);
+    padding: 2.5rem 2.2rem;
+    box-shadow: 0 20px 50px rgba(var(--primary-color-rgb), 0.12);
+}
+
+.setup-container h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 0;
+    text-align: center;
+}
+
+.setup-subtitle {
+    margin: -0.4rem 0 0;
+    text-align: center;
+    color: var(--font-secondary-color);
+    font-size: 0.95rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+
+.form-group label {
+    font-size: 0.95rem;
+    color: var(--font-secondary-color);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.mode-toggle {
+    display: flex;
+    gap: 1rem;
+}
+
+.mode-toggle slice-select {
+    width: 100%;
+}
+
+.styled-select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--primary-background-color);
+    border: var(--slice-border) solid var(--primary-color);
+    border-radius: var(--border-radius-slice);
+    color: var(--font-primary-color);
+    font-size: 0.95rem;
+    font-family: var(--font-family);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.styled-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.2);
+}
+
+#category-container slice-select {
+    margin: 0;
+}
+
+.hint {
+    font-size: 0.85rem;
+    color: var(--font-secondary-color);
+    margin: 0;
+    opacity: 0.8;
+}
+
+.inline-hint {
+    margin: -0.2rem 0 0;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.form-feedback {
+    width: 100%;
+    min-height: 1.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--danger-color);
+}
+
+.actions {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.actions #start-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.actions slice-button {
+    min-width: 200px;
+}
+
+.actions-hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--font-secondary-color);
+    opacity: 0.85;
+    text-align: center;
+}
+
+.actions slice-button::part(slice_button) {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .setup-container {
+        max-width: 100%;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .setup-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .setup-subtitle {
+        font-size: 0.9rem;
+    }
+}

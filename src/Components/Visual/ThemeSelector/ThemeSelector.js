@@ -206,7 +206,6 @@ export default class ThemeSelector extends HTMLElement {
       this.$dropdown.classList.remove('open');
       this.$currentTheme.classList.remove('active');
       this.$currentTheme.setAttribute('aria-expanded', 'false');
-      this.$currentTheme.focus();
    }
 
    // Getter/setter for external access
