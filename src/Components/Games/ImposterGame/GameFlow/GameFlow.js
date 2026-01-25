@@ -101,6 +101,7 @@ export default class GameFlow extends HTMLElement {
             this.$resultsModal.classList.add('open');
             this.$resultsModal.setAttribute('aria-hidden', 'false');
         }
+        document.body.classList.add('results-open');
     }
 
     closeResults() {
@@ -111,6 +112,7 @@ export default class GameFlow extends HTMLElement {
             this.$resultsModal.classList.remove('open');
             this.$resultsModal.setAttribute('aria-hidden', 'true');
         }
+        document.body.classList.remove('results-open');
     }
 }
 

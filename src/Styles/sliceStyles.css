@@ -10,6 +10,10 @@ body {
   margin: 0;
   background-color: var(--primary-background-color);
 }
+
+body.results-open {
+  overflow: hidden;
+}
 .caret {
   cursor: pointer;
   width: 0;

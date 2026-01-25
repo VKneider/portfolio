@@ -259,7 +259,6 @@ slice-theimpostergame {
     justify-content: center;
     gap: 1.75rem;
     position: relative;
-    z-index: 1;
     overflow: hidden;
     box-shadow: inset 0 0 0 1px rgba(var(--primary-color-rgb), 0.08);
     animation: stageIn 0.5s ease;

@@ -1,6 +1,6 @@
 /**
  * Slice.js Bundle Configuration
- * Generated: 2026-01-25T20:18:29.989Z
+ * Generated: 2026-01-25T20:19:25.035Z
  * Strategy: hybrid
  */
 
@@ -8,7 +8,7 @@
 export const SLICE_BUNDLE_CONFIG = {
   "version": "2.0.0",
   "strategy": "hybrid",
-  "generated": "2026-01-25T20:18:29.987Z",
+  "generated": "2026-01-25T20:19:25.035Z",
   "stats": {
     "totalComponents": 51,
     "totalRoutes": 7,
