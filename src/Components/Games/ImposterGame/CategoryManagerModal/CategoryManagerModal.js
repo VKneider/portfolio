@@ -233,30 +233,33 @@ export default class CategoryManagerModal extends HTMLElement {
         const name = `${this.$categoryDisplayName.textContent}`.trim().toLowerCase();
         if (!name) {
             this.setFeedback('El nombre de la categoria es requerido.');
-            return;
+            return false;
         }
         if (this.getDuplicateIndexes().size) {
             this.setFeedback('Hay palabras duplicadas.');
-            return;
+            return false;
         }
         if (this.words.some((word) => !`${word}`.trim())) {
             this.setFeedback('No se permiten palabras vacias.');
-            return;
+            return false;
         }
         this.words = this.normalizeWords(this.words);
         if (!this.words.length) {
             this.setFeedback('Agrega al menos una palabra.');
-            return;
+            return false;
         }
 
-        this.dispatchEvent(new CustomEvent('save-category', {
-            detail: {
-                name,
-                words: this.words
-            },
-            bubbles: true
-        }));
-        this.setFeedback('Categoria guardada.');
+        if (name === this.activeCategoryKey) {
+            this.dispatchEvent(new CustomEvent('save-category', {
+                detail: {
+                    name,
+                    words: this.words
+                },
+                bubbles: true
+            }));
+            this.setFeedback('Categoria guardada.');
+        }
+        return true;
     }
 
     normalizeWords(words) {
@@ -323,15 +326,24 @@ export default class CategoryManagerModal extends HTMLElement {
         this.$categoryFeedback.textContent = message;
     }
 
-    open() {
+    open(selectedKey = null) {
         this.$modal.classList.add('open');
-        this.$modal.setAttribute('aria-hidden', 'false');
+        this.$modal.removeAttribute('inert');
+        if (selectedKey && this.categories[selectedKey]) {
+            this.activeCategoryKey = selectedKey;
+            this.populateCategory(selectedKey);
+            this.renderTabs();
+        }
         this.autoSave();
     }
 
     close() {
         this.$modal.classList.remove('open');
-        this.$modal.setAttribute('aria-hidden', 'true');
+        // Move focus out of modal to prevent accessibility issues
+        if (this.$modal.contains(document.activeElement)) {
+            document.activeElement.blur();
+        }
+        this.$modal.setAttribute('inert', '');
         this.autoSave();
     }
 
@@ -347,14 +359,14 @@ export default class CategoryManagerModal extends HTMLElement {
     }
 
     autoSave() {
-        const previousName = `${this.$categoryDisplayName.textContent}`.trim().toLowerCase();
-        this.save();
-        const newName = `${this.$categoryDisplayName.textContent}`.trim().toLowerCase();
-        if (newName && previousName !== newName) {
-            this.dispatchEvent(new CustomEvent('category-rename', {
-                detail: { previousName, newName, words: this.words },
-                bubbles: true
-            }));
+        if (this.save()) {
+            const newName = `${this.$categoryDisplayName.textContent}`.trim().toLowerCase();
+            if (newName && this.activeCategoryKey !== newName) {
+                this.dispatchEvent(new CustomEvent('category-rename', {
+                    detail: { previousName: this.activeCategoryKey, newName, words: this.words },
+                    bubbles: true
+                }));
+            }
         }
     }
 }

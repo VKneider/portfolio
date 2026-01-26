@@ -256,7 +256,7 @@ export default class GameSetup extends HTMLElement {
                 label: 'var(--secondary-color-contrast)'
             },
             onClickCallback: () => {
-                this.$categoryModalComponent?.open();
+                this.$categoryModalComponent?.open(this.category);
             }
         });
 
@@ -330,22 +330,27 @@ export default class GameSetup extends HTMLElement {
         }
         this.categories[newName] = words;
         this.saveCategories();
-        this.refreshCategorySelects(newName);
+        let selectedKey = this.category;
+        if (previousName === this.category) {
+            selectedKey = newName;
+        }
+        this.refreshCategorySelects(selectedKey);
+        this.$categoryModalComponent?.updateCategories(this.categories, selectedKey);
     }
 
-    handleDeleteListRequest(detail) {
+    handleDeleteCategoryRequest(detail) {
         const name = detail?.name?.trim();
         if (!name) return;
         const confirmationModal = this.closest('slice-theimpostergame')?.querySelector('slice-confirmation-modal');
         if (!confirmationModal) {
-            this.deleteList({ name });
+            this.deleteCategory({ name });
             return;
         }
         confirmationModal.open({
-            title: 'Eliminar lista',
+            title: 'Eliminar categoría',
             message: `¿Estás seguro de eliminar "${name}"?`,
             onConfirm: () => {
-                this.deleteList({ name });
+                this.deleteCategory({ name });
             }
         });
     }
