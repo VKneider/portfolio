@@ -11,6 +11,10 @@ export default class GameFlow extends HTMLElement {
         imposters: {
             type: 'array',
             default: []
+        },
+        names: {
+            type: 'array',
+            default: []
         }
     };
 
@@ -33,6 +37,7 @@ export default class GameFlow extends HTMLElement {
         this.$revealButtonContainer = this.querySelector('#reveal-button-container');
         this.$newGameButtonContainer = this.querySelector('#new-game-button-container');
         this.$closeModalButtonContainer = this.querySelector('#close-modal-button-container');
+        this.$keepPlayersButtonContainer = this.querySelector('#keep-players-button-container');
         this.$resultsModal = this.querySelector('#results-modal');
         this.$stepsGuide = this.querySelector('#steps-guide');
         this.$impostersList = this.querySelector('#imposters-list');
@@ -44,10 +49,18 @@ export default class GameFlow extends HTMLElement {
 
     renderResults() {
         if (!this.$impostersList || !this.$secretWord || !this.$secretCategory) return;
-        const impostersLabels = (this.imposters || []).map((index) => `Jugador #${index + 1}`);
+        const impostersLabels = (this.imposters || []).map((index) => this.getPlayerLabel(index));
         this.$impostersList.textContent = impostersLabels.length ? impostersLabels.join(', ') : '-';
         this.$secretWord.textContent = this.word || '-';
         this.$secretCategory.textContent = this.category || '-';
+    }
+
+    getPlayerLabel(index) {
+        if (Array.isArray(this.names) && this.names.length > index) {
+            const name = `${this.names[index]}`.trim();
+            if (name) return name;
+        }
+        return `Jugador #${index + 1}`;
     }
 
     async renderButtons() {
@@ -80,17 +93,35 @@ export default class GameFlow extends HTMLElement {
                 label: 'var(--secondary-color-contrast)'
             },
             onClickCallback: () => {
-                this.closeResults();
+                this.dispatchEvent(new CustomEvent('reset-game', { bubbles: true }));
+            }
+        });
+
+        this.$keepPlayersButton = await slice.build('Button', {
+            value: 'Jugar con mismos jugadores',
+            customColor: {
+                button: 'var(--success-color)',
+                label: 'var(--success-contrast)'
+            },
+            onClickCallback: () => {
+                this.dispatchEvent(new CustomEvent('play-again-same', {
+                    detail: {
+                        names: this.names
+                    },
+                    bubbles: true
+                }));
             }
         });
 
         this.$revealButton.init();
         this.$newGameButton.init();
         this.$closeModalButton.init();
+        this.$keepPlayersButton.init();
 
         this.$revealButtonContainer.appendChild(this.$revealButton);
         this.$newGameButtonContainer.appendChild(this.$newGameButton);
         this.$closeModalButtonContainer.appendChild(this.$closeModalButton);
+        this.$keepPlayersButtonContainer.appendChild(this.$keepPlayersButton);
     }
 
     openResults() {

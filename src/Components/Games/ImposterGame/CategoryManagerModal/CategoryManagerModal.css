@@ -1,0 +1,203 @@
+.category-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 2000;
+}
+
+.category-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.category-card {
+    width: min(680px, 92vw);
+    background: var(--secondary-background-color);
+    border-radius: calc(var(--border-radius-slice) * 3);
+    border: var(--slice-border) solid var(--primary-color-shade);
+    padding: 2rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s ease;
+}
+
+.category-modal.open .category-card {
+    transform: translateY(0) scale(1);
+}
+
+.category-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.category-header p {
+    margin: 0.4rem 0 0;
+    color: var(--font-secondary-color);
+}
+
+
+.category-tabs {
+    display: flex;
+    gap: 0.6rem;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+    margin-top: 0.6rem;
+}
+
+.category-tab {
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: var(--slice-border) solid var(--primary-color-shade);
+    background: var(--primary-background-color);
+    color: var(--font-primary-color);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.category-tab.active {
+    background: rgba(var(--primary-color-rgb), 0.15);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.category-title-display[contenteditable="true"] {
+    border-bottom: 2px dashed rgba(var(--primary-color-rgb), 0.4);
+}
+
+.category-section-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.25);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.words-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.words-divider {
+    height: 2px;
+    width: 100%;
+    background: rgba(var(--primary-color-rgb), 0.3);
+    margin: 0.6rem 0 0.8rem;
+}
+
+.words-header slice-button::part(slice_button) {
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 1.1rem;
+    border-radius: 999px;
+}
+
+
+.category-title-display[contenteditable="true"] {
+    border-bottom: 2px dashed rgba(var(--primary-color-rgb), 0.4);
+}
+
+.category-body {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.words-input-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.8rem 1rem;
+    align-items: center;
+}
+
+
+.words-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .words-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.word-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    border: var(--slice-border) solid var(--primary-color-shade);
+    background: var(--primary-background-color);
+    color: var(--font-primary-color);
+    font-size: 0.9rem;
+    min-width: 0;
+}
+
+.word-chip.empty {
+    border-color: var(--danger-color);
+}
+
+.word-chip.duplicate {
+    border-color: var(--warning-color);
+}
+
+.word-chip input {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: 0.9rem;
+    font-family: var(--font-family);
+    width: 100%;
+    min-width: 0;
+    outline: none;
+}
+
+.word-chip input:focus {
+    background: rgba(var(--primary-color-rgb), 0.08);
+    border-radius: 999px;
+}
+
+.word-chip input::selection {
+    background: rgba(var(--primary-color-rgb), 0.25);
+    color: var(--font-primary-color);
+}
+
+.word-chip button {
+    border: none;
+    background: transparent;
+    color: var(--danger-color);
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.words-input-row slice-button::part(slice_button) {
+    min-width: 140px;
+}
+
+.category-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}

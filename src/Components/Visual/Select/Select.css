@@ -54,9 +54,10 @@
     color: var(--font-primary-color);
     cursor: pointer;
     padding: 10px;
+    transition: background-color 0.2s ease, color 0.2s ease;
     &:hover {
-      color: var(--secondary-color-contrast);
-      background-color: var(--secondary-color);
+      color: var(--font-primary-color);
+      background-color: rgba(var(--primary-color-rgb), 0.08);
     }
   }
 }

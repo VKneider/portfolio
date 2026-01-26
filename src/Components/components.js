@@ -52,6 +52,9 @@ const components = {
   "TechnicalSkillsSection": "AtomicAppComponents",
   "GameFlow": "ExtraGames",
   "GameSetup": "ExtraGames",
+  "NameManagerModal": "ExtraGames",
+  "ConfirmationModal": "ExtraGames",
+  "CategoryManagerModal": "ExtraGames",
   "TheImposterGame": "ExtraGames",
   "WordReveal": "ExtraGames"
 };

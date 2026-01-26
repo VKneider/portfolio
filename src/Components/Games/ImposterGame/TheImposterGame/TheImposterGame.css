@@ -49,6 +49,14 @@ slice-theimpostergame {
     gap: 0;
 }
 
+.intro-layout.hero-hidden {
+    grid-template-columns: 1fr;
+}
+
+.intro-layout.hero-hidden .hero {
+    display: none;
+}
+
 .hero {
     width: 100%;
     min-height: 100vh;

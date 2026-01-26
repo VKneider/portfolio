@@ -101,7 +101,8 @@
     left: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Cambiado de center a flex-start para reducir espacio vertical */
+    padding-top: 80px; /* Agregar padding arriba para no ocupar toda la altura */
     flex-direction: column;
     background-color: var(--primary-color);
     transform: translateX(100%);
@@ -117,20 +118,31 @@
   }
 }
 
-/* CÓDIGO NUEVO - Añadir solo esta regla */
+/* CÓDIGO NUEVO - Mejora para mobile: organizar en grid de 2 columnas para reducir altura */
 @media only screen and (max-width: 1020px) {
-  .nav_bar_menu,
+  .nav_bar_menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    width: 90%;
+    max-width: 350px;
+    justify-items: center;
+  }
+  
   .nav_bar_buttons {
-    flex-direction: column;
-    width: auto;
-    align-items: center;
+    flex-direction: row; /* Cambiar a fila para botones */
+    gap: 10px;
+    margin-top: 20px;
   }
   
   .slice_nav_header li {
-    margin: 15px;
-    display: flex;
+    margin: 5px; /* Reducir margen */
+    width: 100%;
     justify-content: center;
-    position: relative;
+  }
+  
+  .navbar-action-item {
     width: auto;
+    margin: 0 5px;
   }
 }

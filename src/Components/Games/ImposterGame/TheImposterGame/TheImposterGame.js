@@ -16,8 +16,18 @@ export default class TheImposterGame extends HTMLElement {
   async init() {
     this.$gameContent = this.querySelector('#game-content');
     this.$heroThemeSlot = this.querySelector('.hero-theme-slot');
+    this.$heroSection = this.querySelector('#hero-section');
+    this.$introLayout = this.querySelector('.intro-layout');
+    await this.renderConfirmationModal();
     await this.renderThemeSelector();
     await this.loadSetup();
+  }
+
+  async renderConfirmationModal() {
+    this.$confirmationModal = await slice.build('ConfirmationModal', {});
+    if (this.$confirmationModal) {
+      this.appendChild(this.$confirmationModal);
+    }
   }
 
   async renderThemeSelector() {
@@ -86,14 +96,22 @@ export default class TheImposterGame extends HTMLElement {
     this.$heroThemeSlot.appendChild(themeSelector);
   }
 
-  async loadSetup() {
+  async loadSetup(options = {}) {
     this.clearContent();
-    const setupComponent = await slice.build('GameSetup', {});
+    this.showHero(true);
+    const setupComponent = await slice.build('GameSetup', {
+      keepPlayers: options.keepPlayers || false,
+      savedNames: this.gameState.names
+    });
+    if (!setupComponent) {
+      return;
+    }
     setupComponent.addEventListener('game-start', (e) => {
       this.gameState.players = e.detail.players;
       this.gameState.imposters = e.detail.imposters;
       this.gameState.word = e.detail.word;
       this.gameState.category = e.detail.category;
+      this.gameState.names = e.detail.names || [];
       this.gameState.step = 'reveal';
       this.loadReveal();
     });
@@ -102,11 +120,13 @@ export default class TheImposterGame extends HTMLElement {
 
   async loadReveal() {
     this.clearContent();
+    this.showHero(false);
     const revealComponent = await slice.build('WordReveal', {
       players: this.gameState.players,
       imposters: this.gameState.imposters,
       word: this.gameState.word,
-      category: this.gameState.category
+      category: this.gameState.category,
+      names: this.gameState.names
     });
     
     revealComponent.addEventListener('revelation-finished', () => {
@@ -120,15 +140,23 @@ export default class TheImposterGame extends HTMLElement {
 
   async loadGameFlow() {
     this.clearContent();
+    this.showHero(false);
     const flowComponent = await slice.build('GameFlow', {
       word: this.gameState.word,
       category: this.gameState.category,
-      imposters: this.gameState.imposterIndexes || []
+      imposters: this.gameState.imposterIndexes || [],
+      names: this.gameState.names
     });
     
     flowComponent.addEventListener('reset-game', () => {
       this.gameState.step = 'setup';
       this.loadSetup();
+    });
+
+    flowComponent.addEventListener('play-again-same', (e) => {
+      this.gameState.names = e.detail?.names || this.gameState.names;
+      this.gameState.step = 'setup';
+      this.loadSetup({ keepPlayers: true });
     });
     
     this.$gameContent.appendChild(flowComponent);
@@ -136,6 +164,11 @@ export default class TheImposterGame extends HTMLElement {
 
   clearContent() {
     this.$gameContent.innerHTML = '';
+  }
+
+  showHero(visible) {
+    if (!this.$introLayout) return;
+    this.$introLayout.classList.toggle('hero-hidden', !visible);
   }
 }
 

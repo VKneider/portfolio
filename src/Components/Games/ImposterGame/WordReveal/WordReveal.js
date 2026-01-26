@@ -9,6 +9,10 @@ export default class WordReveal extends HTMLElement {
             type: 'number',
             default: 1
         },
+        names: {
+            type: 'array',
+            default: []
+        },
         word: { 
             type: 'string', 
             default: '' 
@@ -66,7 +70,8 @@ export default class WordReveal extends HTMLElement {
     }
 
     renderPlayerScreen() {
-        this.$playerTitle.textContent = `Jugador #${this.currentPlayer + 1}`;
+        const playerLabel = this.getPlayerLabel(this.currentPlayer);
+        this.$playerTitle.textContent = playerLabel;
         this.$cardContent.innerHTML = '<div class="card-back">?</div>';
         this.$cardContent.className = 'card-container hidden';
         this.$instruction.textContent = 'Asegúrate de que solo tú estés viendo la pantalla.';
@@ -115,6 +120,14 @@ export default class WordReveal extends HTMLElement {
             indexes.add(Math.floor(Math.random() * this.players));
         }
         return Array.from(indexes);
+    }
+
+    getPlayerLabel(index) {
+        if (Array.isArray(this.names) && this.names.length > index) {
+            const name = `${this.names[index]}`.trim();
+            if (name) return name;
+        }
+        return `Jugador #${index + 1}`;
     }
 }
 
