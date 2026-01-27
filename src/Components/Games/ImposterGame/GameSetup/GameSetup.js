@@ -393,6 +393,7 @@ export default class GameSetup extends HTMLElement {
 
     refreshCategorySelects(selectedKey) {
         if (this.$categorySelect) {
+            this.$categorySelect.options = [];
             const options = this.getCategoryOptions();
             this.$categorySelect.options = options;
             const selectedOption = options.find(option => option.value === selectedKey);
