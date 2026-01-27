@@ -9,7 +9,7 @@
     "themeManager": {
         "enabled":true,
         "defaultTheme": "CobaltBlue",
-        "saveThemeLocally": false,
+        "saveThemeLocally": true,
         "useBrowserTheme": false
     },
     "logger": {

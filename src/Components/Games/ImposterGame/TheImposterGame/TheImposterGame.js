@@ -18,8 +18,11 @@ export default class TheImposterGame extends HTMLElement {
     this.$heroThemeSlot = this.querySelector('.hero-theme-slot');
     this.$heroSection = this.querySelector('#hero-section');
     this.$introLayout = this.querySelector('.intro-layout');
+    this.$audio = this.querySelector('#background-audio');
+    this.$audioControls = this.querySelector('#audio-controls');
     await this.renderConfirmationModal();
     await this.renderThemeSelector();
+    await this.renderAudioToggle();
     await this.loadSetup();
   }
 
@@ -96,6 +99,23 @@ export default class TheImposterGame extends HTMLElement {
     this.$heroThemeSlot.appendChild(themeSelector);
   }
 
+  async renderAudioToggle() {
+    this.$audioToggle = await slice.build('BackgroundAudioToggle', {});
+    this.$audioControls.appendChild(this.$audioToggle);
+    this.$audioToggle.addEventListener('toggle-audio', () => {
+      if (this.$audio.paused) {
+        this.$audio.play().catch(() => {});
+      } else {
+        this.$audio.pause();
+      }
+      this.$audioToggle.setState(!this.$audio.paused);
+      if (this.gameAudioToggle) {
+        this.gameAudioToggle.setState(!this.$audio.paused);
+      }
+    });
+    this.$audioToggle.setState(false);
+  }
+
   async loadSetup(options = {}) {
     this.clearContent();
     this.showHero(true);
@@ -160,6 +180,23 @@ export default class TheImposterGame extends HTMLElement {
     });
     
     this.$gameContent.appendChild(flowComponent);
+
+    // Add audio toggle to game view
+    this.gameAudioToggle = await slice.build('BackgroundAudioToggle', {});
+    this.gameAudioToggle.classList.add('game-audio-toggle');
+    this.$gameContent.appendChild(this.gameAudioToggle);
+    this.gameAudioToggle.addEventListener('toggle-audio', () => {
+      if (this.$audio.paused) {
+        this.$audio.play().catch(() => {});
+      } else {
+        this.$audio.pause();
+      }
+      this.gameAudioToggle.setState(!this.$audio.paused);
+      if (this.$audioToggle) {
+        this.$audioToggle.setState(!this.$audio.paused);
+      }
+    });
+    this.gameAudioToggle.setState(!this.$audio.paused);
   }
 
   clearContent() {

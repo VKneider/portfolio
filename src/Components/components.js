@@ -50,11 +50,12 @@ const components = {
   "TeachingSection": "AtomicAppComponents",
   "TechExpertise": "AtomicAppComponents",
   "TechnicalSkillsSection": "AtomicAppComponents",
+  "BackgroundAudioToggle": "ExtraGames",
+  "CategoryManagerModal": "ExtraGames",
+  "ConfirmationModal": "ExtraGames",
   "GameFlow": "ExtraGames",
   "GameSetup": "ExtraGames",
   "NameManagerModal": "ExtraGames",
-  "ConfirmationModal": "ExtraGames",
-  "CategoryManagerModal": "ExtraGames",
   "TheImposterGame": "ExtraGames",
   "WordReveal": "ExtraGames"
 };

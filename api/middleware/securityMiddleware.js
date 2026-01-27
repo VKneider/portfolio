@@ -37,7 +37,7 @@ export function securityMiddleware(options = {}) {
 
     // 2. Permitir acceso a assets públicos
     if (allowPublicAssets) {
-      const publicPaths = ['/assets', '/public', '/images', '/styles'];
+      const publicPaths = ['/assets', '/public', '/images', '/styles', ];
       const isPublicAsset = publicPaths.some(publicPath => 
         requestPath.startsWith(publicPath)
       );

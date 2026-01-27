@@ -183,7 +183,7 @@ export default class GameSetup extends HTMLElement {
 
         this.$namesToggle = await slice.build('Select', {
             options: options,
-            label: 'Nombres propios',
+            label: 'Usar nombres',
             onOptionSelect: async () => {
                 if (this.$namesToggle.value) {
                     this.useNames = this.$namesToggle.value.value === true || this.$namesToggle.value.value === 'true';
@@ -270,7 +270,7 @@ export default class GameSetup extends HTMLElement {
             value: 'Administrar categorias',
             customColor: {
                 button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                label: 'var(--font-primary-color)'
             },
             onClickCallback: () => {
                 this.$categoryModalComponent?.open(this.category);
@@ -544,7 +544,7 @@ export default class GameSetup extends HTMLElement {
             value: 'Administrar jugadores',
             customColor: {
                 button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                label: 'var(--font-primary-color)'
             },
             onClickCallback: () => {
                 this.$namesModalComponent?.open(this.loadSavedLists());
