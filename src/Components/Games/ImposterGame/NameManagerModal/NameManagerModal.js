@@ -33,6 +33,7 @@ export default class NameManagerModal extends HTMLElement {
         this.$title = this.querySelector('#names-list-title');
         this.$listsTabs = this.querySelector('#name-lists-tabs');
         this.$namesDeleteButton = this.querySelector('#names-delete-button');
+        this.$namesSaveButton = this.querySelector('#names-save-button');
     }
 
     bindEvents() {
@@ -73,6 +74,17 @@ export default class NameManagerModal extends HTMLElement {
             }
         });
 
+        this.$save = await slice.build('Button', {
+            value: 'Guardar',
+            customColor: {
+                button: 'var(--success-color)',
+                label: 'var(--success-contrast)'
+            },
+            onClickCallback: () => {
+                this.dispatchSave();
+            }
+        });
+
         this.$close = await slice.build('Button', {
             value: 'Cerrar',
             customColor: {
@@ -84,10 +96,11 @@ export default class NameManagerModal extends HTMLElement {
             }
         });
 
-  
+   
 
         this.$addNameButton.appendChild(this.$addButton);
         this.$namesDeleteButton.appendChild(this.$deleteList);
+        this.$namesSaveButton.appendChild(this.$save);
         this.$closeButton.appendChild(this.$close);
     }
 
@@ -250,7 +263,6 @@ export default class NameManagerModal extends HTMLElement {
     close() {
         this.$modal.classList.remove('open');
         this.$modal.setAttribute('aria-hidden', 'true');
-        this.dispatchSave();
     }
 
     dispatchSave() {

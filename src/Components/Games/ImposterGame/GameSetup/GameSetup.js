@@ -140,7 +140,7 @@ export default class GameSetup extends HTMLElement {
         this.$playerInput = await slice.build('Input', {
             type: 'number',
             label: 'Numero de jugadores',
-            placeholder: 'Mínimo 3 jugadores',
+            placeholder: 'Jugadores (>=3)',
             value: '3',
             min: '3'
         });
@@ -150,8 +150,11 @@ export default class GameSetup extends HTMLElement {
 
         this.$playerInput.querySelector('input')?.addEventListener('input', () => {
             let val = parseInt(this.$playerInput.value);
-            if (!isNaN(val) && val < 3) {
+            if (val < 3) {
+                this.setFeedback('Se necesitan al menos 3 jugadores.');
                 this.$playerInput.value = '3';
+            } else {
+                this.setFeedback('');
             }
             this.syncImpostersLimit();
         });
@@ -525,6 +528,7 @@ export default class GameSetup extends HTMLElement {
         }
         this.$namesManageContainer.style.display = this.useSavedNames ? 'block' : 'none';
         this.syncPlayerInput();
+        this.$playerInput.querySelector('input').disabled = showNames;
     }
 
     parseNames() {
@@ -557,10 +561,22 @@ export default class GameSetup extends HTMLElement {
             this.handleDeleteListRequest(event.detail);
         });
 
-        this.$namesModalComponent.addEventListener('save-list', (event) => {
-            this.savedLists = event.detail;
+        this.$namesModalComponent.addEventListener('save-lists', (event) => {
+            this.savedLists = event.detail.lists;
+            this.selectedListId = event.detail.activeListId || this.selectedListId;
+            this.saveLists(this.savedLists);
             this.renderNamesTabs();
             this.renderSavedNamesToggle();
+        });
+
+        this.$namesModalComponent.addEventListener('rename-list', (event) => {
+            const { id, newName } = event.detail;
+            const list = this.savedLists.find((item) => item.id === id);
+            if (list) {
+                list.name = newName;
+                this.saveLists(this.savedLists);
+                this.renderNamesTabs();
+            }
         });
 
         this.appendChild(this.$namesModalComponent);
