@@ -70,6 +70,7 @@ export default class GameFlow extends HTMLElement {
                 button: 'var(--danger-color)',
                 label: 'var(--danger-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.openResults();
             }
@@ -81,6 +82,7 @@ export default class GameFlow extends HTMLElement {
                 button: 'var(--primary-color)',
                 label: 'var(--primary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.dispatchEvent(new CustomEvent('reset-game', { bubbles: true }));
             }
@@ -92,6 +94,7 @@ export default class GameFlow extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.dispatchEvent(new CustomEvent('reset-game', { bubbles: true }));
             }
@@ -103,6 +106,7 @@ export default class GameFlow extends HTMLElement {
                 button: 'var(--success-color)',
                 label: 'var(--success-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.dispatchEvent(new CustomEvent('play-again-same', {
                     detail: {

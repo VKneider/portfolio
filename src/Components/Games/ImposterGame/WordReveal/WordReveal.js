@@ -40,6 +40,7 @@ export default class WordReveal extends HTMLElement {
         this.imposterIndexes = this.pickImposters();
         this.cacheElements();
         this.bindEvents();
+        await this.renderActionButton();
         this.renderPlayerScreen();
     }
 
@@ -50,23 +51,12 @@ export default class WordReveal extends HTMLElement {
     cacheElements() {
         this.$playerTitle = this.querySelector('#player-title');
         this.$cardContent = this.querySelector('#card-content');
-        this.$actionBtn = this.querySelector('#reveal-btn');
+        this.$actionsContainer = this.querySelector('#actions-container');
         this.$instruction = this.querySelector('#instruction');
     }
 
     bindEvents() {
-        this.$actionBtn.addEventListener('click', () => {
-            const btnValue = this.$actionBtn.value;
-            
-            if (btnValue === 'Ver mi rol') {
-                this.revealRole();
-            } else if (btnValue === 'Ocultar y pasar') {
-                this.nextPlayer();
-            } else {
-                // 'Comenzar Ronda'
-                this.dispatchEvent(new CustomEvent('revelation-finished', { bubbles: true }));
-            }
-        });
+        // No longer needed, button has onClickCallback
     }
 
     renderPlayerScreen() {
@@ -76,7 +66,9 @@ export default class WordReveal extends HTMLElement {
         this.$cardContent.className = 'card-container hidden';
         this.$instruction.textContent = 'Asegúrate de que solo tú estés viendo la pantalla.';
         
-        this.$actionBtn.value = 'Ver mi rol';
+        this.updateActionButton('Ver mi rol', () => {
+            this.revealRole();
+        });
     }
 
     revealRole() {
@@ -103,14 +95,40 @@ export default class WordReveal extends HTMLElement {
         }
 
         const isLastPlayer = this.currentPlayer === this.players - 1;
-        this.$actionBtn.value = isLastPlayer ? 'Comenzar Ronda' : 'Ocultar y pasar';
+        const buttonText = isLastPlayer ? 'Comenzar Ronda' : 'Ocultar y pasar';
         this.$instruction.textContent = 'Memoriza tu rol y palabra.';
+        
+        this.updateActionButton(buttonText, () => {
+            if (isLastPlayer) {
+                this.dispatchEvent(new CustomEvent('revelation-finished', { bubbles: true }));
+            } else {
+                this.nextPlayer();
+            }
+        });
     }
 
     nextPlayer() {
         this.currentPlayer++;
         if (this.currentPlayer < this.players) {
             this.renderPlayerScreen();
+        }
+    }
+
+    async renderActionButton() {
+        this.$actionBtn = await slice.build('Button', {
+            value: 'Ver mi rol',
+            audioOnClickEnabled: true,
+            onClickCallback: () => {
+                this.revealRole();
+            }
+        });
+        this.$actionsContainer.appendChild(this.$actionBtn);
+    }
+
+    updateActionButton(value, onClickCallback) {
+        if (this.$actionBtn) {
+            this.$actionBtn.value = value;
+            this.$actionBtn.onClickCallback = onClickCallback;
         }
     }
 

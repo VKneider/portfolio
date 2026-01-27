@@ -90,6 +90,7 @@ export default class CategoryManagerModal extends HTMLElement {
                 button: 'var(--primary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.addWord();
             }
@@ -101,6 +102,7 @@ export default class CategoryManagerModal extends HTMLElement {
                 button: 'var(--danger-color)',
                 label: 'var(--danger-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.requestDelete();
             }
@@ -112,6 +114,7 @@ export default class CategoryManagerModal extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.close();
             }

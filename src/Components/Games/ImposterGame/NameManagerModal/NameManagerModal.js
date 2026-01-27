@@ -58,6 +58,7 @@ export default class NameManagerModal extends HTMLElement {
                 button: 'var(--primary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.addName();
             }
@@ -69,6 +70,7 @@ export default class NameManagerModal extends HTMLElement {
                 button: 'var(--danger-color)',
                 label: 'var(--danger-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.requestDelete();
             }
@@ -80,6 +82,7 @@ export default class NameManagerModal extends HTMLElement {
                 button: 'var(--success-color)',
                 label: 'var(--success-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.dispatchSave();
             }
@@ -91,6 +94,7 @@ export default class NameManagerModal extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.close();
             }

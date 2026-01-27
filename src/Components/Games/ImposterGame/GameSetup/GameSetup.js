@@ -18,8 +18,10 @@ export default class GameSetup extends HTMLElement {
         slice.attachTemplate(this);
         this.storage = null;
         this.storageKey = 'imposterGamePlayers';
-        this.storageListsKey = 'imposterGamePlayersLists';
         this.categoriesKey = 'imposterGameCategories';
+        this.lastNamesSourceKey = 'imposterLastNamesSource';
+        this.lastSelectedListKey = 'imposterLastSelectedListId';
+        this.lastActiveCategoriesKey = 'imposterLastActiveCategories';
         this.mode = 'automatic';
         this.players = 3;
         this.imposters = 1;
@@ -104,6 +106,7 @@ export default class GameSetup extends HTMLElement {
                 button: 'var(--primary-color)',
                 label: 'var(--primary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.startGame();
             }
@@ -212,6 +215,7 @@ export default class GameSetup extends HTMLElement {
             onOptionSelect: async () => {
                 if (this.$namesSourceSelect.value) {
                     this.useSavedNames = this.$namesSourceSelect.value.value === 'saved';
+                    localStorage.setItem(this.lastNamesSourceKey, this.useSavedNames ? 'saved' : 'new');
                     this.toggleNamesList();
                 }
             }
@@ -272,6 +276,7 @@ export default class GameSetup extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--font-primary-color)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.$categoryModalComponent?.open(this.category);
             }
@@ -547,6 +552,7 @@ export default class GameSetup extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--font-primary-color)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.$namesModalComponent?.open(this.loadSavedLists());
             }
@@ -585,16 +591,103 @@ export default class GameSetup extends HTMLElement {
 
     applySavedNamesProps() {
         if (this.keepPlayers && Array.isArray(this.savedNames) && this.savedNames.length) {
-            this.useNames = true;
-            this.useSavedNames = true;
-            if (this.$namesToggle) {
-                this.$namesToggle.value = [{ text: 'Si', value: true }];
+            const source = localStorage.getItem(this.lastNamesSourceKey);
+            if (!source || source === 'new') {
+                // Manual names
+                this.useNames = true;
+                this.useSavedNames = false;
+                if (this.$namesToggle) {
+                    this.$namesToggle.value = [{ text: 'Si', value: true }];
+                }
+                if (this.$namesSourceSelect) {
+                    this.$namesSourceSelect.value = [{ text: 'Ingresar nuevos', value: 'new' }];
+                }
+                this.toggleNamesList();
+                // Set the textarea with saved names
+                if (!this.$namesTextarea) {
+                    this.renderNamesTextarea();
+                }
+                this.$namesTextarea.value = this.savedNames.join('\n');
+                this.syncPlayerInput();
+                localStorage.setItem(this.lastNamesSourceKey, 'new');
+            } else if (source === 'saved') {
+                // Saved lists
+                this.useNames = true;
+                this.useSavedNames = true;
+                const selectedId = localStorage.getItem(this.lastSelectedListKey);
+                if (selectedId) {
+                    this.selectedListId = selectedId;
+                }
+                if (this.$namesToggle) {
+                    this.$namesToggle.value = [{ text: 'Si', value: true }];
+                }
+                if (this.$namesSourceSelect) {
+                    this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
+                }
+                this.toggleNamesList();
+                this.renderSavedNamesToggle();
+                // Set active checkboxes from stored
+                const activeStr = localStorage.getItem(this.lastActiveCategoriesKey);
+                if (activeStr) {
+                    try {
+                        const active = JSON.parse(activeStr);
+                        if (Array.isArray(active) && this.$activeNamesRefs) {
+                            this.$activeNamesRefs.forEach((ref, i) => {
+                                if (ref.switchComponent && active[i] !== undefined) {
+                                    ref.switchComponent.checked = active[i];
+                                }
+                            });
+                            this.updateActiveNamesHint();
+                            this.syncPlayerInput();
+                        }
+                    } catch (e) {}
+                }
+                localStorage.setItem(this.lastNamesSourceKey, 'saved');
+      
+                if (this.$namesSourceSelect) {
+                    this.$namesSourceSelect.value = [{ text: 'Ingresar nuevos', value: 'new' }];
+                }
+                this.toggleNamesList();
+                // Set the textarea with saved names
+                if (!this.$namesTextarea) {
+                    this.renderNamesTextarea();
+                }
+                this.$namesTextarea.value = this.savedNames.join('\n');
+                this.syncPlayerInput();
+                localStorage.setItem(this.lastNamesSourceKey, 'new');
+            } else if (source === 'saved') {
+                // Saved lists
+                this.useNames = true;
+                this.useSavedNames = true;
+                const selectedId = localStorage.getItem(this.lastSelectedListKey);
+                if (selectedId) {
+                    this.selectedListId = selectedId;
+                }
+                if (this.$namesToggle) {
+                    this.$namesToggle.value = [{ text: 'Si', value: true }];
+                }
+                if (this.$namesSourceSelect) {
+                    this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
+                }
+                this.toggleNamesList();
+                this.renderSavedNamesToggle();
+                // Set active checkboxes from stored
+                const activeStr = localStorage.getItem(this.lastActiveCategoriesKey);
+                if (activeStr) {
+                    try {
+                        const active = JSON.parse(activeStr);
+                        if (Array.isArray(active) && this.$activeNamesRefs) {
+                            this.$activeNamesRefs.forEach((ref, i) => {
+                                if (ref.switchComponent && active[i] !== undefined) {
+                                    ref.switchComponent.checked = active[i];
+                                }
+                            });
+                            this.updateActiveNamesHint();
+                            this.syncPlayerInput();
+                        }
+                    } catch (e) {}
+                }
             }
-            if (this.$namesSourceSelect) {
-                this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
-            }
-            this.toggleNamesList();
-            this.renderSavedNamesToggleFrom(this.savedNames);
         }
     }
 
@@ -625,6 +718,8 @@ export default class GameSetup extends HTMLElement {
             switchComponent.addEventListener('change', () => {
                 this.updateActiveNamesHint();
                 this.syncPlayerInput();
+                const active = this.$activeNamesRefs.map(({switchComponent}) => switchComponent.checked);
+                localStorage.setItem(this.lastActiveCategoriesKey, JSON.stringify(active));
             });
             switchContainer.appendChild(switchComponent);
 
@@ -769,6 +864,7 @@ export default class GameSetup extends HTMLElement {
             tab.textContent = list.name || 'Lista';
             tab.addEventListener('click', () => {
                 this.selectedListId = list.id;
+                localStorage.setItem(this.lastSelectedListKey, list.id);
                 this.renderSavedNamesToggle();
             });
             this.$namesListsTabs.appendChild(tab);

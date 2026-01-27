@@ -11,6 +11,7 @@ export default class TheImposterGame extends HTMLElement {
       word: '',
       category: ''
     };
+    this.isAudioEnabled = false; // starts muted
   }
 
   async init() {
@@ -102,19 +103,41 @@ export default class TheImposterGame extends HTMLElement {
   async renderAudioToggle() {
     this.$audioToggle = await slice.build('BackgroundAudioToggle', {});
     this.$audioControls.appendChild(this.$audioToggle);
-    this.$audioToggle.addEventListener('toggle-audio', () => {
-      if (this.$audio.paused) {
+    this.$audioToggle.addEventListener('toggle-audio', async () => {
+      this.$audio.muted = !this.$audio.muted;
+      this.isAudioEnabled = !this.$audio.muted;
+      if (this.isAudioEnabled && this.$audio.paused) {
         this.$audio.play().catch(() => {});
-      } else {
-        this.$audio.pause();
       }
-      this.$audioToggle.setState(!this.$audio.paused);
+      this.$audioToggle.setState(this.isAudioEnabled);
       if (this.gameAudioToggle) {
-        this.gameAudioToggle.setState(!this.$audio.paused);
+    this.gameAudioToggle.setState(this.isAudioEnabled);
+
+    // Add click sound toggle to game view
+    this.gameClickSoundToggle = await slice.build('ClickSoundToggle', {});
+    this.gameClickSoundToggle.classList.add('game-click-sound-toggle');
+    this.$gameContent.appendChild(this.gameClickSoundToggle);
+    this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
+      const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
+      this.gameClickSoundToggle.setState(isMuted);
+      if (this.$clickSoundToggle) {
+        this.$clickSoundToggle.setState(isMuted);
       }
     });
-    this.$audioToggle.setState(false);
+      }
+    });
+    // Audio starts muted, try to play
+    this.$audio.play().catch(() => {});
+    this.$audioToggle.setState(this.isAudioEnabled);
+
+    this.$clickSoundToggle = await slice.build('ClickSoundToggle', {});
+    this.$audioControls.appendChild(this.$clickSoundToggle);
+    this.$clickSoundToggle.addEventListener('toggle-click-sound', () => {
+      const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
+      this.$clickSoundToggle.setState(isMuted);
+    });
   }
+
 
   async loadSetup(options = {}) {
     this.clearContent();
@@ -181,22 +204,37 @@ export default class TheImposterGame extends HTMLElement {
     
     this.$gameContent.appendChild(flowComponent);
 
-    // Add audio toggle to game view
+    // Add audio controls to game view
+    const gameAudioControls = document.createElement('div');
+    gameAudioControls.classList.add('audio-controls', 'game-audio-controls');
+    this.$gameContent.appendChild(gameAudioControls);
+
     this.gameAudioToggle = await slice.build('BackgroundAudioToggle', {});
     this.gameAudioToggle.classList.add('game-audio-toggle');
-    this.$gameContent.appendChild(this.gameAudioToggle);
+    gameAudioControls.appendChild(this.gameAudioToggle);
     this.gameAudioToggle.addEventListener('toggle-audio', () => {
-      if (this.$audio.paused) {
+      this.$audio.muted = !this.$audio.muted;
+      this.isAudioEnabled = !this.$audio.muted;
+      if (this.isAudioEnabled && this.$audio.paused) {
         this.$audio.play().catch(() => {});
-      } else {
-        this.$audio.pause();
       }
-      this.gameAudioToggle.setState(!this.$audio.paused);
+      this.gameAudioToggle.setState(this.isAudioEnabled);
       if (this.$audioToggle) {
-        this.$audioToggle.setState(!this.$audio.paused);
+        this.$audioToggle.setState(this.isAudioEnabled);
       }
     });
-    this.gameAudioToggle.setState(!this.$audio.paused);
+    this.gameAudioToggle.setState(this.isAudioEnabled);
+
+    this.gameClickSoundToggle = await slice.build('ClickSoundToggle', {});
+    this.gameClickSoundToggle.classList.add('game-click-sound-toggle');
+    gameAudioControls.appendChild(this.gameClickSoundToggle);
+    this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
+      const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
+      this.gameClickSoundToggle.setState(isMuted);
+      if (this.$clickSoundToggle) {
+        this.$clickSoundToggle.setState(isMuted);
+      }
+    });
   }
 
   clearContent() {

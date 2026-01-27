@@ -17,6 +17,10 @@ export default class Button extends HTMLElement {
       icon: { 
          type: 'object', 
          default: null 
+      },
+      audioOnClickEnabled: {
+         type: 'boolean',
+         default: false
       }
    };
 
@@ -28,7 +32,16 @@ export default class Button extends HTMLElement {
       
       if (props.onClickCallback) {
          this.onClickCallback = props.onClickCallback;
-         this.addEventListener('click', async () => await this.onClickCallback());
+          this.addEventListener('click', async () => {
+             if (props.audioOnClickEnabled && localStorage.getItem('imposterClickSoundMuted') !== 'true') {
+                const clickAudio = document.getElementById('click-audio');
+                if (clickAudio) {
+                   clickAudio.currentTime = 0;
+                   clickAudio.play();
+                }
+             }
+             await this.onClickCallback();
+          });
       }
 
       slice.controller.setComponentProps(this, props);
@@ -50,6 +63,7 @@ export default class Button extends HTMLElement {
       return this._icon;
    }
 
+
    set icon(value) {
       this._icon = value;
       if (!this.$icon) return;
@@ -57,14 +71,30 @@ export default class Button extends HTMLElement {
       this.$icon.iconStyle = value.iconStyle;
    }
 
+   get audioOnClickEnabled() {
+      return this._audioOnClickEnabled;
+   }
+
+   set audioOnClickEnabled(value) {
+      this._audioOnClickEnabled = value;
+   }
+
    get value() {
       return this._value;
    }
 
-   set value(value) {
-      this._value = value;
-      this.$value.textContent = value;
-   }
+    set value(value) {
+       this._value = value;
+       this.$value.textContent = value;
+    }
+
+    get onClickCallback() {
+       return this._onClickCallback;
+    }
+
+    set onClickCallback(value) {
+       this._onClickCallback = value;
+    }
 
    get customColor() {
       return this._customColor;

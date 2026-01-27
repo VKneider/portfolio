@@ -52,6 +52,7 @@ const components = {
   "TechnicalSkillsSection": "AtomicAppComponents",
   "BackgroundAudioToggle": "ExtraGames",
   "CategoryManagerModal": "ExtraGames",
+  "ClickSoundToggle": "ExtraGames",
   "ConfirmationModal": "ExtraGames",
   "GameFlow": "ExtraGames",
   "GameSetup": "ExtraGames",

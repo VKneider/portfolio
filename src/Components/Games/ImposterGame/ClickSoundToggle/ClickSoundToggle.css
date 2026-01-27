@@ -1,0 +1,16 @@
+/* Styles for ClickSoundToggle component */
+
+#click-sound-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-slice);
+    transition: background 0.3s ease;
+    color: var(--font-primary-color);
+}
+
+#click-sound-toggle:hover {
+    background: rgba(var(--primary-color-rgb), 0.1);
+}

@@ -28,6 +28,7 @@ export default class ConfirmationModal extends HTMLElement {
                 button: 'var(--secondary-color)',
                 label: 'var(--secondary-color-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.close();
             }
@@ -39,6 +40,7 @@ export default class ConfirmationModal extends HTMLElement {
                 button: 'var(--danger-color)',
                 label: 'var(--danger-contrast)'
             },
+            audioOnClickEnabled: true,
             onClickCallback: () => {
                 if (this.onConfirm) {
                     this.onConfirm();

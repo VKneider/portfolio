@@ -170,6 +170,16 @@ slice-theimpostergame {
     align-items: center;
 }
 
+.game-audio-controls {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
 .hero-badge {
     padding: 0.45rem 1rem;
     border-radius: 999px;
@@ -392,8 +402,5 @@ slice-theimpostergame {
 }
 
 .game-audio-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 10;
+    /* Removed position fixed, now handled by wrapper */
 }
