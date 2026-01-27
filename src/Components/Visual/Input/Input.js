@@ -27,10 +27,14 @@ export default class Input extends HTMLElement {
          type: 'boolean', 
          default: false 
       },
-      conditions: { 
-         type: 'object', 
-         default: null 
-      }
+       conditions: { 
+          type: 'object', 
+          default: null 
+       },
+       min: { 
+          type: 'string', 
+          default: '' 
+       }
    };
 
    constructor(props) {
@@ -62,8 +66,13 @@ export default class Input extends HTMLElement {
          this.updateInputState();
       }
 
-      // Set up disabled state
-      this.$input.disabled = this.disabled;
+       // Set up disabled state
+       this.$input.disabled = this.disabled;
+
+       // Set up min for number inputs
+       if (this.min && this.type === 'number') {
+          this.$input.min = this.min;
+       }
 
       // Set up required state
       if (this.required) {
@@ -245,16 +254,16 @@ export default class Input extends HTMLElement {
       }
    }
 
-   get conditions() {
-      return this._conditions;
-   }
+    get min() {
+       return this._min;
+    }
 
-   set conditions(value) {
-      this._conditions = value;
-      if (value) {
-         this.setupConditions();
-      }
-   }
+    set min(value) {
+       this._min = value;
+       if (this.$input && this.type === 'number') {
+          this.$input.min = value;
+       }
+    }
 }
 
 customElements.define('slice-input', Input);

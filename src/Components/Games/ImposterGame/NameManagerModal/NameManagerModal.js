@@ -84,9 +84,7 @@ export default class NameManagerModal extends HTMLElement {
             }
         });
 
-        this.$addButton.init();
-        this.$deleteList.init();
-        this.$close.init();
+  
 
         this.$addNameButton.appendChild(this.$addButton);
         this.$namesDeleteButton.appendChild(this.$deleteList);

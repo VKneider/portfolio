@@ -1,5 +1,8 @@
+import palabras from "./randomWords.js";
+
 export default class GameSetup extends HTMLElement {
-    static props = {
+
+      static props = {
         keepPlayers: {
             type: 'boolean',
             default: false
@@ -30,28 +33,15 @@ export default class GameSetup extends HTMLElement {
         this.defaultCategories = {
             'git & github': ['Repositorio', 'Commit', 'Branch', 'Merge', 'Pull Request', 'Issue', 'Fork'],
             'html & css': ['Etiqueta', 'Flexbox', 'Grid', 'Selector', 'Margin', 'Padding', 'Responsive'],
-            'javascript': ['Array', 'Closure', 'Promise', 'Async', 'Callback', 'Scope', 'Prototype']
+            'javascript': ['Array', 'Closure', 'Promise', 'Async', 'Callback', 'Scope', 'Prototype'],
+            'aleatoria': this.getRandomWords()
         };
         this.categories = { ...this.defaultCategories };
     }
 
-    async init() {
-        this.cacheElements();
-        this.bindEvents();
-        await this.initStorage();
-        this.loadCategories();
-        await this.renderModeSelect();
-        await this.renderPlayerInput();
-        await this.renderImpostersInput();
-        await this.renderNamesToggle();
-        await this.renderNamesSourceSelect();
-        await this.renderNamesManager();
-        await this.renderCustomWordInput();
-        await this.renderCategories();
-        await this.renderCategoryManager();
-        await this.renderStartButton();
-        this.applySavedNamesProps();
-        this.syncImpostersLimit();
+    getRandomWords() {
+        const shuffled = [...palabras].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, 10);
     }
 
     async initStorage() {
@@ -63,31 +53,49 @@ export default class GameSetup extends HTMLElement {
     }
 
     cacheElements() {
+        this.$setupContainer = this.querySelector('.setup-container');
         this.$modeContainer = this.querySelector('#mode-container .mode-toggle');
         this.$playersContainer = this.querySelector('#players-container');
         this.$impostersContainer = this.querySelector('#imposters-container');
-        this.$namesToggleContainer = this.querySelector('#names-toggle');
+        this.$namesToggleContainer = this.querySelector('#names-toggle-container');
         this.$namesListContainer = this.querySelector('#names-list-container');
         this.$namesTextarea = this.querySelector('#names-list');
         this.$namesSourceContainer = this.querySelector('#names-source-container');
-        this.$namesSource = this.querySelector('#names-source');
-        this.$namesSourceHint = this.querySelector('#names-source-hint');
         this.$namesToggleListContainer = this.querySelector('#names-toggle-list-container');
         this.$namesToggleList = this.querySelector('#names-toggle-list');
         this.$namesActiveHint = this.querySelector('#names-active-hint');
         this.$namesManageContainer = this.querySelector('#names-manage-container');
-        this.$namesManageButton = this.querySelector('#names-manage-button');
+        this.$namesManageButton = this.querySelector('#names-manage-container');
         this.$namesListsTabs = this.querySelector('#names-lists-tabs');
         this.$categoryContainer = this.querySelector('#category-container');
+        this.$categoryGroup = this.querySelector('#category-group');
         this.$categoryManageButton = this.querySelector('#category-manage-button');
         this.$customWordContainer = this.querySelector('#custom-word-container');
         this.$customWordWrapper = this.querySelector('.custom-word-input');
         this.$startButtonContainer = this.querySelector('#start-button-container');
         this.$impostersHint = this.querySelector('#imposters-hint');
-        this.$formFeedback = this.querySelector('#form-feedback');
     }
 
     bindEvents() {}
+
+    async init() {
+        this.cacheElements();
+        this.bindEvents();
+        await this.initStorage();
+        this.loadCategories();
+        await this.renderModeSelect();
+        await this.renderNamesToggle();
+        await this.renderPlayerInput();
+        await this.renderImpostersInput();
+        await this.renderNamesSourceSelect();
+        await this.renderNamesManager();
+        await this.renderCustomWordInput();
+        await this.renderCategories();
+        await this.renderCategoryManager();
+        await this.renderStartButton();
+        this.applySavedNamesProps();
+        this.syncImpostersLimit();
+    }
 
     async renderStartButton() {
         this.$startButton = await slice.build('Button', {
@@ -101,7 +109,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$startButton.init();
         this.$startButtonContainer.appendChild(this.$startButton);
     }
 
@@ -122,7 +129,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$modeSelect.init();
         this.$modeContainer.appendChild(this.$modeSelect);
         if (options.length) {
             this.$modeSelect.value = [options[0]];
@@ -135,14 +141,18 @@ export default class GameSetup extends HTMLElement {
             type: 'number',
             label: 'Numero de jugadores',
             placeholder: 'Mínimo 3 jugadores',
-            value: '3'
+            value: '3',
+            min: '3'
         });
 
-        this.$playerInput.init();
 
         this.$playersContainer.appendChild(this.$playerInput);
 
         this.$playerInput.querySelector('input')?.addEventListener('input', () => {
+            let val = parseInt(this.$playerInput.value);
+            if (!isNaN(val) && val < 3) {
+                this.$playerInput.value = '3';
+            }
             this.syncImpostersLimit();
         });
     }
@@ -150,12 +160,11 @@ export default class GameSetup extends HTMLElement {
     async renderImpostersInput() {
         this.$impostersInput = await slice.build('Input', {
             type: 'number',
-            label: 'Cantidad de impostores',
+            label: 'Cantidad de impostores (Max: 1)',
             placeholder: 'Impostores',
             value: '1'
         });
 
-        this.$impostersInput.init();
         this.$impostersContainer.appendChild(this.$impostersInput);
 
         this.$impostersInput.querySelector('input')?.addEventListener('input', () => {
@@ -171,7 +180,7 @@ export default class GameSetup extends HTMLElement {
 
         this.$namesToggle = await slice.build('Select', {
             options: options,
-            label: 'Nombres personalizados',
+            label: 'Nombres propios',
             onOptionSelect: async () => {
                 if (this.$namesToggle.value) {
                     this.useNames = this.$namesToggle.value.value === true || this.$namesToggle.value.value === 'true';
@@ -180,7 +189,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$namesToggle.init();
         this.$namesToggleContainer.appendChild(this.$namesToggle);
         if (options.length) {
             this.$namesToggle.value = [options[0]];
@@ -206,13 +214,22 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$namesSourceSelect.init();
-        this.$namesSource.appendChild(this.$namesSourceSelect);
+        this.$namesSourceContainer.appendChild(this.$namesSourceSelect);
         if (options.length) {
             this.$namesSourceSelect.value = [options[0]];
         }
         this.useSavedNames = false;
         this.toggleNamesList();
+    }
+
+    async renderNamesTextarea() {
+        this.$namesTextarea = document.createElement('textarea');
+        this.$namesTextarea.placeholder = 'Ingresa un nombre por línea';
+        this.$namesTextarea.rows = 5;
+        this.$namesTextarea.addEventListener('input', () => {
+            this.syncPlayerInput();
+        });
+        this.$namesListContainer.appendChild(this.$namesTextarea);
     }
 
     async renderCustomWordInput() {
@@ -221,8 +238,6 @@ export default class GameSetup extends HTMLElement {
             placeholder: 'Escribe la palabra secreta',
             secret: true
         });
-
-        this.$customWordInput.init();
 
         this.$customWordWrapper.appendChild(this.$customWordInput);
     }
@@ -240,7 +255,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$categorySelect.init();
         this.$categoryContainer.appendChild(this.$categorySelect);
         if (options.length) {
             this.category = options[0].value;
@@ -260,7 +274,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$manageCategoriesButton.init();
         this.$categoryManageButton.appendChild(this.$manageCategoriesButton);
 
         this.$categoryModalComponent = await slice.build('CategoryManagerModal', {
@@ -286,10 +299,12 @@ export default class GameSetup extends HTMLElement {
 
     toggleModeInputs() {
         if (this.mode === 'automatic') {
-            this.$categoryContainer.style.display = 'block';
+            this.$categoryGroup.style.display = 'block';
+            this.$categoryManageButton.style.display = 'block';
             this.$customWordContainer.style.display = 'none';
         } else {
-            this.$categoryContainer.style.display = 'none';
+            this.$categoryGroup.style.display = 'none';
+            this.$categoryManageButton.style.display = 'none';
             this.$customWordContainer.style.display = 'block';
         }
     }
@@ -439,7 +454,7 @@ export default class GameSetup extends HTMLElement {
         const maxImposters = this.getMaxImposters(playersValue);
 
         if (!isNaN(maxImposters)) {
-            this.$impostersHint.textContent = `Max: ${maxImposters}`;
+            this.$impostersInput.label = `Cantidad de impostores (Max: ${maxImposters})`;
         }
 
         if (!isNaN(playersValue) && playersValue >= 3) {
@@ -489,7 +504,7 @@ export default class GameSetup extends HTMLElement {
         if (!this.$namesSourceContainer || !this.$namesToggleListContainer || !this.$namesManageContainer || !this.$namesListContainer) return;
         const showNames = this.useNames;
         this.$namesSourceContainer.style.display = showNames ? 'block' : 'none';
-        this.$namesManageContainer.style.display = showNames ? 'block' : 'none';
+        this.$setupContainer.classList.toggle('names-enabled', showNames);
 
         if (!showNames) {
             this.$namesListContainer.style.display = 'none';
@@ -501,12 +516,15 @@ export default class GameSetup extends HTMLElement {
             this.$namesListContainer.style.display = 'none';
             this.$namesToggleListContainer.style.display = 'block';
             this.renderSavedNamesToggle();
-            this.$namesSourceHint.textContent = 'Elige y desactiva jugadores que no esten presentes.';
         } else {
             this.$namesListContainer.style.display = 'block';
             this.$namesToggleListContainer.style.display = 'none';
-            this.$namesSourceHint.textContent = 'Estos nombres no se guardaran.';
+            if (!this.$namesTextarea) {
+                this.renderNamesTextarea();
+            }
         }
+        this.$namesManageContainer.style.display = this.useSavedNames ? 'block' : 'none';
+        this.syncPlayerInput();
     }
 
     parseNames() {
@@ -529,7 +547,6 @@ export default class GameSetup extends HTMLElement {
             }
         });
 
-        this.$manageNamesButton.init();
         this.$namesManageButton.appendChild(this.$manageNamesButton);
 
         this.$namesModalComponent = await slice.build('NameManagerModal', {
@@ -538,6 +555,12 @@ export default class GameSetup extends HTMLElement {
 
         this.$namesModalComponent.addEventListener('request-delete-list', (event) => {
             this.handleDeleteListRequest(event.detail);
+        });
+
+        this.$namesModalComponent.addEventListener('save-list', (event) => {
+            this.savedLists = event.detail;
+            this.renderNamesTabs();
+            this.renderSavedNamesToggle();
         });
 
         this.appendChild(this.$namesModalComponent);
@@ -802,12 +825,16 @@ export default class GameSetup extends HTMLElement {
     }
 
     syncPlayerInput() {
-        if (this.useNames && this.useSavedNames && this.$playerInput) {
-            const activeCount = this.getActiveSavedNames().length;
-            if (activeCount > 0) {
-                this.$playerInput.value = activeCount;
-                this.syncImpostersLimit();
-            }
+        if (!this.useNames || !this.$playerInput) return;
+        let count = 0;
+        if (this.useSavedNames) {
+            count = this.getActiveSavedNames().length;
+        } else {
+            count = this.parseNames().length;
+        }
+        if (count > 0) {
+            this.$playerInput.value = count;
+            this.syncImpostersLimit();
         }
     }
 

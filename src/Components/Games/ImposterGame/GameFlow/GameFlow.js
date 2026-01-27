@@ -113,10 +113,7 @@ export default class GameFlow extends HTMLElement {
             }
         });
 
-        this.$revealButton.init();
-        this.$newGameButton.init();
-        this.$closeModalButton.init();
-        this.$keepPlayersButton.init();
+  
 
         this.$revealButtonContainer.appendChild(this.$revealButton);
         this.$newGameButtonContainer.appendChild(this.$newGameButton);

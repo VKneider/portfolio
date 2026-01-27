@@ -117,17 +117,16 @@ export default class CategoryManagerModal extends HTMLElement {
             }
         });
 
-        this.$addWord.init();
-        this.$deleteCategory.init();
-        this.$closeModal.init();
-
         this.$addWordButton.appendChild(this.$addWord);
         this.$categoryDeleteButton.appendChild(this.$deleteCategory);
         this.$categoryCloseButton.appendChild(this.$closeModal);
     }
 
     generateCategoryKey() {
-        return `categoria_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+        // make it shorter but include date
+        const timestamp = Date.now().toString(36).slice(-5).slice(4);
+        return `categoria-${timestamp}`;
+        
     }
 
     populateCategory(categoryKey) {
