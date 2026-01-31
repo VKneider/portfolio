@@ -86,10 +86,6 @@ export default class CategoryManagerModal extends HTMLElement {
     async renderButtons() {
         this.$addWord = await slice.build('Button', {
             value: '+',
-            customColor: {
-                button: 'var(--primary-color)',
-                label: 'var(--secondary-color-contrast)'
-            },
             audioOnClickEnabled: true,
             onClickCallback: () => {
                 this.addWord();
@@ -336,7 +332,6 @@ export default class CategoryManagerModal extends HTMLElement {
             this.populateCategory(selectedKey);
             this.renderTabs();
         }
-        this.autoSave();
     }
 
     close() {
@@ -347,15 +342,13 @@ export default class CategoryManagerModal extends HTMLElement {
         }
         this.$modal.setAttribute('inert', '');
         this.autoSave();
+        this.setFeedback(''); // Reset feedback after auto-save
     }
 
     toggleTitleEdit(show) {
         if (!this.$categoryDisplayName) return;
         this.$categoryDisplayName.contentEditable = show ? 'true' : 'false';
-        if (show) {
-            this.$categoryDisplayName.focus();
-            document.getSelection()?.selectAllChildren(this.$categoryDisplayName);
-        } else {
+        if (!show) {
             this.$categoryDisplayName.blur();
         }
     }

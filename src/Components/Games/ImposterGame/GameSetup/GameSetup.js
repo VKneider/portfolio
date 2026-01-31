@@ -22,16 +22,7 @@ export default class GameSetup extends HTMLElement {
         this.lastNamesSourceKey = 'imposterLastNamesSource';
         this.lastSelectedListKey = 'imposterLastSelectedListId';
         this.lastActiveCategoriesKey = 'imposterLastActiveCategories';
-        this.mode = 'automatic';
-        this.players = 3;
-        this.imposters = 1;
-        this.useNames = false;
-        this.useSavedNames = false;
-        this.category = 'random';
-        this.customWord = '';
-        this.names = [];
-        this.selectedListId = null;
-        this.savedLists = [];
+        this.configKey = 'imposterGameConfig';
         this.defaultCategories = {
             'git & github': ['Repositorio', 'Commit', 'Branch', 'Merge', 'Pull Request', 'Issue', 'Fork'],
             'html & css': ['Etiqueta', 'Flexbox', 'Grid', 'Selector', 'Margin', 'Padding', 'Responsive'],
@@ -56,6 +47,8 @@ export default class GameSetup extends HTMLElement {
 
     cacheElements() {
         this.$setupContainer = this.querySelector('.setup-container');
+        this.$setupContainer.setAttribute('role', 'main');
+        this.$setupContainer.setAttribute('aria-label', 'Configuración del juego Imposter');
         this.$modeContainer = this.querySelector('#mode-container .mode-toggle');
         this.$playersContainer = this.querySelector('#players-container');
         this.$impostersContainer = this.querySelector('#imposters-container');
@@ -95,6 +88,12 @@ export default class GameSetup extends HTMLElement {
         await this.renderCategories();
         await this.renderCategoryManager();
         await this.renderStartButton();
+         // Always reset config on page load
+         try {
+             localStorage.removeItem(this.configKey);
+         } catch (e) {
+             // Ignore localStorage errors
+         }
         this.applySavedNamesProps();
         this.syncImpostersLimit();
     }
@@ -107,6 +106,7 @@ export default class GameSetup extends HTMLElement {
                 label: 'var(--primary-color-contrast)'
             },
             audioOnClickEnabled: true,
+            ariaLabel: 'Iniciar juego',
             onClickCallback: () => {
                 this.startGame();
             }
@@ -211,7 +211,7 @@ export default class GameSetup extends HTMLElement {
 
         this.$namesSourceSelect = await slice.build('Select', {
             options: options,
-            label: 'Fuente',
+            label: 'Modo de nombres',
             onOptionSelect: async () => {
                 if (this.$namesSourceSelect.value) {
                     this.useSavedNames = this.$namesSourceSelect.value.value === 'saved';
@@ -398,7 +398,6 @@ export default class GameSetup extends HTMLElement {
 
     refreshCategorySelects(selectedKey) {
         if (this.$categorySelect) {
-            this.$categorySelect.options = [];
             const options = this.getCategoryOptions();
             this.$categorySelect.options = options;
             const selectedOption = options.find(option => option.value === selectedKey);
@@ -423,7 +422,10 @@ export default class GameSetup extends HTMLElement {
         let word = '';
         let categoryName = '';
 
-        if (this.mode === 'automatic') {
+        if (this.keepPlayers && this.config) {
+            word = this.config.word;
+            categoryName = this.config.category;
+        } else if (this.mode === 'automatic') {
             const words = this.categories[this.category];
             word = words[Math.floor(Math.random() * words.length)];
             categoryName = this.category;
@@ -456,6 +458,20 @@ export default class GameSetup extends HTMLElement {
             },
             bubbles: true
         }));
+
+         // Save config to localStorage for play again
+         try {
+             const config = {
+                 players: this.players,
+                 imposters: this.imposters,
+                 names: this.names,
+                 word: word,
+                 category: categoryName
+             };
+             localStorage.setItem('imposterGameConfig', JSON.stringify(config));
+         } catch (e) {
+             // Ignore localStorage errors
+         }
     }
 
     syncImpostersLimit() {
@@ -591,6 +607,25 @@ export default class GameSetup extends HTMLElement {
 
     applySavedNamesProps() {
         if (this.keepPlayers && Array.isArray(this.savedNames) && this.savedNames.length) {
+            // Load full config from localStorage
+            try {
+                const configStr = localStorage.getItem(this.configKey);
+                if (configStr) {
+                    this.config = JSON.parse(configStr);
+                    this.players = this.config.players || 3;
+                    this.imposters = this.config.imposters || 1;
+                    this.names = this.config.names || [];
+                    // Set inputs after render
+                    setTimeout(() => {
+                        if (this.$playerInput) this.$playerInput.value = this.players;
+                        if (this.$impostersInput) this.$impostersInput.value = this.imposters;
+                        this.syncImpostersLimit();
+                    }, 0);
+                }
+            } catch (e) {
+                this.config = null;
+            }
+            // ... existing code for names ...
             const source = localStorage.getItem(this.lastNamesSourceKey);
             if (!source || source === 'new') {
                 // Manual names

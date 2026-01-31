@@ -1,13 +1,13 @@
 {
   "version": "2.0.0",
   "strategy": "hybrid",
-  "generated": "2026-01-27T07:51:34.170Z",
+  "generated": "2026-01-31T14:58:06.890Z",
   "stats": {
     "totalComponents": 51,
     "totalRoutes": 7,
     "sharedComponents": 1,
     "sharedPercentage": "2.0",
-    "totalSize": 2054455,
+    "totalSize": 2057070,
     "criticalSize": 1174
   },
   "bundles": {
@@ -28,7 +28,7 @@
           "/projects"
         ],
         "file": "slice-bundle.multiroute-portfolio.js",
-        "size": 1807356,
+        "size": 1808353,
         "components": [
           "Portfolio",
           "ThemeSelector",

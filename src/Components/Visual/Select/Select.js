@@ -98,35 +98,36 @@ export default class Select extends HTMLElement {
       }
    }
 
-   set options(values) {
-      this._options = values;
-      values.forEach((option) => {
-         const opt = document.createElement('div');
-         opt.textContent = option[this.visibleProp];
-         opt.addEventListener('click', async () => {
-            if (this.$menu.querySelector('.active') && !this.multiple) {
-               this.$menu.querySelector('.active').classList.remove('active');
-            }
+    set options(values) {
+       this._options = values;
+       this.$menu.innerHTML = ''; // Clear existing options before adding new ones
+       values.forEach((option) => {
+          const opt = document.createElement('div');
+          opt.textContent = option[this.visibleProp];
+          opt.addEventListener('click', async () => {
+             if (this.$menu.querySelector('.active') && !this.multiple) {
+                this.$menu.querySelector('.active').classList.remove('active');
+             }
 
-            if (this._value.length === 1 && !this.multiple) {
-               this.removeOptionFromValue(this._value[0]);
-               this.addSelectedOption(option);
-               if (this.onOptionSelect) await this.onOptionSelect();
-               return;
-            }
+             if (this._value.length === 1 && !this.multiple) {
+                this.removeOptionFromValue(this._value[0]);
+                this.addSelectedOption(option);
+                if (this.onOptionSelect) await this.onOptionSelect();
+                return;
+             }
 
-            if (this.isObjectInArray(option, this._value).found) {
-               this.removeOptionFromValue(option);
-               opt.classList.remove('active');
-            } else {
-               this.addSelectedOption(option);
-               opt.classList.add('active');
-            }
-            if (this.onOptionSelect) await this.onOptionSelect();
-         });
-         this.$menu.appendChild(opt);
-      });
-   }
+             if (this.isObjectInArray(option, this._value).found) {
+                this.removeOptionFromValue(option);
+                opt.classList.remove('active');
+             } else {
+                this.addSelectedOption(option);
+                opt.classList.add('active');
+             }
+             if (this.onOptionSelect) await this.onOptionSelect();
+          });
+          this.$menu.appendChild(opt);
+       });
+    }
 
    get value() {
       if (this._value.length === 1) {

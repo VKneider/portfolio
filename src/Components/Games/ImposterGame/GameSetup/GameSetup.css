@@ -10,6 +10,7 @@
     padding: 1.5rem 1.5rem;
     box-shadow: 0 20px 50px rgba(var(--primary-color-rgb), 0.12);
     align-items: start;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .full-span {
@@ -237,4 +238,15 @@
 .names-textarea:focus {
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -49,8 +49,7 @@ export default class ConfirmationModal extends HTMLElement {
             }
         });
 
-        this.$cancelButton.init();
-        this.$acceptButton.init();
+
 
         this.$cancel.appendChild(this.$cancelButton);
         this.$accept.appendChild(this.$acceptButton);

@@ -35,7 +35,6 @@ export default class GameFlow extends HTMLElement {
 
     cacheElements() {
         this.$revealButtonContainer = this.querySelector('#reveal-button-container');
-        this.$newGameButtonContainer = this.querySelector('#new-game-button-container');
         this.$closeModalButtonContainer = this.querySelector('#close-modal-button-container');
         this.$keepPlayersButtonContainer = this.querySelector('#keep-players-button-container');
         this.$resultsModal = this.querySelector('#results-modal');
@@ -76,20 +75,10 @@ export default class GameFlow extends HTMLElement {
             }
         });
 
-        this.$newGameButton = await slice.build('Button', {
-            value: 'Jugar de nuevo',
-            customColor: {
-                button: 'var(--primary-color)',
-                label: 'var(--primary-color-contrast)'
-            },
-            audioOnClickEnabled: true,
-            onClickCallback: () => {
-                this.dispatchEvent(new CustomEvent('reset-game', { bubbles: true }));
-            }
-        });
+
 
         this.$closeModalButton = await slice.build('Button', {
-            value: 'Cerrar',
+            value: 'Reiniciar',
             customColor: {
                 button: 'var(--secondary-color)',
                 label: 'var(--secondary-color-contrast)'
@@ -101,7 +90,7 @@ export default class GameFlow extends HTMLElement {
         });
 
         this.$keepPlayersButton = await slice.build('Button', {
-            value: 'Jugar con mismos jugadores',
+            value: 'Jugar de nuevo',
             customColor: {
                 button: 'var(--success-color)',
                 label: 'var(--success-contrast)'
@@ -120,7 +109,6 @@ export default class GameFlow extends HTMLElement {
   
 
         this.$revealButtonContainer.appendChild(this.$revealButton);
-        this.$newGameButtonContainer.appendChild(this.$newGameButton);
         this.$closeModalButtonContainer.appendChild(this.$closeModalButton);
         this.$keepPlayersButtonContainer.appendChild(this.$keepPlayersButton);
     }

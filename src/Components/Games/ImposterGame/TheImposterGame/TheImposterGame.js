@@ -1,31 +1,37 @@
 export default class TheImposterGame extends HTMLElement {
 
-  constructor() {
-    super();
-    slice.attachTemplate(this);
-    // State
-    this.gameState = {
-      step: 'setup', // setup, reveal, playing
-      players: 3,
-      imposters: 1,
-      word: '',
-      category: ''
-    };
-    this.isAudioEnabled = false; // starts muted
-  }
+   constructor() {
+     super();
+     slice.attachTemplate(this);
+     // State
+     this.gameState = {
+       step: 'setup', // setup, reveal, playing
+       players: 3,
+       imposters: 1,
+       word: '',
+       category: ''
+     };
+     this.isAudioEnabled = false; // starts muted
+     this.stats = { gamesPlayed: 0 };
+   }
 
-  async init() {
-    this.$gameContent = this.querySelector('#game-content');
-    this.$heroThemeSlot = this.querySelector('.hero-theme-slot');
-    this.$heroSection = this.querySelector('#hero-section');
-    this.$introLayout = this.querySelector('.intro-layout');
-    this.$audio = this.querySelector('#background-audio');
-    this.$audioControls = this.querySelector('#audio-controls');
-    await this.renderConfirmationModal();
-    await this.renderThemeSelector();
-    await this.renderAudioToggle();
-    await this.loadSetup();
-  }
+   async init() {
+     this.$gameContent = this.querySelector('#game-content');
+     this.$heroThemeSlot = this.querySelector('.hero-theme-slot');
+     this.$heroSection = this.querySelector('#hero-section');
+     this.$introLayout = this.querySelector('.intro-layout');
+     this.$audio = this.querySelector('#background-audio');
+     this.$audioControls = this.querySelector('#audio-controls');
+     await this.renderConfirmationModal();
+     await this.renderThemeSelector();
+     await this.renderAudioToggle();
+     this.loadStats();
+     await this.loadSetup();
+     this.addEventListener('game-start', () => {
+       this.stats.gamesPlayed++;
+       this.saveStats();
+     });
+   }
 
   async renderConfirmationModal() {
     this.$confirmationModal = await slice.build('ConfirmationModal', {});
@@ -241,10 +247,29 @@ export default class TheImposterGame extends HTMLElement {
     this.$gameContent.innerHTML = '';
   }
 
-  showHero(visible) {
-    if (!this.$introLayout) return;
-    this.$introLayout.classList.toggle('hero-hidden', !visible);
-  }
-}
+   showHero(visible) {
+     if (!this.$introLayout) return;
+     this.$introLayout.classList.toggle('hero-hidden', !visible);
+   }
+
+   loadStats() {
+     try {
+       const statsStr = localStorage.getItem('imposterGameStats');
+       if (statsStr) {
+         this.stats = JSON.parse(statsStr);
+       }
+     } catch (e) {
+       this.stats = { gamesPlayed: 0 };
+     }
+   }
+
+   saveStats() {
+     try {
+       localStorage.setItem('imposterGameStats', JSON.stringify(this.stats));
+     } catch (e) {
+       // Ignore
+     }
+   }
+ }
 
 customElements.define("slice-theimpostergame", TheImposterGame);
