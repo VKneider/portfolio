@@ -32,6 +32,7 @@ export default class GameFlow extends HTMLElement {
         this.cacheElements();
         this.bindEvents();
         this.renderResults();
+        this.resetViewState();
         await this.renderButtons();
     }
 
@@ -41,6 +42,7 @@ export default class GameFlow extends HTMLElement {
             slice.controller.setComponentProps(this, props);
         }
         this.renderResults();
+        this.resetViewState();
     }
 
     cacheElements() {
@@ -132,6 +134,10 @@ export default class GameFlow extends HTMLElement {
             this.$resultsModal.setAttribute('aria-hidden', 'false');
         }
         document.body.classList.add('results-open');
+    }
+
+    resetViewState() {
+        this.closeResults();
     }
 
     closeResults() {
