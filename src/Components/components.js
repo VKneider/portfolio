@@ -40,7 +40,6 @@ const components = {
   "IndexedDbManager": "Service",
   "Link": "Service",
   "LocalStorageManager": "Service",
-  "Translator": "Service",
   "BadgeCarousel": "AtomicAppComponents",
   "CertificateCard": "AtomicAppComponents",
   "ExperienceCard": "AtomicAppComponents",
@@ -56,6 +55,7 @@ const components = {
   "ConfirmationModal": "ExtraGames",
   "GameFlow": "ExtraGames",
   "GameSetup": "ExtraGames",
+  "ImposterGameContextService": "ExtraGames",
   "NameManagerModal": "ExtraGames",
   "TheImposterGame": "ExtraGames",
   "WordReveal": "ExtraGames"

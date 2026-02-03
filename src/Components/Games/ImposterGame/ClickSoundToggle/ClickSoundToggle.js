@@ -3,6 +3,7 @@ export default class ClickSoundToggle extends HTMLElement {
   constructor(props) {
     super();
     slice.attachTemplate(this);
+    this.contextService = null;
   }
 
   async init() {
@@ -10,17 +11,44 @@ export default class ClickSoundToggle extends HTMLElement {
     this.$toggle.addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('toggle-click-sound', { bubbles: true }));
     });
+    this.contextService = slice.getComponent('imposter-context-service');
+    this.bindAudioContext();
     this.updateState();
+  }
+
+  bindAudioContext() {
+    this.contextService?.watchAudioState(
+      this,
+      (isMuted) => {
+        this.updateStateFromValue(isMuted);
+      },
+      (state) => state?.isClickSoundMuted
+    );
+  }
+
+  getMutedState() {
+    const state = this.contextService?.getAudioState();
+    if (state && typeof state.isClickSoundMuted === 'boolean') {
+      return state.isClickSoundMuted;
+    }
+
+    return localStorage.getItem('imposterClickSoundMuted') === 'true';
+  }
+
+  updateStateFromValue(isMuted) {
+    const muted = Boolean(isMuted);
+    this.$toggle.textContent = muted ? '🔕' : '🔔';
   }
 
   updateState() {
-    const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
-    this.$toggle.textContent = isMuted ? '🔕' : '🔔';
+    this.updateStateFromValue(this.getMutedState());
   }
 
-  setState(isEnabled) {
-    localStorage.setItem('imposterClickSoundMuted', isEnabled ? 'false' : 'true');
-    this.updateState();
+  setState(isMuted) {
+    const muted = Boolean(isMuted);
+    this.contextService?.updateAudioState({ isClickSoundMuted: muted });
+    localStorage.setItem('imposterClickSoundMuted', muted ? 'true' : 'false');
+    this.updateStateFromValue(muted);
   }
 }
 

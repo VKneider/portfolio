@@ -2,14 +2,20 @@ export default class TheImposterGame extends HTMLElement {
 
    constructor() {
      super();
+     document.title = 'The Imposter Game - Slice.js';
      slice.attachTemplate(this);
+     this.$setupComponent = null;
+     this.$revealComponent = null;
+     this.$flowComponent = null;
      // State
      this.gameState = {
-       step: 'setup', // setup, reveal, playing
+       step: 'setup',
        players: 3,
        imposters: 1,
        word: '',
-       category: ''
+       category: '',
+       names: [],
+       isAudioEnabled: false
      };
      this.isAudioEnabled = false; // starts muted
      this.stats = { gamesPlayed: 0 };
@@ -22,10 +28,18 @@ export default class TheImposterGame extends HTMLElement {
      this.$introLayout = this.querySelector('.intro-layout');
      this.$audio = this.querySelector('#background-audio');
      this.$audioControls = this.querySelector('#audio-controls');
+     this.loadStats();
+     if (!slice.getComponent('imposter-context-service')) {
+       await slice.build('ImposterGameContextService', {
+         sliceId: 'imposter-context-service'
+       });
+     }
+     this.contextService = slice.getComponent('imposter-context-service');
+     this.syncStateFromService();
      await this.renderConfirmationModal();
      await this.renderThemeSelector();
      await this.renderAudioToggle();
-     this.loadStats();
+     this.applyAudioStateToPlayer();
      await this.loadSetup();
      this.addEventListener('game-start', () => {
        this.stats.gamesPlayed++;
@@ -109,6 +123,7 @@ export default class TheImposterGame extends HTMLElement {
   async renderAudioToggle() {
     this.$audioToggle = await slice.build('BackgroundAudioToggle', {});
     this.$audioControls.appendChild(this.$audioToggle);
+    this.$audioToggle.setState(this.isAudioEnabled);
     this.$audioToggle.addEventListener('toggle-audio', async () => {
       this.$audio.muted = !this.$audio.muted;
       this.isAudioEnabled = !this.$audio.muted;
@@ -116,20 +131,22 @@ export default class TheImposterGame extends HTMLElement {
         this.$audio.play().catch(() => {});
       }
       this.$audioToggle.setState(this.isAudioEnabled);
+      this.contextService?.updateGameConfig({ isAudioEnabled: this.isAudioEnabled });
+      this.contextService?.updateAudioState({ isPlaying: this.isAudioEnabled });
       if (this.gameAudioToggle) {
-    this.gameAudioToggle.setState(this.isAudioEnabled);
+        this.gameAudioToggle.setState(this.isAudioEnabled);
 
-    // Add click sound toggle to game view
-    this.gameClickSoundToggle = await slice.build('ClickSoundToggle', {});
-    this.gameClickSoundToggle.classList.add('game-click-sound-toggle');
-    this.$gameContent.appendChild(this.gameClickSoundToggle);
-    this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
-      const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
-      this.gameClickSoundToggle.setState(isMuted);
-      if (this.$clickSoundToggle) {
-        this.$clickSoundToggle.setState(isMuted);
-      }
-    });
+        // Add click sound toggle to game view
+        this.gameClickSoundToggle = await slice.build('ClickSoundToggle', {});
+        this.gameClickSoundToggle.classList.add('game-click-sound-toggle');
+        this.$gameContent.appendChild(this.gameClickSoundToggle);
+        this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
+          const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
+          this.gameClickSoundToggle.setState(!isMuted);
+          if (this.$clickSoundToggle) {
+            this.$clickSoundToggle.setState(!isMuted);
+          }
+        });
       }
     });
     // Audio starts muted, try to play
@@ -140,7 +157,9 @@ export default class TheImposterGame extends HTMLElement {
     this.$audioControls.appendChild(this.$clickSoundToggle);
     this.$clickSoundToggle.addEventListener('toggle-click-sound', () => {
       const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
-      this.$clickSoundToggle.setState(isMuted);
+      const nextMuted = !isMuted;
+      this.$clickSoundToggle.setState(nextMuted);
+      this.contextService?.updateAudioState({ isClickSoundMuted: nextMuted });
     });
   }
 
@@ -148,67 +167,110 @@ export default class TheImposterGame extends HTMLElement {
   async loadSetup(options = {}) {
     this.clearContent();
     this.showHero(true);
-    const setupComponent = await slice.build('GameSetup', {
-      keepPlayers: options.keepPlayers || false,
-      savedNames: this.gameState.names
-    });
-    if (!setupComponent) {
-      return;
+    const savedConfig = this.contextService?.getGameConfig();
+    if (!this.$setupComponent) {
+      this.$setupComponent = await slice.build('GameSetup', {
+        keepPlayers: options.keepPlayers || false,
+        savedNames: savedConfig?.names || this.gameState.names
+      });
+      if (!this.$setupComponent) {
+        return;
+      }
+      this.$setupComponent.addEventListener('game-start', () => {
+        this.contextService?.updateGameConfig({ step: 'reveal' });
+        this.loadReveal();
+      });
+    } else {
+      // Manual update: GameSetup is not routed or cached by the router.
+      if (typeof this.$setupComponent.update === 'function') {
+        this.$setupComponent.update({
+          keepPlayers: options.keepPlayers || false,
+          savedNames: savedConfig?.names || this.gameState.names
+        });
+      }
     }
-    setupComponent.addEventListener('game-start', (e) => {
-      this.gameState.players = e.detail.players;
-      this.gameState.imposters = e.detail.imposters;
-      this.gameState.word = e.detail.word;
-      this.gameState.category = e.detail.category;
-      this.gameState.names = e.detail.names || [];
-      this.gameState.step = 'reveal';
-      this.loadReveal();
-    });
-    this.$gameContent.appendChild(setupComponent);
+
+    this.$gameContent.appendChild(this.$setupComponent);
   }
 
   async loadReveal() {
     this.clearContent();
     this.showHero(false);
-    const revealComponent = await slice.build('WordReveal', {
-      players: this.gameState.players,
-      imposters: this.gameState.imposters,
-      word: this.gameState.word,
-      category: this.gameState.category,
-      names: this.gameState.names
-    });
+    const savedConfig = this.contextService?.getGameConfig() || {};
+
+    if (!this.$revealComponent) {
+      this.$revealComponent = await slice.build('WordReveal', {
+        players: savedConfig.players ?? this.gameState.players,
+        imposters: savedConfig.imposters ?? this.gameState.imposters,
+        word: savedConfig.word ?? this.gameState.word,
+        category: savedConfig.category ?? this.gameState.category,
+        names: savedConfig.names ?? this.gameState.names
+      });
+      if (!this.$revealComponent) {
+        return;
+      }
+      this.$revealComponent.addEventListener('revelation-finished', () => {
+        this.gameState.imposterIndexes = this.$revealComponent.getImposterIndexes();
+        this.contextService?.updateGameConfig({ step: 'playing' });
+        this.loadGameFlow();
+      });
+    } else {
+      // Manual update: WordReveal is not routed or cached by the router.
+      if (typeof this.$revealComponent.update === 'function') {
+        this.$revealComponent.update({
+          players: savedConfig.players ?? this.gameState.players,
+          imposters: savedConfig.imposters ?? this.gameState.imposters,
+          word: savedConfig.word ?? this.gameState.word,
+          category: savedConfig.category ?? this.gameState.category,
+          names: savedConfig.names ?? this.gameState.names
+        });
+      }
+    }
     
-    revealComponent.addEventListener('revelation-finished', () => {
-      this.gameState.imposterIndexes = revealComponent.getImposterIndexes();
-      this.gameState.step = 'playing';
-      this.loadGameFlow();
-    });
-    
-    this.$gameContent.appendChild(revealComponent);
+    this.$gameContent.appendChild(this.$revealComponent);
   }
 
   async loadGameFlow() {
     this.clearContent();
     this.showHero(false);
-    const flowComponent = await slice.build('GameFlow', {
-      word: this.gameState.word,
-      category: this.gameState.category,
-      imposters: this.gameState.imposterIndexes || [],
-      names: this.gameState.names
-    });
-    
-    flowComponent.addEventListener('reset-game', () => {
-      this.gameState.step = 'setup';
-      this.loadSetup();
-    });
+    const savedConfig = this.contextService?.getGameConfig() || {};
 
-    flowComponent.addEventListener('play-again-same', (e) => {
-      this.gameState.names = e.detail?.names || this.gameState.names;
-      this.gameState.step = 'setup';
-      this.loadSetup({ keepPlayers: true });
-    });
+    if (!this.$flowComponent) {
+      this.$flowComponent = await slice.build('GameFlow', {
+        word: savedConfig.word ?? this.gameState.word,
+        category: savedConfig.category ?? this.gameState.category,
+        imposters: this.gameState.imposterIndexes || [],
+        names: savedConfig.names ?? this.gameState.names
+      });
+      if (!this.$flowComponent) {
+        return;
+      }
+      this.$flowComponent.addEventListener('reset-game', () => {
+        this.contextService?.resetGameConfig();
+        this.loadSetup();
+      });
+
+      this.$flowComponent.addEventListener('play-again-same', (e) => {
+        const names = e.detail?.names;
+        this.contextService?.updateGameConfig({
+          step: 'setup',
+          names: Array.isArray(names) ? names : (this.contextService?.getGameConfig()?.names || [])
+        });
+        this.loadSetup({ keepPlayers: true });
+      });
+    } else {
+      // Manual update: GameFlow is not routed or cached by the router.
+      if (typeof this.$flowComponent.update === 'function') {
+        this.$flowComponent.update({
+          word: savedConfig.word ?? this.gameState.word,
+          category: savedConfig.category ?? this.gameState.category,
+          imposters: this.gameState.imposterIndexes || [],
+          names: savedConfig.names ?? this.gameState.names
+        });
+      }
+    }
     
-    this.$gameContent.appendChild(flowComponent);
+    this.$gameContent.appendChild(this.$flowComponent);
 
     // Add audio controls to game view
     const gameAudioControls = document.createElement('div');
@@ -225,6 +287,8 @@ export default class TheImposterGame extends HTMLElement {
         this.$audio.play().catch(() => {});
       }
       this.gameAudioToggle.setState(this.isAudioEnabled);
+      this.contextService?.updateGameConfig({ isAudioEnabled: this.isAudioEnabled });
+      this.contextService?.updateAudioState({ isPlaying: this.isAudioEnabled });
       if (this.$audioToggle) {
         this.$audioToggle.setState(this.isAudioEnabled);
       }
@@ -236,15 +300,53 @@ export default class TheImposterGame extends HTMLElement {
     gameAudioControls.appendChild(this.gameClickSoundToggle);
     this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
       const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
-      this.gameClickSoundToggle.setState(isMuted);
+      const nextMuted = !isMuted;
+      this.gameClickSoundToggle.setState(nextMuted);
+      this.contextService?.updateAudioState({ isClickSoundMuted: nextMuted });
       if (this.$clickSoundToggle) {
-        this.$clickSoundToggle.setState(isMuted);
+        this.$clickSoundToggle.setState(nextMuted);
       }
     });
   }
 
   clearContent() {
-    this.$gameContent.innerHTML = '';
+    if (this.$gameContent) {
+      this.$gameContent.innerHTML = '';
+    }
+  }
+
+  syncStateFromService() {
+    const savedConfig = this.contextService?.getGameConfig();
+    if (savedConfig) {
+      this.gameState = {
+        step: 'setup',
+        players: 3,
+        imposters: 1,
+        word: '',
+        category: '',
+        names: [],
+        isAudioEnabled: false,
+        ...savedConfig
+      };
+    }
+
+    const savedAudio = this.contextService?.getAudioState();
+    if (savedAudio) {
+      this.isAudioEnabled = savedAudio.isPlaying;
+    } else {
+      this.isAudioEnabled = this.gameState.isAudioEnabled;
+    }
+  }
+
+  applyAudioStateToPlayer() {
+    if (!this.$audio) {
+      return;
+    }
+
+    this.$audio.muted = !this.isAudioEnabled;
+    if (this.isAudioEnabled && this.$audio.paused) {
+      this.$audio.play().catch(() => {});
+    }
   }
 
    showHero(visible) {

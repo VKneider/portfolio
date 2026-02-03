@@ -21,16 +21,26 @@ export default class GameFlow extends HTMLElement {
     constructor(props) {
         super();
         slice.attachTemplate(this);
+        this.contextService = null;
         if (props) {
             slice.controller.setComponentProps(this, props);
         }
     }
 
     async init() {
+        this.contextService = slice.getComponent('imposter-context-service');
         this.cacheElements();
         this.bindEvents();
         this.renderResults();
         await this.renderButtons();
+    }
+
+    update(props = {}) {
+        // Manual update: GameFlow is not routed or cached by the router.
+        if (props && Object.keys(props).length) {
+            slice.controller.setComponentProps(this, props);
+        }
+        this.renderResults();
     }
 
     cacheElements() {
@@ -134,6 +144,7 @@ export default class GameFlow extends HTMLElement {
         }
         document.body.classList.remove('results-open');
     }
+
 }
 
 customElements.define('slice-game-flow', GameFlow);

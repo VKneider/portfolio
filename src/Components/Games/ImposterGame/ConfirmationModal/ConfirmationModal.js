@@ -10,6 +10,9 @@ export default class ConfirmationModal extends HTMLElement {
 
     async init() {
         this.cacheElements();
+        if (this.$modal) {
+            this.$modal.setAttribute('hidden', '');
+        }
         await this.renderButtons();
     }
 
@@ -59,6 +62,7 @@ export default class ConfirmationModal extends HTMLElement {
         if (this.$title) this.$title.textContent = title || 'Confirmar accion';
         if (this.$message) this.$message.textContent = message || '';
         this.onConfirm = onConfirm || null;
+        this.$modal.removeAttribute('hidden');
         this.$modal.classList.add('open');
         this.$modal.setAttribute('aria-hidden', 'false');
     }
@@ -66,6 +70,7 @@ export default class ConfirmationModal extends HTMLElement {
     close() {
         this.$modal.classList.remove('open');
         this.$modal.setAttribute('aria-hidden', 'true');
+        this.$modal.setAttribute('hidden', '');
     }
 }
 

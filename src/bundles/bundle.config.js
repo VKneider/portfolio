@@ -1,6 +1,6 @@
 /**
  * Slice.js Bundle Configuration
- * Generated: 2026-01-31T14:58:06.890Z
+ * Generated: 2026-02-03T22:02:07.388Z
  * Strategy: hybrid
  */
 
@@ -8,13 +8,13 @@
 export const SLICE_BUNDLE_CONFIG = {
   "version": "2.0.0",
   "strategy": "hybrid",
-  "generated": "2026-01-31T14:58:06.890Z",
+  "generated": "2026-02-03T22:02:07.387Z",
   "stats": {
-    "totalComponents": 51,
+    "totalComponents": 50,
     "totalRoutes": 7,
     "sharedComponents": 1,
     "sharedPercentage": "2.0",
-    "totalSize": 2057070,
+    "totalSize": 2053569,
     "criticalSize": 1174
   },
   "bundles": {

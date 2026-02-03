@@ -26,6 +26,7 @@ export default class WordReveal extends HTMLElement {
     constructor(props) {
         super();
         slice.attachTemplate(this);
+        this.contextService = null;
         
         // Initialize state
         this.currentPlayer = 0;
@@ -37,10 +38,21 @@ export default class WordReveal extends HTMLElement {
     }
 
     async init() {
+        this.contextService = slice.getComponent('imposter-context-service');
         this.imposterIndexes = this.pickImposters();
         this.cacheElements();
         this.bindEvents();
         await this.renderActionButton();
+        this.renderPlayerScreen();
+    }
+
+    update(props = {}) {
+        // Manual update: WordReveal is not routed or cached by the router.
+        if (props && Object.keys(props).length) {
+            slice.controller.setComponentProps(this, props);
+        }
+        this.currentPlayer = 0;
+        this.imposterIndexes = this.pickImposters();
         this.renderPlayerScreen();
     }
 
@@ -147,6 +159,7 @@ export default class WordReveal extends HTMLElement {
         }
         return `Jugador #${index + 1}`;
     }
+
 }
 
 customElements.define('slice-word-reveal', WordReveal);

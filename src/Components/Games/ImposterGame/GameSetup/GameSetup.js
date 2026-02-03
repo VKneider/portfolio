@@ -13,9 +13,12 @@ export default class GameSetup extends HTMLElement {
         }
     };
 
-    constructor() {
+    constructor(props) {
         super();
         slice.attachTemplate(this);
+        if (props) {
+            slice.controller.setComponentProps(this, props);
+        }
         this.storage = null;
         this.storageKey = 'imposterGamePlayers';
         this.categoriesKey = 'imposterGameCategories';
@@ -30,6 +33,8 @@ export default class GameSetup extends HTMLElement {
             'aleatoria': this.getRandomWords()
         };
         this.categories = { ...this.defaultCategories };
+        this.contextService = null;
+        this.hasNamesListeners = false;
     }
 
     getRandomWords() {
@@ -73,9 +78,20 @@ export default class GameSetup extends HTMLElement {
 
     bindEvents() {}
 
+    update(props = {}) {
+        // Manual update: GameSetup is not routed or cached by the router.
+        if (props && Object.keys(props).length) {
+            slice.controller.setComponentProps(this, props);
+        }
+        this.syncGameConfigFromContext();
+        this.applySavedNamesProps();
+        this.syncImpostersLimit();
+    }
+
     async init() {
         this.cacheElements();
         this.bindEvents();
+        this.setupNamesTextarea();
         await this.initStorage();
         this.loadCategories();
         await this.renderModeSelect();
@@ -88,12 +104,15 @@ export default class GameSetup extends HTMLElement {
         await this.renderCategories();
         await this.renderCategoryManager();
         await this.renderStartButton();
+        this.contextService = slice.getComponent('imposter-context-service');
+        this.bindContextWatchers();
          // Always reset config on page load
          try {
              localStorage.removeItem(this.configKey);
          } catch (e) {
              // Ignore localStorage errors
          }
+        this.syncGameConfigFromContext();
         this.applySavedNamesProps();
         this.syncImpostersLimit();
     }
@@ -127,6 +146,7 @@ export default class GameSetup extends HTMLElement {
             onOptionSelect: async () => {
                 if (this.$modeSelect.value) {
                     this.mode = this.$modeSelect.value.value;
+                    this.contextService?.updateGameConfig({ mode: this.mode });
                     this.toggleModeInputs();
                 }
             }
@@ -137,6 +157,9 @@ export default class GameSetup extends HTMLElement {
             this.$modeSelect.value = [options[0]];
         }
         this.mode = 'automatic';
+        if (this.contextService) {
+            this.contextService.updateGameConfig({ mode: this.mode });
+        }
     }
 
     async renderPlayerInput() {
@@ -159,6 +182,7 @@ export default class GameSetup extends HTMLElement {
             } else {
                 this.setFeedback('');
             }
+            this.contextService?.updateGameConfig({ players: parseInt(this.$playerInput.value) || 3 });
             this.syncImpostersLimit();
         });
     }
@@ -174,6 +198,7 @@ export default class GameSetup extends HTMLElement {
         this.$impostersContainer.appendChild(this.$impostersInput);
 
         this.$impostersInput.querySelector('input')?.addEventListener('input', () => {
+            this.contextService?.updateGameConfig({ imposters: parseInt(this.$impostersInput.value) || 1 });
             this.syncImpostersLimit();
         });
     }
@@ -190,6 +215,7 @@ export default class GameSetup extends HTMLElement {
             onOptionSelect: async () => {
                 if (this.$namesToggle.value) {
                     this.useNames = this.$namesToggle.value.value === true || this.$namesToggle.value.value === 'true';
+                    this.contextService?.updateGameConfig({ useNames: this.useNames });
                     this.toggleNamesList();
                 }
             }
@@ -200,6 +226,9 @@ export default class GameSetup extends HTMLElement {
             this.$namesToggle.value = [options[0]];
         }
         this.useNames = false;
+        if (this.contextService) {
+            this.contextService.updateGameConfig({ useNames: this.useNames });
+        }
         this.toggleNamesList();
     }
 
@@ -215,7 +244,12 @@ export default class GameSetup extends HTMLElement {
             onOptionSelect: async () => {
                 if (this.$namesSourceSelect.value) {
                     this.useSavedNames = this.$namesSourceSelect.value.value === 'saved';
-                    localStorage.setItem(this.lastNamesSourceKey, this.useSavedNames ? 'saved' : 'new');
+                    const namesSource = this.useSavedNames ? 'saved' : 'new';
+                    localStorage.setItem(this.lastNamesSourceKey, namesSource);
+                    this.contextService?.updateGameConfig({
+                        useSavedNames: this.useSavedNames,
+                        namesSource
+                    });
                     this.toggleNamesList();
                 }
             }
@@ -226,17 +260,68 @@ export default class GameSetup extends HTMLElement {
             this.$namesSourceSelect.value = [options[0]];
         }
         this.useSavedNames = false;
+        if (this.contextService) {
+            this.contextService.updateGameConfig({
+                useSavedNames: this.useSavedNames,
+                namesSource: 'new'
+            });
+        }
         this.toggleNamesList();
     }
 
     async renderNamesTextarea() {
-        this.$namesTextarea = document.createElement('textarea');
-        this.$namesTextarea.placeholder = 'Ingresa un nombre por línea';
-        this.$namesTextarea.rows = 5;
+        if (!this.$namesTextarea) {
+            this.$namesTextarea = document.createElement('textarea');
+            this.$namesTextarea.placeholder = 'Ingresa un nombre por línea';
+            this.$namesTextarea.rows = 5;
+            this.$namesListContainer.appendChild(this.$namesTextarea);
+        }
+        this.setupNamesTextarea();
+    }
+
+    setupNamesTextarea() {
+        if (!this.$namesTextarea || this.hasNamesListeners) {
+            return;
+        }
+
+        this.hasNamesListeners = true;
         this.$namesTextarea.addEventListener('input', () => {
+            const names = this.parseNames();
+            if (this.useNames && !this.useSavedNames && this.$playerInput) {
+                const count = names.length;
+                this.$playerInput.value = count;
+                this.contextService?.updateGameConfig({ players: count, names });
+                this.syncImpostersLimit();
+                return;
+            }
             this.syncPlayerInput();
+            this.contextService?.updateGameConfig({ names });
         });
-        this.$namesListContainer.appendChild(this.$namesTextarea);
+
+        this.$namesTextarea.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter') {
+                return;
+            }
+            const cursorPosition = this.$namesTextarea.selectionStart;
+            const beforeCursor = this.$namesTextarea.value.slice(0, cursorPosition);
+            const lines = beforeCursor.split(/\n/);
+            const currentLine = lines[lines.length - 1] || '';
+            if (!currentLine.trim()) {
+                return;
+            }
+            setTimeout(() => {
+                const names = this.parseNames();
+                if (this.useNames && !this.useSavedNames && this.$playerInput) {
+                    const count = names.length;
+                    this.$playerInput.value = count;
+                    this.contextService?.updateGameConfig({ players: count, names });
+                    this.syncImpostersLimit();
+                    return;
+                }
+                this.syncPlayerInput();
+                this.contextService?.updateGameConfig({ names });
+            }, 0);
+        });
     }
 
     async renderCustomWordInput() {
@@ -247,6 +332,9 @@ export default class GameSetup extends HTMLElement {
         });
 
         this.$customWordWrapper.appendChild(this.$customWordInput);
+        this.$customWordInput.querySelector('input')?.addEventListener('input', () => {
+            this.contextService?.updateGameConfig({ customWord: this.$customWordInput.value });
+        });
     }
 
     async renderCategories() {
@@ -258,6 +346,7 @@ export default class GameSetup extends HTMLElement {
             onOptionSelect: async () => {
                 if(this.$categorySelect.value) {
                     this.category = this.$categorySelect.value.value;
+                    this.contextService?.updateGameConfig({ category: this.category });
                 }
             }
         });
@@ -266,6 +355,7 @@ export default class GameSetup extends HTMLElement {
         if (options.length) {
             this.category = options[0].value;
             this.$categorySelect.value = [options[0]];
+            this.contextService?.updateGameConfig({ category: this.category });
         }
     }
 
@@ -409,8 +499,8 @@ export default class GameSetup extends HTMLElement {
     }
 
     startGame() {
-        this.players = parseInt(this.$playerInput.value);
-        this.imposters = parseInt(this.$impostersInput.value);
+        this.players = parseInt(this.$playerInput.value) || 0;
+        this.imposters = parseInt(this.$impostersInput.value) || 0;
         const validationMessage = this.validateSetup();
         if (validationMessage) {
             this.setFeedback(validationMessage);
@@ -418,25 +508,6 @@ export default class GameSetup extends HTMLElement {
         }
 
         this.setFeedback('');
-
-        let word = '';
-        let categoryName = '';
-
-        if (this.keepPlayers && this.config) {
-            word = this.config.word;
-            categoryName = this.config.category;
-        } else if (this.mode === 'automatic') {
-            const words = this.categories[this.category];
-            word = words[Math.floor(Math.random() * words.length)];
-            categoryName = this.category;
-        } else {
-            word = this.$customWordInput.value.trim();
-            if (!word) {
-                this.setFeedback('Por favor ingresa una palabra secreta.');
-                return;
-            }
-            categoryName = 'Secreto';
-        }
 
         if (this.useNames) {
             if (this.useSavedNames) {
@@ -448,13 +519,53 @@ export default class GameSetup extends HTMLElement {
             this.names = [];
         }
 
+        this.contextService?.updateGameConfig({
+            players: this.players,
+            imposters: this.imposters,
+            names: this.names,
+            mode: this.mode,
+            useNames: this.useNames,
+            useSavedNames: this.useSavedNames,
+            namesSource: this.useSavedNames ? 'saved' : 'new',
+            category: this.category,
+            customWord: this.$customWordInput ? this.$customWordInput.value.trim() : '',
+            selectedListId: this.selectedListId || null,
+            activeNames: Array.isArray(this.$activeNamesRefs)
+                ? this.$activeNamesRefs.map(({ switchComponent }) => switchComponent.checked)
+                : []
+        });
+
+        const updatedConfig = this.contextService?.getGameConfig() || {};
+        let word = '';
+        let categoryName = '';
+
+        if (updatedConfig.mode === 'automatic') {
+            const words = this.categories[updatedConfig.category];
+            word = words[Math.floor(Math.random() * words.length)];
+            categoryName = updatedConfig.category;
+        } else {
+            const customWord = updatedConfig.customWord || '';
+            if (!customWord) {
+                this.setFeedback('Por favor ingresa una palabra secreta.');
+                return;
+            }
+            word = customWord;
+            categoryName = 'Secreto';
+        }
+
+        this.contextService?.updateGameConfig({
+            word: word,
+            category: categoryName
+        });
+
+        const finalConfig = this.contextService?.getGameConfig() || {};
         this.dispatchEvent(new CustomEvent('game-start', {
             detail: {
-                players: this.players,
-                imposters: this.imposters,
-                names: this.names,
-                word: word,
-                category: categoryName
+                players: finalConfig.players ?? this.players,
+                imposters: finalConfig.imposters ?? this.imposters,
+                names: finalConfig.names ?? this.names,
+                word: finalConfig.word ?? word,
+                category: finalConfig.category ?? categoryName
             },
             bubbles: true
         }));
@@ -606,8 +717,29 @@ export default class GameSetup extends HTMLElement {
     }
 
     applySavedNamesProps() {
-        if (this.keepPlayers && Array.isArray(this.savedNames) && this.savedNames.length) {
-            // Load full config from localStorage
+        if (!this.keepPlayers) {
+            return;
+        }
+
+        const savedConfig = this.contextService?.getGameConfig();
+        const sourceFromConfig = savedConfig?.namesSource || (savedConfig?.useSavedNames ? 'saved' : null);
+        const source = sourceFromConfig || localStorage.getItem(this.lastNamesSourceKey);
+        const selectedId = savedConfig?.selectedListId || localStorage.getItem(this.lastSelectedListKey);
+        const activeFromContext = Array.isArray(savedConfig?.activeNames) ? savedConfig.activeNames : null;
+        const namesFromConfig = Array.isArray(savedConfig?.names) ? savedConfig.names : [];
+        const namesForTextarea = this.savedNames?.length ? this.savedNames : namesFromConfig;
+
+        if (savedConfig) {
+            this.config = savedConfig;
+            this.players = savedConfig.players || 3;
+            this.imposters = savedConfig.imposters || 1;
+            this.names = savedConfig.names || [];
+            setTimeout(() => {
+                if (this.$playerInput) this.$playerInput.value = this.players;
+                if (this.$impostersInput) this.$impostersInput.value = this.imposters;
+                this.syncImpostersLimit();
+            }, 0);
+        } else {
             try {
                 const configStr = localStorage.getItem(this.configKey);
                 if (configStr) {
@@ -615,7 +747,6 @@ export default class GameSetup extends HTMLElement {
                     this.players = this.config.players || 3;
                     this.imposters = this.config.imposters || 1;
                     this.names = this.config.names || [];
-                    // Set inputs after render
                     setTimeout(() => {
                         if (this.$playerInput) this.$playerInput.value = this.players;
                         if (this.$impostersInput) this.$impostersInput.value = this.imposters;
@@ -625,43 +756,70 @@ export default class GameSetup extends HTMLElement {
             } catch (e) {
                 this.config = null;
             }
-            // ... existing code for names ...
-            const source = localStorage.getItem(this.lastNamesSourceKey);
-            if (!source || source === 'new') {
-                // Manual names
-                this.useNames = true;
-                this.useSavedNames = false;
-                if (this.$namesToggle) {
-                    this.$namesToggle.value = [{ text: 'Si', value: true }];
-                }
-                if (this.$namesSourceSelect) {
-                    this.$namesSourceSelect.value = [{ text: 'Ingresar nuevos', value: 'new' }];
-                }
-                this.toggleNamesList();
-                // Set the textarea with saved names
-                if (!this.$namesTextarea) {
-                    this.renderNamesTextarea();
-                }
-                this.$namesTextarea.value = this.savedNames.join('\n');
+        }
+
+        if (savedConfig && savedConfig.useNames === false) {
+            this.useNames = false;
+            this.useSavedNames = false;
+            if (this.$namesToggle) {
+                this.$namesToggle.value = [{ text: 'No', value: false }];
+            }
+            this.toggleNamesList();
+            this.contextService?.updateGameConfig({ useNames: false, useSavedNames: false });
+            return;
+        }
+
+        if (!source || source === 'new') {
+            this.useNames = true;
+            this.useSavedNames = false;
+            if (this.$namesToggle) {
+                this.$namesToggle.value = [{ text: 'Si', value: true }];
+            }
+            if (this.$namesSourceSelect) {
+                this.$namesSourceSelect.value = [{ text: 'Ingresar nuevos', value: 'new' }];
+            }
+            this.toggleNamesList();
+            if (!this.$namesTextarea) {
+                this.renderNamesTextarea();
+            }
+            this.$namesTextarea.value = namesForTextarea.join('\n');
+            this.syncPlayerInput();
+            this.contextService?.updateGameConfig({
+                names: this.parseNames(),
+                namesSource: 'new',
+                useSavedNames: false,
+                useNames: true
+            });
+            localStorage.setItem(this.lastNamesSourceKey, 'new');
+            return;
+        }
+
+        if (source === 'saved') {
+            this.useNames = true;
+            this.useSavedNames = true;
+            if (selectedId) {
+                this.selectedListId = selectedId;
+                this.contextService?.updateGameConfig({ selectedListId: selectedId });
+            }
+            if (this.$namesToggle) {
+                this.$namesToggle.value = [{ text: 'Si', value: true }];
+            }
+            if (this.$namesSourceSelect) {
+                this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
+            }
+            this.toggleNamesList();
+            this.renderSavedNamesToggle();
+
+            if (Array.isArray(activeFromContext) && this.$activeNamesRefs) {
+                this.$activeNamesRefs.forEach((ref, i) => {
+                    if (ref.switchComponent && activeFromContext[i] !== undefined) {
+                        ref.switchComponent.checked = activeFromContext[i];
+                    }
+                });
+                this.updateActiveNamesHint();
                 this.syncPlayerInput();
-                localStorage.setItem(this.lastNamesSourceKey, 'new');
-            } else if (source === 'saved') {
-                // Saved lists
-                this.useNames = true;
-                this.useSavedNames = true;
-                const selectedId = localStorage.getItem(this.lastSelectedListKey);
-                if (selectedId) {
-                    this.selectedListId = selectedId;
-                }
-                if (this.$namesToggle) {
-                    this.$namesToggle.value = [{ text: 'Si', value: true }];
-                }
-                if (this.$namesSourceSelect) {
-                    this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
-                }
-                this.toggleNamesList();
-                this.renderSavedNamesToggle();
-                // Set active checkboxes from stored
+                this.updateContextActiveNames();
+            } else {
                 const activeStr = localStorage.getItem(this.lastActiveCategoriesKey);
                 if (activeStr) {
                     try {
@@ -674,55 +832,13 @@ export default class GameSetup extends HTMLElement {
                             });
                             this.updateActiveNamesHint();
                             this.syncPlayerInput();
-                        }
-                    } catch (e) {}
-                }
-                localStorage.setItem(this.lastNamesSourceKey, 'saved');
-      
-                if (this.$namesSourceSelect) {
-                    this.$namesSourceSelect.value = [{ text: 'Ingresar nuevos', value: 'new' }];
-                }
-                this.toggleNamesList();
-                // Set the textarea with saved names
-                if (!this.$namesTextarea) {
-                    this.renderNamesTextarea();
-                }
-                this.$namesTextarea.value = this.savedNames.join('\n');
-                this.syncPlayerInput();
-                localStorage.setItem(this.lastNamesSourceKey, 'new');
-            } else if (source === 'saved') {
-                // Saved lists
-                this.useNames = true;
-                this.useSavedNames = true;
-                const selectedId = localStorage.getItem(this.lastSelectedListKey);
-                if (selectedId) {
-                    this.selectedListId = selectedId;
-                }
-                if (this.$namesToggle) {
-                    this.$namesToggle.value = [{ text: 'Si', value: true }];
-                }
-                if (this.$namesSourceSelect) {
-                    this.$namesSourceSelect.value = [{ text: 'Usar guardados', value: 'saved' }];
-                }
-                this.toggleNamesList();
-                this.renderSavedNamesToggle();
-                // Set active checkboxes from stored
-                const activeStr = localStorage.getItem(this.lastActiveCategoriesKey);
-                if (activeStr) {
-                    try {
-                        const active = JSON.parse(activeStr);
-                        if (Array.isArray(active) && this.$activeNamesRefs) {
-                            this.$activeNamesRefs.forEach((ref, i) => {
-                                if (ref.switchComponent && active[i] !== undefined) {
-                                    ref.switchComponent.checked = active[i];
-                                }
-                            });
-                            this.updateActiveNamesHint();
-                            this.syncPlayerInput();
+                            this.updateContextActiveNames();
                         }
                     } catch (e) {}
                 }
             }
+
+            localStorage.setItem(this.lastNamesSourceKey, 'saved');
         }
     }
 
@@ -755,6 +871,7 @@ export default class GameSetup extends HTMLElement {
                 this.syncPlayerInput();
                 const active = this.$activeNamesRefs.map(({switchComponent}) => switchComponent.checked);
                 localStorage.setItem(this.lastActiveCategoriesKey, JSON.stringify(active));
+                this.updateContextActiveNames();
             });
             switchContainer.appendChild(switchComponent);
 
@@ -898,9 +1015,27 @@ export default class GameSetup extends HTMLElement {
             tab.type = 'button';
             tab.textContent = list.name || 'Lista';
             tab.addEventListener('click', () => {
+                this.useNames = true;
+                this.useSavedNames = true;
                 this.selectedListId = list.id;
                 localStorage.setItem(this.lastSelectedListKey, list.id);
+                this.contextService?.updateGameConfig({
+                    selectedListId: list.id,
+                    useNames: true,
+                    useSavedNames: true,
+                    namesSource: 'saved'
+                });
                 this.renderSavedNamesToggle();
+                const currentNames = this.getSelectedListNames();
+                const playerCount = this.getActiveSavedNames().length || currentNames.length;
+                if (this.$playerInput) {
+                    this.$playerInput.value = playerCount;
+                }
+                this.contextService?.updateGameConfig({
+                    players: playerCount,
+                    names: currentNames,
+                    activeNames: currentNames.map(() => true)
+                });
             });
             this.$namesListsTabs.appendChild(tab);
         });
@@ -957,6 +1092,17 @@ export default class GameSetup extends HTMLElement {
         this.renderSavedNamesToggleFrom(savedNames);
         this.renderNamesTabs();
         this.syncPlayerInput();
+        this.updateContextActiveNames();
+        if (this.useSavedNames) {
+            const playerCount = this.getActiveSavedNames().length;
+            if (this.$playerInput) {
+                this.$playerInput.value = playerCount;
+            }
+            this.contextService?.updateGameConfig({
+                names: savedNames,
+                players: playerCount
+            });
+        }
     }
 
     getActiveSavedNames() {
@@ -964,6 +1110,16 @@ export default class GameSetup extends HTMLElement {
         return this.$activeNamesRefs
             .filter(({ switchComponent }) => switchComponent?.checked)
             .map(({ name }) => name);
+    }
+
+    updateContextActiveNames() {
+        if (!Array.isArray(this.$activeNamesRefs)) {
+            this.contextService?.updateGameConfig({ activeNames: [] });
+            return;
+        }
+
+        const active = this.$activeNamesRefs.map(({ switchComponent }) => switchComponent.checked);
+        this.contextService?.updateGameConfig({ activeNames: active });
     }
 
     updateActiveNamesHint() {
@@ -980,10 +1136,95 @@ export default class GameSetup extends HTMLElement {
         } else {
             count = this.parseNames().length;
         }
-        if (count > 0) {
-            this.$playerInput.value = count;
-            this.syncImpostersLimit();
+        this.$playerInput.value = count;
+        this.contextService?.updateGameConfig({ players: count });
+        this.syncImpostersLimit();
+    }
+
+    bindContextWatchers() {
+        if (this.contextWatchId || !this.contextService) {
+            return;
         }
+
+        this.contextWatchId = this.contextService.watchGameConfig(
+            this,
+            (config) => {
+                if (!config || !this.$playerInput) {
+                    return;
+                }
+
+                if (!config.useNames) {
+                    return;
+                }
+
+                let count = 0;
+                if (config.useSavedNames) {
+                    if (Array.isArray(config.activeNames) && config.activeNames.length) {
+                        count = config.activeNames.filter(Boolean).length;
+                    } else if (Array.isArray(config.names)) {
+                        count = config.names.length;
+                    }
+                } else if (Array.isArray(config.names)) {
+                    count = config.names.length;
+                }
+
+                this.$playerInput.value = count;
+                this.syncImpostersLimit();
+            },
+            (state) => ({
+                names: state?.names,
+                useNames: state?.useNames,
+                useSavedNames: state?.useSavedNames,
+                activeNames: state?.activeNames
+            })
+        );
+    }
+
+    syncGameConfigFromContext() {
+        const savedConfig = this.contextService?.getGameConfig();
+        if (!savedConfig) {
+            return;
+        }
+
+        this.config = savedConfig;
+        this.players = savedConfig.players || 3;
+        this.imposters = savedConfig.imposters || 1;
+        this.names = savedConfig.names || [];
+        this.mode = savedConfig.mode || this.mode;
+        this.useNames = savedConfig.useNames ?? this.useNames;
+        this.useSavedNames = savedConfig.useSavedNames ?? this.useSavedNames;
+        this.category = savedConfig.category || this.category;
+
+        setTimeout(() => {
+            if (this.$playerInput) this.$playerInput.value = this.players;
+            if (this.$impostersInput) this.$impostersInput.value = this.imposters;
+            if (this.$modeSelect && this.mode) {
+                const match = this.$modeSelect.options?.find((option) => option.value === this.mode);
+                if (match) {
+                    this.$modeSelect.value = [match];
+                }
+            }
+            if (this.$namesToggle) {
+                this.$namesToggle.value = [{ text: this.useNames ? 'Si' : 'No', value: this.useNames }];
+            }
+            if (this.$namesSourceSelect) {
+                const sourceValue = this.useSavedNames ? 'saved' : 'new';
+                const sourceText = this.useSavedNames ? 'Usar guardados' : 'Ingresar nuevos';
+                this.$namesSourceSelect.value = [{ text: sourceText, value: sourceValue }];
+            }
+            if (this.$categorySelect && this.category) {
+                const categoryMatch = this.$categorySelect.options?.find((option) => option.value === this.category);
+                if (categoryMatch) {
+                    this.$categorySelect.value = [categoryMatch];
+                }
+            }
+            if (this.$customWordInput) {
+                this.$customWordInput.value = savedConfig.customWord || '';
+            }
+            this.toggleModeInputs();
+            this.toggleNamesList();
+            this.syncImpostersLimit();
+        }, 0);
     }
 
     setFeedback(message) {
