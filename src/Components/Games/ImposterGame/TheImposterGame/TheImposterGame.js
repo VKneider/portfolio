@@ -7,16 +7,8 @@ export default class TheImposterGame extends HTMLElement {
      this.$setupComponent = null;
      this.$revealComponent = null;
      this.$flowComponent = null;
-     // State
-     this.gameState = {
-       step: 'setup',
-       players: 3,
-       imposters: 1,
-       word: '',
-       category: '',
-       names: [],
-       isAudioEnabled: false
-     };
+     // Ephemeral for the current round; not persisted.
+    this.imposterIndexes = [];
      this.isAudioEnabled = false; // starts muted
      this.stats = { gamesPlayed: 0 };
    }
@@ -29,6 +21,8 @@ export default class TheImposterGame extends HTMLElement {
      this.$audio = this.querySelector('#background-audio');
      this.$audioControls = this.querySelector('#audio-controls');
      this.loadStats();
+     // Context service is the single source of truth for game state.
+     // Create it once, then all components read/write via the shared context.
      if (!slice.getComponent('imposter-context-service')) {
        await slice.build('ImposterGameContextService', {
          sliceId: 'imposter-context-service'
@@ -40,6 +34,7 @@ export default class TheImposterGame extends HTMLElement {
      await this.renderThemeSelector();
      await this.renderAudioToggle();
      this.applyAudioStateToPlayer();
+     // Initial screen always comes from context-backed config.
      await this.loadSetup();
      this.addEventListener('game-start', () => {
        this.stats.gamesPlayed++;
@@ -156,15 +151,17 @@ export default class TheImposterGame extends HTMLElement {
     this.clearContent();
     this.showHero(true);
     const savedConfig = this.contextService?.getGameConfig();
+    // Components are cached and manually updated because there is no router.
     if (!this.$setupComponent) {
       this.$setupComponent = await slice.build('GameSetup', {
         keepPlayers: options.keepPlayers || false,
-        savedNames: savedConfig?.names || this.gameState.names
+        savedNames: savedConfig?.names || []
       });
       if (!this.$setupComponent) {
         return;
       }
       this.$setupComponent.addEventListener('game-start', () => {
+        // Transition to reveal step is driven by context.
         this.contextService?.updateGameConfig({ step: 'reveal' });
         this.loadReveal();
       });
@@ -173,7 +170,7 @@ export default class TheImposterGame extends HTMLElement {
       if (typeof this.$setupComponent.update === 'function') {
         this.$setupComponent.update({
           keepPlayers: options.keepPlayers || false,
-          savedNames: savedConfig?.names || this.gameState.names
+          savedNames: savedConfig?.names || []
         });
       }
     }
@@ -185,20 +182,22 @@ export default class TheImposterGame extends HTMLElement {
     this.clearContent();
     this.showHero(false);
     const savedConfig = this.contextService?.getGameConfig() || {};
+    // WordReveal is a pure view of context-derived props.
 
     if (!this.$revealComponent) {
       this.$revealComponent = await slice.build('WordReveal', {
-        players: savedConfig.players ?? this.gameState.players,
-        imposters: savedConfig.imposters ?? this.gameState.imposters,
-        word: savedConfig.word ?? this.gameState.word,
-        category: savedConfig.category ?? this.gameState.category,
-        names: savedConfig.names ?? this.gameState.names
+        players: savedConfig.players,
+        imposters: savedConfig.imposters,
+        word: savedConfig.word,
+        category: savedConfig.category,
+        names: savedConfig.names
       });
       if (!this.$revealComponent) {
         return;
       }
       this.$revealComponent.addEventListener('revelation-finished', () => {
-        this.gameState.imposterIndexes = this.$revealComponent.getImposterIndexes();
+        // Imposter indexes are computed per round and kept local.
+        this.imposterIndexes = this.$revealComponent.getImposterIndexes();
         this.contextService?.updateGameConfig({ step: 'playing' });
         this.loadGameFlow();
       });
@@ -206,11 +205,11 @@ export default class TheImposterGame extends HTMLElement {
       // Manual update: WordReveal is not routed or cached by the router.
       if (typeof this.$revealComponent.update === 'function') {
         this.$revealComponent.update({
-          players: savedConfig.players ?? this.gameState.players,
-          imposters: savedConfig.imposters ?? this.gameState.imposters,
-          word: savedConfig.word ?? this.gameState.word,
-          category: savedConfig.category ?? this.gameState.category,
-          names: savedConfig.names ?? this.gameState.names
+          players: savedConfig.players,
+          imposters: savedConfig.imposters,
+          word: savedConfig.word,
+          category: savedConfig.category,
+          names: savedConfig.names
         });
       }
     }
@@ -222,23 +221,26 @@ export default class TheImposterGame extends HTMLElement {
     this.clearContent();
     this.showHero(false);
     const savedConfig = this.contextService?.getGameConfig() || {};
+    // GameFlow renders only props; state persists in context.
 
     if (!this.$flowComponent) {
       this.$flowComponent = await slice.build('GameFlow', {
-        word: savedConfig.word ?? this.gameState.word,
-        category: savedConfig.category ?? this.gameState.category,
-        imposters: this.gameState.imposterIndexes || [],
-        names: savedConfig.names ?? this.gameState.names
+        word: savedConfig.word,
+        category: savedConfig.category,
+        imposters: this.imposterIndexes || [],
+        names: savedConfig.names
       });
       if (!this.$flowComponent) {
         return;
       }
       this.$flowComponent.addEventListener('reset-game', () => {
+        // Reset uses context defaults, then returns to setup.
         this.contextService?.resetGameConfig();
         this.loadSetup();
       });
 
       this.$flowComponent.addEventListener('play-again-same', (e) => {
+        // Keep names in context so setup can rehydrate without localStorage.
         const names = e.detail?.names;
         this.contextService?.updateGameConfig({
           step: 'setup',
@@ -250,10 +252,10 @@ export default class TheImposterGame extends HTMLElement {
       // Manual update: GameFlow is not routed or cached by the router.
       if (typeof this.$flowComponent.update === 'function') {
         this.$flowComponent.update({
-          word: savedConfig.word ?? this.gameState.word,
-          category: savedConfig.category ?? this.gameState.category,
-          imposters: this.gameState.imposterIndexes || [],
-          names: savedConfig.names ?? this.gameState.names
+          word: savedConfig.word,
+          category: savedConfig.category,
+          imposters: this.imposterIndexes || [],
+          names: savedConfig.names
         });
       }
     }
@@ -305,24 +307,11 @@ export default class TheImposterGame extends HTMLElement {
 
   syncStateFromService() {
     const savedConfig = this.contextService?.getGameConfig();
-    if (savedConfig) {
-      this.gameState = {
-        step: 'setup',
-        players: 3,
-        imposters: 1,
-        word: '',
-        category: '',
-        names: [],
-        isAudioEnabled: false,
-        ...savedConfig
-      };
-    }
-
     const savedAudio = this.contextService?.getAudioState();
     if (savedAudio) {
       this.isAudioEnabled = savedAudio.isPlaying;
     } else {
-      this.isAudioEnabled = this.gameState.isAudioEnabled;
+      this.isAudioEnabled = savedConfig?.isAudioEnabled ?? false;
     }
   }
 

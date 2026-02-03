@@ -21,6 +21,7 @@ export default class GameFlow extends HTMLElement {
     constructor(props) {
         super();
         slice.attachTemplate(this);
+        // Context is available for consistency, but this view only consumes props.
         this.contextService = null;
         if (props) {
             slice.controller.setComponentProps(this, props);
@@ -32,6 +33,7 @@ export default class GameFlow extends HTMLElement {
         this.cacheElements();
         this.bindEvents();
         this.renderResults();
+        // Ensure view is reset on re-entry; state stays in context.
         this.resetViewState();
         await this.renderButtons();
     }
@@ -42,6 +44,7 @@ export default class GameFlow extends HTMLElement {
             slice.controller.setComponentProps(this, props);
         }
         this.renderResults();
+        // Keep the UI reset when props are refreshed.
         this.resetViewState();
     }
 

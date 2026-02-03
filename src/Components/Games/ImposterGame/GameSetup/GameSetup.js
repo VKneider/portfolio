@@ -22,10 +22,6 @@ export default class GameSetup extends HTMLElement {
         this.storage = null;
         this.storageKey = 'imposterGamePlayers';
         this.categoriesKey = 'imposterGameCategories';
-        this.lastNamesSourceKey = 'imposterLastNamesSource';
-        this.lastSelectedListKey = 'imposterLastSelectedListId';
-        this.lastActiveCategoriesKey = 'imposterLastActiveCategories';
-        this.configKey = 'imposterGameConfig';
         this.defaultCategories = {
             'git & github': ['Repositorio', 'Commit', 'Branch', 'Merge', 'Pull Request', 'Issue', 'Fork'],
             'html & css': ['Etiqueta', 'Flexbox', 'Grid', 'Selector', 'Margin', 'Padding', 'Responsive'],
@@ -106,12 +102,6 @@ export default class GameSetup extends HTMLElement {
         await this.renderStartButton();
         this.contextService = slice.getComponent('imposter-context-service');
         this.bindContextWatchers();
-         // Always reset config on page load
-         try {
-             localStorage.removeItem(this.configKey);
-         } catch (e) {
-             // Ignore localStorage errors
-         }
         this.syncGameConfigFromContext();
         this.applySavedNamesProps();
         this.syncImpostersLimit();
@@ -245,7 +235,6 @@ export default class GameSetup extends HTMLElement {
                 if (this.$namesSourceSelect.value) {
                     this.useSavedNames = this.$namesSourceSelect.value.value === 'saved';
                     const namesSource = this.useSavedNames ? 'saved' : 'new';
-                    localStorage.setItem(this.lastNamesSourceKey, namesSource);
                     this.contextService?.updateGameConfig({
                         useSavedNames: this.useSavedNames,
                         namesSource
@@ -570,19 +559,6 @@ export default class GameSetup extends HTMLElement {
             bubbles: true
         }));
 
-         // Save config to localStorage for play again
-         try {
-             const config = {
-                 players: this.players,
-                 imposters: this.imposters,
-                 names: this.names,
-                 word: word,
-                 category: categoryName
-             };
-             localStorage.setItem('imposterGameConfig', JSON.stringify(config));
-         } catch (e) {
-             // Ignore localStorage errors
-         }
     }
 
     syncImpostersLimit() {
@@ -722,15 +698,13 @@ export default class GameSetup extends HTMLElement {
         }
 
         const savedConfig = this.contextService?.getGameConfig();
-        const sourceFromConfig = savedConfig?.namesSource || (savedConfig?.useSavedNames ? 'saved' : null);
-        const source = sourceFromConfig || localStorage.getItem(this.lastNamesSourceKey);
-        const selectedId = savedConfig?.selectedListId || localStorage.getItem(this.lastSelectedListKey);
+        const source = savedConfig?.namesSource || (savedConfig?.useSavedNames ? 'saved' : null);
+        const selectedId = savedConfig?.selectedListId || null;
         const activeFromContext = Array.isArray(savedConfig?.activeNames) ? savedConfig.activeNames : null;
         const namesFromConfig = Array.isArray(savedConfig?.names) ? savedConfig.names : [];
         const namesForTextarea = this.savedNames?.length ? this.savedNames : namesFromConfig;
 
         if (savedConfig) {
-            this.config = savedConfig;
             this.players = savedConfig.players || 3;
             this.imposters = savedConfig.imposters || 1;
             this.names = savedConfig.names || [];
@@ -739,23 +713,6 @@ export default class GameSetup extends HTMLElement {
                 if (this.$impostersInput) this.$impostersInput.value = this.imposters;
                 this.syncImpostersLimit();
             }, 0);
-        } else {
-            try {
-                const configStr = localStorage.getItem(this.configKey);
-                if (configStr) {
-                    this.config = JSON.parse(configStr);
-                    this.players = this.config.players || 3;
-                    this.imposters = this.config.imposters || 1;
-                    this.names = this.config.names || [];
-                    setTimeout(() => {
-                        if (this.$playerInput) this.$playerInput.value = this.players;
-                        if (this.$impostersInput) this.$impostersInput.value = this.imposters;
-                        this.syncImpostersLimit();
-                    }, 0);
-                }
-            } catch (e) {
-                this.config = null;
-            }
         }
 
         if (savedConfig && savedConfig.useNames === false) {
@@ -790,7 +747,6 @@ export default class GameSetup extends HTMLElement {
                 useSavedNames: false,
                 useNames: true
             });
-            localStorage.setItem(this.lastNamesSourceKey, 'new');
             return;
         }
 
@@ -819,26 +775,7 @@ export default class GameSetup extends HTMLElement {
                 this.updateActiveNamesHint();
                 this.syncPlayerInput();
                 this.updateContextActiveNames();
-            } else {
-                const activeStr = localStorage.getItem(this.lastActiveCategoriesKey);
-                if (activeStr) {
-                    try {
-                        const active = JSON.parse(activeStr);
-                        if (Array.isArray(active) && this.$activeNamesRefs) {
-                            this.$activeNamesRefs.forEach((ref, i) => {
-                                if (ref.switchComponent && active[i] !== undefined) {
-                                    ref.switchComponent.checked = active[i];
-                                }
-                            });
-                            this.updateActiveNamesHint();
-                            this.syncPlayerInput();
-                            this.updateContextActiveNames();
-                        }
-                    } catch (e) {}
-                }
             }
-
-            localStorage.setItem(this.lastNamesSourceKey, 'saved');
         }
     }
 
@@ -869,8 +806,6 @@ export default class GameSetup extends HTMLElement {
             switchComponent.addEventListener('change', () => {
                 this.updateActiveNamesHint();
                 this.syncPlayerInput();
-                const active = this.$activeNamesRefs.map(({switchComponent}) => switchComponent.checked);
-                localStorage.setItem(this.lastActiveCategoriesKey, JSON.stringify(active));
                 this.updateContextActiveNames();
             });
             switchContainer.appendChild(switchComponent);
@@ -1018,7 +953,6 @@ export default class GameSetup extends HTMLElement {
                 this.useNames = true;
                 this.useSavedNames = true;
                 this.selectedListId = list.id;
-                localStorage.setItem(this.lastSelectedListKey, list.id);
                 this.contextService?.updateGameConfig({
                     selectedListId: list.id,
                     useNames: true,
@@ -1186,7 +1120,6 @@ export default class GameSetup extends HTMLElement {
             return;
         }
 
-        this.config = savedConfig;
         this.players = savedConfig.players || 3;
         this.imposters = savedConfig.imposters || 1;
         this.names = savedConfig.names || [];

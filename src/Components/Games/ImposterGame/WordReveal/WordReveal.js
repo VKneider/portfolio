@@ -26,6 +26,7 @@ export default class WordReveal extends HTMLElement {
     constructor(props) {
         super();
         slice.attachTemplate(this);
+        // Local-only state for this reveal flow.
         this.contextService = null;
         
         // Initialize state
@@ -39,6 +40,7 @@ export default class WordReveal extends HTMLElement {
 
     async init() {
         this.contextService = slice.getComponent('imposter-context-service');
+        // Imposters are computed per round and passed forward via TheImposterGame.
         this.imposterIndexes = this.pickImposters();
         this.cacheElements();
         this.bindEvents();
@@ -51,6 +53,7 @@ export default class WordReveal extends HTMLElement {
         if (props && Object.keys(props).length) {
             slice.controller.setComponentProps(this, props);
         }
+        // Reset local reveal flow while keeping game state in context.
         this.currentPlayer = 0;
         this.imposterIndexes = this.pickImposters();
         this.renderPlayerScreen();
