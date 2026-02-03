@@ -135,18 +135,6 @@ export default class TheImposterGame extends HTMLElement {
       this.contextService?.updateAudioState({ isPlaying: this.isAudioEnabled });
       if (this.gameAudioToggle) {
         this.gameAudioToggle.setState(this.isAudioEnabled);
-
-        // Add click sound toggle to game view
-        this.gameClickSoundToggle = await slice.build('ClickSoundToggle', {});
-        this.gameClickSoundToggle.classList.add('game-click-sound-toggle');
-        this.$gameContent.appendChild(this.gameClickSoundToggle);
-        this.gameClickSoundToggle.addEventListener('toggle-click-sound', () => {
-          const isMuted = localStorage.getItem('imposterClickSoundMuted') === 'true';
-          this.gameClickSoundToggle.setState(!isMuted);
-          if (this.$clickSoundToggle) {
-            this.$clickSoundToggle.setState(!isMuted);
-          }
-        });
       }
     });
     // Audio starts muted, try to play

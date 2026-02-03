@@ -35,6 +35,6 @@
     "@babel/traverse": "^7.28.5"
   },
   "dependencies": {
-    "slicejs-web-framework": "^2.3.0"
+    "slicejs-web-framework": "^2.3.1"
   }
 }
