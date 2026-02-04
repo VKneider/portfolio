@@ -249,15 +249,12 @@ export default class TheImposterGame extends HTMLElement {
         this.loadSetup({ keepPlayers: true });
       });
     } else {
-      // Manual update: GameFlow is not routed or cached by the router.
-      if (typeof this.$flowComponent.update === 'function') {
         this.$flowComponent.update({
           word: savedConfig.word,
           category: savedConfig.category,
           imposters: this.imposterIndexes || [],
           names: savedConfig.names
-        });
-      }
+        });    
     }
     
     this.$gameContent.appendChild(this.$flowComponent);

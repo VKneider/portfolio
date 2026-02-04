@@ -24,7 +24,7 @@ export default class GameSetup extends HTMLElement {
         this.categoriesKey = 'imposterGameCategories';
         this.defaultCategories = {
             'git & github': ['Repositorio', 'Commit', 'Branch', 'Merge', 'Pull Request', 'Issue', 'Fork'],
-            'html & css': ['Etiqueta', 'Flexbox', 'Grid', 'Selector', 'Margin', 'Padding', 'Responsive'],
+            'html & css': ['Etiqueta', 'Flexbox', 'Grid', 'Selector', 'Margin', 'Padding', 'Responsive', 'Media Query', 'Z-index', "Viewport", "DOM", "Framework", "Library" ],
             'javascript': ['Array', 'Closure', 'Promise', 'Async', 'Callback', 'Scope', 'Prototype'],
             'aleatoria': this.getRandomWords()
         };
