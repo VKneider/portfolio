@@ -96,7 +96,6 @@ export default class WordReveal extends HTMLElement {
                 <div class="role-card imposter">
                     <h3>¡ERES EL IMPOSTOR!</h3>
                     <p>Intenta pasar desapercibido.</p>
-                    <div class="category-hint">Categoría: ${this.category}</div>
                 </div>
             `;
         } else {
@@ -104,7 +103,6 @@ export default class WordReveal extends HTMLElement {
                 <div class="role-card crewmate">
                     <h3>LA PALABRA ES:</h3>
                     <div class="secret-word">${this.word}</div>
-                    <div class="category-hint">Categoría: ${this.category}</div>
                 </div>
             `;
         }

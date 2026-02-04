@@ -66,8 +66,7 @@ export default class GameFlow extends HTMLElement {
         const impostersLabels = (this.imposters || []).map((index) => this.getPlayerLabel(index));
         this.$impostersList.textContent = impostersLabels.length ? impostersLabels.join(', ') : '-';
         this.$secretWord.textContent = this.word || '-';
-        this.$secretCategory.textContent = '';
-        this.$secretCategory.setAttribute('hidden', '');
+        this.$secretCategory.textContent = this.category || '-';
     }
 
     getPlayerLabel(index) {
