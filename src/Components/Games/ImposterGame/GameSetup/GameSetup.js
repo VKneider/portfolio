@@ -621,6 +621,9 @@ export default class GameSetup extends HTMLElement {
         if (!showNames) {
             this.$namesListContainer.style.display = 'none';
             this.$namesToggleListContainer.style.display = 'none';
+            if (this.$playerInput) {
+                this.$playerInput.disabled = false;
+            }
             return;
         }
 
@@ -637,7 +640,9 @@ export default class GameSetup extends HTMLElement {
         }
         this.$namesManageContainer.style.display = this.useSavedNames ? 'block' : 'none';
         this.syncPlayerInput();
-        this.$playerInput.querySelector('input').disabled = showNames;
+        if (this.$playerInput) {
+            this.$playerInput.disabled = showNames;
+        }
     }
 
     parseNames() {
