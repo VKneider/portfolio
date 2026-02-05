@@ -27,14 +27,14 @@
         "enabled": true,
         "ui": {
             "enabled": true,
-            "shortcut": "ctrl+6"
+            "shortcut": "ctrl+backspace"
         }
     },
     "context": {
         "enabled": true,
         "ui": {
             "enabled": true,
-            "shortcut": "ctrl+7"
+            "shortcut": "ctrl+shift"
         }
     },
     "paths": {
