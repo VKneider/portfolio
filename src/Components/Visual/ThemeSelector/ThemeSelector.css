@@ -31,7 +31,8 @@ slice-theme-selector {
   padding: 8px 12px; /* Padding reducido */
   transition: all 0.3s ease;
   font-family: var(--font-family);
-  font-size: 0.9rem; /* Tamaño de fuente reducido */
+   font-size: 0.9rem; /* Tamaño de fuente reducido */
+   min-width: 160px;
 }
 
 .current-theme:hover {
@@ -64,9 +65,12 @@ slice-theme-selector {
   font-size: inherit;
   user-select: none;
   cursor: pointer;
-  flex: 1;
-  text-align: left;
-  color: var(--font-primary-color);
+   flex: 1;
+   text-align: left;
+   color: var(--font-primary-color);
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 
 /* Dropdown Arrow */

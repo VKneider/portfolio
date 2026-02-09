@@ -4,6 +4,8 @@ slice-button {
   padding: 10px; /* Preserve original spacing/margin */
   box-sizing: border-box;
   vertical-align: middle;
+  overflow: visible;
+  border-radius: var(--border-radius-slice);
 }
 
 .slice_button_value {
@@ -35,6 +37,15 @@ slice-button {
   padding: 10px;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+}
+
+.slice_button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.25) inset;
+}
+
+slice-button:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3);
 }
 .slice_button:after {
   content: "";

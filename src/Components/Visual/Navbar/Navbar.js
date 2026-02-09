@@ -271,6 +271,7 @@ export default class Navbar extends HTMLElement {
       this.$logoContainer.addEventListener('click', (e) => {
          e.preventDefault();
          slice.router.navigate(value.path);
+         window.scrollTo({ top: 0, behavior: 'smooth' });
          this.closeMobileMenu();
       });
    }
@@ -323,7 +324,10 @@ export default class Navbar extends HTMLElement {
             path: value.path,
             classes: 'item',
          });
-         link.addEventListener('click', () => this.closeMobileMenu());
+         link.addEventListener('click', () => {
+            this.closeMobileMenu();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+         });
          item.appendChild(link);
       }
       if (value.type === 'dropdown') {

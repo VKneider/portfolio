@@ -5,9 +5,8 @@ export default class CertificateCard extends HTMLElement {
       
       // Get template elements
       this.$card = this.querySelector('.certificate-card');
-      this.$imageContainer = this.querySelector('.certificate-image-container');
-      this.$image = this.querySelector('.certificate-image');
       this.$issuerLogo = this.querySelector('.issuer-logo');
+      this.$issuerInitials = this.querySelector('.issuer-initials');
       this.$title = this.querySelector('.certificate-title');
       this.$issuer = this.querySelector('.certificate-issuer');
       this.$description = this.querySelector('.certificate-description');
@@ -33,31 +32,6 @@ export default class CertificateCard extends HTMLElement {
    }
 
    async populateTemplate() {
-      // Set certificate image as cover background
-      if (this.certificate.image) {
-         this.$image.src = this.certificate.image;
-         this.$image.alt = this.certificate.title;
-         this.$image.loading = 'lazy';
-         this.$image.onerror = () => {
-            // Fallback to gradient if image fails to load
-            this.$image.style.display = 'none';
-         };
-         this.$image.style.display = 'block';
-      } else {
-         this.$image.style.display = 'none';
-      }
-
-      // Clickable image container
-      if (this.certificate.certificateUrl) {
-         this.$imageContainer.onclick = () => window.open(this.certificate.certificateUrl, '_blank');
-         this.$imageContainer.style.cursor = 'pointer';
-         this.$imageContainer.setAttribute('title', 'View Certificate');
-      } else {
-         this.$imageContainer.style.cursor = 'default';
-         this.$imageContainer.onclick = null;
-         this.$imageContainer.removeAttribute('title');
-      }
-
       // Set issuer logo
       if (this.certificate.issuerLogo) {
          this.$issuerLogo.src = this.certificate.issuerLogo;
@@ -67,6 +41,19 @@ export default class CertificateCard extends HTMLElement {
          };
       } else {
          this.$issuerLogo.style.display = 'none';
+      }
+
+      if (this.$issuerInitials) {
+         const initials = this.certificate.issuer
+            .split(' ')
+            .filter(Boolean)
+            .slice(0, 2)
+            .map((word) => word[0].toUpperCase())
+            .join('');
+         this.$issuerInitials.textContent = initials || 'CI';
+         if (this.certificate.issuerLogo) {
+            this.$issuerInitials.style.display = 'none';
+         }
       }
 
       // Set basic info
@@ -106,7 +93,7 @@ export default class CertificateCard extends HTMLElement {
       // Clear existing buttons and create view certificate button
       this.$actions.innerHTML = '';
       const viewBtn = await slice.build('Button', {
-         value: 'View Certificate',
+         value: 'Verify credential',
          customColor: {
             button: 'var(--primary-color)',
             label: 'var(--primary-color-contrast)'
