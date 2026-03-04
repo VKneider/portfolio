@@ -55,10 +55,14 @@
                 "path":"/Components/AtomicAppComponents",
                 "type":"Visual"
             },
-            "ExtraGames":{
-                "path":"/Components/Games/ImposterGame",
+            "ImposterGameVisual":{
+                "path":"/Components/Games/ImposterGame/Visual",
                 "type":"Visual"
-            }
+            },
+            "ImposterGameServices":{
+                "path":"/Components/Games/ImposterGame/Services",
+                "type":"Service"
+        }
         },
         "themes": "/Themes",
         "styles": "/Styles",
