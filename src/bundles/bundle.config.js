@@ -1,6 +1,6 @@
 /**
  * Slice.js Bundle Configuration
- * Generated: 2026-02-10T01:54:38.175Z
+ * Generated: 2026-03-04T04:48:42.069Z
  * Strategy: hybrid
  */
 
@@ -8,19 +8,19 @@
 export const SLICE_BUNDLE_CONFIG = {
   "version": "2.0.0",
   "strategy": "hybrid",
-  "generated": "2026-02-10T01:54:38.174Z",
+  "generated": "2026-03-04T04:48:42.068Z",
   "stats": {
     "totalComponents": 50,
     "totalRoutes": 7,
     "sharedComponents": 1,
     "sharedPercentage": "2.0",
-    "totalSize": 2056903,
-    "criticalSize": 1174
+    "totalSize": 2033232,
+    "criticalSize": 1112
   },
   "bundles": {
     "critical": {
       "file": "slice-bundle.critical.js",
-      "size": 1174,
+      "size": 1112,
       "components": [
         "Layout"
       ]
@@ -35,7 +35,7 @@ export const SLICE_BUNDLE_CONFIG = {
           "/projects"
         ],
         "file": "slice-bundle.multiroute-portfolio.js",
-        "size": 1811687,
+        "size": 1795924,
         "components": [
           "Portfolio",
           "ThemeSelector",
@@ -73,7 +73,7 @@ export const SLICE_BUNDLE_CONFIG = {
           "/404"
         ],
         "file": "slice-bundle.misc.js",
-        "size": 5448,
+        "size": 5289,
         "components": [
           "NotFound"
         ],

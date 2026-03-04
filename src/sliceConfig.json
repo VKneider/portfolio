@@ -73,7 +73,11 @@
     "server": {
         "port": 3001,
         "host": "localhost"
-    }
+    },
+    "publicFolders": [
+        "/Themes",
+        "/Styles",
+        "/assets",
+        "/images"
+    ]
 }
-
-
