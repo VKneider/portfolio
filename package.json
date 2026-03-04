@@ -40,6 +40,6 @@
   "dependencies": {
     "express": "^5.2.1",
     "slicejs-cli": "^2.9.2",
-    "slicejs-web-framework": "^2.4.2"
+    "slicejs-web-framework": "^2.4.3"
   }
 }
