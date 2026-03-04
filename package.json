@@ -9,7 +9,6 @@
     "slice:delete": "node node_modules/slicejs-cli/client.js component delete",
     "slice:init": "node node_modules/slicejs-cli/client.js init",
     "run": "node api/index.js --development",
-    "slice:start": "node node_modules/slicejs-cli/client.js start",
     "slice:dev": "node node_modules/slicejs-cli/client.js dev",
     "development": "node api/index.js --development",
     "slice:version": "node node_modules/slicejs-cli/client.js version",
@@ -20,8 +19,9 @@
     "slice:registry-get": "node node_modules/slicejs-cli/client.js registry get",
     "slice:registry-list": "node node_modules/slicejs-cli/client.js registry list",
     "slice:registry-sync": "node node_modules/slicejs-cli/client.js registry sync",
-    "slice:build": "node node_modules/slicejs-cli/client.js build",
     "slice:test-prod": "NODE_ENV=production node ../slicejs-cli/client.js build && NODE_ENV=production node ../slicejs-cli/client.js start -p 3001",
+    "slice:start": "NODE_ENV=development node node_modules/slicejs-cli/client.js start",
+    "slice:build": "NODE_ENV=development node node_modules/slicejs-cli/client.js build",
     "build": "npm run slice:build",
     "start": "npm run slice:start"
   },
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "express": "^5.2.1",
-    "slicejs-cli": "^2.9.2",
+    "slicejs-cli": "^2.9.3",
     "slicejs-web-framework": "^2.4.3"
   }
 }
