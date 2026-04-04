@@ -105,5 +105,31 @@ test.describe('Bundle loading strategy', () => {
     expect(registrationLogs.length).toBe(uniqueLogs.size);
   });
 
+  test('parallel fetch: slice-env.json and bundle.config.json are fetched in parallel', async ({ page }) => {
+    let configRequestedAt = null;
+    let envCompletedAt = null;
+
+    // Delay slice-env.json by 300ms to create a detectable sequential gap
+    await page.route('**/slice-env.json', async route => {
+      await new Promise(r => setTimeout(r, 300));
+      envCompletedAt = Date.now();
+      await route.continue();
+    });
+
+    page.on('request', req => {
+      if (req.url().includes('bundle.config.json')) {
+        configRequestedAt = Date.now();
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(() => window.slice !== undefined, { timeout: SLICE_INIT_TIMEOUT });
+
+    expect(configRequestedAt).not.toBeNull();
+    // If sequential: bundle.config.json starts AFTER env.json finishes (configRequestedAt > envCompletedAt)
+    // If parallel:   bundle.config.json starts BEFORE env.json finishes (configRequestedAt < envCompletedAt)
+    expect(configRequestedAt).toBeLessThan(envCompletedAt);
+  });
+
 });
 
