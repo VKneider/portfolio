@@ -15,7 +15,7 @@ export default async function globalSetup(_config) {
   }
 
   console.log('[global-setup] Running slice build for production tests...');
-  execSync('node node_modules/slicejs-cli/client.js build', {
+  execSync('node ../node_modules/slicejs-cli/client.js build', {
     cwd: portfolioRoot,
     stdio: 'inherit',
   });
