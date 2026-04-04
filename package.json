@@ -6,6 +6,7 @@
     "test": "node --test --test-concurrency=1",
     "dev": "node node_modules/slicejs-cli/client.js dev",
     "build": "node node_modules/slicejs-cli/client.js build",
+    "slice:build": "node node_modules/slicejs-cli/client.js build",
     "start": "node node_modules/slicejs-cli/client.js start",
     "slice:create": "node node_modules/slicejs-cli/client.js component create",
     "slice:list": "node node_modules/slicejs-cli/client.js component list",
