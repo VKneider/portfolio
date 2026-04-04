@@ -42,13 +42,14 @@ test.describe('Bundle loading strategy', () => {
     expect(frameworkBundleResponses.length).toBeGreaterThan(0);
     expect(frameworkBundleResponses[0].status).toBe(200);
   });
+
   test('production mode: criticalBundleLoaded flag is true after init', async ({ page, baseURL }) => {
     test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
 
     await page.goto('/');
     await page.waitForFunction(
       () => window.slice && window.slice._mode !== undefined,
-      { timeout: 15_000 }
+      { timeout: SLICE_INIT_TIMEOUT }
     );
 
     const flagsSet = await page.evaluate(() => ({
