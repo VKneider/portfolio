@@ -1,6 +1,6 @@
 /**
  * Slice.js Bundle Configuration
- * Generated: 2026-03-04T04:48:42.069Z
+ * Generated: 2026-04-04T18:21:00.101Z
  * Strategy: hybrid
  */
 
@@ -8,20 +8,33 @@
 export const SLICE_BUNDLE_CONFIG = {
   "version": "2.0.0",
   "strategy": "hybrid",
-  "generated": "2026-03-04T04:48:42.068Z",
+  "minified": false,
+  "obfuscated": false,
+  "production": true,
+  "generated": "2026-04-04T18:21:00.100Z",
   "stats": {
-    "totalComponents": 50,
+    "totalComponents": 60,
     "totalRoutes": 7,
-    "sharedComponents": 1,
-    "sharedPercentage": "2.0",
-    "totalSize": 2033232,
-    "criticalSize": 1112
+    "sharedComponents": 2,
+    "sharedPercentage": "1.7",
+    "totalSize": 2175620,
+    "criticalSize": 38550
   },
   "bundles": {
+    "framework": {
+      "file": "slice-bundle.framework.js",
+      "size": 0,
+      "hash": null,
+      "integrity": null,
+      "components": []
+    },
     "critical": {
       "file": "slice-bundle.critical.js",
-      "size": 1112,
+      "size": 38550,
+      "hash": "46fac169e88a5be06e23920c4ccd9b805769cf141e3289a143a2f205d5387b16",
+      "integrity": "sha256:46fac169e88a5be06e23920c4ccd9b805769cf141e3289a143a2f205d5387b16",
       "components": [
+        "Loading",
         "Layout"
       ]
     },
@@ -36,6 +49,8 @@ export const SLICE_BUNDLE_CONFIG = {
         ],
         "file": "slice-bundle.multiroute-portfolio.js",
         "size": 1795924,
+        "hash": "683a8ee9f8f15c2ef25f6afe770c4ecb5660af74497a989fdd7c38d8624a23e8",
+        "integrity": "sha256:683a8ee9f8f15c2ef25f6afe770c4ecb5660af74497a989fdd7c38d8624a23e8",
         "components": [
           "Portfolio",
           "ThemeSelector",
@@ -68,12 +83,44 @@ export const SLICE_BUNDLE_CONFIG = {
           "critical"
         ]
       },
+      "general": {
+        "path": [
+          "/imposter"
+        ],
+        "file": "slice-bundle.general.js",
+        "size": 1637559,
+        "hash": "597efeb51f15b055892b7bdc5a5435e8a06b89a7eda5bdf46d36c012df5aabb2",
+        "integrity": "sha256:597efeb51f15b055892b7bdc5a5435e8a06b89a7eda5bdf46d36c012df5aabb2",
+        "components": [
+          "TheImposterGame",
+          "ImposterGameContextService",
+          "ConfirmationModal",
+          "Button",
+          "Icon",
+          "ThemeSelector",
+          "BackgroundAudioToggle",
+          "ClickSoundToggle",
+          "GameSetup",
+          "LocalStorageManager",
+          "Select",
+          "Input",
+          "CategoryManagerModal",
+          "NameManagerModal",
+          "WordReveal",
+          "GameFlow"
+        ],
+        "dependencies": [
+          "critical"
+        ]
+      },
       "misc": {
         "path": [
           "/404"
         ],
         "file": "slice-bundle.misc.js",
         "size": 5289,
+        "hash": "3c66e9f383a42cfe7aa860ab59108bde19e0511bd74af6361c6c22f139a42e7c",
+        "integrity": "sha256:3c66e9f383a42cfe7aa860ab59108bde19e0511bd74af6361c6c22f139a42e7c",
         "components": [
           "NotFound"
         ],
@@ -82,6 +129,36 @@ export const SLICE_BUNDLE_CONFIG = {
         ]
       }
     }
+  },
+  "routeBundles": {
+    "/": [
+      "critical",
+      "multiroute-Portfolio"
+    ],
+    "/experience": [
+      "critical",
+      "multiroute-Portfolio"
+    ],
+    "/education": [
+      "critical",
+      "multiroute-Portfolio"
+    ],
+    "/slice-js": [
+      "critical",
+      "multiroute-Portfolio"
+    ],
+    "/projects": [
+      "critical",
+      "multiroute-Portfolio"
+    ],
+    "/imposter": [
+      "critical",
+      "general"
+    ],
+    "/404": [
+      "critical",
+      "misc"
+    ]
   }
 };
 
@@ -91,9 +168,22 @@ if (typeof window !== 'undefined' && window.slice && window.slice.controller) {
 
   // Load critical bundle automatically
   if (SLICE_BUNDLE_CONFIG.bundles.critical && !window.slice.controller.criticalBundleLoaded) {
-    import('./slice-bundle.critical.js').catch(err =>
-      console.warn('Failed to load critical bundle:', err)
-    );
-    window.slice.controller.criticalBundleLoaded = true;
+    (async () => {
+      const bundlePath = "/bundles/" + SLICE_BUNDLE_CONFIG.bundles.critical.file;
+      const integrity = SLICE_BUNDLE_CONFIG.bundles.critical.integrity;
+
+      if (typeof window.slice.controller.verifyBundleIntegrity === 'function') {
+        const ok = await window.slice.controller.verifyBundleIntegrity(bundlePath, integrity);
+        if (!ok) {
+          console.warn('Failed to load critical bundle: integrity check failed');
+          return;
+        }
+      }
+
+      import('./slice-bundle.critical.js').catch(err =>
+        console.warn('Failed to load critical bundle:', err)
+      );
+      window.slice.controller.criticalBundleLoaded = true;
+    })();
   }
 }
