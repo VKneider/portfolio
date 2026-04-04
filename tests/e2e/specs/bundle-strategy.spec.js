@@ -47,8 +47,11 @@ test.describe('Bundle loading strategy', () => {
     test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
 
     await page.goto('/');
+    // Wait directly for the flags to be set — init() now relies on the bundle's
+    // auto-registration block (not an explicit registerBundle() call), so we must
+    // wait for the flag itself rather than the earlier _mode sentinel.
     await page.waitForFunction(
-      () => window.slice && window.slice._mode !== undefined,
+      () => window.slice?.controller?.criticalBundleLoaded === true,
       { timeout: SLICE_INIT_TIMEOUT }
     );
 
@@ -78,6 +81,28 @@ test.describe('Bundle loading strategy', () => {
     );
 
     expect(configFetches.length).toBe(1);
+  });
+
+  test('production mode: no duplicate bundle registration (registerBundle called once per bundle)', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    // Intercept console.log to count "Registering bundle:" messages
+    const registrationLogs = [];
+    page.on('console', msg => {
+      if (msg.text().includes('Registering bundle:')) {
+        registrationLogs.push(msg.text());
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    // Each bundle should be registered exactly once — no duplicates
+    const uniqueLogs = new Set(registrationLogs);
+    expect(registrationLogs.length).toBe(uniqueLogs.size);
   });
 
 });
