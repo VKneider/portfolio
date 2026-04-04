@@ -105,6 +105,8 @@ test.describe('Bundle loading strategy', () => {
     expect(registrationLogs.length).toBe(uniqueLogs.size);
   });
 
+  // Intentionally runs against both dev-mode and production-mode servers — parallelism
+  // applies to both since init() always fetches both JSON files regardless of mode.
   test('parallel fetch: slice-env.json and bundle.config.json are fetched in parallel', async ({ page }) => {
     let configRequestedAt = null;
     let envCompletedAt = null;
@@ -123,7 +125,10 @@ test.describe('Bundle loading strategy', () => {
     });
 
     await page.goto('/');
-    await page.waitForFunction(() => window.slice !== undefined, { timeout: SLICE_INIT_TIMEOUT });
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
 
     expect(configRequestedAt).not.toBeNull();
     // If sequential: bundle.config.json starts AFTER env.json finishes (configRequestedAt > envCompletedAt)
