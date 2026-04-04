@@ -61,5 +61,24 @@ test.describe('Bundle loading strategy', () => {
     expect(flagsSet.loadedBundlesHasCritical).toBe(true);
   });
 
+  test('production mode: bundle.config.json is fetched exactly once', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    const configFetches = [];
+    page.on('request', req => {
+      if (req.url().includes('bundle.config.json')) {
+        configFetches.push(req.url());
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    expect(configFetches.length).toBe(1);
+  });
+
 });
 
