@@ -88,6 +88,23 @@ app.use((req, res, next) => {
 });
 
 // ==============================================
+// RUNTIME MODE ENDPOINT
+// ==============================================
+
+// Expone el modo actual al framework Slice.js en runtime.
+// Solo se registra en development — 404 en production indica modo producción.
+if (runMode === 'development') {
+  app.get('/slice-env.json', (req, res) => {
+    res.json({ mode: 'development' });
+  });
+} else {
+  // Explicit 404 so the SPA fallback doesn't return 200 for this dev-only endpoint.
+  app.get('/slice-env.json', (req, res) => {
+    res.status(404).json({ error: 'Not found' });
+  });
+}
+
+// ==============================================
 // ARCHIVOS ESTÁTICOS (DESPUÉS DE SEGURIDAD)
 // ==============================================
 
@@ -113,19 +130,12 @@ if (runMode === 'production') {
   app.use('/Components', (req, res) => res.status(404).send('Not found'));
 }
 
-// Capturar todas las peticiones a bundles para debugging
-app.use('/bundles/', (req, res, next) => {
-  console.log(`🔍 Bundle request: ${req.method} ${req.originalUrl}`);
-  next();
-});
-
 // Middleware personalizado para archivos de bundles con MIME types correctos
 // ⚠️ DEBE IR ANTES del middleware general para tener prioridad
 app.use('/bundles/', (req, res, next) => {
   // Solo procesar archivos .js
   if (req.path.endsWith('.js')) {
     const filePath = path.join(__dirname, `../${folderDeployed}`, 'bundles', req.path);
-    console.log(`📂 Processing bundle: ${req.path} -> ${filePath}`);
 
     // Verificar que el archivo existe
     if (fs.existsSync(filePath)) {
@@ -133,17 +143,15 @@ app.use('/bundles/', (req, res, next) => {
         // Leer y servir el archivo con headers correctos
         const fileContent = fs.readFileSync(filePath, 'utf8');
         res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // No cachear para permitir actualizaciones en tiempo real
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.setHeader('Pragma', 'no-cache');
         res.setHeader('Expires', '0');
-        console.log(`✅ Serving bundle: ${req.path} (${fileContent.length} bytes, ${Buffer.byteLength(fileContent, 'utf8')} bytes UTF-8)`);
         return res.send(fileContent);
       } catch (error) {
-        console.log(`❌ Error reading bundle file: ${error.message}`);
+        console.error(`Error reading bundle file: ${error.message}`);
         return res.status(500).send('Error reading bundle file');
       }
     } else {
-      console.log(`❌ Bundle file not found: ${filePath}`);
       return res.status(404).send('Bundle file not found');
     }
   }
@@ -154,7 +162,6 @@ app.use('/bundles/', (req, res, next) => {
 
 // Servir otros archivos de bundles (JSON, CSS, etc.) con el middleware estático normal
 app.use('/bundles/', express.static(path.join(__dirname, `../${folderDeployed}`, 'bundles')));
-console.log(`📦 Serving bundles from /${folderDeployed}/bundles`);
 
 // Servir framework Slice.js (solo development)
 if (runMode === 'development') {

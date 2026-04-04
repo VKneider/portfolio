@@ -4,26 +4,21 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test --test-concurrency=1",
+    "dev": "node node_modules/slicejs-cli/client.js dev",
+    "build": "node node_modules/slicejs-cli/client.js build",
+    "start": "node node_modules/slicejs-cli/client.js start",
     "slice:create": "node node_modules/slicejs-cli/client.js component create",
     "slice:list": "node node_modules/slicejs-cli/client.js component list",
     "slice:delete": "node node_modules/slicejs-cli/client.js component delete",
     "slice:init": "node node_modules/slicejs-cli/client.js init",
-    "run": "node api/index.js --development",
-    "slice:dev": "node node_modules/slicejs-cli/client.js dev",
-    "development": "node api/index.js --development",
     "slice:version": "node node_modules/slicejs-cli/client.js version",
     "slice:update": "node node_modules/slicejs-cli/client.js update",
     "slice:get": "node node_modules/slicejs-cli/client.js get",
     "slice:browse": "node node_modules/slicejs-cli/client.js browse",
     "slice:sync": "node node_modules/slicejs-cli/client.js sync",
-    "slice:registry-get": "node node_modules/slicejs-cli/client.js registry get",
-    "slice:registry-list": "node node_modules/slicejs-cli/client.js registry list",
-    "slice:registry-sync": "node node_modules/slicejs-cli/client.js registry sync",
-    "slice:test-prod": "NODE_ENV=production node ../slicejs-cli/client.js build && NODE_ENV=production node ../slicejs-cli/client.js start -p 3001",
-    "slice:start": "NODE_ENV=development node node_modules/slicejs-cli/client.js start",
-    "slice:build": "NODE_ENV=development node node_modules/slicejs-cli/client.js build",
-    "build": "npm run slice:build",
-    "start": "npm run slice:start"
+    "test:e2e": "SLICE_BUILD=true playwright test --config tests/e2e/playwright.config.js",
+    "test:e2e:dev": "playwright test --project=dev-mode --config tests/e2e/playwright.config.js",
+    "test:e2e:prod": "SLICE_BUILD=true playwright test --project=production-mode --config tests/e2e/playwright.config.js"
   },
   "keywords": [],
   "author": "",
@@ -35,7 +30,8 @@
   },
   "devDependencies": {
     "@babel/parser": "^7.28.5",
-    "@babel/traverse": "^7.28.5"
+    "@babel/traverse": "^7.28.5",
+    "@playwright/test": "^1.59.1"
   },
   "dependencies": {
     "express": "^5.2.1",
