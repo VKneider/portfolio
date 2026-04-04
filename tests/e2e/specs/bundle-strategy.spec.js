@@ -135,6 +135,37 @@ test.describe('Bundle loading strategy', () => {
     // If parallel:   bundle.config.json starts BEFORE env.json finishes (configRequestedAt < envCompletedAt)
     expect(configRequestedAt).toBeLessThan(envCompletedAt);
   });
+  test('production mode: critical bundle download starts in parallel with framework bundle', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    let criticalRequestedAt = null;
+    let frameworkCompletedAt = null;
+
+    // Delay framework bundle response by 300ms to create a detectable sequential gap
+    await page.route('**/slice-bundle.framework*', async route => {
+      await new Promise(r => setTimeout(r, 300));
+      frameworkCompletedAt = Date.now();
+      await route.continue();
+    });
+
+    page.on('request', req => {
+      if (req.url().includes('slice-bundle.critical') && criticalRequestedAt === null) {
+        criticalRequestedAt = Date.now();
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice?.controller?.criticalBundleLoaded === true,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    expect(criticalRequestedAt).not.toBeNull();
+    // If sequential: critical bundle starts AFTER framework finishes (criticalRequestedAt > frameworkCompletedAt)
+    // If parallel:   critical bundle starts BEFORE framework finishes (criticalRequestedAt < frameworkCompletedAt)
+    expect(criticalRequestedAt).toBeLessThan(frameworkCompletedAt);
+  });
 
 });
+
 
