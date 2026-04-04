@@ -135,6 +135,7 @@ test.describe('Bundle loading strategy', () => {
     // If parallel:   bundle.config.json starts BEFORE env.json finishes (configRequestedAt < envCompletedAt)
     expect(configRequestedAt).toBeLessThan(envCompletedAt);
   });
+
   test('production mode: critical bundle download starts in parallel with framework bundle', async ({ page, baseURL }) => {
     test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
 
@@ -149,6 +150,10 @@ test.describe('Bundle loading strategy', () => {
     });
 
     page.on('request', req => {
+      // Guard: capture only the first request (the pre-fetch from init()).
+      // Without this, the second request triggered by await import(criticalUrl)
+      // would overwrite criticalRequestedAt with a later timestamp, making the
+      // parallel assertion pass even if the pre-fetch never actually fired.
       if (req.url().includes('slice-bundle.critical') && criticalRequestedAt === null) {
         criticalRequestedAt = Date.now();
       }
