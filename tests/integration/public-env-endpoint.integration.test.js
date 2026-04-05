@@ -14,8 +14,8 @@ afterEach(async () => {
 });
 
 const sharedEnv = {
-  PUBLIC_API_URL: 'https://api.slice.test',
-  PUBLIC_FEATURE_FLAG: 'on',
+  SLICE_PUBLIC_API_URL: 'https://api.slice.test',
+  SLICE_PUBLIC_FEATURE_FLAG: 'on',
   SECRET_API_KEY: 'top-secret',
   INTERNAL_TOKEN: 'internal-only'
 };
@@ -55,14 +55,14 @@ async function assertPublicEnvContract(response, expectedMode) {
 
   const publicEnvEntries = Object.entries(body.env);
   for (const [key, value] of publicEnvEntries) {
-    assert.match(key, /^PUBLIC_/);
+    assert.match(key, /^SLICE_PUBLIC_/);
     assert.equal(typeof value, 'string');
   }
 
   const sortedKeys = Object.keys(body.env).sort();
-  assert.deepEqual(sortedKeys, ['PUBLIC_API_URL', 'PUBLIC_FEATURE_FLAG']);
-  assert.equal(body.env.PUBLIC_API_URL, sharedEnv.PUBLIC_API_URL);
-  assert.equal(body.env.PUBLIC_FEATURE_FLAG, sharedEnv.PUBLIC_FEATURE_FLAG);
+  assert.deepEqual(sortedKeys, ['SLICE_PUBLIC_API_URL', 'SLICE_PUBLIC_FEATURE_FLAG']);
+  assert.equal(body.env.SLICE_PUBLIC_API_URL, sharedEnv.SLICE_PUBLIC_API_URL);
+  assert.equal(body.env.SLICE_PUBLIC_FEATURE_FLAG, sharedEnv.SLICE_PUBLIC_FEATURE_FLAG);
   assert.equal('SECRET_API_KEY' in body.env, false);
   assert.equal('INTERNAL_TOKEN' in body.env, false);
 }
