@@ -57,7 +57,7 @@ test.describe('Framework basics', () => {
     expect(sliceState.isProductionIsBoolean).toBe(true);
   });
 
-  test('SPA navigation: visiting /experience updates the URL', async ({ page }) => {
+  test('Direct route /experience is accessible via SPA fallback', async ({ page }) => {
     await page.goto('/');
 
     await page.waitForFunction(
