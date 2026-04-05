@@ -29,9 +29,7 @@ test.describe('Framework basics', () => {
       !url.includes('manifest') &&
       !text.includes('manifest') &&
       !url.includes('service-worker') &&
-      !text.includes('service-worker') &&
-      // /slice-env.json returns 404 in production intentionally — it signals production mode
-      !url.includes('slice-env.json')
+      !text.includes('service-worker')
     );
     expect(fatalErrors).toHaveLength(0);
   });

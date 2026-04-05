@@ -6,15 +6,18 @@ test.describe('Mode detection', () => {
 
   test('/slice-env.json returns correct response per mode', async ({ request }, testInfo) => {
     const isDev = testInfo.project.name === 'dev-mode';
+    const expectedMode = isDev ? 'development' : 'production';
     const response = await request.get('/slice-env.json');
 
-    if (isDev) {
-      expect(response.status()).toBe(200);
-      const body = await response.json();
-      expect(body).toEqual({ mode: 'development' });
-    } else {
-      // In production the endpoint is not registered — security middleware returns 404
-      expect(response.status()).toBe(404);
+    expect(response.status()).toBe(200);
+
+    const body = await response.json();
+    expect(body).toMatchObject({ mode: expectedMode });
+    expect(typeof body.env).toBe('object');
+    expect(body.env).not.toBeNull();
+
+    for (const key of Object.keys(body.env)) {
+      expect(key.startsWith('SLICE_PUBLIC_')).toBe(true);
     }
   });
 
