@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,6 +19,16 @@ export default async function globalSetup(_config) {
   execSync('node node_modules/slicejs-cli/client.js build', {
     cwd: portfolioRoot,
     stdio: ['ignore', 'inherit', 'inherit'],
+    env: {
+      ...process.env,
+      INIT_CWD: portfolioRoot,
+    },
   });
+
+  const distIndexPath = path.join(portfolioRoot, 'dist', 'App', 'index.html');
+  if (!fs.existsSync(distIndexPath)) {
+    throw new Error(`[global-setup] Build did not produce ${distIndexPath}`);
+  }
+
   console.log('[global-setup] Build complete.');
 }
