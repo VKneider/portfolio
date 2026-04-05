@@ -29,7 +29,7 @@ export async function startServer({ cwd, port, env, build = false }) {
 }
 
 export async function stopServer(serverProcess) {
-  if (!serverProcess || serverProcess.killed) return;
+  if (!serverProcess || serverProcess.exitCode !== null) return;
 
   serverProcess.kill('SIGTERM');
   await Promise.race([
@@ -37,8 +37,12 @@ export async function stopServer(serverProcess) {
     delay(3000)
   ]);
 
-  if (!serverProcess.killed) {
+  if (serverProcess.exitCode === null) {
     serverProcess.kill('SIGKILL');
+    await Promise.race([
+      new Promise((resolve) => serverProcess.once('exit', resolve)),
+      delay(3000)
+    ]);
   }
 }
 
@@ -56,9 +60,9 @@ async function waitForReady(serverProcess, port, timeoutMs) {
       if (response.ok) {
         return;
       }
-    } catch (error) {
-      await delay(200);
-    }
+    } catch (error) {}
+
+    await delay(200);
   }
 
   const stdout = serverProcess.stdout?.read?.()?.toString?.() || '';
