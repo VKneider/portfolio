@@ -21,14 +21,22 @@ export default defineConfig({
       url: 'http://localhost:3001',
       reuseExistingServer: !process.env.CI,
       cwd: portfolioRoot,
-      env: { PORT: '3001', NODE_ENV: 'development' },
+      env: {
+        PORT: '3001',
+        NODE_ENV: 'development',
+        SLICE_PUBLIC_E2E_VALUE: 'dev-e2e-visible',
+      },
     },
     {
       command: 'node api/index.js --production',
       url: 'http://localhost:3002',
       reuseExistingServer: !process.env.CI,
       cwd: portfolioRoot,
-      env: { PORT: '3002', NODE_ENV: 'production' },
+      env: {
+        PORT: '3002',
+        NODE_ENV: 'production',
+        SLICE_PUBLIC_E2E_VALUE: 'prod-e2e-visible',
+      },
     },
   ],
 
