@@ -143,9 +143,13 @@ app.use('/bundles/', (req, res, next) => {
         // Leer y servir el archivo con headers correctos
         const fileContent = fs.readFileSync(filePath, 'utf8');
         res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
+        if (runMode === 'production') {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          res.setHeader('Pragma', 'no-cache');
+          res.setHeader('Expires', '0');
+        }
         return res.send(fileContent);
       } catch (error) {
         console.error(`Error reading bundle file: ${error.message}`);

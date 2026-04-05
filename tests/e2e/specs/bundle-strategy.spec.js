@@ -136,7 +136,9 @@ test.describe('Bundle loading strategy', () => {
     expect(configRequestedAt).toBeLessThan(envCompletedAt);
   });
 
-  test('parallel startup: routes module import starts before delayed global styles completes', async ({ page }) => {
+  test('parallel startup: routes module import starts before delayed global styles completes', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
     let routesModuleRequestedAt = null;
     let stylesCompletedAt = null;
 
