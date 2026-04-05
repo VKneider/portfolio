@@ -48,4 +48,27 @@ test.describe('Mode detection', () => {
     expect(mode).toBe(expectedMode);
   });
 
+  test('runtime exposes getEnv/getPublicEnv API', async ({ page }) => {
+    await page.goto('/');
+
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    const runtimeState = await page.evaluate(() => ({
+      hasGetEnv: typeof window.slice.getEnv === 'function',
+      hasGetPublicEnv: typeof window.slice.getPublicEnv === 'function',
+      hasDedicatedGlobalEnv: typeof window.__SLICE_ENV__ !== 'undefined',
+      readMissingWithFallback: window.slice.getEnv('SLICE_PUBLIC_NOT_DEFINED', 'fallback-value'),
+      envSnapshotIsObject: typeof window.slice.getPublicEnv() === 'object' && window.slice.getPublicEnv() !== null
+    }));
+
+    expect(runtimeState.hasGetEnv).toBe(true);
+    expect(runtimeState.hasGetPublicEnv).toBe(true);
+    expect(runtimeState.hasDedicatedGlobalEnv).toBe(false);
+    expect(runtimeState.readMissingWithFallback).toBe('fallback-value');
+    expect(runtimeState.envSnapshotIsObject).toBe(true);
+  });
+
 });
