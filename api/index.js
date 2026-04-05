@@ -248,7 +248,7 @@ app.get('/api/status', (req, res) => {
 // SPA fallback - servir index.html para rutas no encontradas
 app.use((req, res) => {
   const indexPath = path.join(__dirname, `../${folderDeployed}`, "App", 'index.html');
-  res.sendFile(indexPath, (err) => {
+  res.sendFile(indexPath, { dotfiles: 'allow' }, (err) => {
     if (err) {
       res.status(404).send(`
         <h1>404 - Page Not Found</h1>

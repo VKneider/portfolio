@@ -136,26 +136,43 @@ test.describe('Bundle loading strategy', () => {
     expect(configRequestedAt).toBeLessThan(envCompletedAt);
   });
 
-  test('production mode: critical bundle download starts in parallel with framework bundle', async ({ page, baseURL }) => {
-    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+  test('parallel startup: routes module import starts before delayed global styles completes', async ({ page }) => {
+    let routesModuleRequestedAt = null;
+    let stylesCompletedAt = null;
 
-    let criticalRequestedAt = null;
-    let frameworkCompletedAt = null;
-
-    // Delay framework bundle response by 300ms to create a detectable sequential gap
-    await page.route('**/slice-bundle.framework*', async route => {
+    await page.route('**/Styles/sliceStyles.css', async route => {
       await new Promise(r => setTimeout(r, 300));
-      frameworkCompletedAt = Date.now();
+      stylesCompletedAt = Date.now();
       await route.continue();
     });
 
     page.on('request', req => {
-      // Guard: capture only the first request (the pre-fetch from init()).
-      // Without this, the second request triggered by await import(criticalUrl)
-      // would overwrite criticalRequestedAt with a later timestamp, making the
-      // parallel assertion pass even if the pre-fetch never actually fired.
-      if (req.url().includes('slice-bundle.critical') && criticalRequestedAt === null) {
-        criticalRequestedAt = Date.now();
+      if (req.url().includes('/routes.js') || req.url().includes('/src/routes.js') || req.url().includes('/dist/routes.js')) {
+        routesModuleRequestedAt = Date.now();
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    await page.waitForTimeout(800);
+
+    expect(routesModuleRequestedAt).not.toBeNull();
+    expect(stylesCompletedAt).not.toBeNull();
+    expect(routesModuleRequestedAt).toBeLessThan(stylesCompletedAt);
+  });
+
+  test('production mode: critical bundle is requested exactly once on startup', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    const criticalRequests = [];
+
+    page.on('request', req => {
+      if (req.url().includes('slice-bundle.critical')) {
+        criticalRequests.push(req.url());
       }
     });
 
@@ -165,12 +182,52 @@ test.describe('Bundle loading strategy', () => {
       { timeout: SLICE_INIT_TIMEOUT }
     );
 
-    expect(criticalRequestedAt).not.toBeNull();
-    // If sequential: critical bundle starts AFTER framework finishes (criticalRequestedAt > frameworkCompletedAt)
-    // If parallel:   critical bundle starts BEFORE framework finishes (criticalRequestedAt < frameworkCompletedAt)
-    expect(criticalRequestedAt).toBeLessThan(frameworkCompletedAt);
+    await page.waitForTimeout(250);
+    expect(criticalRequests.length).toBe(1);
+  });
+
+  test('production mode: route bundles are requested at most once across navigation', async ({ page, baseURL }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    const routeBundleCounts = new Map();
+
+    page.on('request', req => {
+      const url = req.url();
+      const isBundle = url.includes('/bundles/slice-bundle.');
+      const isFrameworkOrCritical = url.includes('slice-bundle.framework') || url.includes('slice-bundle.critical');
+      if (!isBundle || isFrameworkOrCritical) return;
+
+      const key = new URL(url).pathname;
+      routeBundleCounts.set(key, (routeBundleCounts.get(key) || 0) + 1);
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice?.controller?.criticalBundleLoaded === true,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    await page.waitForFunction(
+      () => Boolean(window.slice?.router && typeof window.slice.router.navigate === 'function'),
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    await page.evaluate(async () => {
+      await window.slice.router.navigate('/experience');
+      await new Promise(r => setTimeout(r, 80));
+      await window.slice.router.navigate('/imposter');
+      await new Promise(r => setTimeout(r, 80));
+      await window.slice.router.navigate('/404');
+      await new Promise(r => setTimeout(r, 80));
+      await window.slice.router.navigate('/imposter');
+    });
+
+    await page.waitForTimeout(400);
+
+    expect(routeBundleCounts.size).toBeGreaterThan(0);
+    for (const [, count] of routeBundleCounts.entries()) {
+      expect(count).toBe(1);
+    }
   });
 
 });
-
-
