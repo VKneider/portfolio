@@ -81,6 +81,7 @@
     "publicFolders": [
         "/Themes",
         "/Styles",
+        "/libs",
         "/assets",
         "/images"
     ]

@@ -172,4 +172,16 @@ export default class Portfolio extends HTMLElement {
    }
 }
 
+if (new URLSearchParams(window.location.search).get('slicePublicImportFixture') === '1') {
+   import('/libs/dayjs/dayjs.min.js')
+      .then(({ default: slicePublicImportFixtureValue }) => {
+         window.__slicePublicImportFixture = slicePublicImportFixtureValue;
+         window.__slicePublicImportFixtureStatus = 'ok';
+      })
+      .catch((error) => {
+         window.__slicePublicImportFixtureStatus = 'error';
+         window.__slicePublicImportFixtureError = error instanceof Error ? error.message : String(error);
+      });
+}
+
 customElements.define('slice-portfolio', Portfolio);
