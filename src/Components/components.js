@@ -1,5 +1,6 @@
 const components = {
   "AboutSection": "AppComponents",
+  "DomPurify": "AppComponents",
   "EducationSection": "AppComponents",
   "ExperienceSection": "AppComponents",
   "ImageDemo": "AppComponents",
@@ -40,8 +41,10 @@ const components = {
   "FetchManager": "Service",
   "IndexedDbManager": "Service",
   "LocalStorageManager": "Service",
+  "Translator": "Service",
   "BadgeCarousel": "AtomicAppComponents",
   "CertificateCard": "AtomicAppComponents",
+  "Ejemplo": "AtomicAppComponents",
   "ExperienceCard": "AtomicAppComponents",
   "ProjectCard": "AtomicAppComponents",
   "RandomFacts": "AtomicAppComponents",

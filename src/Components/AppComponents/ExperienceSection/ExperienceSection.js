@@ -4,21 +4,29 @@ export default class ExperienceSection extends HTMLElement {
    constructor(props) {
       super();
       slice.attachTemplate(this);
-      
+
       this.$container = this.querySelector('.experience-container');
       this.$timeline = this.querySelector('.experience-timeline');
-      
+
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
-      this.experienceData = experienceData  || [];
+      this.experienceData = experienceData || [];
    }
 
    async init() {
       // Define experience data
-      
+
 
       // Create timeline directly without filters
       await this.createTimeline();
+
+      // Render DOMPurify playground as an independent component.
+      await this.renderDomPurifyDemo();
+   }
+
+   async renderDomPurifyDemo() {
+      const demoComponent = await slice.build('DomPurify');
+      this.$timeline.appendChild(demoComponent);
    }
 
    async createTimeline() {
@@ -36,8 +44,8 @@ export default class ExperienceSection extends HTMLElement {
       // Sort by date (most recent first)
       const sortedExperience = [...this.experienceData].sort((a, b) => {
          const getYear = (str) => {
-             const match = str && str.match(/\d{4}/);
-             return match ? parseInt(match[0]) : 0;
+            const match = str && str.match(/\d{4}/);
+            return match ? parseInt(match[0]) : 0;
          };
          // If IDs are chronological, use IDs? But date parsing is safer if IDs are arbitrary
          // Assuming b is more recent
@@ -46,10 +54,10 @@ export default class ExperienceSection extends HTMLElement {
 
       // Prepare items for Timeline component
       const timelineItems = sortedExperience.map(exp => ({
-          id: exp.id,
-          date: exp.period ? exp.period.split(' - ')[0] : '', // E.g. "2024"
-          label: exp.company,
-          fullData: exp
+         id: exp.id,
+         date: exp.period ? exp.period.split(' - ')[0] : '', // E.g. "2024"
+         label: exp.company,
+         fullData: exp
       }));
 
       // Build Timeline
@@ -67,36 +75,36 @@ export default class ExperienceSection extends HTMLElement {
             experience: experience,
          });
          experienceCard.style.width = '100%';
-         experienceCard.style.maxWidth = '900px'; 
+         experienceCard.style.maxWidth = '900px';
          cards.push(experienceCard);
       }
 
       const tabs = await slice.build('Tabs', {
          items: cards.map((card, index) => ({
-             label: sortedExperience[index].company,
-             content: card
+            label: sortedExperience[index].company,
+            content: card
          })),
          orientation: 'horizontal'
       });
-      
+
       // Layout: Tabs on TOP, Timeline on BOTTOM
       this.$timeline.appendChild(tabs);
-      
+
       const timelineWrapper = document.createElement('div');
       timelineWrapper.style.marginTop = '2rem'; // Reduced space from 4rem
       timelineWrapper.style.width = '100%';
       timelineWrapper.appendChild(timeline);
-      
+
       this.$timeline.appendChild(timelineWrapper);
-      
+
       // Bi-directional sync
       timeline.addEventListener('timeline-select', (e) => {
-          console.log('Caught timeline-select', e.detail.index);
-          tabs.activateTab(e.detail.index);
+         console.log('Caught timeline-select', e.detail.index);
+         tabs.activateTab(e.detail.index);
       });
-      
+
       tabs.addEventListener('tab-change', (e) => {
-          timeline.setActive(e.detail.index);
+         timeline.setActive(e.detail.index);
       });
 
       // Select first by default

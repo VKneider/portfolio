@@ -47,7 +47,7 @@ app.use(sliceFrameworkProtection());
 // 3. Middleware de seguridad general
 app.use(securityMiddleware({
   allowedExtensions: [
-    '.js', '.css', '.html', '.json', 
+    '.js', '.mjs', '.css', '.html', '.json', 
     '.svg', '.png', '.jpg', '.jpeg', '.gif', 
     '.woff', '.woff2', '.ttf', '.ico'
   ],
@@ -68,8 +68,8 @@ app.use(securityMiddleware({
 
 // Middleware global para archivos JavaScript con MIME types correctos
 app.use((req, res, next) => {
-  if (req.path.endsWith('.js')) {
-    // Forzar headers correctos para TODOS los archivos .js
+  if (req.path.endsWith('.js') || req.path.endsWith('.mjs')) {
+    // Forzar headers correctos para archivos JavaScript y ESM.
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
   }
   next();
