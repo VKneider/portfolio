@@ -20,12 +20,12 @@ export function securityMiddleware(options = {}) {
 
   return (req, res, next) => {
     const requestPath = req.path;
-    
+
     // 1. Bloquear acceso a rutas definitivamente sensibles (configuración, dependencias)
-    const isBlockedPath = blockedPaths.some(blocked => 
+    const isBlockedPath = blockedPaths.some(blocked =>
       requestPath.startsWith(blocked) || requestPath.includes(blocked)
     );
-    
+
     if (isBlockedPath) {
       console.warn(`🚫 Blocked access to sensitive path: ${requestPath}`);
       return res.status(403).json({
@@ -37,11 +37,11 @@ export function securityMiddleware(options = {}) {
 
     // 2. Permitir acceso a assets públicos
     if (allowPublicAssets) {
-      const publicPaths = ['/assets', '/public', '/images', '/styles', ];
-      const isPublicAsset = publicPaths.some(publicPath => 
+      const publicPaths = ['/assets', '/public', '/images', '/styles',];
+      const isPublicAsset = publicPaths.some(publicPath =>
         requestPath.startsWith(publicPath)
       );
-      
+
       if (isPublicAsset) {
         return next();
       }
@@ -49,7 +49,7 @@ export function securityMiddleware(options = {}) {
 
     // 3. Validar extensiones de archivo
     const fileExtension = path.extname(requestPath).toLowerCase();
-    
+
     if (fileExtension && !allowedExtensions.includes(fileExtension)) {
       console.warn(`🚫 Blocked file type: ${requestPath}`);
       return res.status(403).json({
@@ -81,12 +81,12 @@ export function securityMiddleware(options = {}) {
  * BLOQUEA acceso directo desde navegador o herramientas externas
  */
 export function sliceFrameworkProtection(options = {}) {
-  const { 
-    port = 3000, 
+  const {
+    port = 3000,
     strictMode = false,
     allowedDomains = [] // Dominios personalizados permitidos
   } = options;
-  
+
   return (req, res, next) => {
     const requestPath = req.path;
 
@@ -97,7 +97,7 @@ export function sliceFrameworkProtection(options = {}) {
       '/Slice/Services'
     ];
 
-    const isFrameworkFile = frameworkPaths.some(fwPath => 
+    const isFrameworkFile = frameworkPaths.some(fwPath =>
       requestPath.startsWith(fwPath)
     );
 
@@ -109,7 +109,7 @@ export function sliceFrameworkProtection(options = {}) {
     const referer = req.get('Referer') || req.get('Referrer');
     const origin = req.get('Origin');
     const host = req.get('Host');
-    
+
     // Construir lista de orígenes válidos dinámicamente
     const validOrigins = [
       `http://localhost:${port}`,
@@ -118,7 +118,7 @@ export function sliceFrameworkProtection(options = {}) {
       `https://localhost:${port}`,
       ...allowedDomains // Dominios personalizados del usuario
     ];
-    
+
     // Si hay un Host header, agregarlo automáticamente
     if (host) {
       validOrigins.push(`http://${host}`);
@@ -129,7 +129,7 @@ export function sliceFrameworkProtection(options = {}) {
     const hasValidReferer = referer && validOrigins.some(valid => referer.startsWith(valid));
     const hasValidOrigin = origin && validOrigins.some(valid => origin === valid);
     const isSameHost = host && referer && referer.includes(host);
-    
+
     // Permitir si viene desde la aplicación
     if (hasValidReferer || hasValidOrigin || isSameHost) {
       return next();
@@ -168,8 +168,8 @@ export function suspiciousRequestLogger() {
 
   return (req, res, next) => {
     const requestPath = req.path;
-    
-    const isSuspicious = suspiciousPatterns.some(pattern => 
+
+    const isSuspicious = suspiciousPatterns.some(pattern =>
       pattern.test(requestPath)
     );
 
@@ -188,14 +188,14 @@ export function suspiciousRequestLogger() {
  */
 export function directAccessProtection(options = {}) {
   const { protectedPaths = [] } = options;
-  
+
   return (req, res, next) => {
     const requestPath = req.path;
-    
-    const isProtectedPath = protectedPaths.some(protectedPath => 
+
+    const isProtectedPath = protectedPaths.some(protectedPath =>
       requestPath.startsWith(protectedPath)
     );
-    
+
     if (!isProtectedPath) {
       return next();
     }
@@ -205,9 +205,9 @@ export function directAccessProtection(options = {}) {
     // - Accept header indica navegación HTML
     const referer = req.get('Referer');
     const accept = req.get('Accept') || '';
-    
+
     const isDirectBrowserAccess = !referer && accept.includes('text/html');
-    
+
     if (isDirectBrowserAccess) {
       console.warn(`🚫 Blocked direct browser access: ${requestPath}`);
       return res.status(403).send(`

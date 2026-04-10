@@ -4,9 +4,9 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { 
-  securityMiddleware, 
-  sliceFrameworkProtection, 
+import {
+  securityMiddleware,
+  sliceFrameworkProtection,
   suspiciousRequestLogger
 } from './middleware/securityMiddleware.js';
 import { createPublicEnvProvider } from './utils/publicEnvResolver.js';
@@ -47,8 +47,8 @@ app.use(sliceFrameworkProtection());
 // 3. Middleware de seguridad general
 app.use(securityMiddleware({
   allowedExtensions: [
-    '.js', '.mjs', '.css', '.html', '.json', 
-    '.svg', '.png', '.jpg', '.jpeg', '.gif', 
+    '.js', '.mjs', '.css', '.html', '.json',
+    '.svg', '.png', '.jpg', '.jpeg', '.gif',
     '.woff', '.woff2', '.ttf', '.ico'
   ],
   blockedPaths: [
@@ -84,7 +84,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  
+
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
