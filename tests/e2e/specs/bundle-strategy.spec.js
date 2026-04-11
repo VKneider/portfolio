@@ -232,4 +232,84 @@ test.describe('Bundle loading strategy', () => {
     }
   });
 
+  test('production mode: vendor-shared is fetched once and blocks dependent route bundle requests', async ({ page, baseURL, request }) => {
+    test.skip(!baseURL?.includes('3002'), 'Only runs against the production-mode server');
+
+    const configResponse = await request.get('/bundles/bundle.config.json');
+    expect(configResponse.ok()).toBe(true);
+    const bundleConfig = await configResponse.json();
+
+    const vendorBundleInfo = bundleConfig?.bundles?.shared?.['vendor-shared'];
+    test.skip(!vendorBundleInfo?.file, 'Current production fixture has no vendor-shared bundle');
+
+    const routeBundles = bundleConfig?.routeBundles || {};
+    const routeBundleMap = bundleConfig?.bundles?.routes || {};
+    const initialRouteBundles = routeBundles['/'] || [];
+    const dependentBundles = initialRouteBundles.filter((bundleName) =>
+      Array.isArray(routeBundleMap[bundleName]?.dependencies)
+      && routeBundleMap[bundleName].dependencies.includes('vendor-shared')
+    );
+
+    test.skip(dependentBundles.length === 0, 'No initial route bundles depend on vendor-shared');
+
+    const dependentFiles = new Set(
+      dependentBundles
+        .map((bundleName) => routeBundleMap[bundleName]?.file)
+        .filter(Boolean)
+    );
+
+    let vendorRequestCount = 0;
+    let vendorRequestedAt = null;
+    let vendorReleasedAt = null;
+    let firstDependentRequestedAt = null;
+
+    await page.route(`**/bundles/${vendorBundleInfo.file}`, async (route) => {
+      vendorRequestCount += 1;
+      vendorRequestedAt = Date.now();
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      vendorReleasedAt = Date.now();
+      await route.continue();
+    });
+
+    page.on('request', (req) => {
+      const url = req.url();
+      if (!url.includes('/bundles/')) return;
+      const pathname = new URL(url).pathname;
+      const fileName = pathname.split('/').pop();
+
+      if (!fileName || !dependentFiles.has(fileName)) return;
+      if (firstDependentRequestedAt === null) {
+        firstDependentRequestedAt = Date.now();
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => Boolean(window.slice?.router && typeof window.slice.router.navigate === 'function'),
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    const nextVendorRoute = Object.keys(routeBundles).find((path) => {
+      if (path === '/') return false;
+      const bundlesAtPath = routeBundles[path] || [];
+      return bundlesAtPath.some((bundleName) =>
+        Array.isArray(routeBundleMap[bundleName]?.dependencies)
+        && routeBundleMap[bundleName].dependencies.includes('vendor-shared')
+      );
+    });
+
+    if (nextVendorRoute) {
+      await page.evaluate(async (targetPath) => {
+        await window.slice.router.navigate(targetPath);
+      }, nextVendorRoute);
+      await page.waitForTimeout(250);
+    }
+
+    expect(vendorRequestCount).toBe(1);
+    expect(vendorRequestedAt).not.toBeNull();
+    expect(vendorReleasedAt).not.toBeNull();
+    expect(firstDependentRequestedAt).not.toBeNull();
+    expect(firstDependentRequestedAt).toBeGreaterThanOrEqual(vendorReleasedAt);
+  });
+
 });
