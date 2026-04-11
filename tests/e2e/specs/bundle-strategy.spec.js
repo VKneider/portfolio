@@ -240,7 +240,7 @@ test.describe('Bundle loading strategy', () => {
     const bundleConfig = await configResponse.json();
 
     const vendorBundleInfo = bundleConfig?.bundles?.shared?.['vendor-shared'];
-    test.skip(!vendorBundleInfo?.file, 'Current production fixture has no vendor-shared bundle');
+    expect(vendorBundleInfo?.file, 'Production fixture must include vendor-shared bundle file').toBeTruthy();
 
     const routeBundles = bundleConfig?.routeBundles || {};
     const routeBundleMap = bundleConfig?.bundles?.routes || {};
@@ -250,7 +250,7 @@ test.describe('Bundle loading strategy', () => {
       && routeBundleMap[bundleName].dependencies.includes('vendor-shared')
     );
 
-    test.skip(dependentBundles.length === 0, 'No initial route bundles depend on vendor-shared');
+    expect(dependentBundles.length, 'At least one initial route bundle must depend on vendor-shared').toBeGreaterThan(0);
 
     const dependentFiles = new Set(
       dependentBundles
