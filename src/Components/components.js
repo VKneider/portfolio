@@ -1,5 +1,6 @@
 const components = {
   "AboutSection": "AppComponents",
+  "Charts": "AppComponents",
   "DomPurify": "AppComponents",
   "EducationSection": "AppComponents",
   "ExperienceSection": "AppComponents",

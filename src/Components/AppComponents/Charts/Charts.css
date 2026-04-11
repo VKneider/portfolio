@@ -1,0 +1,53 @@
+slice-charts {
+  display: block;
+  width: 100%;
+}
+
+.charts-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.charts-header h1 {
+  margin: 0;
+}
+
+.charts-header p {
+  margin: 0.4rem 0 0;
+}
+
+.charts-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.charts-update-button {
+  border: 1px solid var(--primary-color-shade);
+  background: var(--secondary-background-color);
+  color: var(--font-primary-color);
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--border-radius-slice);
+  cursor: pointer;
+}
+
+.charts-canvas-wrap {
+  background: var(--secondary-background-color);
+  border: 1px solid var(--primary-color-shade);
+  border-radius: var(--border-radius-slice);
+  padding: 0.9rem;
+}
+
+.charts-canvas {
+  width: 100%;
+  min-height: 320px;
+}
+
+.charts-sanitize {
+  border: 1px solid var(--primary-color-shade);
+  border-radius: var(--border-radius-slice);
+  background: var(--tertiary-background-color);
+  padding: 0.75rem;
+}

@@ -1,6 +1,7 @@
 const routes = [
    // Portfolio routes
    { path: '/', component: 'Portfolio' },
+   { path: '/charts', component: 'Charts' },
    { path: '/dompurify', component: 'DomPurify' },
    { path: '/experience', component: 'Portfolio' },
    { path: '/education', component: 'Portfolio' },
