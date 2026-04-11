@@ -239,7 +239,9 @@ test.describe('Bundle loading strategy', () => {
     expect(configResponse.ok()).toBe(true);
     const bundleConfig = await configResponse.json();
 
-    const vendorBundleInfo = bundleConfig?.bundles?.shared?.['vendor-shared'];
+    const vendorBundleInfo =
+      bundleConfig?.bundles?.vendorShared
+      || bundleConfig?.bundles?.shared?.['vendor-shared'];
     expect(vendorBundleInfo?.file, 'Production fixture must include vendor-shared bundle file').toBeTruthy();
 
     const routeBundles = bundleConfig?.routeBundles || {};
