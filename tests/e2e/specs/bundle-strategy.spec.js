@@ -260,15 +260,25 @@ test.describe('Bundle loading strategy', () => {
         .filter(Boolean)
     );
 
+    const EVENT_TIMEOUT_MS = 10_000;
+
+    const waitWithTimeout = (promise, label, timeoutMs = EVENT_TIMEOUT_MS) =>
+      Promise.race([
+        promise,
+        new Promise((_, reject) => {
+          setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs);
+        }),
+      ]);
+
     let vendorRequestCount = 0;
-    let vendorRequestedAt = null;
-    let vendorReleasedAt = null;
+    let vendorStartedAt = null;
+    let vendorFinishedAt = null;
     let firstDependentRequestedAt = null;
-    let resolveVendorReleased;
-    let rejectVendorReleased;
-    const vendorReleasedPromise = new Promise((resolve, reject) => {
-      resolveVendorReleased = resolve;
-      rejectVendorReleased = reject;
+    let resolveVendorFinished;
+    let rejectVendorFinished;
+    const vendorFinishedPromise = new Promise((resolve, reject) => {
+      resolveVendorFinished = resolve;
+      rejectVendorFinished = reject;
     });
 
     let resolveFirstDependentRequest;
@@ -278,22 +288,26 @@ test.describe('Bundle loading strategy', () => {
 
     await page.route(`**/bundles/${vendorBundleInfo.file}`, async (route) => {
       vendorRequestCount += 1;
-      vendorRequestedAt = Date.now();
       await new Promise((resolve) => setTimeout(resolve, 300));
       await route.continue();
     });
 
     const isVendorRequest = (req) => req.url().includes(`/bundles/${vendorBundleInfo.file}`);
 
+    page.on('request', (req) => {
+      if (!isVendorRequest(req) || vendorStartedAt !== null) return;
+      vendorStartedAt = Date.now();
+    });
+
     page.on('requestfinished', (req) => {
-      if (!isVendorRequest(req) || vendorReleasedAt !== null) return;
-      vendorReleasedAt = Date.now();
-      resolveVendorReleased();
+      if (!isVendorRequest(req) || vendorFinishedAt !== null) return;
+      vendorFinishedAt = Date.now();
+      resolveVendorFinished();
     });
 
     page.on('requestfailed', (req) => {
-      if (!isVendorRequest(req) || vendorReleasedAt !== null) return;
-      rejectVendorReleased(new Error(`vendor-shared request failed: ${req.failure()?.errorText || 'unknown error'}`));
+      if (!isVendorRequest(req) || vendorFinishedAt !== null) return;
+      rejectVendorFinished(new Error(`vendor-shared request failed: ${req.failure()?.errorText || 'unknown error'}`));
     });
 
     page.on('request', (req) => {
@@ -332,14 +346,16 @@ test.describe('Bundle loading strategy', () => {
     }
 
     await Promise.all([
-      vendorReleasedPromise,
-      firstDependentRequestPromise,
+      waitWithTimeout(vendorFinishedPromise, 'vendor-shared completion'),
+      waitWithTimeout(firstDependentRequestPromise, 'first dependent bundle request'),
     ]);
 
     expect(vendorRequestCount).toBe(1);
-    expect(vendorRequestedAt).not.toBeNull();
+    expect(vendorStartedAt).not.toBeNull();
+    expect(vendorFinishedAt).not.toBeNull();
     expect(firstDependentRequestedAt).not.toBeNull();
-    expect(firstDependentRequestedAt).toBeGreaterThanOrEqual(vendorRequestedAt);
+    expect(vendorFinishedAt).toBeGreaterThanOrEqual(vendorStartedAt);
+    expect(firstDependentRequestedAt).toBeGreaterThanOrEqual(vendorFinishedAt);
   });
 
 });
