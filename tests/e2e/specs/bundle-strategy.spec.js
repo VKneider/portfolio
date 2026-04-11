@@ -264,13 +264,36 @@ test.describe('Bundle loading strategy', () => {
     let vendorRequestedAt = null;
     let vendorReleasedAt = null;
     let firstDependentRequestedAt = null;
+    let resolveVendorReleased;
+    let rejectVendorReleased;
+    const vendorReleasedPromise = new Promise((resolve, reject) => {
+      resolveVendorReleased = resolve;
+      rejectVendorReleased = reject;
+    });
+
+    let resolveFirstDependentRequest;
+    const firstDependentRequestPromise = new Promise((resolve) => {
+      resolveFirstDependentRequest = resolve;
+    });
 
     await page.route(`**/bundles/${vendorBundleInfo.file}`, async (route) => {
       vendorRequestCount += 1;
       vendorRequestedAt = Date.now();
       await new Promise((resolve) => setTimeout(resolve, 300));
-      vendorReleasedAt = Date.now();
       await route.continue();
+    });
+
+    const isVendorRequest = (req) => req.url().includes(`/bundles/${vendorBundleInfo.file}`);
+
+    page.on('requestfinished', (req) => {
+      if (!isVendorRequest(req) || vendorReleasedAt !== null) return;
+      vendorReleasedAt = Date.now();
+      resolveVendorReleased();
+    });
+
+    page.on('requestfailed', (req) => {
+      if (!isVendorRequest(req) || vendorReleasedAt !== null) return;
+      rejectVendorReleased(new Error(`vendor-shared request failed: ${req.failure()?.errorText || 'unknown error'}`));
     });
 
     page.on('request', (req) => {
@@ -282,6 +305,7 @@ test.describe('Bundle loading strategy', () => {
       if (!fileName || !dependentFiles.has(fileName)) return;
       if (firstDependentRequestedAt === null) {
         firstDependentRequestedAt = Date.now();
+        resolveFirstDependentRequest();
       }
     });
 
@@ -307,11 +331,15 @@ test.describe('Bundle loading strategy', () => {
       await page.waitForTimeout(250);
     }
 
+    await Promise.all([
+      vendorReleasedPromise,
+      firstDependentRequestPromise,
+    ]);
+
     expect(vendorRequestCount).toBe(1);
     expect(vendorRequestedAt).not.toBeNull();
-    expect(vendorReleasedAt).not.toBeNull();
     expect(firstDependentRequestedAt).not.toBeNull();
-    expect(firstDependentRequestedAt).toBeGreaterThanOrEqual(vendorReleasedAt);
+    expect(firstDependentRequestedAt).toBeGreaterThanOrEqual(vendorRequestedAt);
   });
 
 });
