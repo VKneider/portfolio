@@ -29,6 +29,15 @@ const publicEnvProvider = createPublicEnvProvider({
   envFilePath: path.join(__dirname, '..', '.env')
 });
 
+function sendMainHTML(res) {
+  const indexPath = path.join(__dirname, `../${folderDeployed}`, "App", 'index.html');
+  res.sendFile(indexPath, { dotfiles: 'allow' }, (err) => {
+    if (err) {
+      res.status(404).send('File not found');
+    }
+  });
+}
+
 // Obtener puerto desde process.env.PORT con fallback a sliceConfig.json
 const PORT = process.env.PORT || sliceConfig.server?.port || 3001;
 
@@ -129,6 +138,7 @@ if (runMode === 'production') {
   app.use('/Slice', (req, res) => res.status(404).send('Not found'));
   app.use('/Components', (req, res) => res.status(404).send('Not found'));
 }
+
 
 // Middleware personalizado para archivos de bundles con MIME types correctos
 // ⚠️ DEBE IR ANTES del middleware general para tener prioridad
