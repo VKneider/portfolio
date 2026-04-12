@@ -20,13 +20,7 @@ export default class ExperienceSection extends HTMLElement {
       // Create timeline directly without filters
       await this.createTimeline();
 
-      // Render DOMPurify playground as an independent component.
-      await this.renderDomPurifyDemo();
-   }
 
-   async renderDomPurifyDemo() {
-      const demoComponent = await slice.build('DomPurify');
-      this.$timeline.appendChild(demoComponent);
    }
 
    async createTimeline() {
