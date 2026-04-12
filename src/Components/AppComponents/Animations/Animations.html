@@ -1,0 +1,173 @@
+<section class="animations-page">
+  <header class="animations-header">
+    <h1>Anime.js Motion Lab</h1>
+    <p>Interactive animation showcases built with the local Anime.js bundle.</p>
+  </header>
+
+  <div class="animations-controls">
+    <button class="animations-action-button" data-action="play" type="button">Play all</button>
+    <button class="animations-action-button" data-action="pause" type="button">Pause all</button>
+    <button class="animations-action-button" data-action="restart" type="button">Restart all</button>
+
+    <label class="animations-control">
+      <span>Speed</span>
+      <input class="animations-speed-input" type="range" min="0.6" max="1.8" step="0.1" value="1" />
+    </label>
+
+    <label class="animations-control">
+      <span>Easing</span>
+      <select class="animations-easing-select">
+        <option value="inOutSine" selected>inOutSine</option>
+        <option value="outElastic(1, .6)">outElastic</option>
+        <option value="outExpo">outExpo</option>
+        <option value="inOutBack">inOutBack</option>
+      </select>
+    </label>
+
+    <label class="animations-control">
+      <span>Amplitude</span>
+      <input class="animations-amplitude-input" type="range" min="18" max="72" step="2" value="36" />
+    </label>
+  </div>
+
+  <div class="animations-grid">
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Stagger Wave</h2>
+        <p>A grid of dots moving with staggered delay and shared easing.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-dots" aria-label="Staggered dots showcase">
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+        <span class="animations-dot"></span>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Timeline Stack</h2>
+        <p>Layered panels sequenced in a looping Anime.js timeline.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-stack" aria-label="Timeline stack showcase">
+        <div class="animations-panel">Launch</div>
+        <div class="animations-panel">Measure</div>
+        <div class="animations-panel">Refine</div>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Metric Pulse</h2>
+        <p>Click a metric to focus it while the bars keep pulsing in place.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-bars" aria-label="Metric pulse showcase">
+        <button class="animations-metric" data-metric="Build Velocity" type="button">
+          <span class="animations-metric-label">Build Velocity</span>
+          <span class="animations-metric-track"><span class="animations-metric-fill" style="--metric-size: 72%;"></span></span>
+        </button>
+        <button class="animations-metric" data-metric="UI Polish" type="button">
+          <span class="animations-metric-label">UI Polish</span>
+          <span class="animations-metric-track"><span class="animations-metric-fill" style="--metric-size: 61%;"></span></span>
+        </button>
+        <button class="animations-metric" data-metric="Docs Coverage" type="button">
+          <span class="animations-metric-label">Docs Coverage</span>
+          <span class="animations-metric-track"><span class="animations-metric-fill" style="--metric-size: 48%;"></span></span>
+        </button>
+        <button class="animations-metric" data-metric="Test Confidence" type="button">
+          <span class="animations-metric-label">Test Confidence</span>
+          <span class="animations-metric-track"><span class="animations-metric-fill" style="--metric-size: 83%;"></span></span>
+        </button>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Orbit Loop</h2>
+        <p>Nested rotations, pulse rings and a central hub running continuously.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-orbit" aria-label="Orbit loop showcase">
+        <div class="animations-orbit-shell">
+          <div class="animations-orbit-ring animations-orbit-ring-inner"></div>
+          <div class="animations-orbit-ring animations-orbit-ring-outer"></div>
+          <div class="animations-orbit-hub"></div>
+          <div class="animations-orbit-satellite"></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Text Reveal</h2>
+        <p>Split words entering in sequence to demonstrate staggered editorial motion.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-text" aria-label="Text reveal showcase">
+        <span class="animations-word">Build</span>
+        <span class="animations-word">motion</span>
+        <span class="animations-word">that</span>
+        <span class="animations-word">feels</span>
+        <span class="animations-word">alive</span>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Loader Spectrum</h2>
+        <p>Vertical beams pulsing at different offsets like a live processing indicator.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-loader" aria-label="Loader spectrum showcase">
+        <span class="animations-beam"></span>
+        <span class="animations-beam"></span>
+        <span class="animations-beam"></span>
+        <span class="animations-beam"></span>
+        <span class="animations-beam"></span>
+        <span class="animations-beam"></span>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Floating Badges</h2>
+        <p>Small product labels drifting with gentle offsets and scale changes.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-badges" aria-label="Floating badges showcase">
+        <span class="animations-badge">CLI</span>
+        <span class="animations-badge">SSR</span>
+        <span class="animations-badge">E2E</span>
+        <span class="animations-badge">Docs</span>
+      </div>
+    </article>
+
+    <article class="animations-card">
+      <header class="animations-card-header">
+        <h2>Spotlight Drift</h2>
+        <p>A moving glow sweeping across a mock surface for ambient UI motion.</p>
+      </header>
+
+      <div class="animations-stage animations-stage-spotlight" aria-label="Spotlight drift showcase">
+        <div class="animations-spotlight-card">
+          <div class="animations-spotlight-blob"></div>
+          <div class="animations-spotlight-copy">
+            <strong>Ambient motion</strong>
+            <span>Subtle background animation for feature sections.</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="animations-interaction" aria-live="polite"></div>
+  <div class="animations-status" aria-live="polite"></div>
+</section>
