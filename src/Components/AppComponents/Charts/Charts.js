@@ -1,7 +1,7 @@
-import { Chart, registerables } from '../../../../node_modules/chart.js/dist/chart.js';
+import '../../../libs/chartjs/chart.umd.js';
 import domPurify from '../../../libs/DOMpurify/purify.es.mjs';
 
-Chart.register(...registerables);
+const ChartLib = typeof window !== 'undefined' ? window.Chart : null;
 
 export default class Charts extends HTMLElement {
   constructor(props) {
@@ -34,7 +34,12 @@ export default class Charts extends HTMLElement {
   }
 
   renderChart() {
-    this.chart = new Chart(this.canvas, {
+    if (!ChartLib) {
+      this.sanitizeBox.textContent = 'Chart library is unavailable.';
+      return;
+    }
+
+    this.chart = new ChartLib(this.canvas, {
       type: 'bar',
       data: {
         labels: ['Q1', 'Q2', 'Q3', 'Q4'],
