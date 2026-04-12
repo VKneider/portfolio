@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-pwa-v1';
+const CACHE_NAME = 'portfolio-pwa-v2';
 const APP_SHELL = [
   '/',
   '/App/index.html',
@@ -76,20 +76,19 @@ self.addEventListener('fetch', (event) => {
 
   if (isBundleRequest) {
     event.respondWith(
-      caches.open(CACHE_NAME).then((cache) =>
-        cache.match(event.request).then((cached) => {
-          const fetchPromise = fetch(event.request)
-            .then((networkResponse) => {
-              if (networkResponse && networkResponse.status === 200) {
-                cache.put(event.request, networkResponse.clone());
-              }
-              return networkResponse;
-            })
-            .catch(() => cached);
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(event.request);
 
-          return cached || fetchPromise;
-        })
-      )
+        try {
+          const networkResponse = await fetch(event.request, { cache: 'no-store' });
+          if (networkResponse && networkResponse.status === 200) {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        } catch (error) {
+          return cached;
+        }
+      })
     );
     return;
   }

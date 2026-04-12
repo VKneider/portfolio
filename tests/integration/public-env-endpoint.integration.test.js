@@ -42,6 +42,36 @@ test('production mode /slice-env.json returns 200 with mode and filtered env', a
   await assertPublicEnvContract(response, 'production');
 });
 
+test('production mode bundle headers: unhashed no-store, hashed immutable', async () => {
+  serverProcess = await startServer({
+    cwd: projectRoot,
+    port: PROD_PORT,
+    env: { NODE_ENV: 'production', ...sharedEnv },
+    build: true
+  });
+
+  const configResponse = await expectStatus(`http://localhost:${PROD_PORT}/bundles/bundle.config.json`, 200);
+  const config = await configResponse.json();
+
+  const criticalBundle = config?.bundles?.critical;
+  assert.ok(criticalBundle?.file, 'Expected critical bundle file in bundle config');
+  assert.ok(criticalBundle?.hash, 'Expected critical bundle hash in bundle config');
+
+  const unhashedResponse = await expectStatus(
+    `http://localhost:${PROD_PORT}/bundles/${criticalBundle.file}`,
+    200
+  );
+  const unhashedCacheControl = unhashedResponse.headers.get('cache-control') || '';
+  assert.match(unhashedCacheControl, /no-store/i);
+
+  const hashedResponse = await expectStatus(
+    `http://localhost:${PROD_PORT}/bundles/${criticalBundle.file}?v=${criticalBundle.hash}`,
+    200
+  );
+  const hashedCacheControl = hashedResponse.headers.get('cache-control') || '';
+  assert.match(hashedCacheControl, /immutable/i);
+});
+
 async function assertPublicEnvContract(response, expectedMode) {
   const cacheControl = response.headers.get('cache-control') || '';
   assert.match(cacheControl, /no-store/i);

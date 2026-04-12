@@ -154,7 +154,14 @@ app.use('/bundles/', (req, res, next) => {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
         if (runMode === 'production') {
-          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          const hasVersionQuery = req.originalUrl.includes('?v=');
+          if (hasVersionQuery) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          } else {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+          }
         } else {
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
           res.setHeader('Pragma', 'no-cache');
