@@ -1,15 +1,73 @@
 <section class="charts-page">
   <header class="charts-header">
     <h1>Charts Playground</h1>
-    <p>Simple Chart.js render with dynamic updates and sanitized labels.</p>
+    <p>Chart.js showcase with multiple chart types, live updates, and sanitized labels.</p>
   </header>
 
   <div class="charts-controls">
-    <button class="charts-update-button" type="button">Update chart data</button>
+    <button class="charts-update-button" type="button">Refresh showcase data</button>
+    <label class="charts-control">
+      <span>Revenue intensity</span>
+      <input class="charts-intensity-input" type="range" min="0.6" max="1.6" step="0.1" value="1" />
+    </label>
+    <label class="charts-control">
+      <span>Traffic curve</span>
+      <select class="charts-line-style-select">
+        <option value="smooth" selected>Smooth</option>
+        <option value="sharp">Sharp</option>
+        <option value="stepped">Stepped</option>
+      </select>
+    </label>
+    <label class="charts-control charts-control-toggle">
+      <input class="charts-fill-toggle" type="checkbox" checked />
+      <span>Fill traffic area</span>
+    </label>
   </div>
 
-  <div class="charts-canvas-wrap">
-    <canvas class="charts-canvas" aria-label="Demo chart" role="img"></canvas>
+  <div class="charts-grid">
+    <article class="charts-card">
+      <header class="charts-card-header">
+        <h2>Revenue Bars</h2>
+        <p>Quarterly revenue comparison with strong categorical colors.</p>
+      </header>
+      <div class="charts-canvas-wrap">
+        <canvas class="charts-canvas" data-chart="revenue" aria-label="Revenue bar chart" role="img"></canvas>
+      </div>
+    </article>
+
+    <article class="charts-card">
+      <header class="charts-card-header">
+        <h2>Traffic Trend</h2>
+        <p>Line chart for weekly sessions with a soft filled area.</p>
+      </header>
+      <div class="charts-canvas-wrap">
+        <canvas class="charts-canvas" data-chart="traffic" aria-label="Traffic line chart" role="img"></canvas>
+      </div>
+    </article>
+
+    <article class="charts-card">
+      <header class="charts-card-header">
+        <h2>Channel Mix</h2>
+        <p>Doughnut chart to compare acquisition sources at a glance.</p>
+      </header>
+      <div class="charts-canvas-wrap">
+        <canvas class="charts-canvas" data-chart="channels" aria-label="Channel doughnut chart" role="img"></canvas>
+      </div>
+    </article>
+
+    <article class="charts-card">
+      <header class="charts-card-header">
+        <h2>Team Radar</h2>
+        <p>Radar chart showing capability balance across core product areas.</p>
+      </header>
+      <div class="charts-canvas-wrap">
+        <canvas class="charts-canvas" data-chart="team" aria-label="Team radar chart" role="img"></canvas>
+      </div>
+    </article>
+  </div>
+
+  <div class="charts-interaction" aria-live="polite">
+    Click a revenue bar to inspect that quarter and use the controls above to reshape the charts.
   </div>
 
   <div class="charts-sanitize" aria-live="polite"></div>

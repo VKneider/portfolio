@@ -4,7 +4,7 @@ slice-charts {
 }
 
 .charts-page {
-  max-width: 880px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 1.5rem;
   display: grid;
@@ -21,7 +21,63 @@ slice-charts {
 
 .charts-controls {
   display: flex;
+  flex-wrap: wrap;
+  align-items: end;
   gap: 0.75rem;
+}
+
+.charts-control {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 180px;
+}
+
+.charts-control span {
+  font-size: 0.95rem;
+}
+
+.charts-control input[type='range'],
+.charts-control select {
+  width: 100%;
+}
+
+.charts-control-toggle {
+  display: flex;
+  align-items: center;
+  min-width: auto;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--primary-color-shade);
+  border-radius: var(--border-radius-slice);
+  background: var(--secondary-background-color);
+}
+
+.charts-control-toggle input {
+  margin: 0;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.charts-card {
+  display: grid;
+  gap: 0.75rem;
+  background: var(--secondary-background-color);
+  border: 1px solid var(--primary-color-shade);
+  border-radius: var(--border-radius-slice);
+  padding: 1rem;
+}
+
+.charts-card-header {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.charts-card-header h2,
+.charts-card-header p {
+  margin: 0;
 }
 
 .charts-update-button {
@@ -34,15 +90,16 @@ slice-charts {
 }
 
 .charts-canvas-wrap {
-  background: var(--secondary-background-color);
-  border: 1px solid var(--primary-color-shade);
+  background: var(--tertiary-background-color);
+  border: 1px solid color-mix(in srgb, var(--primary-color-shade) 70%, transparent);
   border-radius: var(--border-radius-slice);
   padding: 0.9rem;
+  min-height: 260px;
 }
 
 .charts-canvas {
   width: 100%;
-  min-height: 320px;
+  min-height: 240px;
 }
 
 .charts-sanitize {
@@ -50,4 +107,21 @@ slice-charts {
   border-radius: var(--border-radius-slice);
   background: var(--tertiary-background-color);
   padding: 0.75rem;
+}
+
+.charts-interaction {
+  border: 1px solid color-mix(in srgb, var(--primary-color-shade) 70%, transparent);
+  border-radius: var(--border-radius-slice);
+  background: color-mix(in srgb, var(--tertiary-background-color) 85%, transparent);
+  padding: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .charts-page {
+    padding: 1rem;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
 }
