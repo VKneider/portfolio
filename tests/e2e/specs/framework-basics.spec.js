@@ -2,6 +2,21 @@ import { test, expect } from '@playwright/test';
 
 const SLICE_INIT_TIMEOUT = 15_000;
 
+async function waitForSliceRouter(page) {
+  await page.waitForFunction(
+    () => Boolean(window.slice?.router && typeof window.slice.router.navigate === 'function'),
+    { timeout: SLICE_INIT_TIMEOUT }
+  );
+}
+
+async function navigateWithSliceRouter(page, targetPath) {
+  await waitForSliceRouter(page);
+  await page.evaluate(async (path) => {
+    await window.slice.router.navigate(path);
+  }, targetPath);
+  await expect(page).toHaveURL(new RegExp(`${targetPath.replace('/', '\\/')}(?:$|[?#])`));
+}
+
 function setupErrorCollector(page) {
   const errors = [];
 
@@ -32,7 +47,7 @@ function getFatalErrors(errors) {
 
 function getDomPurifyFatalErrors(errors) {
   return errors.filter(({ text }) =>
-    /sanitize\s+is\s+undefined|Error creating instance DomPurify/i.test(text)
+    /dompurify|sanitize\s+is\s+undefined|error\s+creating\s+instance\s+dompurify/i.test(text)
   );
 }
 
@@ -64,7 +79,7 @@ test.describe('Framework basics', () => {
       { timeout: SLICE_INIT_TIMEOUT }
     );
 
-    await page.goto('/dompurify');
+    await navigateWithSliceRouter(page, '/dompurify');
 
     const demoRoot = page.locator('.dompurify');
     await expect(demoRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
@@ -91,8 +106,8 @@ test.describe('Framework basics', () => {
     expect(sanitizedOutput).not.toContain('<script>');
     expect(sanitizedOutput?.trim()).not.toBe(rawPayload);
 
-    await page.goto('/');
-    await page.goto('/dompurify');
+    await navigateWithSliceRouter(page, '/');
+    await navigateWithSliceRouter(page, '/dompurify');
     await expect(demoRoot).toBeVisible();
 
     const revisitPayload = `<p>revisit-check</p><img src="x" onerror="alert('revisit')" />`;
@@ -108,6 +123,97 @@ test.describe('Framework basics', () => {
     expect(revisitSanitizedOutput).toContain('revisit-check');
     expect(revisitSanitizedOutput).not.toContain('onerror=');
     expect(revisitSanitizedOutput?.trim()).not.toBe(revisitPayload);
+
+    const fatalErrors = getFatalErrors(errors);
+    const domPurifyFatal = getDomPurifyFatalErrors(fatalErrors);
+    expect(domPurifyFatal).toHaveLength(0);
+  });
+
+  test('production mode: /charts renders fixture and update interaction sanitizes label', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'production-mode', 'Only runs against the production-mode server');
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    await navigateWithSliceRouter(page, '/charts');
+
+    const chartsPage = page.locator('.charts-page');
+    await expect(chartsPage).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
+
+    const chartCanvas = chartsPage.locator('.charts-canvas');
+    await expect(chartCanvas).toBeVisible();
+
+    const sanitizeBox = chartsPage.locator('.charts-sanitize');
+    await expect(sanitizeBox).toContainText('Initial sanitize check:', { timeout: SLICE_INIT_TIMEOUT });
+
+    const updateButton = chartsPage.getByRole('button', { name: /update chart data/i });
+    await expect(updateButton).toBeVisible();
+    await updateButton.click();
+
+    await expect(sanitizeBox).toContainText('Sanitized label applied:', { timeout: SLICE_INIT_TIMEOUT });
+    const sanitizeText = (await sanitizeBox.textContent()) || '';
+    expect(sanitizeText).not.toContain('<img');
+    expect(sanitizeText).toContain('Updated chart dataset');
+  });
+
+  test('production mode: /dompurify -> /charts -> /dompurify remains stable with no runtime DOMPurify fatals', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'production-mode', 'Only runs against the production-mode server');
+
+    const errors = setupErrorCollector(page);
+
+    await page.goto('/');
+    await page.waitForFunction(
+      () => window.slice && window.slice._mode !== undefined,
+      { timeout: SLICE_INIT_TIMEOUT }
+    );
+
+    await navigateWithSliceRouter(page, '/dompurify');
+    const domPurifyRoot = page.locator('.dompurify');
+    await expect(domPurifyRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
+
+    const inputArea = domPurifyRoot.locator('textarea');
+    const sanitizeButton = domPurifyRoot.getByRole('button', { name: /sanitize/i });
+    const status = domPurifyRoot.getByText(/^Status:/);
+    const sanitizedCodeOutput = domPurifyRoot
+      .locator('p', { hasText: 'Sanitized HTML (string output):' })
+      .locator('xpath=following-sibling::pre[1]');
+
+    const domPurifyPayload = `<div>cross-nav</div><script>alert('xss')</script>`;
+    await inputArea.fill(domPurifyPayload);
+    await sanitizeButton.click();
+
+    await expect(status).toContainText('Status:', { timeout: SLICE_INIT_TIMEOUT });
+    const firstSanitizedOutput = await sanitizedCodeOutput.textContent();
+    expect(firstSanitizedOutput).toBeTruthy();
+    expect(firstSanitizedOutput).not.toContain('<script>');
+
+    await navigateWithSliceRouter(page, '/charts');
+    const chartsPage = page.locator('.charts-page');
+    await expect(chartsPage).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
+
+    const chartsUpdateButton = chartsPage.getByRole('button', { name: /update chart data/i });
+    const chartsSanitizeBox = chartsPage.locator('.charts-sanitize');
+    await chartsUpdateButton.click();
+    await expect(chartsSanitizeBox).toContainText('Sanitized label applied:', { timeout: SLICE_INIT_TIMEOUT });
+
+    await navigateWithSliceRouter(page, '/dompurify');
+    await expect(domPurifyRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
+
+    const revisitPayload = `<p>dompurify-after-charts</p><img src="x" onerror="alert('revisit')" />`;
+    await inputArea.fill(revisitPayload);
+    await sanitizeButton.click();
+
+    const revisitStatusText = (await status.textContent()) || '';
+    expect(revisitStatusText).toMatch(/status:/i);
+    expect(revisitStatusText).not.toMatch(/no suspicious changes/i);
+
+    const revisitSanitizedOutput = await sanitizedCodeOutput.textContent();
+    expect(revisitSanitizedOutput).toBeTruthy();
+    expect(revisitSanitizedOutput).toContain('dompurify-after-charts');
+    expect(revisitSanitizedOutput).not.toContain('onerror=');
 
     const fatalErrors = getFatalErrors(errors);
     const domPurifyFatal = getDomPurifyFatalErrors(fatalErrors);
