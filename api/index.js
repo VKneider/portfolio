@@ -10,6 +10,7 @@ import {
   suspiciousRequestLogger
 } from './middleware/securityMiddleware.js';
 import { createPublicEnvProvider } from './utils/publicEnvResolver.js';
+import discoverThemes from './utils/themesDiscovery.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,6 +18,9 @@ import sliceConfig from '../src/sliceConfig.json' with { type: 'json' };
 
 let server;
 const app = express();
+let registeredThemes ;
+
+registeredThemes = await discoverThemes();
 
 // Parsear argumentos de línea de comandos
 const args = process.argv.slice(2);
@@ -37,6 +41,8 @@ function sendMainHTML(res) {
     }
   });
 }
+
+
 
 // Obtener puerto desde process.env.PORT con fallback a sliceConfig.json
 const PORT = process.env.PORT || sliceConfig.server?.port || 3001;
@@ -259,6 +265,10 @@ app.get('/api/status', (req, res) => {
       description: 'Zero-config security - works with any domain'
     }
   });
+});
+
+app.get('/api/themes', (req, res) => {
+  res.json(Array.from(registeredThemes));
 });
 
 

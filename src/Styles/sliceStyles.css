@@ -1,11 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Roboto&display=swap");
+/**
+ * vkneider.dev — Global Styles
+ * Las variables de color y tema vienen de vkneider-theme.css (importar antes que este archivo).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
   --border-radius-slice: 5px;
   --slice-border: 1px;
 }
+
 body {
   margin: 0;
   background-color: var(--primary-background-color);
@@ -14,6 +21,7 @@ body {
 body.results-open {
   overflow: hidden;
 }
+
 .caret {
   cursor: pointer;
   width: 0;
@@ -23,15 +31,19 @@ body.results-open {
   border-top: 6px solid;
   transition: transform 0.3s;
 }
+
 .caret_open {
   transform: rotate(180deg);
 }
+
 *::-webkit-scrollbar {
   width: 5px;
 }
+
 *::-webkit-scrollbar:horizontal {
   height: 3px;
 }
+
 *::-webkit-scrollbar-thumb {
   background: var(--secondary-color);
   border-radius: var(--border-radius-slice);
@@ -54,6 +66,9 @@ body {
   color: var(--font-primary-color);
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 body {
@@ -70,6 +85,59 @@ html, body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Monospace para código, datos técnicos y comandos */
+code, pre, kbd, samp, .mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+code {
+  background: var(--secondary-background-color);
+  color: var(--primary-color);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-slice);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--secondary-background-color);
+  color: var(--font-primary-color);
+  padding: 1rem;
+  border-radius: var(--border-radius-slice);
+  overflow-x: auto;
+  border-left: 3px solid var(--primary-color);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Headings — peso medium (500) según manual de marca, no bold (700) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--font-primary-color);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Eyebrow — etiqueta característica del branding (sobre encabezados de sección) */
+.eyebrow {
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  letter-spacing: 4px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 /* Global animations */
@@ -153,7 +221,7 @@ a {
 }
 
 a:hover {
-  color: var(--secondary-color);
+  color: var(--primary-color-shade);
   text-decoration: underline;
 }
 
@@ -192,7 +260,7 @@ img[loading="lazy"].loaded {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
+  background: var(--primary-color-shade);
 }
 
 /* Print styles */
@@ -291,7 +359,8 @@ slice-navbar {
   color: var(--primary-color);
   text-align: center;
   margin-bottom: 3rem;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   position: relative;
   text-shadow:
     0 0 12px rgba(var(--primary-color-rgb), 0.4),

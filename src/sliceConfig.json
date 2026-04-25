@@ -9,8 +9,8 @@
     },
     "themeManager": {
         "enabled":true,
-        "defaultTheme": "CobaltBlue",
-        "saveThemeLocally": true,
+        "defaultTheme": "Dark",
+        "saveThemeLocally": false,
         "useBrowserTheme": false
     },
     "logger": {

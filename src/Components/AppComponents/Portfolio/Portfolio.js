@@ -15,64 +15,18 @@ export default class Portfolio extends HTMLElement {
    }
 
    async init() {
-      // Create navigation bar
-      const themes = [
-         {
-            name: 'EmeraldLight',
-            colors: { primary: '#10B981', secondary: '#FEFFFE' },
-            description: 'Official Slice.js theme'
-         },
-         {
-            name: 'Light',
-            colors: { primary: '#F3F4F6', secondary: '#374151' },
-            description: 'Clean and bright'
-         },
-         {
-            name: 'Dark',
-            colors: { primary: '#18181B', secondary: '#F3F4F6' },
-            description: 'Easy on the eyes'
-         },
-         {
-            name: 'CobaltBlue',
-            colors: { primary: '#1D4ED8', secondary: '#F97316' },
-            description: 'Professional blue with orange accents and light background'
-         },
-         {
-            name: 'Purple',
-            colors: { primary: '#9333EA', secondary: '#10B981' },
-            description: 'Creative purple'
-         },
-         {
-            name: "NavyYellow",
-            colors: { primary: '#020617', secondary: '#FCD34D' },
-            description: 'Navy blue with yellow accents'
-         },
-         {
-            name: "CrimsonRed",
-            colors: { primary: '#990000', secondary: '#4A4A4A' },
-            description: 'Elegant deep crimson'
-         },
-         {
-            name: "NeonCyberpunk",
-            colors: { primary: '#FF00FF', secondary: '#00FFFF' },
-            description: 'High contrast neon madness'
-         },
-         {
-            name: "CandyPop",
-            colors: { primary: '#FF69B4', secondary: '#87CEEB' },
-            description: 'Sweet and bubbly pastels'
-         },
-         {
-            name: "ToxicSlime",
-            colors: { primary: '#CCFF00', secondary: '#9D00FF' },
-            description: 'Warning: Radioactive colors'
-         },
-         {
-            name: "RetroVapor",
-            colors: { primary: '#FF71CE', secondary: '#01CDFE' },
-            description: 'Aesthetic 80s vibes'
+
+      let themes = [];
+
+         try {
+            const response = await fetch('/api/themes');
+            if (response.ok) {
+               themes = await response.json();
+            }
+         } catch (error) {
+            console.error('Error fetching themes from API:', error);
          }
-      ];
+
 
       const themeSelector = await slice.build('ThemeSelector', {
          themes

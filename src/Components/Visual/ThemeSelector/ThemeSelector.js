@@ -126,7 +126,6 @@ export default class ThemeSelector extends HTMLElement {
          </div>
          <div class="theme-info">
             <div class="theme-item-name">${theme.name}</div>
-            <div class="theme-description">${theme.description}</div>
          </div>
          <div class="check-icon">✓</div>
       `;

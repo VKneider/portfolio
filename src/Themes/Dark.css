@@ -1,42 +1,43 @@
 :root {
-  --font-primary-color: #fff;
-
-  /** primary **/
-  --primary-color: #0066ff;
-  --primary-color-rgb: rgb(0, 102, 255);
-  /* Se reemplaza el negro puro por un gris muy oscuro, más cálido y agradable */
-  --primary-background-color: #282828; /* antes: #000 */
-  --primary-color-contrast: #000;
-  /* Ajustamos la sombra para que armonice con el fondo aclarado */
-  --primary-color-shade: #383838; /* antes: #222 */
-
-  /** secondary **/
-  --secondary-color: #63ccfd;
-  --secondary-color-rgb: rgb(99, 204, 253);
-  /* Se aclara el fondo secundario para suavizar el efecto general */
-  --secondary-background-color: #333333; /* antes: #222 */
-  --secondary-color-contrast: #fff;
-
-  /** tertiary **/
-  /* Se levanta ligeramente el fondo terciario para mantener la coherencia visual */
-  --tertiary-background-color: #555555; /* antes: #444 */
-
-  /** success **/
-  --success-color: #00ff40;
-  --success-contrast: #000;
-
-  /** warning **/
-  --warning-color: #ffff40;
-  --warning-contrast: #000;
-
-  /** danger **/
-  --danger-color: #ff0000;
-  --danger-contrast: #000;
-
-  /** medium **/
-  --medium-color: #92949c;
-  --medium-contrast: #fff;
-
-  /* Disabled color */
-  --disabled-color: #7f7f7f;
+/* Tipografía con máximo contraste sobre fondo oscuro */
+  --font-primary-color: #E0E7FF;            /* Lavanda muy clara para títulos y prosa */
+  --font-secondary-color: #C7D2FE;          /* Indigo claro para texto secundario */
+ 
+  /** Primary - Ámbar suave (acento principal en oscuro) **/
+  --primary-color: #FDBA74;                 /* Ámbar suave, cálido y legible sobre indigo */
+  --primary-color-rgb: 253, 186, 116;
+  --primary-background-color: #1E1B4B;      /* Indigo profundo como canvas oscuro */
+  --primary-color-contrast: #1E1B4B;        /* Texto indigo sobre botones ámbar */
+  --primary-color-shade: #F97316;           /* Naranja saturado para hover, focus, énfasis */
+ 
+  /** Secondary - Naranja saturado (énfasis máximo en oscuro) **/
+  --secondary-color: #F97316;               /* Naranja saturado para CTAs principales */
+  --secondary-color-rgb: 249, 115, 22;
+  --secondary-background-color: #312E81;    /* Indigo medio para tarjetas y superficies */
+  --secondary-color-contrast: #FFFFFF;      /* Texto blanco sobre botones naranja */
+ 
+  /** Tertiary - Indigo más profundo **/
+  --tertiary-background-color: #3730A3;     /* Indigo profundo para bordes y divisores */
+ 
+  /** Success - Verde esmeralda más luminoso **/
+  --success-color: #10B981;                 /* Esmeralda más brillante para destacar sobre oscuro */
+  --success-contrast: #FFFFFF;
+ 
+  /** Warning - Ámbar brillante **/
+  --warning-color: #F59E0B;                 /* Ámbar saturado, visible sobre indigo */
+  --warning-contrast: #1E1B4B;              /* Texto indigo sobre warning */
+ 
+  /** Danger - Rojo más luminoso **/
+  --danger-color: #EF4444;                  /* Rojo claro y vibrante sobre oscuro */
+  --danger-contrast: #FFFFFF;
+ 
+  /** Medium - Indigo lavanda muted **/
+  --medium-color: #818CF8;                  /* Indigo claro como gris azulado en oscuro */
+  --medium-contrast: #FFFFFF;
+ 
+  /** Disabled - Indigo muted **/
+  --disabled-color: #4F46E5;                /* Indigo apagado pero distinguible */
+ 
+  /** Accent - Ámbar suave decorativo (mismo en ambos modos) **/
+  --accent-color: #FDBA74;                  /* Ámbar para fondos de elementos llenos */
 }

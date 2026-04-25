@@ -1,40 +1,34 @@
 :root {
-  /* Tipografía en escala de grises */
-  --font-primary-color: #1a1a1a;
-  --font-secondary-color: #666666;
-  
-  /** Primary - Gris oscuro como color principal **/
-  --primary-color: #4a4a4a;
-  --primary-color-rgb: 74, 74, 74;
-  --primary-background-color: #ffffff;
-  --primary-color-contrast: #ffffff;
-  --primary-color-shade: #e0e0e0;
-  
-  /** Secondary - Gris medio **/
-  --secondary-color: #787878;
-  --secondary-color-rgb: 120, 120, 120;
-  --secondary-background-color: #f5f5f5;
-  --secondary-color-contrast: #ffffff;
-  
-  /** Tertiary - Gris claro **/
-  --tertiary-background-color: #eeeeee;
-  
-  /** Success - Verde sutil pero visible **/
-  --success-color: #28a745;
-  --success-contrast: #ffffff;
-  
-  /** Warning - Naranja sutil **/
-  --warning-color: #ffc107;
-  --warning-contrast: #1a1a1a;
-  
-  /** Danger - Rojo sutil **/
-  --danger-color: #dc3545;
-  --danger-contrast: #ffffff;
-  
-  /** Medium - Gris medio neutro **/
-  --medium-color: #6c757d;
-  --medium-contrast: #ffffff;
-
-  /** Disabled - Gris claro **/
-  --disabled-color: #cccccc;
+  /* Tipografía con máximo contraste */
+  --font-primary-color: #1E1B4B;            /* Indigo profundo para títulos y prosa principal */
+  --font-secondary-color: #3730A3;          /* Indigo medio para texto secundario y subtítulos */
+ 
+  --primary-color: #F97316;                 /* Naranja saturado, vivo y profesional */
+  --primary-color-rgb: 249, 115, 22;
+  --primary-background-color: #FFFFFF;      /* Blanco puro como canvas */
+  --primary-color-contrast: #FFFFFF;        /* Texto sobre botones primarios */
+  --primary-color-shade: #EA580C;           /* Naranja profundo para hover, focus, bordes */
+ 
+  --secondary-color: #1E1B4B;               /* Indigo profundo como complemento del naranja */
+  --secondary-color-rgb: 30, 27, 75;
+  --secondary-background-color: #F5F3FF;    /* Indigo violeta muy claro para superficies */
+  --secondary-color-contrast: #FFFFFF;      /* Texto sobre fondo indigo */
+ 
+  --tertiary-background-color: #FFF7ED;     /* Tinte naranja suave para banners y destacados */
+ 
+  --success-color: #059669;                 /* Verde esmeralda contrastante sobre blanco */
+  --success-contrast: #FFFFFF;
+ 
+  --warning-color: #D97706;                 /* Ámbar dorado, distinto del naranja primario */
+  --warning-contrast: #FFFFFF;
+ 
+  --danger-color: #DC2626;                  /* Rojo intenso y claro sobre blanco */
+  --danger-contrast: #FFFFFF;
+ 
+  --medium-color: #6366F1;                  /* Indigo medio coherente con la paleta */
+  --medium-contrast: #FFFFFF;
+ 
+  --disabled-color: #C7D2FE;                /* Indigo claro visible pero apagado */
+ 
+  --accent-color: #FDBA74;                  /* Ámbar para fondos de elementos llenos (badges, banners) */
 }
