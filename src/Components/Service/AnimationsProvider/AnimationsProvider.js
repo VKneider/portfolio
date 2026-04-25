@@ -1,13 +1,9 @@
-// Singleton instance
-let instance = null;
 
 import { animate } from '../../../libs/animejs/anime.esm.js';
 
-class AnimationsProvider {
+export default class AnimationsProvider {
   constructor(props) {
-    if (instance) return instance;
     this.props = props || {};
-    instance = this;
   }
 
   // Fade in animation
@@ -46,6 +42,3 @@ class AnimationsProvider {
     return animate(element, animeOptions);
   }
 }
-
-const AnimationsProviderSingleton = new AnimationsProvider();
-export default AnimationsProviderSingleton;

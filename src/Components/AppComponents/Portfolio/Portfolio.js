@@ -8,6 +8,7 @@ export default class Portfolio extends HTMLElement {
       this.$footer = this.querySelector('.portfolio-footer');
       this.$socialLinks = this.querySelector('.social-links');
       this.$copyright = this.querySelector('.copyright');
+
       
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
@@ -16,6 +17,7 @@ export default class Portfolio extends HTMLElement {
 
    async init() {
 
+      const animationsProvider = await slice.build("AnimationsProvider", {sliceId:"animations-provider"});
       let themes = [];
 
          try {
