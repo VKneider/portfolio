@@ -1,20 +1,20 @@
 :root {
 /* Tipografía con máximo contraste sobre fondo oscuro */
-  --font-primary-color: #E0E7FF;            /* Lavanda muy clara para títulos y prosa */
+ --font-primary-color: #E0E7FF;            /* Lavanda muy clara para títulos y prosa */
   --font-secondary-color: #C7D2FE;          /* Indigo claro para texto secundario */
  
-  /** Primary - Ámbar suave (acento principal en oscuro) **/
-  --primary-color: #FDBA74;                 /* Ámbar suave, cálido y legible sobre indigo */
-  --primary-color-rgb: 253, 186, 116;
+  /** Primary - Naranja saturado (acento principal en oscuro) **/
+  --primary-color: #F97316;                 /* Naranja saturado, dominante de marca */
+  --primary-color-rgb: 249, 115, 22;
   --primary-background-color: #1E1B4B;      /* Indigo profundo como canvas oscuro */
-  --primary-color-contrast: #1E1B4B;        /* Texto indigo sobre botones ámbar */
-  --primary-color-shade: #F97316;           /* Naranja saturado para hover, focus, énfasis */
+  --primary-color-contrast: #FFFFFF;        /* Texto blanco sobre botones naranja */
+  --primary-color-shade: #EA580C;           /* Naranja profundo para hover, focus */
  
-  /** Secondary - Naranja saturado (énfasis máximo en oscuro) **/
-  --secondary-color: #F97316;               /* Naranja saturado para CTAs principales */
-  --secondary-color-rgb: 249, 115, 22;
+  /** Secondary - Ámbar suave (CTA puntual / énfasis máximo) **/
+  --secondary-color: #FDBA74;               /* Ámbar suave para CTAs principales y datos clave */
+  --secondary-color-rgb: 253, 186, 116;
   --secondary-background-color: #312E81;    /* Indigo medio para tarjetas y superficies */
-  --secondary-color-contrast: #FFFFFF;      /* Texto blanco sobre botones naranja */
+  --secondary-color-contrast: #1E1B4B;      /* Texto indigo sobre botones ámbar */
  
   /** Tertiary - Indigo más profundo **/
   --tertiary-background-color: #3730A3;     /* Indigo profundo para bordes y divisores */
@@ -40,4 +40,5 @@
  
   /** Accent - Ámbar suave decorativo (mismo en ambos modos) **/
   --accent-color: #FDBA74;                  /* Ámbar para fondos de elementos llenos */
+
 }
