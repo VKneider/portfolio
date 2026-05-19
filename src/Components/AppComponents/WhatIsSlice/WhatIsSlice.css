@@ -1,6 +1,6 @@
 slice-whatisslice {
   font-family: var(--font-family);
-  color: var(--font-primary-color);
+  color: var(--text-1);
 }
 
 slice-whatisslice .whatisslice-container {
@@ -10,22 +10,22 @@ slice-whatisslice .whatisslice-container {
 }
 
 slice-whatisslice h1 {
-  color: var(--primary-color);
+  color: var(--heading);
   font-size: 2.5em;
   margin-bottom: 30px;
   text-align: center;
 }
 
 slice-whatisslice h2 {
-  color: var(--primary-color);
+  color: var(--heading);
   font-size: 1.8em;
   margin: 40px 0 20px;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--secondary-background-color);
+  border-bottom: 1px solid var(--surface-1);
 }
 
 slice-whatisslice h3 {
-  color: var(--font-primary-color);
+  color: var(--text-1);
   font-size: 1.4em;
   margin: 20px 0 15px;
 }
@@ -74,12 +74,12 @@ slice-whatisslice .slice-logo {
   height: auto;
   transition: transform 0.3s ease;
   /* Apply theme's primary color using CSS filter */
-  filter: brightness(0) saturate(100%) drop-shadow(0 0 0.1rem var(--primary-color));
+  filter: brightness(0) saturate(100%) drop-shadow(0 0 0.1rem var(--accent));
 }
 
 slice-whatisslice .slice-logo-container:hover .slice-logo {
   transform: scale(1.05);
-  filter: brightness(0) saturate(100%) drop-shadow(0 0 0.2rem var(--primary-color));
+  filter: brightness(0) saturate(100%) drop-shadow(0 0 0.2rem var(--accent));
 }
 
 /* Tabs */
@@ -87,13 +87,13 @@ slice-whatisslice .tabs-container {
   margin: 40px 0;
   border-radius: var(--border-radius-slice);
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.1);
 }
 
 slice-whatisslice .tabs {
    display: flex;
-   background-color: var(--secondary-background-color);
-   border-bottom: 1px solid var(--primary-color-shade);
+   background-color: var(--surface-1);
+   border-bottom: 1px solid var(--accent);
    flex-wrap: wrap;
    gap: 4px;
 }
@@ -102,7 +102,7 @@ slice-whatisslice .tab {
    padding: 15px 20px;
    cursor: pointer;
    transition: all 0.3s ease;
-   font-weight: bold;
+   font-weight: 600;
    text-align: center;
    flex: 1;
    border-radius: 10px 10px 0 0;
@@ -110,17 +110,17 @@ slice-whatisslice .tab {
 }
 
 slice-whatisslice .tab:hover {
-   background-color: var(--primary-background-color);
-   color: var(--primary-color);
+   background-color: var(--bg);
+   color: var(--accent);
 }
 
 slice-whatisslice .tab.active {
-   background-color: var(--primary-color);
-   color: var(--primary-color-contrast);
+   background-color: var(--accent);
+   color: var(--on-accent);
 }
 
 slice-whatisslice .tab-contents {
-   background-color: var(--primary-background-color);
+   background-color: var(--bg);
    padding: 25px;
    min-height: 400px;
 }
@@ -143,22 +143,22 @@ slice-whatisslice .principles-grid {
 }
 
 slice-whatisslice .principle {
-   background-color: var(--secondary-background-color);
+   background-color: var(--surface-1);
    padding: 20px;
    border-radius: var(--border-radius-slice);
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   box-shadow: 0 2px 4px rgba(var(--accent-rgb), 0.1);
    transition: transform 0.3s ease;
 }
 
 slice-whatisslice .principle:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.1);
 }
 
 slice-whatisslice .principle h3 {
-  color: var(--primary-color);
+  color: var(--heading);
   margin-top: 0;
-  border-bottom: 1px solid var(--primary-color-shade);
+  border-bottom: 1px solid var(--accent);
   padding-bottom: 8px;
 }
 
@@ -179,13 +179,13 @@ slice-whatisslice .features-list li:before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--primary-color);
-  font-weight: bold;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 slice-whatisslice .feature-highlight {
-  color: var(--primary-color);
-  font-weight: bold;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* Architecture Diagram */
@@ -215,18 +215,18 @@ slice-whatisslice .component-box p {
 }
 
 slice-whatisslice .component-box.visual {
-  background-color: rgba(var(--primary-color-rgb), 0.15);
-  border: 2px solid var(--primary-color);
+  background-color: rgba(var(--accent-rgb), 0.15);
+  border: 2px solid var(--accent);
 }
 
 slice-whatisslice .component-box.structural {
-  background-color: rgba(var(--secondary-color-rgb), 0.15);
-  border: 2px solid var(--secondary-color);
+  background-color: rgba(var(--accent-rgb), 0.15);
+  border: 2px solid var(--accent);
 }
 
 slice-whatisslice .component-box.service {
-  background-color: var(--secondary-background-color);
-  border: 2px solid var(--font-primary-color);
+  background-color: var(--surface-1);
+  border: 2px solid var(--text-1);
 }
 
 slice-whatisslice .component-description {
@@ -235,11 +235,11 @@ slice-whatisslice .component-description {
   top: 50%;
   transform: translateY(-50%);
   width: 250px;
-  background-color: var(--primary-background-color);
-  border: 1px solid var(--primary-color-shade);
+  background-color: var(--bg);
+  border: 1px solid var(--accent);
   border-radius: var(--border-radius-slice);
   padding: 15px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.2);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -253,12 +253,12 @@ slice-whatisslice .component-description.visible {
 
 slice-whatisslice .component-description h4 {
   margin-top: 0;
-  color: var(--primary-color);
+  color: var(--heading);
 }
 
 slice-whatisslice .component-description code {
   display: block;
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   padding: 5px;
   margin-top: 10px;
   font-family: monospace;
@@ -281,7 +281,7 @@ slice-whatisslice .component-section {
 }
 
 slice-whatisslice .code-example {
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   border-radius: var(--border-radius-slice);
   overflow: hidden;
   margin: 20px 0;
@@ -312,7 +312,7 @@ slice-whatisslice .lifecycle-list li:before {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--primary-color);
+  color: var(--accent);
   font-size: 1.5em;
   line-height: 0.8;
 }
@@ -326,14 +326,14 @@ slice-whatisslice .code-files {
 
 slice-whatisslice .code-file {
   flex: 1;
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   border-radius: var(--border-radius-slice);
   overflow: hidden;
 }
 
 slice-whatisslice .code-file h4 {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
+  background-color: var(--accent);
+  color: var(--on-accent);
   margin: 0;
   padding: 8px 15px;
 }
@@ -347,20 +347,20 @@ slice-whatisslice .benefits-grid {
 }
 
 slice-whatisslice .benefit {
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   padding: 20px;
   border-radius: var(--border-radius-slice);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(var(--accent-rgb), 0.1);
   transition: all 0.3s ease;
 }
 
 slice-whatisslice .benefit:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.1);
 }
 
 slice-whatisslice .benefit h3 {
-  color: var(--primary-color);
+  color: var(--heading);
   margin-top: 0;
 }
 
@@ -369,7 +369,7 @@ slice-whatisslice .benefit h3 {
 
 /* Get Started Section */
 slice-whatisslice .get-started-section {
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   border-radius: var(--border-radius-slice);
   padding: 30px;
   margin: 40px 0 20px;
@@ -384,12 +384,12 @@ slice-whatisslice .action-buttons {
 }
 
 slice-whatisslice .action-button {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
+  background-color: var(--accent);
+  color: var(--on-accent);
   text-decoration: none;
   padding: 12px 25px;
   border-radius: var(--border-radius-slice);
-  font-weight: bold;
+  font-weight: 600;
   transition: all 0.3s ease;
   display: inline-block;
   border: none;
@@ -398,16 +398,16 @@ slice-whatisslice .action-button {
 }
 
 slice-whatisslice .action-button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--accent);
   transform: translateY(-3px);
 }
 
 slice-whatisslice .action-button.github {
-  background-color: #333;
+  background-color: var(--surface-2);
 }
 
 slice-whatisslice .action-button.github:hover {
-  background-color: #555;
+  background-color: var(--border);
 }
 
 /* Animations */

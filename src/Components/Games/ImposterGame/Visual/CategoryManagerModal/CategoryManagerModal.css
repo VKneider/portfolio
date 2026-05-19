@@ -1,7 +1,7 @@
 .category-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(var(--accent-rgb), 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,11 +18,11 @@
 
 .category-card {
     width: min(680px, 92vw);
-    background: var(--secondary-background-color);
+    background: var(--surface-1);
     border-radius: calc(var(--border-radius-slice) * 3);
-    border: var(--slice-border) solid var(--primary-color-shade);
+    border: var(--slice-border) solid var(--accent);
     padding: 2rem;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 24px 60px rgba(var(--accent-rgb), 0.25);
     transform: translateY(20px) scale(0.98);
     transition: transform 0.3s ease;
 }
@@ -33,18 +33,18 @@
 
 .category-header h3 {
     margin: 0;
-    color: var(--primary-color);
+    color: var(--heading);
     font-size: 1.4rem;
-    font-weight: 800;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.25);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.25);
     text-align: center;
 }
 
 .category-header p {
     margin: 0.4rem 0 0;
-    color: var(--font-secondary-color);
+    color: var(--text-2);
 }
 
 
@@ -59,28 +59,28 @@
 .category-tab {
     padding: 0.4rem 0.8rem;
     border-radius: 999px;
-    border: var(--slice-border) solid var(--primary-color-shade);
-    background: var(--primary-background-color);
-    color: var(--font-primary-color);
+    border: var(--slice-border) solid var(--accent);
+    background: var(--bg);
+    color: var(--text-1);
     font-size: 0.85rem;
     white-space: nowrap;
     cursor: pointer;
 }
 
 .category-tab.active {
-    background: rgba(var(--primary-color-rgb), 0.15);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    background: rgba(var(--accent-rgb), 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 .category-title-display[contenteditable="true"] {
-    border-bottom: 2px dashed rgba(var(--primary-color-rgb), 0.4);
+    border-bottom: 2px dashed rgba(var(--accent-rgb), 0.4);
     font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--primary-color);
+    font-weight: 600;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.25);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.25);
     margin-bottom: 0.5rem;
     text-align: center;
 }
@@ -90,16 +90,16 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 2px dashed rgba(var(--primary-color-rgb), 0.4);
+    border-bottom: 2px dashed rgba(var(--accent-rgb), 0.4);
 }
 
 .category-section-title {
     font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--primary-color);
+    font-weight: 600;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.25);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.25);
     margin-bottom: 0.5rem;
     text-align: center;
 }
@@ -114,7 +114,7 @@
 .words-divider {
     height: 2px;
     width: 100%;
-    background: rgba(var(--primary-color-rgb), 0.3);
+    background: rgba(var(--accent-rgb), 0.3);
     margin: 0.6rem 0 0.8rem;
 }
 
@@ -160,19 +160,19 @@
     gap: 0.4rem;
     padding: 0.45rem 0.7rem;
     border-radius: 999px;
-    border: var(--slice-border) solid var(--primary-color-shade);
-    background: var(--primary-background-color);
-    color: var(--font-primary-color);
+    border: var(--slice-border) solid var(--accent);
+    background: var(--bg);
+    color: var(--text-1);
     font-size: 0.9rem;
     min-width: 0;
 }
 
 .word-chip.empty {
-    border-color: var(--danger-color);
+    border-color: var(--accent);
 }
 
 .word-chip.duplicate {
-    border-color: var(--warning-color);
+    border-color: var(--accent);
 }
 
 .word-chip input {
@@ -187,20 +187,20 @@
 }
 
 .word-chip input:focus {
-    background: rgba(var(--primary-color-rgb), 0.08);
+    background: rgba(var(--accent-rgb), 0.08);
     border-radius: 999px;
 }
 
 .word-chip input::selection {
-    background: rgba(var(--primary-color-rgb), 0.25);
-    color: var(--font-primary-color);
+    background: rgba(var(--accent-rgb), 0.25);
+    color: var(--text-1);
 }
 
 .word-chip button {
     border: none;
     background: transparent;
-    color: var(--danger-color);
-    font-weight: 700;
+    color: var(--accent);
+    font-weight: 600;
     cursor: pointer;
     padding: 0;
     line-height: 1;

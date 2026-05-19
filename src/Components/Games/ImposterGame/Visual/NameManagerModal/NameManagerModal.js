@@ -55,8 +55,8 @@ export default class NameManagerModal extends HTMLElement {
         this.$addButton = await slice.build('Button', {
             value: '+',
             customColor: {
-                button: 'var(--primary-color)',
-                label: 'var(--secondary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -67,8 +67,8 @@ export default class NameManagerModal extends HTMLElement {
         this.$deleteList = await slice.build('Button', {
             value: 'Eliminar lista',
             customColor: {
-                button: 'var(--danger-color)',
-                label: 'var(--danger-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -79,8 +79,8 @@ export default class NameManagerModal extends HTMLElement {
         this.$save = await slice.build('Button', {
             value: 'Guardar',
             customColor: {
-                button: 'var(--success-color)',
-                label: 'var(--success-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -91,8 +91,8 @@ export default class NameManagerModal extends HTMLElement {
         this.$close = await slice.build('Button', {
             value: 'Cerrar',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {

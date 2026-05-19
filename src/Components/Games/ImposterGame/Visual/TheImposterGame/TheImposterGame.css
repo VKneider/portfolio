@@ -30,15 +30,15 @@ slice-theimpostergame {
 
 .the-imposter-game-container::before {
     background:
-        radial-gradient(circle at 20% 20%, rgba(var(--primary-color-rgb), 0.12), transparent 45%),
-        radial-gradient(circle at 80% 10%, rgba(var(--secondary-color-rgb), 0.12), transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(var(--primary-color-rgb), 0.08), transparent 45%);
+        radial-gradient(circle at 20% 20%, rgba(var(--accent-rgb), 0.12), transparent 45%),
+        radial-gradient(circle at 80% 10%, rgba(var(--accent-rgb), 0.12), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.08), transparent 45%);
 }
 
 .the-imposter-game-container::after {
     background:
-        linear-gradient(120deg, rgba(var(--primary-color-rgb), 0.05), transparent 40%),
-        linear-gradient(300deg, rgba(var(--secondary-color-rgb), 0.06), transparent 50%);
+        linear-gradient(120deg, rgba(var(--accent-rgb), 0.05), transparent 40%),
+        linear-gradient(300deg, rgba(var(--accent-rgb), 0.06), transparent 50%);
     opacity: 0.9;
 }
 
@@ -62,10 +62,10 @@ slice-theimpostergame {
     min-height: 100vh;
     padding: 6rem 4rem;
     background:
-        radial-gradient(circle at 20% 20%, rgba(var(--primary-color-rgb), 0.2), transparent 45%),
-        radial-gradient(circle at 80% 10%, rgba(var(--secondary-color-rgb), 0.18), transparent 50%),
-        linear-gradient(120deg, rgba(var(--secondary-color-rgb), 0.16), transparent 55%),
-        var(--secondary-background-color);
+        radial-gradient(circle at 20% 20%, rgba(var(--accent-rgb), 0.2), transparent 45%),
+        radial-gradient(circle at 80% 10%, rgba(var(--accent-rgb), 0.18), transparent 50%),
+        linear-gradient(120deg, rgba(var(--accent-rgb), 0.16), transparent 55%),
+        var(--surface-1);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -77,8 +77,8 @@ slice-theimpostergame {
     content: '';
     position: absolute;
     inset: 0;
-    border-left: 1px solid rgba(var(--primary-color-rgb), 0.15);
-    border-right: 1px solid rgba(var(--primary-color-rgb), 0.1);
+    border-left: 1px solid rgba(var(--accent-rgb), 0.15);
+    border-right: 1px solid rgba(var(--accent-rgb), 0.1);
     pointer-events: none;
 }
 
@@ -86,7 +86,7 @@ slice-theimpostergame {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(var(--primary-color-rgb), 0.08), transparent 60%);
+    background: radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb), 0.08), transparent 60%);
     animation: pulseHalo 6s ease-in-out infinite;
     pointer-events: none;
 }
@@ -112,28 +112,28 @@ slice-theimpostergame {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(var(--text-1-rgb), 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--text-1-rgb), 0.06) 1px, transparent 1px);
     background-size: 48px 48px;
     opacity: 0.25;
     animation: gridShift 18s linear infinite;
 }
 
 .orb-primary {
-    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.6), transparent 60%);
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.6), transparent 60%);
     top: -60px;
     left: -40px;
 }
 
 .orb-secondary {
-    background: radial-gradient(circle, rgba(var(--secondary-color-rgb), 0.6), transparent 60%);
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.6), transparent 60%);
     bottom: -80px;
     right: -60px;
     animation-delay: 3s;
 }
 
 .orb-tertiary {
-    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.4), transparent 65%);
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.4), transparent 65%);
     top: 40%;
     right: 20%;
     animation-delay: 6s;
@@ -183,8 +183,8 @@ slice-theimpostergame {
 .hero-badge {
     padding: 0.45rem 1rem;
     border-radius: 999px;
-    background: rgba(var(--secondary-color-rgb), 0.12);
-    color: var(--secondary-color);
+    background: rgba(var(--accent-rgb), 0.12);
+    color: var(--heading);
     font-weight: 600;
     letter-spacing: 0.4px;
     text-transform: uppercase;
@@ -200,21 +200,21 @@ slice-theimpostergame {
     left: -120%;
     width: 120%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    background: linear-gradient(120deg, transparent, rgba(var(--text-1-rgb), 0.5), transparent);
     animation: badgeShimmer 3s ease-in-out infinite;
 }
 
 .game-subtitle {
     margin: 0;
     font-size: 1.05rem;
-    color: var(--font-secondary-color);
+    color: var(--text-2);
     max-width: 620px;
 }
 
 .hero-hint {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: var(--font-secondary-color);
+    color: var(--text-2);
     opacity: 0.85;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -227,7 +227,7 @@ slice-theimpostergame {
     width: 120px;
     height: 2px;
     margin: 0 auto 0.6rem;
-    background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
     opacity: 0.6;
 }
 
@@ -240,14 +240,14 @@ slice-theimpostergame {
 }
 
 .stat-card {
-    background: var(--primary-background-color);
+    background: var(--bg);
     border-radius: calc(var(--border-radius-slice) * 2);
-    border: var(--slice-border) solid var(--primary-color-shade);
+    border: var(--slice-border) solid var(--accent);
     padding: 1rem 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    box-shadow: 0 12px 24px rgba(var(--primary-color-rgb), 0.12);
+    box-shadow: 0 12px 24px rgba(var(--accent-rgb), 0.12);
     animation: statFloat 5s ease-in-out infinite;
 }
 
@@ -261,13 +261,13 @@ slice-theimpostergame {
 
 .stat-value {
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-weight: 600;
+    color: var(--heading);
 }
 
 .stat-label {
     font-size: 0.85rem;
-    color: var(--font-secondary-color);
+    color: var(--text-2);
     font-weight: 500;
 }
 
@@ -275,7 +275,7 @@ slice-theimpostergame {
     width: 100%;
     min-height: 100vh;
     padding: 5rem 4rem;
-    background: var(--primary-background-color);
+    background: var(--bg);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -283,7 +283,7 @@ slice-theimpostergame {
     gap: 1.75rem;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(var(--primary-color-rgb), 0.08);
+    box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.08);
     animation: stageIn 0.5s ease;
 }
 
@@ -291,7 +291,7 @@ slice-theimpostergame {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgba(var(--secondary-color-rgb), 0.1), transparent 50%);
+    background: linear-gradient(160deg, rgba(var(--accent-rgb), 0.1), transparent 50%);
     pointer-events: none;
 }
 
@@ -299,7 +299,7 @@ slice-theimpostergame {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top right, rgba(var(--primary-color-rgb), 0.12), transparent 40%);
+    background: radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.12), transparent 40%);
     pointer-events: none;
 }
 

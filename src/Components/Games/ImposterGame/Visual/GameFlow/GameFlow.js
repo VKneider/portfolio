@@ -81,8 +81,8 @@ export default class GameFlow extends HTMLElement {
         this.$revealButton = await slice.build('Button', {
             value: 'STOP & REVEAL',
             customColor: {
-                button: 'var(--danger-color)',
-                label: 'var(--danger-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -95,8 +95,8 @@ export default class GameFlow extends HTMLElement {
         this.$closeModalButton = await slice.build('Button', {
             value: 'Reiniciar',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -107,8 +107,8 @@ export default class GameFlow extends HTMLElement {
         this.$keepPlayersButton = await slice.build('Button', {
             value: 'Jugar de nuevo',
             customColor: {
-                button: 'var(--success-color)',
-                label: 'var(--success-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {

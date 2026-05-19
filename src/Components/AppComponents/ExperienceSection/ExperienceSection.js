@@ -27,9 +27,7 @@ export default class ExperienceSection extends HTMLElement {
       // Clear existing timeline
       this.$timeline.innerHTML = '';
 
-      const timelineTitle = document.createElement('h2');
-      timelineTitle.textContent = 'Professional Experience';
-      timelineTitle.classList.add('section-title');
+      const timelineTitle = await slice.build('SectionTitle', { text: 'Professional Experience' });
       this.$timeline.appendChild(timelineTitle);
 
       const timelineContainer = document.createElement('div');

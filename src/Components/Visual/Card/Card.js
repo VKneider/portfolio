@@ -236,7 +236,7 @@ export default class Card extends HTMLElement {
             name: this.icon.name,
             iconStyle: this.icon.iconStyle || 'filled',
             size: '32px',
-            color: 'var(--primary-color-contrast)'
+            color: 'var(--on-accent)'
          });
          
          // Verificar que el icono se construyó correctamente

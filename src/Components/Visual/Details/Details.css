@@ -1,30 +1,30 @@
 slice-details {
    font-family: var(--font-family);
-   color: var(--font-primary-color);
+   color: var(--text-1);
 }
 .details_summary {
    cursor: pointer;
    display: flex;
    align-items: center;
-   border-bottom: var(--slice-border) solid var(--primary-color);
+   border-bottom: var(--slice-border) solid var(--accent);
    padding: 10px;
 }
 .details_summary .caret {
    transform: rotate(-90deg);
    margin-right: 10px;
-   color: var(--primary-color);
+   color: var(--accent);
 }
 .details_title {
    width: 100%;
-   font-weight: bold;
+   font-weight: 600;
 }
 .details_text {
-   color: var(--font-secondary-color);
+   color: var(--text-2);
 }
 .details_container {
    padding-left: 5px;
    padding: 10px;
-   background-color: var(--secondary-background-color);
+   background-color: var(--surface-1);
    border-radius: var(--border-radius-slice);
    visibility: hidden;
    display: block;
@@ -52,7 +52,7 @@ slice-details {
 .symbol::after {
    content: '';
    position: absolute;
-   background-color: var(--primary-color);
+   background-color: var(--accent);
    width: 15px;
    height: 2px;
    top: 50%;

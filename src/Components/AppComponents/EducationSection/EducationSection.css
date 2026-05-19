@@ -10,13 +10,7 @@ slice-education-section {
 }
 
 /* Section Titles */
-.section-title {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 3rem;
-  font-weight: 600;
-}
+/* .section-title vive en sliceStyles.css (canónico). */
 
 /* Studies Section */
 .education-studies {
@@ -29,157 +23,8 @@ slice-education-section {
   gap: 4rem; /* Increased from 3rem */
 }
 
-/* Study Cards */
-.study-card {
-  background-color: var(--secondary-background-color);
-  border-radius: var(--border-radius-slice);
-  padding: 2.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid var(--primary-color);
-  animation: slideInFromLeft 0.6s ease-out forwards;
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.3s ease;
-}
-
-.study-card:hover {
-  transform: translateX(0) translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Study Header */
-.study-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.institution-logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: var(--border-radius-slice);
-  background-color: var(--primary-background-color);
-  padding: 10px;
-  border: 2px solid var(--primary-color-shade);
-}
-
-.institution-initials {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
-  border-radius: var(--border-radius-slice);
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.study-basic-info {
-  flex: 1;
-}
-
-.degree {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  margin: 0 0 0.5rem 0;
-  font-weight: 600;
-}
-
-.institution {
-  font-size: 1.3rem;
-  color: var(--font-primary-color);
-  margin: 0 0 1rem 0;
-  font-weight: 500;
-}
-
-.study-meta {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.study-meta span {
-  background-color: var(--tertiary-background-color);
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--font-secondary-color);
-}
-
-.study-meta .period {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
-}
-
-/* Study Content */
-.study-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--font-primary-color);
-  margin-bottom: 2rem;
-  text-align: justify;
-}
-
-.achievements-section,
-.coursework-section {
-  margin-bottom: 2rem;
-}
-
-.achievements-section h5,
-.coursework-section h5 {
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.achievements-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.achievements-list li {
-  position: relative;
-  padding-left: 2rem;
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
-  color: var(--font-primary-color);
-}
-
-.achievements-list li::before {
-  content: '🏆';
-  position: absolute;
-  left: 0;
-  font-size: 1.2rem;
-}
-
-.coursework-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.course-tag {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
-  padding: 0.4rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.course-tag:hover {
-  background-color: var(--secondary-color);
-  color: var(--secondary-color-contrast);
-  transform: scale(1.05);
-}
+/* StudyCard styles viven en /Components/AtomicAppComponents/StudyCard/StudyCard.css.
+/* StudyCard styles → /Components/AtomicAppComponents/StudyCard/StudyCard.css */
 
 /* Certificates Section */
 .education-certificates {
@@ -202,20 +47,20 @@ slice-education-section {
    gap: 0.6rem;
    padding: 0.6rem 0.9rem;
    border-radius: 999px;
-   background-color: var(--primary-background-color);
-   border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+   background-color: var(--bg);
+   border: 1px solid rgba(var(--accent-rgb), 0.2);
    min-width: min(360px, 100%);
    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
 }
 
 .certificates-search:focus-within {
-   border-color: var(--primary-color);
-   box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.12);
+   border-color: var(--accent);
+   box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
    transform: translateY(-1px);
 }
 
 .search-icon {
-   color: var(--font-secondary-color);
+   color: var(--text-2);
    font-size: 0.9rem;
 }
 
@@ -224,27 +69,27 @@ slice-education-section {
    outline: none;
    background: transparent;
    width: 100%;
-   color: var(--font-primary-color);
+   color: var(--text-1);
    font-size: 0.95rem;
 }
 
 .certificates-search-input::placeholder {
-   color: var(--font-secondary-color);
+   color: var(--text-2);
 }
 
 .certificates-empty {
    text-align: center;
    padding: 2.5rem 1.5rem;
    border-radius: var(--border-radius-slice);
-   border: 1px dashed rgba(var(--primary-color-rgb), 0.25);
-   background-color: var(--primary-background-color);
-   color: var(--font-secondary-color);
+   border: 1px dashed rgba(var(--accent-rgb), 0.25);
+   background-color: var(--bg);
+   color: var(--text-2);
    font-size: 0.95rem;
 }
 
 .certificates-count {
    font-size: 0.95rem;
-   color: var(--font-secondary-color);
+   color: var(--text-2);
    font-weight: 600;
 }
 
@@ -265,9 +110,9 @@ slice-education-section {
 }
 
 .certificate-page-btn {
-   border: 1px solid rgba(var(--primary-color-rgb), 0.22);
-   background-color: var(--primary-background-color);
-   color: var(--font-primary-color);
+   border: 1px solid rgba(var(--accent-rgb), 0.22);
+   background-color: var(--bg);
+   color: var(--text-1);
    padding: 0.45rem 0.9rem;
    border-radius: 999px;
    font-size: 0.85rem;
@@ -277,14 +122,14 @@ slice-education-section {
 }
 
 .certificate-page-btn:hover {
-   border-color: var(--primary-color);
-   color: var(--primary-color);
+   border-color: var(--accent);
+   color: var(--accent);
 }
 
 .certificate-page-btn.is-active {
-   background-color: var(--primary-color);
-   color: var(--primary-color-contrast);
-   border-color: var(--primary-color);
+   background-color: var(--accent);
+   color: var(--on-accent);
+   border-color: var(--accent);
 }
 
 .certificate-page-btn:disabled {
@@ -309,31 +154,11 @@ slice-education-section {
   }
 }
 
-/* Responsive Design */
+/* Responsive — StudyCard responsive vive en su propio CSS. Aquí solo lo que es de section. */
 @media (max-width: 768px) {
-  .study-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .institution-logo,
-  .institution-initials {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .study-meta {
-    justify-content: center;
-  }
-  
-   .certificates-grid {
-     grid-template-columns: 1fr;
-     gap: 1.2rem;
-   }
-  
-  .section-title {
-    font-size: 2rem;
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 }
 
@@ -341,20 +166,8 @@ slice-education-section {
   .education-container {
     padding: 1rem;
   }
-  
-  .study-card {
-    padding: 2rem;
-  }
-  
+
   .certificate-content {
     padding: 1rem;
-  }
-  
-  .degree {
-    font-size: 1.3rem;
-  }
-  
-  .institution {
-    font-size: 1.1rem;
   }
 }

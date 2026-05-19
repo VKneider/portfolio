@@ -76,14 +76,9 @@ export default class ImageCarrousel extends HTMLElement {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
       
-      // Configurar estado inicial
+      // Estado inicial: solo la primera slide tiene .active (CSS controla opacity).
       if (index === 0) {
-        slide.style.display = 'block';
-        slide.style.opacity = '1';
         slide.classList.add('active');
-      } else {
-        slide.style.display = 'none';
-        slide.style.opacity = '0';
       }
       
       const img = document.createElement('img');
@@ -234,47 +229,26 @@ export default class ImageCarrousel extends HTMLElement {
   async goToSlideSmooth(index) {
     if (index < 0 || index >= this.images.length) return;
     if (index === this.currentIndex) return;
-    
+    if (this.isTransitioning) return;
+
     const currentSlide = this.$slides.children[this.currentIndex];
     const newSlide = this.$slides.children[index];
-    
     if (!currentSlide || !newSlide) return;
-    
-    // Prevenir múltiples transiciones simultáneas
-    if (this.isTransitioning) return;
+
     this.isTransitioning = true;
-    
     try {
-      // Fade out del slide actual
-      currentSlide.style.opacity = '0';
+      // CSS gestiona la transición: solo swap de clase .active.
+      // (Antes había style.display/style.opacity inline que causaban
+      // jumps de z-index y reset del :hover.)
       currentSlide.classList.remove('active');
-      
-      // Esperar a que termine la transición de opacity
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Ocultar slide actual
-      currentSlide.style.display = 'none';
-      
-      // Preparar nuevo slide
-      newSlide.style.display = 'block';
-      newSlide.style.opacity = '0';
-      
-      // Forzar reflow para que la transición funcione correctamente
-      newSlide.offsetHeight;
-      
-      // Fade in del nuevo slide
-      newSlide.style.opacity = '1';
       newSlide.classList.add('active');
-      
-      // Esperar a que termine la transición de opacity
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Actualizar indicadores con transición suave
+
       this.updateIndicators(index);
-      
       this.currentIndex = index;
       this.updateSlideDisplay();
-      
+
+      // Esperar el fade (matches CSS transition: opacity 0.5s).
+      await new Promise(resolve => setTimeout(resolve, 500));
     } catch (error) {
       console.error('Error during slide transition:', error);
     } finally {

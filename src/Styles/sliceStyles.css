@@ -1,26 +1,396 @@
 /**
- * vkneider.dev — Global Styles
- * Las variables de color y tema vienen de vkneider-theme.css (importar antes que este archivo).
+ * vkneider.dev — Estilos globales
+ * Fuentes: cargadas vía <link> en /App/index.html (Crimson Pro + Inter Tight + JetBrains Mono).
+ * Variables de paleta: ver /Themes/Dark.css y /Themes/Light.css
+ * Sistema tipográfico: Manual de Marca · §3 Sección 2
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
-
 :root {
-  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  --font-serif: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --font-sans:  'Inter Tight', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* Alias legacy — algunos componentes leen --font-family */
+  --font-family: var(--font-sans);
+
+  /* Escala tipográfica canónica · Skill §3 2.4 (calibrada para Crimson Pro) */
+  --fs-display: clamp(48px, 6.5vw, 92px);
+  --fs-h1:      clamp(34px, 3.8vw, 52px);
+  --fs-h2:      30px;
+  --fs-h3:      26px;
+  --fs-h4:      40px;
+  --fs-h-card:  46px;
+  --fs-lede:    clamp(19px, 1.9vw, 23px);
+  --fs-body:    19px;
+  --fs-body-md: 17px;
+  --fs-body-sm: 15px;
+  --fs-post:    24px;
+
+  --lh-display: 1.04;
+  --lh-body:    1.65;
+  --ls-display: -0.018em;
+  --ls-heading: -0.012em;
+
+  --container: 1200px;
+
   --border-radius-slice: 5px;
   --slice-border: 1px;
 }
 
+* { box-sizing: border-box; }
+
+html, body { max-width: 100%; overflow-x: hidden; }
+
+html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
-  background-color: var(--primary-background-color);
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  background-color: var(--bg);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body.results-open {
-  overflow: hidden;
+body.results-open { overflow: hidden; }
+
+/* ============================================================
+ * Tipografía editorial — Crimson Pro
+ * Escala calibrada · Manual §3 2.4
+ * ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--heading);
+  margin: 0 0 0.5em;
 }
+
+h1 {
+  font-size: var(--fs-h1);
+  line-height: 1.08;
+  letter-spacing: var(--ls-heading);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.12;
+  letter-spacing: var(--ls-heading);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.18;
+  letter-spacing: var(--ls-heading);
+}
+
+h4 {
+  font-size: clamp(20px, 2vw, 22px);
+  line-height: 1.25;
+  letter-spacing: -0.008em;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+h6 {
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+/* Display: hero principal de la marca */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--heading);
+}
+
+/* Hero-card: bloques featured (Slice.js, cohort title) */
+.hero-card-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-h-card);
+  line-height: 1.05;
+  letter-spacing: var(--ls-display);
+  color: var(--heading);
+}
+
+p {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.65;
+  margin: 0 0 1em;
+  color: var(--text-1);
+}
+
+p.body-editorial { font-size: 19px; line-height: 1.65; }
+p.body-medium    { font-size: 17px; line-height: 1.65; }
+p.body-small     { font-size: 16px; line-height: 1.55; }
+
+.lead {
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--text-1);
+  opacity: 0.82;
+}
+
+em, i {
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+strong, b { font-weight: 600; }
+
+blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 1.5em 0;
+  padding: 0 0 0 24px;
+  border-left: 3px solid var(--accent);
+  color: var(--text-1);
+}
+
+/* Stats identitarios (§3 2.4 — "Magna Cum Laude", "3 papers") */
+.stat {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  color: var(--heading);
+}
+
+/* ============================================================
+ * Tipografía técnica — JetBrains Mono
+ * Código y eyebrows (§3 2.6)
+ * ============================================================ */
+
+code, pre, kbd, samp, .mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+code {
+  background: var(--surface-1);
+  color: var(--accent);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-slice);
+}
+
+pre {
+  background: var(--surface-1);
+  color: var(--text-1);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border-left: 3px solid var(--accent);
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* Eyebrow — etiqueta identitaria que precede a un heading (§3 2.6) */
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow--small { font-size: 11px; letter-spacing: 2px; }
+.eyebrow--muted { color: var(--text-2); }
+
+/* Microcopy y labels mono */
+.microcopy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-2);
+}
+
+/* ============================================================
+ * Interfaz funcional — Inter Tight
+ * Botones, nav, inputs (§3 2.5)
+ * ============================================================ */
+
+button, input, select, textarea {
+  font-family: var(--font-sans);
+}
+
+button {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-link, .nav-cta {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ui-text {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* ============================================================
+ * Links
+ * §3 3.5 caso 4 — links de prosa en text-1, hover en accent.
+ * ============================================================ */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover { color: var(--accent); }
+
+/* Micro-CTA — link de acción mono que invita a navegar */
+.micro-cta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+}
+
+/* ============================================================
+ * Accesibilidad y utilidades
+ * ============================================================ */
+
+/* Focus visible solo en navegación por teclado, no en click de mouse. */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded { opacity: 1; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--surface-1); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--border-radius-slice);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ============================================================
+ * Animaciones globales
+ * ============================================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+.fade-in         { animation: fadeIn 0.6s ease-out; }
+.slide-in-left   { animation: slideInFromLeft 0.6s ease-out; }
+.slide-in-right  { animation: slideInFromRight 0.6s ease-out; }
+.pulse-hover:hover { animation: pulse 0.6s ease-in-out; }
+
+.lazy-load {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.lazy-load.loaded { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+ * Layout helpers — patrones de App-shell
+ * ============================================================ */
+
+slice-portfolio {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+slice-navbar {
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero-section,
+.features-section,
+.showcase-section,
+.stats-section,
+.roadmap-section {
+  margin-bottom: 4rem;
+}
+
+/* Sin reducción agresiva de root font-size: la escala usa clamp() */
+
+/* ============================================================
+ * Section-title legacy — derivado del sistema canónico
+ * §3 3.5 Caso 1 / §3 5.6 Receta 1
+ * ============================================================ */
+
+/* Section title — vive en /Components/Visual/SectionTitle (componente + alias .section-title). */
+
+/* ============================================================
+ * Caret (legacy widget)
+ * ============================================================ */
 
 .caret {
   cursor: pointer;
@@ -32,366 +402,30 @@ body.results-open {
   transition: transform 0.3s;
 }
 
-.caret_open {
-  transform: rotate(180deg);
-}
+.caret_open { transform: rotate(180deg); }
 
-*::-webkit-scrollbar {
-  width: 5px;
-}
+/* ============================================================
+ * Print
+ * ============================================================ */
 
-*::-webkit-scrollbar:horizontal {
-  height: 3px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
-  border-radius: var(--border-radius-slice);
-}
-
-
-/* Portfolio-specific global styles */
-
-/* Smooth scrolling for the entire document */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Body styles for portfolio */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-family);
-  background-color: var(--primary-background-color);
-  color: var(--font-primary-color);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
-}
-
-body {
-  margin: 0;
-  background-color: var(--primary-background-color);
-  overflow-x: hidden;
-  width: 100%;
-}
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Monospace para código, datos técnicos y comandos */
-code, pre, kbd, samp, .mono {
-  font-family: var(--font-mono);
-  font-feature-settings: "liga" 0, "calt" 0;
-}
-
-code {
-  background: var(--secondary-background-color);
-  color: var(--primary-color);
-  padding: 2px 6px;
-  border-radius: var(--border-radius-slice);
-  font-size: 0.9em;
-}
-
-pre {
-  background: var(--secondary-background-color);
-  color: var(--font-primary-color);
-  padding: 1rem;
-  border-radius: var(--border-radius-slice);
-  overflow-x: auto;
-  border-left: 3px solid var(--primary-color);
-}
-
-pre code {
-  background: transparent;
-  padding: 0;
-  color: inherit;
-}
-
-/* Headings — peso medium (500) según manual de marca, no bold (700) */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--font-primary-color);
-}
-
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-
-/* Eyebrow — etiqueta característica del branding (sobre encabezados de sección) */
-.eyebrow {
-  font-size: 0.75rem;
-  color: var(--primary-color);
-  letter-spacing: 4px;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-/* Global animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-/* Utility classes for animations */
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
-.slide-in-left {
-  animation: slideInFromLeft 0.6s ease-out;
-}
-
-.slide-in-right {
-  animation: slideInFromRight 0.6s ease-out;
-}
-
-.pulse-hover:hover {
-  animation: pulse 0.6s ease-in-out;
-}
-
-/* Enhanced focus styles for accessibility */
-*:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-/* Custom button focus styles */
-button:focus,
-.slice_button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-/* Improved link styles */
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--primary-color-shade);
-  text-decoration: underline;
-}
-
-/* Image optimization */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Loading state for images */
-img[loading="lazy"] {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-img[loading="lazy"].loaded {
-  opacity: 1;
-}
-
-/* Enhanced scrollbar styles */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--tertiary-background-color);
-  border-radius: var(--border-radius-slice);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: var(--border-radius-slice);
-  transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color-shade);
-}
-
-/* Print styles */
 @media print {
   * {
     background: white !important;
     color: black !important;
     box-shadow: none !important;
   }
-  
+
   .portfolio-footer,
   .cta-buttons,
   .project-actions,
   .filter-buttons {
     display: none !important;
   }
-  
+
   .project-card,
   .experience-card,
   .feature-card {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-}
-
-/* Reduced motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Portfolio-specific component enhancements */
-slice-portfolio {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Enhanced navbar styles for portfolio */
-slice-navbar {
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* Improved spacing for sections */
-.hero-section,
-.features-section,
-.showcase-section,
-.stats-section,
-.roadmap-section {
-  margin-bottom: 4rem;
-}
-
-/* Better responsive typography */
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  html {
-    font-size: 13px;
-  }
-}
-
-/* Performance optimizations */
-.project-image,
-.profile-image,
-.company-logo {
-  will-change: transform;
-}
-
-/* Intersection Observer loading states */
-.lazy-load {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.lazy-load.loaded {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Global Section Titles - Centered */
-.section-title {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 3rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  position: relative;
-  text-shadow:
-    0 0 12px rgba(var(--primary-color-rgb), 0.4),
-    0 0 20px rgba(var(--primary-color-rgb), 0.2);
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background-color: var(--secondary-color);
-  border-radius: 2px;
-  box-shadow:
-    0 0 15px rgba(var(--secondary-color-rgb), 0.6),
-    0 0 30px rgba(var(--secondary-color-rgb), 0.3);
-}
-
-/* Responsive section titles */
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
   }
 }

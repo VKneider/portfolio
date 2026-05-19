@@ -17,7 +17,7 @@ slice-experience-section {
 
 .filter-title {
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: var(--accent);
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -34,13 +34,7 @@ slice-experience-section {
 }
 
 /* Timeline Section */
-.section-title {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 3rem;
-  font-weight: 600;
-}
+/* .section-title vive en SectionTitle component (canónico). */
 
 .timeline-container {
   position: relative;
@@ -54,18 +48,18 @@ slice-experience-section {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+  background: var(--accent);
 }
 
 /* Experience Cards */
 .experience-card {
   position: relative;
   margin-bottom: 4rem; /* Increased from 3rem */
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   border-radius: var(--border-radius-slice);
   padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.1);
+  border-left: 4px solid var(--accent);
   animation: slideInFromRight 0.6s ease-out forwards;
   opacity: 0;
   transform: translateX(50px);
@@ -78,9 +72,9 @@ slice-experience-section {
   top: 2rem;
   width: 12px;
   height: 12px;
-  background-color: var(--primary-color);
+  background-color: var(--accent);
   border-radius: 50%;
-  border: 3px solid var(--primary-background-color);
+  border: 3px solid var(--bg);
 }
 
 /* Experience Header */
@@ -96,9 +90,9 @@ slice-experience-section {
   height: 60px;
   object-fit: contain;
   border-radius: var(--border-radius-slice);
-  background-color: var(--primary-background-color);
+  background-color: var(--bg);
   padding: 8px;
-  border: 2px solid var(--primary-color-shade);
+  border: 2px solid var(--accent);
 }
 
 .company-initials {
@@ -107,10 +101,10 @@ slice-experience-section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
+  background-color: var(--accent);
+  color: var(--on-accent);
   border-radius: var(--border-radius-slice);
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.2rem;
 }
 
@@ -120,14 +114,14 @@ slice-experience-section {
 
 .position {
   font-size: 1.4rem;
-  color: var(--primary-color);
+  color: var(--accent);
   margin: 0 0 0.5rem 0;
   font-weight: 600;
 }
 
 .company {
   font-size: 1.2rem;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin: 0 0 1rem 0;
   font-weight: 500;
 }
@@ -139,24 +133,21 @@ slice-experience-section {
 }
 
 .meta-info span {
-  background-color: var(--tertiary-background-color);
+  background-color: var(--border);
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
 }
 
-.type {
-  background-color: var(--primary-color) !important;
-  color: var(--primary-color-contrast) !important;
-}
+/* .type vive en ExperienceCard.css (outline accent, canónico). */
 
 /* Description */
 .experience-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin-bottom: 2rem;
   text-align: justify;
 }
@@ -171,7 +162,7 @@ slice-experience-section {
 .achievements-section h5,
 .tech-section h5 {
   font-size: 1.1rem;
-  color: var(--primary-color);
+  color: var(--heading);
   margin-bottom: 1rem;
   font-weight: 600;
 }
@@ -189,7 +180,7 @@ slice-experience-section {
   padding-left: 1.5rem;
   margin-bottom: 0.8rem;
   line-height: 1.5;
-  color: var(--font-primary-color);
+  color: var(--text-1);
 }
 
 .responsibilities-list li::before,
@@ -197,13 +188,13 @@ slice-experience-section {
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--primary-color);
-  font-weight: bold;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .achievements-list li::before {
   content: '★';
-  color: var(--success-color);
+  color: var(--accent);
 }
 
 /* Technologies */
@@ -217,21 +208,7 @@ slice-experience-section {
   gap: 0.5rem;
 }
 
-.tech-tag {
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.tech-tag:hover {
-  background-color: var(--secondary-color);
-  color: var(--secondary-color-contrast);
-  transform: scale(1.05);
-}
+/* .tech-tag vive en ExperienceCard.css (outline, canónico). */
 
 /* Animations */
 @keyframes slideInFromRight {

@@ -95,8 +95,8 @@ export default class CertificateCard extends HTMLElement {
       const viewBtn = await slice.build('Button', {
          value: 'Verify credential',
          customColor: {
-            button: 'var(--primary-color)',
-            label: 'var(--primary-color-contrast)'
+            button: 'var(--accent)',
+            label: 'var(--on-accent)'
          },
          onClickCallback: () => window.open(this.certificate.certificateUrl, '_blank')
       });

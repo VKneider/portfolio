@@ -1,14 +1,40 @@
 .slice_nav_header {
-  font-family: var(--font-family);
+  font-family: var(--font-sans);
   width: 100%;
+  min-height: 64px;
   z-index: 100;
-  box-shadow: 0px 0px 10px #00000050;
-  background-color: var(--primary-color);
+  background-color: var(--surface-1);
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
   padding: 0 1rem;
+}
+
+/* Desktop layout — grid 3 columnas para garantizar que el menú quede
+ * exactamente centrado en el viewport, independiente de si hay logo o no.
+ * Columna 1 (logo), columna 2 (menu, centered), columna 3 (theme toggle). */
+@media (min-width: 1021px) {
+  .slice_nav_header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .slice_nav_header .logo_container {
+    justify-self: start;
+  }
+  .slice_nav_header .slice_nav_bar {
+    display: contents;
+  }
+  .slice_nav_header .nav_bar_menu {
+    grid-column: 2;
+    justify-self: center;
+    width: auto;
+  }
+  .slice_nav_header .nav_bar_buttons {
+    grid-column: 3;
+    justify-self: end;
+  }
 }
 
 .direction-row-reverse {
@@ -38,21 +64,33 @@
   justify-content: center;
   list-style: none;
 }
-.slice_nav_header .item {
+/* Nav-link tratamiento HTML canónico: mono uppercase, hover text-2 → text-1
+ * (skill §3 3.3 r.2: nav hover NO va en accent, va en text-1). */
+.slice_nav_header .item,
+.slice_nav_header slice-link .slice-link,
+.slice_nav_header a {
   cursor: pointer;
-  font-weight: bold;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   text-decoration: none;
-  color: var(--primary-color-contrast);
+  color: var(--text-2);
   border-radius: var(--border-radius-slice);
+  transition: color 0.15s ease;
+}
+.slice_nav_header .item:hover,
+.slice_nav_header slice-link:hover .slice-link {
+  color: var(--text-1);
 }
 .anim-item {
   position: absolute;
   top: 100%;
   left: 50%;
   width: 0%;
-  height: 2.5px;
-  border-radius: 5px;
-  background-color: var(--primary-color-contrast);
+  height: 1px;
+  background-color: var(--accent);
   transition: width 0.3s ease, left 0.3s ease;
 }
 .slice_nav_header li {
@@ -84,11 +122,13 @@
 .mobile_close_menu {
   visibility: hidden;
   position: absolute;
-  right: 0px;
-  margin-right: 25px;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .mobile_close_menu {
   top: 25px;
+  transform: none;
 }
 @media only screen and (max-width: 1020px) {
   .slice_nav_bar {
@@ -104,7 +144,7 @@
     align-items: center;
     padding-top: 80px;
     flex-direction: column;
-    background-color: var(--primary-color);
+    background-color: var(--surface-1);
     transform: translateX(100%);
     transition: transform 0.3s ease;
   }

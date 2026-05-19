@@ -5,7 +5,7 @@
 	padding: 0;
 }
 #app, body {
-	background: var(--primary-color);
+	background: var(--accent);
 	display: flex;
 	height: 100vh;
 }
@@ -45,7 +45,7 @@ figcaption span {
 /* II. Sprites */
 /* 1. Sad Mac */
 .sad-mac {
-	background: #fff;
+	background: var(--surface-1);
 	margin: 0 auto 7em auto;
 	width: 23em;
 	height: 30em;

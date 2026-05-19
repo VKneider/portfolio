@@ -246,17 +246,17 @@ export default class ProjectViewer extends HTMLElement {
       if (project.githubUrl) {
          const githubBtn = await slice.build('Button', {
             value: 'GitHub',
-            customColor: { button: 'var(--secondary-background-color)', label: 'var(--font-primary-color)' },
+            customColor: { button: 'var(--surface-1)', label: 'var(--text-1)' },
             onClickCallback: () => window.open(project.githubUrl, '_blank')
          });
-         githubBtn.style.border = '1px solid var(--disabled-color)';
+         githubBtn.style.border = '1px solid var(--text-2)';
          this.$actions.appendChild(githubBtn);
       }
 
       if (project.liveUrl) {
          const liveBtn = await slice.build('Button', {
             value: 'Live Demo',
-            customColor: { button: 'var(--primary-color)', label: 'var(--primary-color-contrast)' },
+            customColor: { button: 'var(--accent)', label: 'var(--on-accent)' },
             onClickCallback: () => window.open(project.liveUrl, '_blank')
          });
          this.$actions.appendChild(liveBtn);

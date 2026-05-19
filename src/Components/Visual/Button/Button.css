@@ -28,12 +28,12 @@ slice-button {
   min-width: fit-content;
 
   /* Theming via CSS Variables */
-  background-color: var(--btn-bg, var(--primary-color));
-  color: var(--btn-text-color, var(--primary-color-contrast));
-  border: var(--slice-border) solid var(--btn-border-color, var(--primary-color));
+  background-color: var(--btn-bg, var(--accent));
+  color: var(--btn-text-color, var(--on-accent));
+  border: var(--slice-border) solid var(--btn-border-color, var(--accent));
   
   border-radius: var(--border-radius-slice);
-  font-weight: 800;
+  font-weight: 600;
   padding: 10px;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -41,18 +41,18 @@ slice-button {
 
 .slice_button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.25) inset;
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.25) inset;
 }
 
 slice-button:focus-within {
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.3);
 }
 .slice_button:after {
   content: "";
   width: 100%;
   height: 100%;
   border-radius: 100%;
-  background: #ffffff50;
+  background: rgba(var(--accent-rgb), 0.25);
   position: absolute;
   display: block;
   opacity: 0;

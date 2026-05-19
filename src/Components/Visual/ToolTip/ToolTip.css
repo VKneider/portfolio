@@ -12,8 +12,8 @@ slice-tooltip {
 /* The bubble element (appended to body) */
 .slice-tooltip-bubble {
   position: fixed;
-  background-color: var(--primary-color);
-  color: var(--primary-color-contrast);
+  background-color: var(--accent);
+  color: var(--on-accent);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -23,7 +23,7 @@ slice-tooltip {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(var(--accent-rgb), 0.1), 0 2px 4px -1px rgba(var(--accent-rgb), 0.06);
   line-height: 1.4;
   text-align: justify;
   word-wrap: break-word;

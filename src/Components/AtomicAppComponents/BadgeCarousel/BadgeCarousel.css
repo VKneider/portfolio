@@ -12,7 +12,7 @@ slice-badge-carousel {
   
   /* Variables CSS personalizables */
   --carousel-radius: 12px;
-  --carousel-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --carousel-shadow: 0 8px 25px rgba(var(--accent-rgb), 0.1);
 }
 
 /* Header del carrusel */
@@ -25,8 +25,8 @@ slice-badge-carousel {
 
 .carousel-title {
   font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--font-primary-color);
+  font-weight: 600;
+  color: var(--heading);
   margin: 0;
   opacity: 0;
   transform: translateY(-20px);
@@ -38,9 +38,9 @@ slice-badge-carousel {
 }
 
 .control-btn {
-  background: var(--tertiary-background-color);
-  color: var(--font-primary-color);
-  border: 1px solid var(--primary-color-shade);
+  background: var(--border);
+  color: var(--text-1);
+  border: 1px solid var(--accent);
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -52,12 +52,10 @@ slice-badge-carousel {
 }
 
 .control-btn:hover {
-  background: var(--carousel-primary);
-  color: var(--primary-color-contrast);
+  background: var(--accent);
+  color: var(--on-accent);
   transform: translateY(-2px);
-  box-shadow: 
-    0 4px 12px rgba(var(--primary-color-rgb), 0.3),
-    0 0 20px rgba(var(--primary-color-rgb), 0.2);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.18);
 }
 
 .control-btn svg {
@@ -70,7 +68,7 @@ slice-badge-carousel {
   overflow: hidden;
   position: relative;
   border-radius: var(--carousel-radius);
-  background: var(--primary-background-color);
+  background: var(--bg);
   padding: 0.8rem 0;
   box-shadow: var(--carousel-shadow);
 }
@@ -83,14 +81,15 @@ slice-badge-carousel {
 }
 
 .skill-badge {
-  background: var(--carousel-primary);
-  color: var(--primary-color-contrast);
+  background: var(--surface-1);
+  color: var(--text-1);
   padding: 0.5rem 1rem;
   border-radius: 18px;
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 500;
   white-space: nowrap;
-  border: 1px solid var(--carousel-primary);
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
   cursor: default;
   position: relative;
@@ -108,18 +107,9 @@ slice-badge-carousel {
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.2), 
+    rgba(var(--text-1-rgb), 0.2), 
     transparent);
   transition: left 0.5s ease;
-}
-
-.skill-badge:hover {
-  background: var(--carousel-accent);
-  color: var(--primary-color-contrast);
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 
-    0 6px 15px rgba(var(--primary-color-rgb), 0.3),
-    0 0 20px rgba(var(--primary-color-rgb), 0.2);
 }
 
 .skill-badge:hover::before {
@@ -222,7 +212,7 @@ slice-badge-carousel {
 /* Modo oscuro y temas */
 @media (prefers-color-scheme: dark) {
   .badges-marquee {
-    background: var(--tertiary-background-color);
+    background: var(--border);
   }
 }
 
@@ -241,56 +231,64 @@ slice-badge-carousel {
 
 /* Estados de focus para navegación por teclado */
 .control-btn:focus {
-  outline: 2px solid var(--carousel-primary);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-/* Hover states mejorados */
-@media (hover: hover) {
-  .skill-badge:hover {
-    transform: translateY(-2px) scale(1.03);
-  }
 }
 
 @media (hover: none) {
   .skill-badge:active {
-    transform: scale(0.98);
+    transform: translateY(0);
   }
 }
 
-/* Variantes de color personalizadas */
-.badge-carousel.frontend-theme {
-  --carousel-primary: #3b82f6;
-  --carousel-secondary: #1d4ed8;
-  --carousel-accent: #60a5fa;
+/* Variantes — diferenciadas por tratamiento de superficie y borde
+ * dentro de la paleta cerrada del manual. No hay segundos cálidos. */
+
+/* 1 · Frontend: filled accent */
+.badge-carousel.frontend-theme .skill-badge {
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 1px solid var(--accent);
 }
 
-.badge-carousel.backend-theme {
-  --carousel-primary: #10b981;
-  --carousel-secondary: #059669;
-  --carousel-accent: #34d399;
+/* 2 · Backend: outline accent (transparente + borde + texto bronce) */
+.badge-carousel.backend-theme .skill-badge {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
 }
 
-.badge-carousel.database-theme {
-  --carousel-primary: #8b5cf6;
-  --carousel-secondary: #7c3aed;
-  --carousel-accent: #a78bfa;
+/* 3 · Database: ghost sobre surface-1 */
+.badge-carousel.database-theme .skill-badge {
+  background: var(--surface-1);
+  color: var(--text-1);
+  border: 1px solid var(--border);
 }
 
-.badge-carousel.devops-theme {
-  --carousel-primary: #f59e0b;
-  --carousel-secondary: #d97706;
-  --carousel-accent: #fbbf24;
+/* 4 · DevOps: filled surface-2 con borde accent */
+.badge-carousel.devops-theme .skill-badge {
+  background: var(--surface-2);
+  color: var(--text-1);
+  border: 1px solid var(--accent);
 }
 
-.badge-carousel.mobile-theme {
-  --carousel-primary: #ec4899;
-  --carousel-secondary: #db2777;
-  --carousel-accent: #f472b6;
+/* 5 · Mobile: pill outline punteada */
+.badge-carousel.mobile-theme .skill-badge {
+  background: transparent;
+  color: var(--text-1);
+  border: 1px dashed var(--accent);
 }
 
-.badge-carousel.ai-theme {
-  --carousel-primary: #ef4444;
-  --carousel-secondary: #dc2626;
-  --carousel-accent: #f87171;
+/* 6 · AI: pastilla bronce translúcida */
+.badge-carousel.ai-theme .skill-badge {
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+}
+
+/* Hover: lift sutil (sin scale — manual §3 6.3 r.6 anti-hype) */
+.badge-carousel .skill-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 15px rgba(var(--accent-rgb), 0.18);
 }

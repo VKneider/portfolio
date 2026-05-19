@@ -19,17 +19,17 @@ export default class TeachingSection extends HTMLElement {
     },
     primaryColor: { 
       type: 'string', 
-      default: 'var(--primary-color)', 
+      default: 'var(--accent)', 
       required: false 
     },
     secondaryColor: { 
       type: 'string', 
-      default: 'var(--secondary-color)', 
+      default: 'var(--accent)', 
       required: false 
     },
     accentColor: { 
       type: 'string', 
-      default: 'var(--accent-color)', 
+      default: 'var(--accent)', 
       required: false 
     },
     showStudentProjects: { 

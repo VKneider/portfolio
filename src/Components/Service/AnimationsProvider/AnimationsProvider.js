@@ -185,7 +185,7 @@ export default class AnimationsProvider {
     * El color por defecto usa --primary-color-rgb (variable del theme).
     */
    glow(element, options = {}) {
-      const colorRgb = options.colorRgb || 'var(--primary-color-rgb)';
+      const colorRgb = options.colorRgb || 'var(--accent-rgb)';
       const minBlur = options.minBlur || 20;
       const maxBlur = options.maxBlur || 40;
       return this._animate(element, {

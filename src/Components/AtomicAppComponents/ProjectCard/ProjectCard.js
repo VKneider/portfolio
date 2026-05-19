@@ -139,7 +139,7 @@ export default class ProjectCard extends HTMLElement {
          // Si el placeholder también falla, mostrar un color de fondo
          this.$image.onerror = () => {
             this.$image.style.display = 'none';
-            this.$imageContainer.style.backgroundColor = 'var(--primary-color)';
+            this.$imageContainer.style.backgroundColor = 'var(--accent)';
             this.$imageContainer.innerHTML += `<div style="color: white; font-weight: bold; text-align: center; padding: 2rem;">${project.title}</div>`;
          };
       };
@@ -183,8 +183,8 @@ export default class ProjectCard extends HTMLElement {
          const liveBtn = await slice.build('Button', {
             value: 'Live Demo',
             customColor: {
-               button: 'var(--primary-color)',
-               label: 'var(--primary-color-contrast)'
+               button: 'var(--accent)',
+               label: 'var(--on-accent)'
             },
             onClickCallback: () => window.open(project.liveUrl, '_blank')
          });

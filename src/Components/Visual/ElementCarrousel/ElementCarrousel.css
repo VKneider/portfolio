@@ -46,8 +46,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--primary-color, #333);
+    background: rgba(var(--text-1-rgb), 0.8);
+    color: var(--accent);
     border: none;
     cursor: pointer;
     z-index: 10;
@@ -58,13 +58,13 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(var(--accent-rgb),0.2);
     transition: background 0.3s, transform 0.2s;
 }
 
 .carousel-button:hover {
-    background: var(--primary-color, #333);
-    color: var(--primary-color-contrast, white);
+    background: var(--accent);
+    color: var(--on-accent);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -89,20 +89,20 @@
     border-radius: 50%;
     width: 12px;
     height: 12px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(var(--accent-rgb),0.3);
     cursor: pointer;
     transition: background 0.3s;
 }
 
 .carousel-indicator.current-slide {
-    background: var(--primary-color, #333);
+    background: var(--accent);
     transform: scale(1.2);
 }
 
 /* Dark mode support if vars are used */
 @media (prefers-color-scheme: dark) {
     .carousel-button {
-         background: rgba(0, 0, 0, 0.6);
+         background: rgba(var(--accent-rgb), 0.6);
          color: white;
     }
 }

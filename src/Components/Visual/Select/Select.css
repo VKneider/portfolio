@@ -10,21 +10,21 @@
   display: flex;
   padding: 10px;
   border-radius: var(--border-radius-slice);
-  border: var(--slice-border) solid var(--primary-color);
-  background-color: var(--primary-background-color);
+  border: var(--slice-border) solid var(--accent);
+  background-color: var(--bg);
   justify-content: space-between;
   align-items: center;
 }
 .slice_select {
   pointer-events: none;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   width: 100%;
   background: none;
   outline: none;
   border: none;
 }
 .slice_select_label {
-  color: var(--primary-color);
+  color: var(--accent);
   position: absolute;
   transition: all 0.5s;
   user-select: none;
@@ -37,7 +37,7 @@
 }
 .slice_select_menu {
   display: none;
-  border: var(--slice-border) solid var(--primary-color);
+  border: var(--slice-border) solid var(--accent);
   list-style: none;
   font-family: var(--font-family);
   visibility: hidden;
@@ -48,17 +48,17 @@
   top: 100%;
   width: 100%;
    z-index: 10;
-  background-color: var(--primary-background-color);
+  background-color: var(--bg);
   border-radius: var(--border-radius-slice);
-  box-shadow: 0 0 10px 0 #00000050;
+  box-shadow: 0 0 10px 0 rgba(var(--accent-rgb), 0.12);
   div {
-    color: var(--font-primary-color);
+    color: var(--text-1);
     cursor: pointer;
     padding: 10px;
     transition: background-color 0.2s ease, color 0.2s ease;
     &:hover {
-      color: var(--font-primary-color);
-      background-color: rgba(var(--primary-color-rgb), 0.08);
+      color: var(--text-1);
+      background-color: rgba(var(--accent-rgb), 0.08);
     }
   }
 }
@@ -74,13 +74,13 @@
   width: 5px;
 }
 .menu_open::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
+  background: var(--accent);
   border-radius: var(--border-radius-slice);
 }
 .active {
-  /* color: var(--primary-color); */
-  background-color: var(--secondary-background-color);
+  /* color: var(--accent); */
+  background-color: var(--surface-1);
 }
 .slice_select_container .caret {
-  border-top-color: var(--primary-color);
+  border-top-color: var(--accent);
 }

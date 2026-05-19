@@ -13,7 +13,7 @@ slice-about-section {
   text-align: center;
   padding: 4rem 2rem; /* Aumentado aún más */
   padding-top: 4.5rem; /* Aumentado para dar más espacio arriba */
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   margin-bottom: 3rem;
   /* Remover border-radius y border para que ocupe todo el ancho */
   border-radius: 0;
@@ -32,88 +32,10 @@ slice-about-section {
   margin-right: calc(-50vw + 50%);
 }
 
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, var(--primary-color) 0%, transparent 20%),
-    radial-gradient(circle at 80% 20%, var(--secondary-color) 0%, transparent 20%);
-  opacity: 0.05;
-  pointer-events: none;
-}
-
-
-
-/* Floating Background Elements */
-.hero-background-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
+/* Hero floating elements removidos por petición de Victor — el hero respira sin difuminado. */
+.hero-background-elements,
 .floating-element {
-  position: absolute;
-  background: var(--primary-color);
-  opacity: 0.1;
-  border-radius: 50%;
-  animation: float 6s ease-in-out infinite;
-  /* Add subtle glow to floating elements */
-  box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.4);
-}
-
-.element-1 {
-  width: 100px;
-  height: 100px;
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.element-2 {
-  width: 60px;
-  height: 60px;
-  top: 60%;
-  right: 15%;
-  animation-delay: 2s;
-  background: var(--secondary-color);
-  box-shadow: 0 0 20px rgba(var(--secondary-color-rgb), 0.4);
-}
-
-.element-3 {
-  width: 80px;
-  height: 80px;
-  bottom: 30%;
-  left: 20%;
-  animation-delay: 4s;
-  background: var(--success-color);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-}
-
-.element-4 {
-  width: 40px;
-  height: 40px;
-  top: 30%;
-  right: 30%;
-  animation-delay: 1s;
-  background: var(--warning-color);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-}
-
-@keyframes float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
-  }
-  50% { 
-    transform: translateY(-20px) rotate(180deg); 
-  }
+  display: none;
 }
 
 .hero-content {
@@ -130,64 +52,21 @@ slice-about-section {
   margin-bottom: 2.5rem; /* Reducido de 3rem para mejor balance */
 }
 
-.profile-ring {
-  position: absolute;
-  top: -25px; /* Ajustado para la nueva imagen */
-  left: -25px; /* Ajustado para la nueva imagen */
-  right: -25px; /* Ajustado para la nueva imagen */
-  bottom: -25px; /* Ajustado para la nueva imagen */
-  border: 4px solid transparent; /* Aumentado de 3px */
-  border-radius: 50%;
-  border-top: 4px solid var(--primary-color);
-  border-right: 4px solid var(--secondary-color);
-  border-bottom: 4px solid var(--success-color);
-  border-left: 4px solid var(--warning-color);
-  animation: rotateRing 4s linear infinite;
-  /* Glowing ring effect */
-  box-shadow: 
-    0 0 35px rgba(var(--primary-color-rgb), 0.6), /* Aumentado */
-    inset 0 0 35px rgba(var(--primary-color-rgb), 0.3); /* Aumentado */
-}
-
-.profile-ring::before {
-  content: '';
-  position: absolute;
-  top: -10px; /* Ajustado para la nueva imagen */
-  left: -10px; /* Ajustado para la nueva imagen */
-  right: -10px; /* Ajustado para la nueva imagen */
-  bottom: -10px; /* Ajustado para la nueva imagen */
-  border: 2px solid var(--primary-color); /* Aumentado de 1px */
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: rotateRing 6s linear infinite reverse;
-  /* Outer ring glow */
-  box-shadow: 0 0 40px rgba(var(--primary-color-rgb), 0.5); /* Aumentado */
-}
-
-@keyframes rotateRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* profile-ring removido por petición de Victor — la foto va sola. */
 
 .profile-image {
-  width: 280px; /* Aumentado significativamente de 160px */
-  height: 280px; /* Aumentado significativamente de 160px */
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--primary-background-color); /* Aumentado de 4px */
-  box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.3), /* Aumentado significativamente */
-    0 0 40px rgba(var(--primary-color-rgb), 0.4); /* Aumentado */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 4px solid var(--bg);
+  transition: transform 0.3s ease;
   position: relative;
   z-index: 3;
 }
 
 .profile-image:hover {
-  transform: scale(1.05);
-  box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.3),
-    0 0 50px rgba(var(--primary-color-rgb), 0.6);
+  transform: scale(1.03);
 }
 
 /* Enhanced Hero Text - COMPACTO */
@@ -197,31 +76,25 @@ slice-about-section {
 }
 
 .hero-text h1 {
-  font-size: 3.8rem; /* Reducido de 4.5rem para mejor balance */
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
   margin: 0;
-  color: var(--primary-color);
-  font-weight: 900;
+  color: var(--heading);
+  font-weight: 500;
   position: relative;
-  /* Text glow effect */
-  text-shadow: 
-    0 0 18px rgba(var(--primary-color-rgb), 0.6),
-    0 0 30px rgba(var(--primary-color-rgb), 0.4),
-    0 0 40px rgba(var(--primary-color-rgb), 0.2);
 }
 
 .title-accent {
   position: absolute;
-  bottom: -18px; /* Ajustado de -20px */
+  bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 130px; /* Reducido de 150px */
-  height: 5px; /* Reducido de 6px */
-  background-color: var(--secondary-color);
-  border-radius: 3px;
-  /* Accent glow */
-  box-shadow: 
-    0 0 18px rgba(var(--secondary-color-rgb), 0.8),
-    0 0 30px rgba(var(--secondary-color-rgb), 0.5);
+  width: 64px;
+  height: 3px;
+  background-color: var(--accent);
+  border-radius: 2px;
 }
 
 .roles-container {
@@ -233,25 +106,27 @@ slice-about-section {
 }
 
 .role-title {
-  font-size: 2.4rem; /* Reducido de 2.8rem para mejor balance */
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.2;
+  letter-spacing: var(--ls-heading);
   margin: 0;
-  color: var(--font-secondary-color);
-  font-weight: 600;
-  min-height: 3rem; /* Ajustado de 3.5rem */
+  color: var(--text-2);
+  font-weight: 400;
+  font-style: italic;
 }
 
 .role-switcher {
   transition: opacity 0.3s ease;
-  color: var(--primary-color);
-  font-weight: 600;
-  /* Subtle text glow */
-  text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
+  color: var(--accent);
+  font-weight: 400;
+  font-style: italic;
 }
 
 .hero-description {
   font-size: 1.3rem; /* Reducido de 1.5rem para mejor balance */
   line-height: 1.7; /* Ajustado de 1.8 */
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin-bottom: 2.2rem; /* Ajustado de 2.5rem */
   max-width: 750px; /* Ajustado de 800px */
   margin-left: auto;
@@ -268,42 +143,35 @@ slice-about-section {
   flex-wrap: wrap;
 }
 
+/* Card simple — Manual §3 5.6 Receta 2 */
 .stat-item {
   text-align: center;
-  padding: 0.8rem; /* Reducido de 1rem */
-  background: var(--tertiary-background-color);
-  border-radius: var(--border-radius-slice);
-  border: 2px solid var(--primary-color-shade);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Stat item glow */
-  box-shadow: 
-    0 3px 12px rgba(0, 0, 0, 0.1), /* Reducido de 0 4px 15px */
-    0 0 15px rgba(var(--primary-color-rgb), 0.1); /* Reducido de 0 0 20px */
+  padding: 1rem 0.75rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-item:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary-color);
-  /* Enhanced glow on hover */
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.15),
-    0 0 30px rgba(var(--primary-color-rgb), 0.4);
+  transform: translateY(-3px);
+  border-color: var(--accent);
 }
 
 .stat-number {
   display: block;
   font-size: 2rem; /* Reducido de 2.5rem */
-  font-weight: bold;
-  color: var(--primary-color);
+  font-weight: 600;
+  color: var(--heading);
   margin-bottom: 0.3rem; /* Reducido de 0.5rem */
   /* Number glow */
-  text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3); /* Reducido de 0 0 10px */
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.3); /* Reducido de 0 0 10px */
 }
 
 .stat-label {
   display: block;
   font-size: 0.9rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   font-weight: 500;
 }
 
@@ -315,35 +183,45 @@ slice-about-section {
   flex-wrap: wrap;
 }
 
-/* Section Titles - COMPACTO */
-.section-title {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 2rem; /* Reducido de 3rem */
-  font-weight: 700;
-  position: relative;
-  /* Section title glow */
-  text-shadow: 
-    0 0 12px rgba(var(--primary-color-rgb), 0.4), /* Reducido de 0 0 15px */
-    0 0 20px rgba(var(--primary-color-rgb), 0.2); /* Reducido de 0 0 30px */
+/* Skill §3 3.5 caso 2: dos estilos de botón (primary + ghost).
+ * El tercer CTA es micro-CTA mono (§3 3.5 caso 4). */
+
+.cta-buttons {
+  align-items: center;
 }
 
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background-color: var(--secondary-color);
-  border-radius: 2px;
-  /* Title underline glow */
-  box-shadow: 
-    0 0 15px rgba(var(--secondary-color-rgb), 0.6),
-    0 0 30px rgba(var(--secondary-color-rgb), 0.3);
+.cta-buttons .cta-primary .slice_button {
+  border: 1px solid var(--accent) !important;
+  box-shadow: 0 4px 14px var(--shadow-cta);
 }
+.cta-buttons .cta-primary .slice_button:hover {
+  transform: translateY(-1px);
+}
+
+.cta-buttons .cta-ghost .slice_button {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+}
+.cta-buttons .cta-ghost .slice_button:hover {
+  border-color: var(--text-2) !important;
+  background: var(--surface-1) !important;
+}
+
+.cta-micro {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 8px 4px;
+  transition: opacity 0.2s ease;
+}
+.cta-micro:hover {
+  opacity: 0.75;
+}
+
+/* Section Titles - COMPACTO */
+/* .section-title vive en sliceStyles.css (canónico, único). */
 
 /* About Section using Slice Cards - COMPACTO */
 .about-content {
@@ -396,13 +274,13 @@ slice-about-section {
 }
 
 .value-card {
-  background: var(--secondary-background-color);
+  background: var(--surface-1);
   padding: 2rem;
   border-radius: 15px;
   text-align: center;
   box-shadow: 
-    0 6px 20px rgba(0, 0, 0, 0.1),
-    0 0 20px rgba(var(--primary-color-rgb), 0.1);
+    0 6px 20px rgba(var(--accent-rgb), 0.1),
+    0 0 20px rgba(var(--accent-rgb), 0.1);
   transition: all 0.3s ease;
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
@@ -412,31 +290,31 @@ slice-about-section {
 
 .value-card:hover {
   transform: translateY(-8px);
-  border-color: var(--primary-color);
+  border-color: var(--accent);
   /* Value card glow enhancement */
   box-shadow: 
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 0 40px rgba(var(--primary-color-rgb), 0.4);
+    0 12px 30px rgba(var(--accent-rgb), 0.15),
+    0 0 40px rgba(var(--accent-rgb), 0.4);
 }
 
 .value-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   /* Icon glow effect */
-  filter: drop-shadow(0 0 10px rgba(var(--primary-color-rgb), 0.3));
+  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.3));
 }
 
 .value-name {
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--accent);
   margin-bottom: 1rem;
   font-weight: 600;
   /* Value name glow */
-  text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3);
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.3);
 }
 
 .value-description {
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -456,13 +334,13 @@ slice-about-section {
 }
 
 .interest-tag {
-  background: var(--tertiary-background-color);
-  color: var(--font-primary-color);
+  background: var(--border);
+  color: var(--text-1);
   padding: 1rem 1.8rem;
   border-radius: 50px;
   font-size: 1rem;
   font-weight: 500;
-  border: 2px solid var(--primary-color-shade);
+  border: 2px solid var(--accent);
   transition: all 0.4s ease;
   cursor: pointer;
   display: flex;
@@ -473,24 +351,24 @@ slice-about-section {
   transform: scale(0.8);
   /* Interest tag glow */
   box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.1),
-    0 0 15px rgba(var(--primary-color-rgb), 0.1);
+    0 4px 15px rgba(var(--accent-rgb), 0.1),
+    0 0 15px rgba(var(--accent-rgb), 0.1);
 }
 
 .interest-tag:hover {
-  background: var(--primary-color);
-  color: var(--primary-color-contrast);
+  background: var(--accent);
+  color: var(--on-accent);
   transform: translateY(-3px) scale(1.05);
   /* Interest tag hover glow */
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.15),
-    0 0 30px rgba(var(--primary-color-rgb), 0.6);
+    0 8px 20px rgba(var(--accent-rgb), 0.15),
+    0 0 30px rgba(var(--accent-rgb), 0.6);
 }
 
 .interest-icon {
   font-size: 1.2rem;
   /* Icon glow */
-  filter: drop-shadow(0 0 5px rgba(var(--primary-color-rgb), 0.3));
+  filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.3));
 }
 
 /* Animations */
@@ -530,24 +408,19 @@ slice-about-section {
 @keyframes pulseGlow {
   0% {
     box-shadow: 
-      0 0 20px rgba(var(--primary-color-rgb), 0.3),
-      0 0 40px rgba(var(--primary-color-rgb), 0.1);
+      0 0 20px rgba(var(--accent-rgb), 0.3),
+      0 0 40px rgba(var(--accent-rgb), 0.1);
   }
   50% {
     box-shadow: 
-      0 0 30px rgba(var(--primary-color-rgb), 0.5),
-      0 0 60px rgba(var(--primary-color-rgb), 0.2);
+      0 0 30px rgba(var(--accent-rgb), 0.5),
+      0 0 60px rgba(var(--accent-rgb), 0.2);
   }
   100% {
     box-shadow: 
-      0 0 20px rgba(var(--primary-color-rgb), 0.3),
-      0 0 40px rgba(var(--primary-color-rgb), 0.1);
+      0 0 20px rgba(var(--accent-rgb), 0.3),
+      0 0 40px rgba(var(--accent-rgb), 0.1);
   }
-}
-
-/* Add pulsing glow to specific elements */
-.profile-ring {
-  animation: rotateRing 4s linear infinite, pulseGlow 3s ease-in-out infinite;
 }
 
 /* Responsive Design - COMPACTO */
@@ -707,13 +580,6 @@ slice-about-section {
     margin-bottom: 1.5rem; /* Ajustado */
   }
   
-  .profile-ring {
-    top: -18px; /* Ajustado para la nueva imagen */
-    left: -18px; /* Ajustado para la nueva imagen */
-    right: -18px; /* Ajustado para la nueva imagen */
-    bottom: -18px; /* Ajustado para la nueva imagen */
-  }
-  
   .roles-container {
     height: 42px; /* Ajustado de 45px */
     margin-bottom: 1.1rem; /* Ajustado */
@@ -765,9 +631,6 @@ slice-about-section {
 .carousel-footer {
   margin-top: 24px;
   padding: 20px;
-  background: var(--background-color);
-  border-radius: var(--border-radius-slice);
-  border: var(--slice-border) solid var(--border-color);
 }
 
 .stats-container {
@@ -788,15 +651,15 @@ slice-about-section {
 
 .stat-number {
   font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  font-weight: 600;
+  color: var(--heading);
   margin-bottom: 8px;
   line-height: 1;
 }
 
 .stat-label {
   font-size: 0.85rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   font-weight: 500;
   line-height: 1.3;
 }
@@ -804,67 +667,65 @@ slice-about-section {
 .text-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 24px;
-  padding: 24px;
-  background: var(--secondary-background-color);
-  border-radius: var(--border-radius-slice);
-  border: var(--slice-border) solid var(--primary-color-shade);
+  padding: 40px 36px;
+  background: var(--surface-1);
+  border-radius: 12px;
 }
 
 .personal-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin: 0 0 16px 0;
-  line-height: 1.3;
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  letter-spacing: var(--ls-heading);
+  color: var(--heading);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
 }
 
 .personal-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--font-secondary-color);
-  margin: 0 0 24px 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-md);
+  line-height: var(--lh-body);
+  color: var(--text-1);
+  opacity: 0.85;
+  margin: 0 0 16px 0;
 }
 
 .personal-description strong {
-  color: var(--primary-color);
+  color: var(--heading);
   font-weight: 600;
 }
 
 .highlights-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
 }
 
+/* Lista numerada (skill §3 5.6 Cohort): número mono accent + texto serif. */
 .highlight-item {
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px;
-  background: var(--background-color);
-  border-radius: var(--border-radius-slice);
-  border: var(--slice-border) solid var(--border-color);
-  transition: all 0.3s ease;
+  align-items: baseline;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-soft);
+  transition: opacity 0.2s ease;
 }
 
-.highlight-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(var(--primary-color-rgb), 0.15);
-  border-color: var(--primary-color);
+.highlight-item:first-child {
+  border-top: none;
 }
 
-.highlight-icon {
-  font-size: 1.5rem;
+.highlight-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent);
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary-color);
-  color: var(--primary-color-contrast);
-  border-radius: 50%;
+  width: 28px;
+  line-height: 1.2;
 }
 
 .highlight-content {
@@ -872,17 +733,19 @@ slice-about-section {
 }
 
 .highlight-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--font-primary-color);
-  margin: 0 0 8px 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-md);
+  font-weight: 500;
+  color: var(--text-1);
+  margin: 0 0 4px 0;
   line-height: 1.3;
 }
 
 .highlight-description {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--font-secondary-color);
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--text-2);
   margin: 0;
 }
 

@@ -1,0 +1,32 @@
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    image: vkneider-portfolio:dev
+    container_name: vkneider-portfolio-dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+  prod:
+    build:
+      context: .
+      target: prod
+    image: vkneider-portfolio:prod
+    container_name: vkneider-portfolio-prod
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    profiles: ["prod"]
+
+volumes:
+  node_modules:

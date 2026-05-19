@@ -23,7 +23,7 @@ export const studiesData = [
     'Systems Analysis and Design',
     'Component-Based Programming'
   ],
-  logo: '/images/education/uru-logo.png'
+  logo: '/images/uru-logo-seo.png'
 },
   {
     id: 2,

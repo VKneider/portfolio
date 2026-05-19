@@ -1,6 +1,6 @@
 .slice_tree_item,
 .container_open .slice_tree_item {
-   color: var(--font-primary-color);
+   color: var(--text-1);
    user-select: none;
    cursor: pointer;
    width: fit-content;
@@ -11,7 +11,7 @@
    border-radius: var(--border-radius-slice);
 }
 .slice_tree_item .caret {
-   color: var(--primary-color);
+   color: var(--accent);
    margin-right: 5px;
    transform: rotate(-90deg);
 }
@@ -20,7 +20,7 @@
 }
 .container {
    margin-left: 14px;
-   border-left: 2px solid var(--primary-color);
+   border-left: 2px solid var(--accent);
    height: 0;
    overflow: hidden;
    transition: height 0.3s ease;
@@ -31,6 +31,6 @@
 }
 
 .slice_tree_item:hover {
-   background-color: #ffffff25;
-   color: var(--primary-color);
+   background-color: rgba(var(--accent-rgb), 0.12);
+   color: var(--accent);
 }

@@ -1,0 +1,58 @@
+/**
+ * SectionTitle — heading canónico de sección (Manual §3 5.6 Receta 1).
+ *
+ * Aplica al host slice-section-title y al .section-title legacy (clase suelta
+ * en HTML/JS antiguos) para que ambas formas rindan idénticas.
+ */
+
+slice-section-title {
+  display: block;
+  width: 100%;
+}
+
+slice-section-title .section-title,
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: var(--ls-heading);
+  color: var(--heading);
+  text-align: center;
+  margin: 0 0 4rem;
+  padding-top: 1rem;
+  position: relative;
+}
+
+slice-section-title .section-title::after,
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 3px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+/* Acento conceptual en italica bronce (skill §3 3.2 B): solo una palabra. */
+slice-section-title .section-title em,
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* Variante alineada a la izquierda (para secciones que no son centradas). */
+slice-section-title[data-align="start"] .section-title,
+.section-title.align-start {
+  text-align: left;
+}
+
+slice-section-title[data-align="start"] .section-title::after,
+.section-title.align-start::after {
+  left: 0;
+  transform: none;
+}

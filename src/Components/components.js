@@ -32,6 +32,7 @@ const components = {
   "NotFound": "Visual",
   "ProjectViewer": "Visual",
   "Route": "Visual",
+  "SectionTitle": "Visual",
   "Select": "Visual",
   "Switch": "Visual",
   "Tabs": "Visual",

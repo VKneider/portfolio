@@ -23,7 +23,7 @@
 .switch_label {
   margin: 5px;
   font-family: var(--font-family);
-  color: var(--font-primary-color);
+  color: var(--text-1);
 }
 
 .slider {
@@ -31,8 +31,8 @@
   display: inline-block;
   width: var(--button-width);
   height: var(--button-height);
-  background-color: var(--secondary-background-color);
-  border: var(--slice-border) solid var(--primary-color);
+  background-color: var(--surface-1);
+  border: var(--slice-border) solid var(--accent);
   border-radius: calc(var(--button-height) / 2);
   position: relative;
   transition: 0.3s all ease-in-out;
@@ -43,7 +43,7 @@
   display: inline-block;
   width: var(--toggle-diameter);
   height: var(--toggle-diameter);
-  background-color: #fff;
+  background-color: var(--text-1);
   border-radius: calc(var(--toggle-diameter) / 2);
   position: absolute;
   top: var(--button-toggle-offset);
@@ -52,8 +52,8 @@
 }
 
 .slice_switch input[type="checkbox"]:checked + .slider {
-  background-color: var(--success-color);
-  border: var(--slice-border) solid var(--success-color);
+  background-color: var(--accent);
+  border: var(--slice-border) solid var(--accent);
 }
 
 .slice_switch input[type="checkbox"]:checked + .slider::after {
@@ -69,8 +69,8 @@
 }
 
 .disabled {
-  border-color: var(--disabled-color);
-  background-color: var(--primary-color-shade);
-  color: var(--disabled-color);
+  border-color: var(--text-2);
+  background-color: var(--accent);
+  color: var(--text-2);
   cursor: not-allowed;
 }

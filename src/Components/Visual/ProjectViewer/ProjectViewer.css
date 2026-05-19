@@ -9,17 +9,17 @@ slice-project-viewer {
     grid-template-columns: 260px 1fr 340px; /* Adjusted columns back to reasonable ratio */
     gap: 0;
     height: 600px; /* Reduced height to fix proportion */
-    background: var(--primary-background-color);
+    background: var(--bg);
     border-radius: var(--border-radius-slice, 16px);
     overflow: hidden;
-    border: 1px solid var(--disabled-color, #eee);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.02);
+    border: 1px solid var(--text-2);
+    box-shadow: 0 20px 60px rgba(var(--accent-rgb),0.12), 0 0 0 1px rgba(var(--accent-rgb),0.02);
     transition: all 0.3s ease;
 
     /* --- Left Column: Thumbnails --- */
     & .thumbnails-column {
-        background: var(--secondary-background-color, #f8f9fa);
-        border-right: 1px solid var(--disabled-color, #eee);
+        background: var(--surface-1);
+        border-right: 1px solid var(--text-2);
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -27,14 +27,14 @@ slice-project-viewer {
 
         & .column-header {
             padding: 1.5rem;
-            border-bottom: 1px solid var(--disabled-color, #eee);
-            background: var(--primary-background-color);
+            border-bottom: 1px solid var(--text-2);
+            background: var(--bg);
 
             & h3 {
                 margin: 0;
                 font-size: 1.1rem;
-                font-weight: 700;
-                color: var(--font-primary-color);
+                font-weight: 600;
+                color: var(--text-1);
                 letter-spacing: -0.5px;
             }
         }
@@ -53,7 +53,7 @@ slice-project-viewer {
             flex-direction: column;
             gap: 0.8rem;
             padding: 0.8rem;
-            background: var(--primary-background-color);
+            background: var(--bg);
             border: 1px solid transparent;
             border-radius: 10px;
             cursor: pointer;
@@ -65,7 +65,7 @@ slice-project-viewer {
 
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+                box-shadow: 0 8px 16px rgba(var(--accent-rgb),0.06);
                 z-index: 1;
 
                 & img {
@@ -74,9 +74,9 @@ slice-project-viewer {
             }
 
             &.active {
-                border-color: var(--primary-color);
-                background: var(--primary-background-color);
-                box-shadow: 0 6px 16px rgba(var(--primary-color-rgb), 0.15);
+                border-color: var(--accent);
+                background: var(--bg);
+                box-shadow: 0 6px 16px rgba(var(--accent-rgb), 0.15);
 
                 &::before {
                     content: '';
@@ -86,7 +86,7 @@ slice-project-viewer {
                     bottom: 15%;
                     width: 4px;
                     border-radius: 0 4px 4px 0;
-                    background: var(--primary-color);
+                    background: var(--accent);
                 }
 
                 & img {
@@ -99,8 +99,8 @@ slice-project-viewer {
                 height: 110px;
                 border-radius: 6px;
                 overflow: hidden;
-                background: #000;
-                box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+                background: var(--surface-2);
+                box-shadow: inset 0 0 0 1px rgba(var(--text-1-rgb),0.1);
 
                 & img {
                     width: 100%;
@@ -114,7 +114,7 @@ slice-project-viewer {
             & .thumbnail-title {
                 font-size: 0.95rem;
                 font-weight: 600;
-                color: var(--font-primary-color);
+                color: var(--text-1);
                 padding-left: 0.5rem;
             }
         }
@@ -126,7 +126,7 @@ slice-project-viewer {
         /* display: flex; align-items: flex-start; */ /* Removed flex to avoid height issues */
         display: block; 
         position: relative;
-        background: radial-gradient(circle at center, var(--tertiary-background-color) 0%, var(--secondary-background-color) 100%);
+        background: radial-gradient(circle at center, var(--border) 0%, var(--surface-1) 100%);
         overflow: hidden;
         text-align: center; /* Helper to center inline layout if fallback triggers */
 
@@ -136,7 +136,7 @@ slice-project-viewer {
             position: absolute;
             width: 500px;
             height: 500px;
-            background: var(--primary-color);
+            background: var(--accent);
             opacity: 0.03;
             border-radius: 50%;
             filter: blur(80px);
@@ -183,11 +183,11 @@ slice-project-viewer {
                     background: transparent;
                 }
                 &::-webkit-scrollbar-thumb {
-                    background-color: rgba(0,0,0,0.1);
+                    background-color: rgba(var(--accent-rgb),0.1);
                     border-radius: 10px;
 
                     &:hover {
-                        background-color: rgba(0,0,0,0.2);
+                        background-color: rgba(var(--accent-rgb),0.2);
                     }
                 }
 
@@ -196,7 +196,7 @@ slice-project-viewer {
                     height: auto;
                     display: block;
                     border-radius: 8px;
-                    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15);
+                    box-shadow: 0 10px 30px -5px rgba(var(--accent-rgb), 0.15);
                     transition: all 0.4s ease;
                     flex: 0 0 auto; /* Prevent shrinking */
                     background: white;
@@ -213,9 +213,9 @@ slice-project-viewer {
         padding: 2.5rem 2rem;
         display: flex;
         flex-direction: column;
-        background: var(--primary-background-color);
+        background: var(--bg);
         overflow-y: auto;
-        border-left: 1px solid var(--disabled-color);
+        border-left: 1px solid var(--text-2);
         position: relative;
 
         & .details-panel {
@@ -231,9 +231,9 @@ slice-project-viewer {
             & .project-title {
                 font-size: 2rem;
                 margin: 0 0 0.8rem 0;
-                color: var(--font-primary-color);
+                color: var(--text-1);
                 line-height: 1.2;
-                font-weight: 800;
+                font-weight: 600;
                 letter-spacing: -0.5px;
             }
 
@@ -243,20 +243,20 @@ slice-project-viewer {
                 padding: 0.3rem 0.8rem;
                 border-radius: 30px;
                 font-size: 0.75rem;
-                font-weight: 700;
+                font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
-                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 4px -1px rgba(var(--accent-rgb), 0.1);
 
-                &.status-active, &.status-live { background-color: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
-                &.status-completed { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
-                &.status-in-development { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+                &.status-active, &.status-live { background-color: rgba(var(--accent-rgb), 0.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb), 0.25); }
+                &.status-completed { background-color: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); font-style: italic; }
+                &.status-in-development { background-color: rgba(var(--accent-rgb), 0.06); color: var(--text-1); border: 1px dashed var(--accent); }
             }
 
             & .project-description {
                 font-size: 1rem;
                 line-height: 1.6;
-                color: var(--font-secondary-color);
+                color: var(--text-2);
                 margin-bottom: 2rem;
                 font-weight: 400;
             }
@@ -266,9 +266,9 @@ slice-project-viewer {
                     margin: 0 0 1rem 0;
                     font-size: 0.85rem;
                     text-transform: uppercase;
-                    color: var(--font-secondary-color);
+                    color: var(--text-2);
                     letter-spacing: 1px;
-                    font-weight: 700;
+                    font-weight: 600;
                 }
 
                 & .tech-list {
@@ -279,19 +279,19 @@ slice-project-viewer {
 
                     & .tech-tag {
                         padding: 0.3rem 0.6rem;
-                        background: var(--primary-background-color);
-                        border: 1px solid var(--disabled-color);
-                        color: var(--font-primary-color);
+                        background: var(--bg);
+                        border: 1px solid var(--text-2);
+                        color: var(--text-1);
                         border-radius: 4px;
                         font-size: 0.75rem;
                         font-weight: 500;
-                        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+                        box-shadow: 0 1px 2px rgba(var(--accent-rgb),0.03);
                         transition: transform 0.2s;
 
                         &:hover {
                             transform: translateY(-2px);
-                            border-color: var(--primary-color);
-                            color: var(--primary-color);
+                            border-color: var(--accent);
+                            color: var(--accent);
                         }
                     }
                 }
@@ -330,7 +330,7 @@ slice-project-viewer {
     
         & .thumbnails-column {
             grid-row: 1 / -1;
-            border-right: 1px solid var(--disabled-color);
+            border-right: 1px solid var(--text-2);
         }
     
         & .preview-column {
@@ -344,7 +344,7 @@ slice-project-viewer {
             padding: 2.5rem;
             height: auto;
             border-left: none;
-            border-top: 1px solid var(--disabled-color);
+            border-top: 1px solid var(--text-2);
         }
     
         & .project-title { font-size: 2.2rem; }
@@ -375,8 +375,8 @@ slice-project-viewer {
 
             & .preview-container {
                 border-radius: 16px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                background: var(--tertiary-background-color);
+                box-shadow: 0 10px 30px rgba(var(--accent-rgb),0.1);
+                background: var(--border);
 
                 & .preview-scroll-wrapper .preview-image {
                     box-shadow: none;
@@ -400,7 +400,7 @@ slice-project-viewer {
             order: 3;
             border-right: none;
             background: transparent;
-            border-top: 1px solid var(--disabled-color);
+            border-top: 1px solid var(--text-2);
             padding: 1.5rem 0;
 
             & .thumbnails-list {
@@ -415,8 +415,8 @@ slice-project-viewer {
             & .thumbnail-btn {
                 min-width: 160px;
                 width: 160px;
-                background: var(--primary-background-color);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                background: var(--bg);
+                box-shadow: 0 4px 10px rgba(var(--accent-rgb),0.05);
 
                 & .thumbnail-wrapper { height: 90px; }
             }
@@ -428,7 +428,7 @@ slice-project-viewer {
         display: block; 
         text-align: center; 
         font-size: 0.85rem; 
-        color: var(--font-secondary-color); 
+        color: var(--text-2); 
         margin-bottom: 1rem; 
         opacity: 0.8; 
         font-weight: 600;
@@ -448,7 +448,7 @@ slice-project-viewer {
     
     .thumbnails-column {
         grid-row: 1 / -1; /* Full height sidebar */
-        border-right: 1px solid var(--disabled-color);
+        border-right: 1px solid var(--text-2);
     }
     
     .preview-column {
@@ -462,7 +462,7 @@ slice-project-viewer {
         padding: 2.5rem;
         height: auto;
         border-left: none; /* Removed border as it's now stacked */
-        border-top: 1px solid var(--disabled-color);
+        border-top: 1px solid var(--text-2);
     }
     
     .project-title { font-size: 2.2rem; }
@@ -494,8 +494,8 @@ slice-project-viewer {
 
     .preview-container {
         border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        background: var(--tertiary-background-color);
+        box-shadow: 0 10px 30px rgba(var(--accent-rgb),0.1);
+        background: var(--border);
     }
     
     .preview-image {
@@ -518,12 +518,12 @@ slice-project-viewer {
         order: 3;
         border-right: none;
         background: transparent;
-        border-top: 1px solid var(--disabled-color);
+        border-top: 1px solid var(--text-2);
         padding: 1.5rem 0;
     }
 
     .mobile-hidden { display: none; }
-    .mobile-only { display: block; text-align: center; font-size: 0.85rem; color: var(--font-secondary-color); margin-bottom: 1rem; opacity: 0.8; font-weight: 600;}
+    .mobile-only { display: block; text-align: center; font-size: 0.85rem; color: var(--text-2); margin-bottom: 1rem; opacity: 0.8; font-weight: 600;}
 
     .thumbnails-list {
         flex-direction: row;
@@ -537,8 +537,8 @@ slice-project-viewer {
     .thumbnail-btn {
         min-width: 160px;
         width: 160px;
-        background: var(--primary-background-color);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        background: var(--bg);
+        box-shadow: 0 4px 10px rgba(var(--accent-rgb),0.05);
     }
     
     .thumbnail-wrapper {
@@ -556,7 +556,7 @@ slice-project-viewer {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.95); /* Increased opacity to replace backdrop-filter */
+    background-color: rgba(var(--accent-rgb),0.95); /* Increased opacity to replace backdrop-filter */
     opacity: 0;
     transition: opacity 0.25s ease-out; /* Faster, simpler transition */
     align-items: center;
@@ -575,7 +575,7 @@ slice-project-viewer {
     transform: scale(0.95);
     transition: transform 0.25s ease-out; /* Removed expensive elastic bounce */
     border-radius: 4px; /* Reduced radius for performance */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 40px rgba(var(--accent-rgb),0.5);
     will-change: transform;
 }
 
@@ -587,13 +587,13 @@ slice-project-viewer {
     position: absolute;
     top: 20px;
     right: 20px;
-    color: #f1f1f1;
+    color: var(--text-1);
     font-size: 32px; /* Adjusted size */
-    font-weight: 300; /* Thinner weight */
+    font-weight: 400; /* Thinner weight */
     cursor: pointer;
     z-index: 10001;
     line-height: 1;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(var(--text-1-rgb), 0.15);
     width: 44px;
     height: 44px;
     min-width: 44px; /* Ensure circular shape */
@@ -608,8 +608,8 @@ slice-project-viewer {
 }
 
 .image-modal .close-modal:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
+    background: rgba(var(--text-1-rgb), 0.3);
+    color: var(--text-1);
     transform: scale(1.05);
 }
 
@@ -618,8 +618,8 @@ slice-project-viewer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.15);
-    color: #f1f1f1;
+    background: rgba(var(--text-1-rgb), 0.15);
+    color: var(--text-1);
     border: none;
     cursor: pointer;
     z-index: 10001;
@@ -636,8 +636,8 @@ slice-project-viewer {
 }
 
 .modal-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
+    background: rgba(var(--text-1-rgb), 0.3);
+    color: var(--text-1);
     transform: translateY(-50%) scale(1.1);
 }
 

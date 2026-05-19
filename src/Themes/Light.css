@@ -1,34 +1,37 @@
+/**
+ * vkneider.dev — Modo Claro
+ * Paleta dual cerrada · 8 tokens canónicos + derivados
+ * Fuente de verdad: Manual de Marca · §3 Sección 1.2
+ *
+ * Movimientos deliberados respecto al modo oscuro (§3 1.4):
+ *   1. Indigo migra: de fondo a --structural (que sostiene headings vía --heading).
+ *   2. Bronce se profundiza: #D97706 → #B45309.
+ *   3. Cool estructural pasa de lavanda a indigo.
+ */
+
 :root {
-  /* Tipografía con máximo contraste */
-  --font-primary-color: #1E1B4B;            /* Indigo profundo para títulos y prosa principal */
-  --font-secondary-color: #3730A3;          /* Indigo medio para texto secundario y subtítulos */
- 
-  --primary-color: #F97316;                 /* Naranja saturado, vivo y profesional */
-  --primary-color-rgb: 249, 115, 22;
-  --primary-background-color: #FFFFFF;      /* Blanco puro como canvas */
-  --primary-color-contrast: #FFFFFF;        /* Texto sobre botones primarios */
-  --primary-color-shade: #EA580C;           /* Naranja profundo para hover, focus, bordes */
- 
-  --secondary-color: #1E1B4B;               /* Indigo profundo como complemento del naranja */
-  --secondary-color-rgb: 30, 27, 75;
-  --secondary-background-color: #F5F3FF;    /* Indigo violeta muy claro para superficies */
-  --secondary-color-contrast: #FFFFFF;      /* Texto sobre fondo indigo */
- 
-  --tertiary-background-color: #FFF7ED;     /* Tinte naranja suave para banners y destacados */
- 
-  --success-color: #059669;                 /* Verde esmeralda contrastante sobre blanco */
-  --success-contrast: #FFFFFF;
- 
-  --warning-color: #D97706;                 /* Ámbar dorado, distinto del naranja primario */
-  --warning-contrast: #FFFFFF;
- 
-  --danger-color: #DC2626;                  /* Rojo intenso y claro sobre blanco */
-  --danger-contrast: #FFFFFF;
- 
-  --medium-color: #6366F1;                  /* Indigo medio coherente con la paleta */
-  --medium-contrast: #FFFFFF;
- 
-  --disabled-color: #C7D2FE;                /* Indigo claro visible pero apagado */
- 
-  --accent-color: #FDBA74;                  /* Ámbar para fondos de elementos llenos (badges, banners) */
+  /* 8 tokens canónicos */
+  --bg:          #FAF7EE;
+  --surface-1:   #F5F1E8;
+  --surface-2:   #EDE7D8;
+  --border:      #D6CFC0;
+  --accent:      #B45309;
+  --structural:  #1E1B4B;
+  --text-1:      #1C1917;
+  --text-2:      #44403C;
+
+  /* Derivados */
+  --border-soft: rgba(30, 27, 75, 0.10);
+  --heading:     var(--structural);
+  --on-accent:   var(--bg);
+  --indigo:      var(--structural);
+  --bracket:     var(--structural);
+
+  --glow-warm:   rgba(180, 83, 9, 0.07);
+  --glow-cool:   rgba(30, 27, 75, 0.05);
+  --hover-bg:    rgba(180, 83, 9, 0.04);
+  --shadow-cta:  rgba(180, 83, 9, 0.45);
+
+  --accent-rgb:  180, 83, 9;
+  --text-1-rgb:  28, 25, 23;
 }

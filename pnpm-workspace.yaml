@@ -1,0 +1,4 @@
+# pnpm 11+ workspace settings (single-project setup, no workspace).
+# Allowlist de paquetes con install scripts permitidos (ignoreScripts=true en .npmrc).
+allowBuilds:
+  slicejs-cli: true

@@ -6,14 +6,14 @@ slice-teaching-section {
 .teaching-section {
   width: 100%;
   padding: 2rem 0;
-  --teaching-surface-shadow-strong: 0 20px 40px rgba(var(--primary-color-rgb), 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.1);
-  --teaching-surface-shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.2);
+  --teaching-surface-shadow-strong: 0 20px 40px rgba(var(--accent-rgb), 0.2),
+    0 8px 16px rgba(var(--accent-rgb), 0.1);
+  --teaching-surface-shadow-soft: 0 8px 25px rgba(var(--accent-rgb), 0.2);
 }
 
 .teaching-section.teaching-reduced-effects {
-  --teaching-surface-shadow-strong: 0 6px 20px rgba(0, 0, 0, 0.3);
-  --teaching-surface-shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --teaching-surface-shadow-strong: 0 6px 20px rgba(var(--accent-rgb), 0.3);
+  --teaching-surface-shadow-soft: 0 4px 16px rgba(var(--accent-rgb), 0.25);
 }
 
 .teaching-section.teaching-reduced-effects :is(
@@ -78,14 +78,14 @@ slice-teaching-section {
 
 .teaching-title {
   font-size: 2.5rem;
-  color: var(--primary-color);
+  color: var(--accent);
   text-align: center;
   margin-bottom: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
   text-shadow: 
-    0 0 12px rgba(var(--primary-color-rgb), 0.4),
-    0 0 20px rgba(var(--primary-color-rgb), 0.2);
+    0 0 12px rgba(var(--accent-rgb), 0.4),
+    0 0 20px rgba(var(--accent-rgb), 0.2);
 }
 
 .teaching-title::after {
@@ -96,16 +96,16 @@ slice-teaching-section {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background-color: var(--secondary-color);
+  background-color: var(--accent);
   border-radius: 2px;
   box-shadow: 
-    0 0 15px rgba(var(--secondary-color-rgb), 0.6),
-    0 0 30px rgba(var(--secondary-color-rgb), 0.3);
+    0 0 15px rgba(var(--accent-rgb), 0.6),
+    0 0 30px rgba(var(--accent-rgb), 0.3);
 }
 
 .teaching-subtitle {
   font-size: 1.3rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   margin: 0;
   max-width: 700px;
   margin: 0 auto;
@@ -127,14 +127,11 @@ slice-teaching-section {
 
 /* Selection Cards - Cards pequeñas cuadradas */
 .selection-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: var(--surface-1);
   backdrop-filter: blur(20px);
   border-radius: 15px;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -143,9 +140,9 @@ slice-teaching-section {
   opacity: 0;
   transform: translateY(30px);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 8px 32px rgba(var(--accent-rgb), 0.1),
+    0 2px 8px rgba(var(--accent-rgb), 0.05),
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.1);
   width: 200px;
   height: 200px;
   display: flex;
@@ -163,11 +160,7 @@ slice-teaching-section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    var(--teaching-primary, var(--primary-color)) 0%, 
-    var(--teaching-secondary, var(--secondary-color)) 50%,
-    var(--teaching-accent, var(--accent-color)) 100%
-  );
+  background: var(--accent);
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: -1;
@@ -175,9 +168,9 @@ slice-teaching-section {
 
 .selection-card:hover {
   transform: translateY(-8px) scale(1.05);
-  border-color: rgba(var(--primary-color-rgb), 0.3);
+  border-color: rgba(var(--accent-rgb), 0.3);
   box-shadow: var(--teaching-surface-shadow-strong),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.2);
 }
 
 .selection-card:hover::before {
@@ -186,10 +179,10 @@ slice-teaching-section {
 
 .selection-card.selected {
   transform: translateY(-8px) scale(1.05);
-  border-color: var(--primary-color);
+  border-color: var(--accent);
   box-shadow: var(--teaching-surface-shadow-strong),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 30px rgba(var(--primary-color-rgb), 0.3);
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.2),
+    0 0 30px rgba(var(--accent-rgb), 0.3);
 }
 
 .selection-card.selected::before {
@@ -197,21 +190,21 @@ slice-teaching-section {
 }
 
 .selection-card.selected .selection-title {
-  color: var(--primary-color);
-  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Elementos de las cards de selección */
 .selection-icon {
   font-size: 2.5rem;
   margin-bottom: 0.8rem;
-  filter: drop-shadow(0 0 10px rgba(var(--primary-color-rgb), 0.3));
+  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.3));
 }
 
 .selection-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin: 0 0 0.8rem 0;
   line-height: 1.2;
   text-align: center;
@@ -227,15 +220,15 @@ slice-teaching-section {
 }
 
 .selection-status.currently-teaching {
-  background: var(--primary-color);
-  color: var(--primary-color-contrast);
-  box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.4);
 }
 
 .selection-status.not-teaching {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--font-secondary-color);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(var(--text-1-rgb), 0.1);
+  color: var(--text-2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
 }
 
 /* Vista Detallada */
@@ -246,18 +239,15 @@ slice-teaching-section {
 }
 
 .detail-content {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: var(--surface-1);
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 8px 32px rgba(var(--accent-rgb), 0.1),
+    0 2px 8px rgba(var(--accent-rgb), 0.05),
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -269,11 +259,7 @@ slice-teaching-section {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, 
-    var(--teaching-primary, var(--primary-color)), 
-    var(--teaching-secondary, var(--secondary-color)),
-    var(--teaching-accent, var(--accent-color))
-  );
+  background: var(--accent);
 }
 
 /* Header de la vista detallada */
@@ -289,11 +275,8 @@ slice-teaching-section {
 
 .detail-title {
   font-size: 2.2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, 
-    var(--font-primary-color) 0%, 
-    var(--teaching-primary, var(--primary-color)) 100%
-  );
+  font-weight: 600;
+  background: var(--accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -304,7 +287,7 @@ slice-teaching-section {
 
 .detail-university {
   font-size: 1rem;
-  color: var(--teaching-secondary, var(--secondary-color));
+  color: var(--teaching-secondary, var(--accent));
   font-weight: 500;
   margin-bottom: 1rem;
   display: block;
@@ -324,7 +307,7 @@ slice-teaching-section {
   padding: 1rem 1.5rem;
   border-radius: 15px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
   transition: all 0.3s ease;
   min-width: 120px;
   position: relative;
@@ -338,10 +321,7 @@ slice-teaching-section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    var(--primary-color) 0%, 
-    rgba(var(--primary-color-rgb), 0.8) 100%
-  );
+  background: var(--accent);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -352,41 +332,41 @@ slice-teaching-section {
 }
 
 .detail-status-indicator.currently-teaching {
-  background: rgba(var(--primary-color-rgb), 0.1);
-  border-color: rgba(var(--primary-color-rgb), 0.3);
-  box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.2);
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 8px 25px rgba(var(--accent-rgb), 0.2);
 }
 
 .detail-status-indicator.not-teaching {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--text-1-rgb), 0.05);
+  border-color: rgba(var(--text-1-rgb), 0.1);
 }
 
 .detail-status-indicator:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(var(--primary-color-rgb), 0.3);
+  box-shadow: 0 12px 30px rgba(var(--accent-rgb), 0.3);
 }
 
 .status-icon {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 8px rgba(var(--primary-color-rgb), 0.4));
+  filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.4));
 }
 
 .status-text {
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-align: center;
 }
 
 .detail-status-indicator.currently-teaching .status-text {
-  color: var(--primary-color);
+  color: var(--accent);
 }
 
 .detail-status-indicator.not-teaching .status-text {
-  color: var(--font-secondary-color);
+  color: var(--text-2);
 }
 
 /* Contenido principal de la vista detallada */
@@ -398,7 +378,7 @@ slice-teaching-section {
 .detail-description {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   margin: 0 0 2rem 0;
   font-weight: 400;
 }
@@ -411,7 +391,7 @@ slice-teaching-section {
 .detail-technologies .tech-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin: 0 0 1rem 0;
 }
 
@@ -422,21 +402,21 @@ slice-teaching-section {
 }
 
 .detail-technologies .tech-badge {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--text-1-rgb), 0.1);
   backdrop-filter: blur(10px);
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   padding: 0.6rem 1.2rem;
   border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
   transition: all 0.3s ease;
 }
 
 .detail-technologies .tech-badge:hover {
-  background: rgba(var(--primary-color-rgb), 0.2);
-  color: var(--primary-color);
-  border-color: rgba(var(--primary-color-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.4);
   transform: translateY(-2px);
 }
 
@@ -448,7 +428,7 @@ slice-teaching-section {
 .detail-projects .projects-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin: 0 0 1.5rem 0;
 }
 
@@ -463,10 +443,10 @@ slice-teaching-section {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--text-1-rgb), 0.05);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(var(--text-1-rgb), 0.1);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -479,22 +459,19 @@ slice-teaching-section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    var(--primary-color) 0%, 
-    rgba(var(--primary-color-rgb), 0.8) 100%
-  );
+  background: var(--accent);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
 }
 
 .detail-projects .project-item:hover {
-  background: rgba(var(--primary-color-rgb), 0.1);
-  border-color: rgba(var(--primary-color-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: rgba(var(--accent-rgb), 0.4);
   transform: translateX(8px);
   box-shadow: 
-    0 8px 25px rgba(var(--primary-color-rgb), 0.2),
-    0 0 20px rgba(var(--primary-color-rgb), 0.1);
+    0 8px 25px rgba(var(--accent-rgb), 0.2),
+    0 0 20px rgba(var(--accent-rgb), 0.1);
 }
 
 .detail-projects .project-item:hover::before {
@@ -504,35 +481,35 @@ slice-teaching-section {
 .detail-projects .project-name {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin-bottom: 0.3rem;
   display: block;
 }
 
 .detail-projects .student-name {
   font-size: 0.85rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
 }
 
 .detail-projects .project-link {
-  color: var(--primary-color);
+  color: var(--accent);
   text-decoration: none;
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: rgba(var(--primary-color-rgb), 0.1);
-  border: 2px solid rgba(var(--primary-color-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 4px 15px rgba(var(--primary-color-rgb), 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 4px 15px rgba(var(--accent-rgb), 0.2),
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.1);
 }
 
 .detail-projects .project-link::before {
@@ -542,23 +519,20 @@ slice-teaching-section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    var(--primary-color) 0%, 
-    rgba(var(--primary-color-rgb), 0.8) 100%
-  );
+  background: var(--accent);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
 }
 
 .detail-projects .project-link:hover {
-  background: rgba(var(--primary-color-rgb), 0.2);
-  border-color: var(--primary-color);
+  background: rgba(var(--accent-rgb), 0.2);
+  border-color: var(--accent);
   transform: scale(1.15) rotate(5deg);
   box-shadow: 
-    0 8px 25px rgba(var(--primary-color-rgb), 0.4),
-    0 0 20px rgba(var(--primary-color-rgb), 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 8px 25px rgba(var(--accent-rgb), 0.4),
+    0 0 20px rgba(var(--accent-rgb), 0.3),
+    inset 0 1px 0 rgba(var(--text-1-rgb), 0.2);
 }
 
 .detail-projects .project-link:hover::before {
@@ -566,8 +540,8 @@ slice-teaching-section {
 }
 
 .detail-projects .project-link:hover {
-  color: var(--primary-color-contrast);
-  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5);
+  color: var(--on-accent);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
 }
 
 /* Footer de la vista detallada */
@@ -576,14 +550,14 @@ slice-teaching-section {
   justify-content: space-between;
   align-items: center;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(var(--text-1-rgb), 0.1);
   position: relative;
   z-index: 2;
 }
 
 .detail-year {
   font-size: 0.9rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   font-weight: 500;
   opacity: 0.8;
 }
@@ -592,27 +566,21 @@ slice-teaching-section {
   padding: 0.5rem 1.2rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .detail-status.status-active {
-  background: linear-gradient(135deg, 
-    var(--success-color) 0%, 
-    rgba(var(--success-color-rgb), 0.8) 100%
-  );
-  color: var(--success-contrast);
-  box-shadow: 0 4px 15px rgba(var(--success-color-rgb), 0.3);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.3);
 }
 
 .detail-status.status-completed {
-  background: linear-gradient(135deg, 
-    var(--secondary-color) 0%, 
-    rgba(var(--secondary-color-rgb), 0.8) 100%
-  );
-  color: var(--secondary-color-contrast);
-  box-shadow: 0 4px 15px rgba(var(--secondary-color-rgb), 0.3);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Subject Header */
@@ -631,11 +599,8 @@ slice-teaching-section {
 
 .subject-title {
   font-size: 1.4rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, 
-    var(--font-primary-color) 0%, 
-    var(--teaching-primary, var(--primary-color)) 100%
-  );
+  font-weight: 600;
+  background: var(--accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -652,12 +617,12 @@ slice-teaching-section {
 
 .meta-item {
   font-size: 0.75rem;
-  color: var(--font-secondary-color);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-2);
+  background: rgba(var(--text-1-rgb), 0.1);
   backdrop-filter: blur(10px);
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--text-1-rgb), 0.2);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -665,8 +630,8 @@ slice-teaching-section {
 }
 
 .meta-item:hover {
-  background: rgba(var(--primary-color-rgb), 0.2);
-  border-color: rgba(var(--primary-color-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.2);
+  border-color: rgba(var(--accent-rgb), 0.3);
   transform: translateY(-1px);
 }
 
@@ -680,7 +645,7 @@ slice-teaching-section {
 .subject-description {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -704,14 +669,14 @@ slice-teaching-section {
 }
 
 .tech-badge {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(var(--text-1-rgb), 0.08);
   backdrop-filter: blur(10px);
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   padding: 0.5rem 1rem;
   border-radius: 25px;
   font-size: 0.8rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(var(--text-1-rgb), 0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -726,18 +691,18 @@ slice-teaching-section {
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.2), 
+    rgba(var(--text-1-rgb), 0.2), 
     transparent
   );
   transition: left 0.5s ease;
 }
 
 .tech-badge:hover {
-  background: rgba(var(--primary-color-rgb), 0.2);
-  color: var(--primary-color);
-  border-color: rgba(var(--primary-color-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.4);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
 }
 
 .tech-badge:hover::before {
@@ -745,15 +710,15 @@ slice-teaching-section {
 }
 
 .tech-more {
-  background: rgba(var(--secondary-color-rgb), 0.2);
-  color: var(--secondary-color);
-  border-color: rgba(var(--secondary-color-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.4);
 }
 
 .tech-more:hover {
-  background: rgba(var(--secondary-color-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.3);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(var(--secondary-color-rgb), 0.3);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Student Projects Section */
@@ -776,10 +741,10 @@ slice-teaching-section {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.2rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--text-1-rgb), 0.05);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(var(--text-1-rgb), 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -792,20 +757,17 @@ slice-teaching-section {
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, 
-    var(--teaching-primary, var(--primary-color)), 
-    var(--teaching-secondary, var(--secondary-color))
-  );
+  background: var(--accent);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.3s ease;
 }
 
 .project-item:hover {
-  background: rgba(var(--primary-color-rgb), 0.1);
-  border-color: rgba(var(--primary-color-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: rgba(var(--accent-rgb), 0.3);
   transform: translateX(8px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.2);
+  box-shadow: 0 8px 25px rgba(var(--accent-rgb), 0.2);
 }
 
 .project-item:hover::before {
@@ -813,28 +775,28 @@ slice-teaching-section {
 }
 
 .project-item:hover .project-name {
-  color: var(--primary-color);
+  color: var(--accent);
   transform: translateX(4px);
 }
 
 .project-item:hover .project-link {
-  color: var(--primary-color);
+  color: var(--accent);
   transform: scale(1.1);
 }
 
 .project-name {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   transition: all 0.3s ease;
   letter-spacing: -0.01em;
 }
 
 .project-link {
-  color: var(--teaching-primary, var(--primary-color));
+  color: var(--teaching-primary, var(--accent));
   text-decoration: none;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -842,24 +804,24 @@ slice-teaching-section {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(var(--primary-color-rgb), 0.1);
-  border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .project-link:hover {
-  background: rgba(var(--primary-color-rgb), 0.2);
-  border-color: rgba(var(--primary-color-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.2);
+  border-color: rgba(var(--accent-rgb), 0.4);
 }
 
 .project-more {
   opacity: 0.7;
   font-style: italic;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(var(--text-1-rgb), 0.03);
 }
 
 .project-more:hover {
   opacity: 1;
-  background: rgba(var(--secondary-color-rgb), 0.1);
+  background: rgba(var(--accent-rgb), 0.1);
 }
 
 /* Subject Footer */
@@ -869,14 +831,14 @@ slice-teaching-section {
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(var(--text-1-rgb), 0.1);
   position: relative;
   z-index: 2;
 }
 
 .subject-year {
   font-size: 0.85rem;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
   font-weight: 500;
   opacity: 0.8;
 }
@@ -885,7 +847,7 @@ slice-teaching-section {
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
@@ -902,7 +864,7 @@ slice-teaching-section {
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.2), 
+    rgba(var(--text-1-rgb), 0.2), 
     transparent
   );
   transition: left 0.5s ease;
@@ -913,21 +875,15 @@ slice-teaching-section {
 }
 
 .status-active {
-  background: linear-gradient(135deg, 
-    var(--success-color) 0%, 
-    rgba(var(--success-color-rgb), 0.8) 100%
-  );
-  color: var(--success-contrast);
-  box-shadow: 0 4px 15px rgba(var(--success-color-rgb), 0.3);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.3);
 }
 
 .status-completed {
-  background: linear-gradient(135deg, 
-    var(--secondary-color) 0%, 
-    rgba(var(--secondary-color-rgb), 0.8) 100%
-  );
-  color: var(--secondary-color-contrast);
-  box-shadow: 0 4px 15px rgba(var(--secondary-color-rgb), 0.3);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Animations */

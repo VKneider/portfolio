@@ -11,13 +11,8 @@ slice-animations {
 	gap: 1rem;
 }
 
-.animations-header h1 {
-	margin: 0;
-}
-
-.animations-header p {
-	margin: 0.4rem 0 0;
-}
+.animations-header h1 { margin: 0; }
+.animations-header p  { margin: 0.4rem 0 0; }
 
 .animations-controls {
 	display: flex;
@@ -28,9 +23,9 @@ slice-animations {
 
 .animations-action-button,
 .animations-metric {
-	border: 1px solid var(--primary-color-shade);
-	background: var(--secondary-background-color);
-	color: var(--font-primary-color);
+	border: 1px solid var(--accent);
+	background: var(--surface-1);
+	color: var(--text-1);
 	border-radius: var(--border-radius-slice);
 }
 
@@ -46,9 +41,7 @@ slice-animations {
 }
 
 .animations-control input,
-.animations-control select {
-	width: 100%;
-}
+.animations-control select { width: 100%; }
 
 .animations-grid {
 	display: grid;
@@ -59,27 +52,21 @@ slice-animations {
 .animations-card {
 	display: grid;
 	gap: 0.9rem;
-	background: var(--secondary-background-color);
-	border: 1px solid var(--primary-color-shade);
+	background: var(--surface-1);
+	border: 1px solid var(--border);
 	border-radius: var(--border-radius-slice);
 	padding: 1rem;
 }
 
-.animations-card-header {
-	display: grid;
-	gap: 0.25rem;
-}
-
+.animations-card-header { display: grid; gap: 0.25rem; }
 .animations-card-header h2,
-.animations-card-header p {
-	margin: 0;
-}
+.animations-card-header p { margin: 0; }
 
 .animations-stage {
 	min-height: 260px;
-	border: 1px solid color-mix(in srgb, var(--primary-color-shade) 70%, transparent);
+	border: 1px solid var(--border);
 	border-radius: var(--border-radius-slice);
-	background: var(--tertiary-background-color);
+	background: var(--surface-2);
 	padding: 1rem;
 	position: relative;
 	overflow: hidden;
@@ -96,34 +83,33 @@ slice-animations {
 	width: 18px;
 	height: 18px;
 	border-radius: 999px;
-	background: linear-gradient(135deg, #8ecae6, #219ebc);
-	box-shadow: 0 0 0 10px rgba(33, 158, 188, 0.08);
+	background: var(--accent);
+	box-shadow: 0 0 0 10px rgba(var(--accent-rgb), 0.08);
 }
 
-.animations-stage-stack {
-	display: grid;
-	place-items: center;
-}
+.animations-stage-stack { display: grid; place-items: center; }
 
 .animations-panel {
 	width: min(220px, 100%);
 	padding: 0.9rem 1rem;
 	border-radius: 18px;
-	background: linear-gradient(135deg, rgba(255, 183, 3, 0.92), rgba(251, 133, 0, 0.92));
-	color: #1e1e1e;
-	font-weight: 700;
-	box-shadow: 0 18px 36px rgba(2, 48, 71, 0.16);
+	background: var(--accent);
+	color: var(--on-accent);
+	font-weight: 600;
+	box-shadow: 0 18px 36px rgba(var(--accent-rgb), 0.16);
 	position: absolute;
 	text-align: center;
 }
 
 .animations-panel:nth-child(2) {
-	background: linear-gradient(135deg, rgba(142, 202, 230, 0.94), rgba(33, 158, 188, 0.94));
+	background: var(--surface-1);
+	color: var(--text-1);
+	border: 1px solid var(--border);
 }
 
 .animations-panel:nth-child(3) {
-	background: linear-gradient(135deg, rgba(2, 48, 71, 0.94), rgba(33, 158, 188, 0.88));
-	color: #f7fbff;
+	background: var(--surface-2);
+	color: var(--text-1);
 }
 
 .animations-stage-bars {
@@ -142,13 +128,11 @@ slice-animations {
 }
 
 .animations-metric.is-selected {
-	border-color: #ffb703;
-	box-shadow: 0 0 0 2px rgba(255, 183, 3, 0.18);
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.18);
 }
 
-.animations-metric-label {
-	font-size: 0.95rem;
-}
+.animations-metric-label { font-size: 0.95rem; }
 
 .animations-metric-track {
 	display: block;
@@ -156,7 +140,7 @@ slice-animations {
 	height: 12px;
 	border-radius: 999px;
 	overflow: hidden;
-	background: rgba(2, 48, 71, 0.12);
+	background: rgba(var(--accent-rgb), 0.12);
 }
 
 .animations-metric-fill {
@@ -164,13 +148,10 @@ slice-animations {
 	width: var(--metric-size);
 	height: 100%;
 	transform-origin: left center;
-	background: linear-gradient(90deg, #023047, #219ebc, #8ecae6);
+	background: var(--accent);
 }
 
-.animations-stage-orbit {
-	display: grid;
-	place-items: center;
-}
+.animations-stage-orbit { display: grid; place-items: center; }
 
 .animations-stage-text {
 	display: flex;
@@ -184,10 +165,10 @@ slice-animations {
 	align-items: center;
 	padding: 0.5rem 0.85rem;
 	border-radius: 999px;
-	background: rgba(142, 202, 230, 0.2);
-	border: 1px solid rgba(33, 158, 188, 0.18);
+	background: rgba(var(--accent-rgb), 0.12);
+	border: 1px solid var(--border);
 	font-size: 1.05rem;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .animations-stage-loader {
@@ -202,7 +183,7 @@ slice-animations {
 	height: 120px;
 	border-radius: 999px;
 	transform-origin: center bottom;
-	background: linear-gradient(180deg, #8ecae6 0%, #219ebc 55%, #023047 100%);
+	background: var(--accent);
 }
 
 .animations-stage-badges {
@@ -219,16 +200,13 @@ slice-animations {
 	min-width: 76px;
 	padding: 0.7rem 0.95rem;
 	border-radius: 16px;
-	background: linear-gradient(135deg, rgba(255, 183, 3, 0.88), rgba(251, 133, 0, 0.88));
-	color: #1e1e1e;
-	font-weight: 700;
-	box-shadow: 0 12px 24px rgba(2, 48, 71, 0.12);
+	background: var(--accent);
+	color: var(--on-accent);
+	font-weight: 600;
+	box-shadow: 0 12px 24px rgba(var(--accent-rgb), 0.12);
 }
 
-.animations-stage-spotlight {
-	display: grid;
-	place-items: center;
-}
+.animations-stage-spotlight { display: grid; place-items: center; }
 
 .animations-spotlight-card {
 	position: relative;
@@ -237,9 +215,9 @@ slice-animations {
 	padding: 1.2rem;
 	border-radius: 22px;
 	overflow: hidden;
-	background: linear-gradient(160deg, rgba(2, 48, 71, 0.96), rgba(33, 158, 188, 0.84));
-	color: #f8fbff;
-	box-shadow: 0 20px 40px rgba(2, 48, 71, 0.18);
+	background: var(--surface-2);
+	color: var(--text-1);
+	box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.18);
 }
 
 .animations-spotlight-blob {
@@ -251,7 +229,7 @@ slice-animations {
 	border-radius: 999px;
 	filter: blur(12px);
 	opacity: 0.7;
-	background: radial-gradient(circle, rgba(255, 183, 3, 0.92) 0%, rgba(255, 183, 3, 0.18) 65%, transparent 100%);
+	background: radial-gradient(circle, rgba(var(--accent-rgb), 0.55) 0%, rgba(var(--accent-rgb), 0.12) 65%, transparent 100%);
 }
 
 .animations-spotlight-copy {
@@ -263,9 +241,7 @@ slice-animations {
 }
 
 .animations-spotlight-copy strong,
-.animations-spotlight-copy span {
-	margin: 0;
-}
+.animations-spotlight-copy span { margin: 0; }
 
 .animations-orbit-shell {
 	width: 220px;
@@ -282,20 +258,20 @@ slice-animations {
 
 .animations-orbit-ring-inner {
 	inset: 36px;
-	border: 2px solid rgba(33, 158, 188, 0.28);
+	border: 2px solid var(--border);
 }
 
 .animations-orbit-ring-outer {
 	inset: 6px;
-	border: 2px dashed rgba(2, 48, 71, 0.2);
+	border: 2px dashed var(--border);
 }
 
 .animations-orbit-hub {
 	width: 48px;
 	height: 48px;
 	inset: calc(50% - 24px);
-	background: radial-gradient(circle at 30% 30%, #ffb703, #fb8500);
-	box-shadow: 0 0 0 18px rgba(255, 183, 3, 0.12);
+	background: var(--accent);
+	box-shadow: 0 0 0 18px rgba(var(--accent-rgb), 0.12);
 }
 
 .animations-orbit-satellite {
@@ -303,28 +279,20 @@ slice-animations {
 	height: 28px;
 	top: 20px;
 	left: calc(50% - 14px);
-	background: linear-gradient(135deg, #8ecae6, #219ebc);
-	box-shadow: 0 12px 24px rgba(33, 158, 188, 0.28);
+	background: var(--accent);
+	box-shadow: 0 12px 24px rgba(var(--accent-rgb), 0.28);
 }
 
 .animations-interaction,
 .animations-status {
-	border: 1px solid color-mix(in srgb, var(--primary-color-shade) 70%, transparent);
+	border: 1px solid var(--border);
 	border-radius: var(--border-radius-slice);
-	background: var(--tertiary-background-color);
+	background: var(--surface-2);
 	padding: 0.75rem;
 }
 
 @media (max-width: 640px) {
-	.animations-page {
-		padding: 1rem;
-	}
-
-	.animations-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.animations-stage {
-		min-height: 220px;
-	}
+	.animations-page    { padding: 1rem; }
+	.animations-grid    { grid-template-columns: 1fr; }
+	.animations-stage   { min-height: 220px; }
 }

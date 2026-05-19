@@ -111,8 +111,8 @@ export default class GameSetup extends HTMLElement {
         this.$startButton = await slice.build('Button', {
             value: 'START',
             customColor: {
-                button: 'var(--primary-color)',
-                label: 'var(--primary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             ariaLabel: 'Iniciar juego',
@@ -352,8 +352,8 @@ export default class GameSetup extends HTMLElement {
         this.$manageCategoriesButton = await slice.build('Button', {
             value: 'Administrar categorias',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--font-primary-color)'
+                button: 'var(--accent)',
+                label: 'var(--text-1)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -657,8 +657,8 @@ export default class GameSetup extends HTMLElement {
         this.$manageNamesButton = await slice.build('Button', {
             value: 'Administrar jugadores',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--font-primary-color)'
+                button: 'var(--accent)',
+                label: 'var(--text-1)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {

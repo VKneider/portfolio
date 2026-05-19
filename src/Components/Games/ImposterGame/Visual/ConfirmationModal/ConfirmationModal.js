@@ -28,8 +28,8 @@ export default class ConfirmationModal extends HTMLElement {
         this.$cancelButton = await slice.build('Button', {
             value: 'Cancelar',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -40,8 +40,8 @@ export default class ConfirmationModal extends HTMLElement {
         this.$acceptButton = await slice.build('Button', {
             value: 'Confirmar',
             customColor: {
-                button: 'var(--danger-color)',
-                label: 'var(--danger-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {

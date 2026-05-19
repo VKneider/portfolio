@@ -1,5 +1,5 @@
 .eye {
-  color: var(--primary-color);
+  color: var(--accent);
   position: absolute;
   user-select: none;
   cursor: pointer;
@@ -13,7 +13,7 @@
 }
 
 .input_area {
-  color: var(--font-primary-color);
+  color: var(--text-1);
   width: 100%;
   height: 100%; /* Fill the host */
   background: none;
@@ -36,8 +36,8 @@ slice-input {
   /* Theming */
   border-radius: var(--border-radius-slice);
   font-family: var(--font-family);
-  border: var(--slice-border) solid var(--primary-color);
-  background-color: var(--primary-background-color);
+  border: var(--slice-border) solid var(--accent);
+  background-color: var(--bg);
   
   /* Remove fixed margins to allow external layout control */
   /* margin-bottom: 25px; margin-top: 25px; */
@@ -46,7 +46,7 @@ slice-input {
 }
 
 .slice_input_placeholder {
-  color: var(--primary-color);
+  color: var(--accent);
   position: absolute;
   transition: all 0.5s;
   user-select: none;
@@ -59,24 +59,24 @@ slice-input {
   scale: 0.8;
   transform: translateY(-24px); /* Adjust based on height */
   transform-origin: left top;
-  background-color: var(--primary-background-color); 
+  background-color: var(--bg); 
   padding: 0 5px;
 }
 
 /* Required state applied to the host */
 slice-input.required {
-  border-color: var(--danger-color);
-  --primary-color: var(--danger-color);
+  border-color: var(--accent);
+  --primary-color: var(--accent);
 }
 
 .disabled,
 .disabled label {
-  border-color: var(--disabled-color);
+  border-color: var(--text-2);
   cursor: not-allowed;
   pointer-events: none;
-  color: var(--disabled-color);
+  color: var(--text-2);
   div {
-    background-color: var(--primary-color-shade);
+    background-color: var(--accent);
   }
 }
 .color_input {
@@ -85,7 +85,7 @@ slice-input.required {
   width: 50px;
 }
 .message {
-  color: var(--danger-color);
+  color: var(--accent);
   font-size: small;
 }
 
@@ -108,6 +108,6 @@ slice-input.required {
 }
 
 .error {
-  --primary-color: var(--danger-color);
+  --primary-color: var(--accent);
   animation: shake 0.5s infinite; /* Establece la animación y su duración */
 }

@@ -36,10 +36,12 @@ export default class Portfolio extends HTMLElement {
 
       const navbar = await slice.build('Navbar', {
          position: 'fixed',
-         logo: {
-            src: '/images/Slice.js-logo.png',
-            path: '/',
-         },
+         // Logo deshabilitado hasta tener arte final de marca (el PNG de Slice
+         // no encaja con la paleta dual: blanco invisible en light mode).
+         // logo: {
+         //    src: '/images/Slice.js-logo.png',
+         //    path: '/',
+         // },
          items: [
             { text: 'About', path: '/' },
             { text: 'Experience', path: '/experience' },
@@ -119,7 +121,7 @@ export default class Portfolio extends HTMLElement {
       });
 
       // Set copyright text
-      this.$copyright.textContent = `© ${new Date().getFullYear()} Victor Kneider. All rights reserved.`;
+      this.$copyright.textContent = ` ${new Date().getFullYear()} Victor Kneider.`;
    }
 
    handleRouteChange() {

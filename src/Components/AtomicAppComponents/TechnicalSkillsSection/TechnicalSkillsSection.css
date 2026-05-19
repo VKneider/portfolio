@@ -11,14 +11,14 @@ slice-technical-skills-section {
 /* Título de la sección */
 .technical-skills-title {
   font-size: 2.5rem;
-  color: var(--primary-color);
+  color: var(--accent);
   text-align: center;
   margin-bottom: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
   text-shadow: 
-    0 0 12px rgba(var(--primary-color-rgb), 0.4),
-    0 0 20px rgba(var(--primary-color-rgb), 0.2);
+    0 0 12px rgba(var(--accent-rgb), 0.4),
+    0 0 20px rgba(var(--accent-rgb), 0.2);
 }
 
 .technical-skills-title::after {
@@ -29,11 +29,11 @@ slice-technical-skills-section {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background-color: var(--secondary-color);
+  background-color: var(--accent);
   border-radius: 2px;
   box-shadow: 
-    0 0 15px rgba(var(--secondary-color-rgb), 0.6),
-    0 0 30px rgba(var(--secondary-color-rgb), 0.3);
+    0 0 15px rgba(var(--accent-rgb), 0.6),
+    0 0 30px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Contenedor principal */
@@ -49,14 +49,14 @@ slice-technical-skills-section {
 
 /* Tarjetas de skills - SIN barra de carga en hover */
 .technical-skill-card {
-  background: var(--secondary-background-color);
+  background: var(--surface-1);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.08),
-    0 0 20px rgba(var(--primary-color-rgb), 0.05);
+    0 4px 15px rgba(var(--accent-rgb), 0.08),
+    0 0 20px rgba(var(--accent-rgb), 0.05);
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-  border: 1px solid var(--primary-color-shade);
+  border: 1px solid var(--accent);
   position: relative;
   overflow: hidden;
   animation: slideInUp 0.6s ease-out forwards;
@@ -69,9 +69,9 @@ slice-technical-skills-section {
 .technical-skill-card:hover {
   transform: translateY(-8px);
   box-shadow: 
-    0 12px 25px rgba(0, 0, 0, 0.12),
-    0 0 40px rgba(var(--primary-color-rgb), 0.2);
-  border-color: var(--primary-color);
+    0 12px 25px rgba(var(--accent-rgb), 0.12),
+    0 0 40px rgba(var(--accent-rgb), 0.2);
+  border-color: var(--accent);
 }
 
 /* ELIMINADO: :hover::before que animaba la barra de carga */
@@ -96,10 +96,10 @@ slice-technical-skills-section {
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--primary-color-contrast);
+  color: var(--on-accent);
   /* ELIMINADO: box-shadow que creaba el borde */
   transition: all 0.3s ease;
-  background: var(--primary-color); /* Agregado para mantener el color de fondo */
+  background: var(--accent); /* Agregado para mantener el color de fondo */
 }
 
 .skill-header-info {
@@ -111,7 +111,7 @@ slice-technical-skills-section {
 
 .skill-category {
   font-size: 1.1rem;
-  color: var(--font-primary-color);
+  color: var(--text-1);
   margin: 0;
   font-weight: 600;
   line-height: 1.2;
@@ -128,14 +128,14 @@ slice-technical-skills-section {
 }
 
 .skill-tag-compact {
-  background: var(--tertiary-background-color);
-  color: var(--font-primary-color);
+  background: var(--border);
+  color: var(--text-1);
   padding: 0.4rem 0.6rem;
   border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 500;
   text-align: center;
-  border: 1px solid var(--primary-color-shade);
+  border: 1px solid var(--accent);
   transition: all 0.3s ease;
   cursor: default;
   position: relative;
@@ -151,18 +151,18 @@ slice-technical-skills-section {
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.2), 
+    rgba(var(--text-1-rgb), 0.2), 
     transparent);
   transition: left 0.5s ease;
 }
 
 .skill-tag-compact:hover {
-  background: var(--primary-background-color);
+  background: var(--bg);
   transform: translateY(-2px);
   box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    0 0 15px rgba(var(--primary-color-rgb), 0.3);
-  border-color: var(--primary-color);
+    0 4px 8px rgba(var(--accent-rgb), 0.1),
+    0 0 15px rgba(var(--accent-rgb), 0.3);
+  border-color: var(--accent);
 }
 
 .skill-tag-compact:hover::before {
@@ -171,8 +171,8 @@ slice-technical-skills-section {
 
 .skill-more-indicator {
   grid-column: 1 / -1;
-  background: var(--primary-color-shade);
-  color: var(--font-secondary-color);
+  background: var(--accent);
+  color: var(--text-2);
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   font-size: 0.7rem;
@@ -190,8 +190,8 @@ slice-technical-skills-section {
 }
 
 .technical-skill-card:hover .skill-category {
-  color: var(--primary-color);
-  text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.3);
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.3);
 }
 
 /* ELIMINADO: hover para .skill-level-badge */

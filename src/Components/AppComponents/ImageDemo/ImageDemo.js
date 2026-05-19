@@ -289,8 +289,8 @@ export default class ImageDemo extends HTMLElement {
       const updateButton = await slice.build('Button', {
          value: '🔄 Update Image',
          customColor: {
-            button: 'var(--primary-color)',
-            label: 'var(--primary-color-contrast)'
+            button: 'var(--accent)',
+            label: 'var(--on-accent)'
          },
          onClickCallback: () => this.updateDemoImage()
       });

@@ -15,25 +15,23 @@ slice-built-with-badge:hover {
 }
 
 slice-built-with-badge .slice-built-with-badge-container {
-    background: var(--primary-background-color);
+    background: var(--bg);
     padding: 0.6rem 1rem;
     border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(var(--accent-rgb),0.1), 0 0 0 1px rgba(var(--accent-rgb),0.05);
     display: flex;
     align-items: center;
     gap: 0.4rem;
     font-size: 0.85rem;
-    color: var(--font-secondary-color);
-    border: 1px solid var(--disabled-color);
+    color: var(--text-2);
+    border: 1px solid var(--text-2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
 slice-built-with-badge .slice-framework-name {
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #a855f7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }

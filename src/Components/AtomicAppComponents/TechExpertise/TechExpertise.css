@@ -4,10 +4,7 @@ slice-techexpertise {
   width: 100%;
   margin: 1.5rem 0;
 
-  background: linear-gradient(135deg, 
-    var(--primary-background-color) 0%, 
-    var(--secondary-background-color) 50%, 
-    var(--tertiary-background-color) 100%);
+  background: var(--surface-1);
 }
 
 
@@ -32,38 +29,37 @@ slice-techexpertise {
 
 /* Header de la sección */
 .expertise-header {
-  padding-top: 1rem;
+  padding: 3rem 0 0;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
+/* .expertise-title hereda los estilos canónicos de .section-title (via SectionTitle.css).
+ * Override del margin-bottom global (4rem) para no apilar con el subtitle. */
 .expertise-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--primary-color);
-  margin-bottom: 0.8rem;
-  text-shadow: 
-    0 0 20px rgba(var(--primary-color-rgb), 0.3),
-    0 0 40px rgba(var(--primary-color-rgb), 0.2);
+  margin-bottom: 1.5rem;
   opacity: 0;
   transform: translateY(-30px);
 }
 
 .expertise-subtitle {
-  font-size: 1.1rem;
-  color: var(--font-secondary-color);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.5;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-md);
+  color: var(--text-2);
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+  line-height: var(--lh-body);
+  text-align: center;
   opacity: 0;
   transform: translateY(30px);
 }
 
-/* Contenido principal */
+/* Contenido principal — padding generoso abajo para cerrar la sección. */
 .expertise-content {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding-bottom: 4rem;
 }
 
 /* Animaciones */
@@ -88,35 +84,13 @@ slice-techexpertise {
   }
 }
 
-/* Responsive Design */
+/* Responsive — title sizing viene del SectionTitle canónico vía clamp. */
 @media (max-width: 992px) {
-  .modern-tech-expertise {
-    padding: 1.5rem;
-  }
-  
-  .expertise-title {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .expertise-title {
-    font-size: 2rem;
-  }
-  
-  .expertise-subtitle {
-    font-size: 1rem;
-  }
+  .modern-tech-expertise { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .modern-tech-expertise {
-    padding: 1.2rem;
-  }
-  
-  .expertise-title {
-    font-size: 1.8rem;
-  }
+  .modern-tech-expertise { padding: 1.2rem; }
 }
 
 /* Carruseles individuales centrados */
@@ -128,13 +102,13 @@ slice-techexpertise {
 }
 
 .individual-carousels-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
   text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: var(--primary-color);
-  text-shadow: 
-    0 0 15px rgba(var(--primary-color-rgb), 0.3),
-    0 0 30px rgba(var(--primary-color-rgb), 0.2);
+  margin-bottom: 1rem;
+  color: var(--accent);
 }
 
 /* Responsive para carruseles individuales */

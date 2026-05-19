@@ -118,7 +118,7 @@ export default class Timeline extends HTMLElement {
         if(this.title) {
             const h3 = document.createElement('h3');
             h3.textContent = this.title;
-            h3.style.color = 'var(--primary-color)';
+            h3.style.color = 'var(--accent)';
             h3.style.marginBottom = '0.5rem';
             header.appendChild(h3);
         }
@@ -343,7 +343,7 @@ export default class Timeline extends HTMLElement {
 
       this.$svg.innerHTML = `
         <path d="${d}" 
-              stroke="var(--primary-color)" 
+              stroke="var(--accent)" 
               stroke-width="2" 
               fill="none" 
               stroke-linecap="round"

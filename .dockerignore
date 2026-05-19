@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.env
+.env.*
+*.log
+npm-debug.log*
+.DS_Store
+.vscode
+.idea
+tests/e2e/test-results
+tests/e2e/playwright-report

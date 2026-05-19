@@ -30,9 +30,7 @@ export default class EducationSection extends HTMLElement {
    }
 
    async createStudiesSection() {
-      const studiesTitle = document.createElement('h2');
-      studiesTitle.textContent = 'Educational Background';
-      studiesTitle.classList.add('section-title');
+      const studiesTitle = await slice.build('SectionTitle', { text: 'Educational Background' });
 
       const studiesContainer = document.createElement('div');
       studiesContainer.classList.add('studies-container');
@@ -51,9 +49,7 @@ export default class EducationSection extends HTMLElement {
 
 
    async createCertificatesSection() {
-      const certificatesTitle = document.createElement('h2');
-      certificatesTitle.textContent = `Professional Certifications`;
-      certificatesTitle.classList.add('section-title');
+      const certificatesTitle = await slice.build('SectionTitle', { text: 'Professional Certifications' });
       this.$certificates.insertBefore(certificatesTitle, this.$certificates.firstChild);
 
       this.bindCertificateSearch();

@@ -2,8 +2,8 @@ slice-portfolio {
   display: block;
   min-height: 100vh;
   font-family: var(--font-family);
-  color: var(--font-primary-color);
-  background-color: var(--primary-background-color);
+  color: var(--text-1);
+  background-color: var(--bg);
 }
 
 .portfolio-container {
@@ -15,15 +15,9 @@ slice-portfolio {
 
 .portfolio-main {
   flex: 1;
-  padding-top: 40px; /* Account for fixed navbar */
-  min-height: calc(100vh - 120px);
-}
-
-@media (max-width: 768px) {
-  .portfolio-main {
-    padding-top: 58px; /* Account for fixed navbar */
-    min-height: calc(100vh - 120px);
-  }
+  /* Compensa la altura del navbar fixed (min-height 64px en navbar). */
+  padding-top: 64px;
+  min-height: calc(100vh - 64px);
 }
 
 
@@ -46,7 +40,9 @@ slice-portfolio {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  /* No padding-top: el hero (full-bleed) toca el navbar sin gap.
+   * Las demás secciones aportan su propio padding-top interno. */
+  padding: 0 2rem 2rem;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
@@ -57,10 +53,10 @@ slice-portfolio {
 
 /* Footer Styles */
 .portfolio-footer {
-  background-color: var(--secondary-background-color);
+  background-color: var(--surface-1);
   padding: 3rem 2rem 2rem;
   margin-top: auto;
-  border-top: 1px solid var(--primary-color-shade);
+  border-top: 1px solid var(--accent);
 }
 
 .social-links {
@@ -77,12 +73,12 @@ slice-portfolio {
   gap: 0.75rem;
   padding: 0.75rem 1.5rem;
   background-color: var(--card-background-color);
-  color: var(--font-primary-color);
+  color: var(--text-1);
   text-decoration: none;
   border-radius: 50px;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-weight: 600;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(var(--accent-rgb),0.1);
   border: 2px solid transparent;
 }
 
@@ -99,36 +95,24 @@ slice-portfolio {
   filter: brightness(1.1);
 }
 
-/* GitHub - Slate/Black */
-.social-link-github {
-  background-color: #24292e;
-  color: white;
-}
-.social-link-github:hover {
-  box-shadow: 0 10px 20px rgba(36, 41, 46, 0.4);
-}
-
-/* LinkedIn - Blue */
-.social-link-linkedin {
-  background-color: #0077b5;
-  color: white;
-}
-.social-link-linkedin:hover {
-  box-shadow: 0 10px 20px rgba(0, 119, 181, 0.4);
-}
-
-/* Email - Red */
+.social-link-github,
+.social-link-linkedin,
 .social-link-email {
-  background-color: #ea4335;
-  color: white;
+  background-color: var(--surface-1);
+  color: var(--text-1);
+  border: 1px solid var(--border);
 }
+
+.social-link-github:hover,
+.social-link-linkedin:hover,
 .social-link-email:hover {
-  box-shadow: 0 10px 20px rgba(234, 67, 53, 0.4);
+  border-color: var(--accent);
+  box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.15);
 }
 
 .footer-info {
   text-align: center;
-  color: var(--font-secondary-color);
+  color: var(--text-2);
 }
 
 .footer-info p {
@@ -137,21 +121,21 @@ slice-portfolio {
 }
 
 .footer-info a {
-  color: var(--primary-color);
+  color: var(--accent);
   text-decoration: none;
   font-weight: 600;
 }
 
 .footer-info a:hover {
-  text-decoration: underline;
+  color: var(--text-1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .portfolio-content {
-    padding: 1rem;
+    padding: 0 1rem 1rem;
   }
-  
+
   .social-links {
     flex-direction: column;
     align-items: center;

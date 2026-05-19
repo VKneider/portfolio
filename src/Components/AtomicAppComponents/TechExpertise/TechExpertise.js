@@ -72,7 +72,7 @@ export default class TechExpertise extends HTMLElement {
     sectionTitle.style.textAlign = 'center';
     sectionTitle.style.fontSize = '1.5rem';
     sectionTitle.style.marginBottom = '2rem';
-    sectionTitle.style.color = 'var(--primary-color)';
+    sectionTitle.style.color = 'var(--accent)';
     
     individualCarouselsContainer.appendChild(sectionTitle);
     

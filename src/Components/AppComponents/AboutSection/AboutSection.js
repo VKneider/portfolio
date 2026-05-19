@@ -54,10 +54,6 @@ export default class AboutSection extends HTMLElement {
       profileImage.alt = 'Victor Kneider — Computer Engineer & University Professor';
       profileImage.classList.add('profile-image');
 
-      const profileRing = document.createElement('div');
-      profileRing.classList.add('profile-ring');
-
-      profileContainer.appendChild(profileRing);
       profileContainer.appendChild(profileImage);
 
       // Hero text — el <h1> alterna entre "Victor Kneider" y "vkneider.dev",
@@ -86,48 +82,41 @@ export default class AboutSection extends HTMLElement {
       const ctaButtons = document.createElement('div');
       ctaButtons.classList.add('cta-buttons');
 
+      // Skill §3 3.5 caso 2: solo 2 estilos de botón (primary + ghost).
+      // Tercer CTA va como micro-CTA link (§3 3.5 caso 4 + §3 3.2 H).
       const contactBtn = await slice.build('Button', {
-         value: '📧 Get In Touch',
+         value: 'Get In Touch',
          customColor: {
-            button: 'var(--primary-color)',
-            label: 'var(--primary-color-contrast)'
+            button: 'var(--accent)',
+            label: 'var(--on-accent)'
          },
          onClickCallback: async () => {
-            const mailtoLink = "mailto:victorkneider@gmail.com"
-            const link = document.createElement('a');
-            link.click()
-            
+            window.location.href = 'mailto:victorkneider@gmail.com';
          }
       });
+      contactBtn.classList.add('cta-primary');
 
       const projectsBtn = await slice.build('Button', {
-         value: '🚀 View Projects',
+         value: 'View Projects',
          customColor: {
-            button: 'var(--secondary-color)',
-            label: 'var(--secondary-color-contrast)'
+            button: 'transparent',
+            label: 'var(--text-1)'
          },
          onClickCallback: async () => {
             await slice.router.navigate('/projects');
          }
       });
+      projectsBtn.classList.add('cta-ghost');
 
-      const cvBtn = await slice.build('Button', {
-         value: '📄 Download CV',
-         customColor: {
-            button: 'var(--success-color)',
-            label: 'var(--success-contrast)'
-         },
-         onClickCallback: () => {
-            const link = document.createElement('a');
-            link.href = '/assets/Victor_Kneider_CV.pdf';
-            link.download = 'Victor_Kneider_CV.pdf';
-            link.click();
-         }
-      });
+      const cvLink = document.createElement('a');
+      cvLink.className = 'cta-micro';
+      cvLink.href = '/assets/Victor_Kneider_CV.pdf';
+      cvLink.download = 'Victor_Kneider_CV.pdf';
+      cvLink.textContent = '→ Download CV';
 
       ctaButtons.appendChild(contactBtn);
       ctaButtons.appendChild(projectsBtn);
-      ctaButtons.appendChild(cvBtn);
+      ctaButtons.appendChild(cvLink);
 
       // Assemble hero content
       heroContent.appendChild(profileContainer);
@@ -139,7 +128,7 @@ export default class AboutSection extends HTMLElement {
       this.AnimationsProvider.slideInLeft(heroText, { duration: 900, delay: 300 });
 
       // Animar los botones de CTA
-      [contactBtn, projectsBtn, cvBtn].forEach((btn, idx) => {
+      [contactBtn, projectsBtn, cvLink].forEach((btn, idx) => {
          this.AnimationsProvider.fadeIn(btn, { duration: 700, delay: 600 + idx * 120, translateY: ['20px', '0px'] });
       });
 
@@ -172,33 +161,38 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createEnhancedAboutCards() {
+      const aboutTitle = await slice.build('SectionTitle', { text: 'About Me' });
+      this.$about.appendChild(aboutTitle);
+
+      // Skill §3 3.3 r.1 + §3 4.5: cards en surface-1, sin emojis/slice-icons.
+      // Iconos Lucide inline (única biblioteca permitida por la marca).
+      const cardSurface = { card: 'var(--surface-1)' };
+
+      // Lucide path data — stroke 2, viewBox 0 0 24 24.
+      const lucide = {
+         cloud:    '<path d="M17.5 19a4.5 4.5 0 1 0 0-9h-1.8A7 7 0 1 0 9 19h8.5Z"/>',
+         book:     '<path d="M22 9 12 5 2 9l10 4 10-4v6"/><path d="M6 10.6V16a6 3 0 0 0 12 0v-5.4"/>',
+         sparkles: '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>'
+      };
+
       const aboutData = [
          {
             title: 'Cloud & Engineering',
             text: 'Remote Engineer with 1+ year experience in Cloud Platforms (Azure) and Process Automation. Expert in building scalable architectures and leveraging AI tools like Claude Code & Cursor for efficient development.',
-            icon: { name: 'cloud', iconStyle: 'filled' },
-            customColor: {
-               card: 'var(--primary-color)',
-               icon: 'var(--primary-color-contrast)'
-            }
+            lucide: lucide.cloud,
+            customColor: cardSurface
          },
          {
             title: 'Educational Leadership',
             text: 'University Professor passionate about making complex technology concepts accessible. Experienced in curriculum development, innovative teaching methodologies, and mentoring the next generation of developers.',
-            icon: { name: 'book-open', iconStyle: 'filled' },
-            customColor: {
-               card: 'var(--secondary-color)',
-               icon: 'var(--secondary-color-contrast)'
-            }
+            lucide: lucide.book,
+            customColor: cardSurface
          },
          {
             title: 'AI & Innovation',
             text: 'Early adopter of Model Context Protocol (MCP) and AI-driven development. Dedicated to researching new technologies and bridging the gap between academic theory, cloud infrastructure, and automation.',
-            icon: { name: 'lightbulb', iconStyle: 'filled' },
-            customColor: {
-               card: 'var(--accent-color)',
-               icon: 'var(--primary-background-color)'
-            }
+            lucide: lucide.sparkles,
+            customColor: cardSurface
          }
       ];
 
@@ -211,10 +205,22 @@ export default class AboutSection extends HTMLElement {
          const aboutCard = await slice.build('Card', {
             title: cardData.title,
             text: cardData.text,
-            icon: cardData.icon,
             customColor: cardData.customColor,
             animationDelay: index * 0.2
          });
+
+         // Inyectar Lucide SVG en card-media-content (reemplaza al slice-icon default).
+         const mediaContent = aboutCard.querySelector('.card-media-content');
+         if (mediaContent) {
+            mediaContent.innerHTML = `
+               <svg class="card-lucide-icon" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">${cardData.lucide}</svg>
+            `;
+         }
+         const media = aboutCard.querySelector('.card-media');
+         if (media) media.style.display = 'flex';
 
          await grid.setItem(aboutCard);
       }
@@ -264,9 +270,7 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createCarruselSection() {
-      const valuesTitle = document.createElement('h2');
-      valuesTitle.innerHTML = 'My Journey & Experiences';
-      valuesTitle.classList.add('section-title');
+      const valuesTitle = await slice.build('SectionTitle', { text: 'My Journey & Experiences' });
 
       // Contenedor principal con grid 60/40
       const mainContainer = document.createElement('div');
@@ -350,35 +354,33 @@ export default class AboutSection extends HTMLElement {
       const highlightsList = document.createElement('div');
       highlightsList.classList.add('highlights-list');
 
+      // Skill §3 4.5: la marca no usa emojis. Cada highlight se numera en mono (§3 3.2 G).
       const highlights = [
          {
-            icon: '🎯',
             title: 'Community Building',
             description: 'Creating spaces where developers can learn, grow, and collaborate together.'
          },
          {
-            icon: '🚀',
             title: 'Innovation Leadership',
             description: 'Leading by example in adopting and promoting cutting-edge technologies.'
          },
          {
-            icon: '💡',
             title: 'Knowledge Sharing',
             description: 'Committed to making complex concepts accessible to everyone.'
          },
          {
-            icon: '🌟',
             title: 'Mentorship',
             description: 'Guiding the next generation of developers and engineers.'
          }
       ];
 
-      highlights.forEach(highlight => {
+      highlights.forEach((highlight, index) => {
          const highlightItem = document.createElement('div');
          highlightItem.classList.add('highlight-item');
 
+         const num = String(index + 1).padStart(2, '0');
          highlightItem.innerHTML = `
-            <div class="highlight-icon">${highlight.icon}</div>
+            <div class="highlight-num">${num}</div>
             <div class="highlight-content">
                <h4 class="highlight-title">${highlight.title}</h4>
                <p class="highlight-description">${highlight.description}</p>

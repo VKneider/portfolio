@@ -72,11 +72,6 @@ export default class TheImposterGame extends HTMLElement {
         description: 'Professional blue with orange accents and light background'
       },
       {
-        name: 'Purple',
-        colors: { primary: '#9333EA', secondary: '#10B981' },
-        description: 'Creative purple'
-      },
-      {
         name: 'NavyYellow',
         colors: { primary: '#020617', secondary: '#FCD34D' },
         description: 'Navy blue with yellow accents'

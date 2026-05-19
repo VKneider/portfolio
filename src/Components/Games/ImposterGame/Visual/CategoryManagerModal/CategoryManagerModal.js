@@ -95,8 +95,8 @@ export default class CategoryManagerModal extends HTMLElement {
         this.$deleteCategory = await slice.build('Button', {
             value: 'Eliminar categoria',
             customColor: {
-                button: 'var(--danger-color)',
-                label: 'var(--danger-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {
@@ -107,8 +107,8 @@ export default class CategoryManagerModal extends HTMLElement {
         this.$closeModal = await slice.build('Button', {
             value: 'Cerrar',
             customColor: {
-                button: 'var(--secondary-color)',
-                label: 'var(--secondary-color-contrast)'
+                button: 'var(--accent)',
+                label: 'var(--on-accent)'
             },
             audioOnClickEnabled: true,
             onClickCallback: () => {

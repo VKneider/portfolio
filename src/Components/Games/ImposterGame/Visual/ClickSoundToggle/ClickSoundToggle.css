@@ -8,9 +8,9 @@
     padding: 0.5rem;
     border-radius: var(--border-radius-slice);
     transition: background 0.3s ease;
-    color: var(--font-primary-color);
+    color: var(--text-1);
 }
 
 #click-sound-toggle:hover {
-    background: rgba(var(--primary-color-rgb), 0.1);
+    background: rgba(var(--accent-rgb), 0.1);
 }

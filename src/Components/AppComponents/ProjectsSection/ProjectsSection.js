@@ -21,9 +21,7 @@ export default class ProjectsSection extends HTMLElement {
       // Clear existing content
       this.$grid.innerHTML = '';
 
-      const sectionTitle = document.createElement('h2');
-      sectionTitle.textContent = `My Projects (${this.projectsData.length})`;
-      sectionTitle.classList.add('section-title');
+      const sectionTitle = await slice.build('SectionTitle', { text: `My Projects (${this.projectsData.length})` });
 
       // Sort projects: featured first, then by date
       const sortedProjects = [...this.projectsData].sort((a, b) => {
