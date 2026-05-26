@@ -65,10 +65,7 @@ export default class WhatIsSlice extends HTMLElement {
   }
   
   highlightCode() {
-    // Check if Prism is available (for syntax highlighting)
-    if (typeof Prism !== 'undefined') {
-      Prism.highlightAllUnder(this);
-    }
+    
   }
   
   setupDiagramInteractions() {

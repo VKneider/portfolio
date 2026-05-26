@@ -77,7 +77,7 @@ export default class Navbar extends HTMLElement {
          element, 
          section = 'actions', 
          asNavItem = false, 
-         className = '', 
+         className = '',
          order = null 
       } = config;
 
@@ -174,7 +174,7 @@ export default class Navbar extends HTMLElement {
     * Métodos de conveniencia para diferentes secciones
     */
    addToLogo(element, options = {}) {
-      this.addElement({ element, section: 'logo', ...options });
+      this.addElement({ element, section: 'logo', asNavItem: false, className: '', order: null, ...options });
    }
 
    addToNavigation(element, options = {}) {
@@ -182,6 +182,8 @@ export default class Navbar extends HTMLElement {
          element, 
          section: 'navigation', 
          asNavItem: true, 
+         className: '',
+         order: null,
          ...options 
       });
    }
@@ -191,20 +193,22 @@ export default class Navbar extends HTMLElement {
          element, 
          section: 'center', 
          asNavItem: true, 
+         className: '',
+         order: null,
          ...options 
       });
    }
 
    addToActions(element, options = {}) {
-      this.addElement({ element, section: 'actions', ...options });
+      this.addElement({ element, section: 'actions', asNavItem: false, className: '', order: null, ...options });
    }
 
    addToStart(element, options = {}) {
-      this.addElement({ element, section: 'start', ...options });
+      this.addElement({ element, section: 'start', asNavItem: false, className: '', order: null, ...options });
    }
 
    addToEnd(element, options = {}) {
-      this.addElement({ element, section: 'end', ...options });
+      this.addElement({ element, section: 'end', asNavItem: false, className: '', order: null, ...options });
    }
 
    /**

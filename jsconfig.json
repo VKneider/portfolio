@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "strictNullChecks": false,
+    "maxNodeModuleJsDepth": 2,
+    "strict": false,
+    "noImplicitAny": false
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/Components/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/libs/**",
+    "tests/**",
+    "src/Themes/**",
+    "src/Styles/**",
+    "src/assets/**",
+    "src/images/**"
+  ]
+}

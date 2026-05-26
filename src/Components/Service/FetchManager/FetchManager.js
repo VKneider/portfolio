@@ -24,14 +24,18 @@ export default class FetchManager {
       if (data && typeof data !== 'object') throw new Error('Invalid data, not JSON');
       const controller = new AbortController();
 
+      const defaultHeaders = /** @type {Record<string, string>} */ (this.defaultHeaders || {});
+      const requestHeaders = /** @type {Record<string, string>} */ (requestOptions.headers || {});
+
+      /** @type {{ method: string, headers: Record<string, string>, signal: AbortSignal, body?: string }} */
       let options;
       if (method !== 'GET') {
          options = {
             method: method,
             headers: {
                'Content-Type': 'application/json',
-               ...this.defaultHeaders,
-               ...requestOptions.headers,
+               ...defaultHeaders,
+               ...requestHeaders,
             },
             signal: controller.signal,
          };
@@ -39,12 +43,13 @@ export default class FetchManager {
          options = {
             method: method,
             headers: {
-               ...this.defaultHeaders,
-               ...requestOptions.headers,
+               ...defaultHeaders,
+               ...requestHeaders,
             },
             signal: controller.signal,
          };
       }
+
 
       if (data) {
          options.body = JSON.stringify(data);

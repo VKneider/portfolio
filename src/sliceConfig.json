@@ -9,7 +9,8 @@
     },
     "themeManager": {
         "enabled":true,
-        "defaultTheme": "Dark",
+        "defaultTheme": "Light",
+
         "saveThemeLocally": false,
         "useBrowserTheme": false
     },

@@ -15,7 +15,8 @@ export default class Switch extends HTMLElement {
       },
       labelPlacement: { 
          type: 'string', 
-         default: 'right' 
+         default: 'right',
+         allowedValues: ['left', 'right', 'top', 'bottom']
       },
       customColor: { 
          type: 'string', 

@@ -65,7 +65,7 @@ export default class ProjectCard extends HTMLElement {
          const targetUrl = project.liveUrl || project.githubUrl;
          
          // Remove previous event listeners
-         const newImageContainer = this.$imageContainer.cloneNode(true);
+          const newImageContainer = /** @type {HTMLElement} */ (this.$imageContainer.cloneNode(true));
          this.$imageContainer.parentNode.replaceChild(newImageContainer, this.$imageContainer);
          this.$imageContainer = newImageContainer;
          this.$image = this.$imageContainer.querySelector('.project-image');

@@ -26,9 +26,11 @@ export default class ProjectsSection extends HTMLElement {
       // Sort projects: featured first, then by date
       const sortedProjects = [...this.projectsData].sort((a, b) => {
          if (a.featured !== b.featured) {
-            return b.featured - a.featured;
+            return Number(b.featured) - Number(a.featured);
+            
          }
-         return new Date(b.date) - new Date(a.date);
+         return new Date(b.date).getTime() - new Date(a.date).getTime();
+
       });
       
       this.$grid.appendChild(sectionTitle);

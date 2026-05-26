@@ -140,7 +140,8 @@ export default class Select extends HTMLElement {
       this._value = [];
 
       if (valueParam.length > 1 && !this.multiple) {
-         return console.error('Select is not multiple, you can only select one option');
+         console.error('Select is not multiple, you can only select one option');
+         return;
       }
 
       const validOptions = valueParam.every((option) => this.isObjectInArray(option, this._options).found);

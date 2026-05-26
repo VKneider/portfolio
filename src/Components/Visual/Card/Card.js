@@ -27,7 +27,8 @@ export default class Card extends HTMLElement {
       },
       variant: {
          type: 'string',
-         default: 'default' // default, elevated, outlined, minimal
+         default: 'default', // default, elevated, outlined, minimal
+         allowedValues: ['default', 'elevated', 'outlined', 'minimal']
       },
       interactive: {
          type: 'boolean',

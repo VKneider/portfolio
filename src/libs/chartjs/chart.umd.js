@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*!
  * Chart.js v4.5.1
  * https://www.chartjs.org

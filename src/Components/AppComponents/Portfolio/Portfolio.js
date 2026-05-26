@@ -58,7 +58,7 @@ export default class Portfolio extends HTMLElement {
       // Create multi-route for content sections
       const portfolioRoutes = await slice.build('MultiRoute', {
          routes: [
-            { path: '/', component: 'AboutSection' },
+            { path: '/', component: 'Charts' },
             { path: '/experience', component: 'ExperienceSection' },
             { path: '/education', component: 'EducationSection' },
             { path: '/slice-js', component: 'WhatIsSlice' },
@@ -128,18 +128,6 @@ export default class Portfolio extends HTMLElement {
       // Simplemente añadir una clase CSS para transiciones suaves
       this.$content.classList.add('smooth-transitions');
    }
-}
-
-if (new URLSearchParams(window.location.search).get('slicePublicImportFixture') === '1') {
-   import('/libs/dayjs/dayjs.min.js')
-      .then(({ default: slicePublicImportFixtureValue }) => {
-         window.__slicePublicImportFixture = slicePublicImportFixtureValue;
-         window.__slicePublicImportFixtureStatus = 'ok';
-      })
-      .catch((error) => {
-         window.__slicePublicImportFixtureStatus = 'error';
-         window.__slicePublicImportFixtureError = error instanceof Error ? error.message : String(error);
-      });
 }
 
 customElements.define('slice-portfolio', Portfolio);

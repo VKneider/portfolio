@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Anime.js - UMD bundle
  * @version v4.3.6

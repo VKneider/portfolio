@@ -101,7 +101,6 @@ export default class RandomFacts extends HTMLElement {
 
         if (isUser) {
             textContainer.className = 'editable-content';
-            textContainer.contentEditable = true;
             textContainer.innerText = fact.text;
             textContainer.addEventListener('input', () => {
                 const noteId = note.dataset.id;
@@ -197,7 +196,7 @@ export default class RandomFacts extends HTMLElement {
         const fact = this.getRandomFact();
         const note = this.createNoteElement(fact);
         this.zIndexCounter++;
-        note.style.zIndex = this.zIndexCounter;
+        note.style.zIndex = String(this.zIndexCounter);
         this.positionNoteInSlot(note, slot);
         this.$board.appendChild(note);
         slot.note = note;
@@ -237,7 +236,7 @@ export default class RandomFacts extends HTMLElement {
         note.style.left = `${x}px`;
         note.style.top = `${y}px`;
         this.zIndexCounter++;
-        note.style.zIndex = this.zIndexCounter;
+        note.style.zIndex = String(this.zIndexCounter);
         this.$board.appendChild(note);
         this.animateEntrance(note, rotation);
     }
@@ -275,7 +274,7 @@ export default class RandomFacts extends HTMLElement {
             if (note) {
                activeNote = note;
                this.zIndexCounter++;
-               activeNote.style.zIndex = this.zIndexCounter;
+               activeNote.style.zIndex = String(this.zIndexCounter);
                initialX = clientX - note.offsetLeft;
                initialY = clientY - note.offsetTop;
                activeNote.classList.add('dragging');

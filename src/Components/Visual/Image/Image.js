@@ -78,8 +78,9 @@ export default class Image extends HTMLElement {
       window.addEventListener('offline', () => this.onNetworkChange(false));
       
       // Monitorear cambios en la velocidad de conexión (si está disponible)
-      if ('connection' in navigator) {
-         navigator.connection.addEventListener('change', () => {
+      const connection = /** @type {any} */ (navigator).connection;
+      if (connection && typeof connection.addEventListener === 'function') {
+         connection.addEventListener('change', () => {
             this.networkInfo = this.getNetworkInfo();
             this.adjustQualityBasedOnConnection();
          });
@@ -99,11 +100,11 @@ export default class Image extends HTMLElement {
    }
 
    getNetworkInfo() {
-      if (!('connection' in navigator)) {
+      const connection = /** @type {any} */ (navigator).connection;
+      if (!connection) {
          return { effectiveType: '4g', downlink: 10, saveData: false };
       }
-      
-      const connection = navigator.connection;
+
       return {
          effectiveType: connection.effectiveType || '4g',
          downlink: connection.downlink || 10,
@@ -511,9 +512,10 @@ set src(value) {
       
       window.removeEventListener('online', this.onNetworkChange);
       window.removeEventListener('offline', this.onNetworkChange);
-      
-      if ('connection' in navigator) {
-         navigator.connection.removeEventListener('change', this.adjustQualityBasedOnConnection);
+
+      const connection = /** @type {any} */ (navigator).connection;
+      if (connection && typeof connection.removeEventListener === 'function') {
+         connection.removeEventListener('change', this.adjustQualityBasedOnConnection);
       }
    }
 }

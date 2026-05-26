@@ -17,7 +17,7 @@ export default class SectionTitle extends HTMLElement {
   static props = {
     text:   { type: 'string', default: '' },
     accent: { type: 'string', default: '' },
-    align:  { type: 'string', default: 'center' },
+    align:  { type: 'string', default: 'center', allowedValues: ['center', 'start'] },
     anchor: { type: 'string', default: '' }
   };
 

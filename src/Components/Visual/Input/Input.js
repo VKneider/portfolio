@@ -13,7 +13,8 @@ export default class Input extends HTMLElement {
       },
       type: { 
          type: 'string', 
-         default: 'text' 
+         default: 'text',
+         allowedValues: ['text', 'password', 'email', 'number', 'search', 'tel', 'url']
       },
       required: { 
          type: 'boolean', 

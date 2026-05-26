@@ -27,6 +27,11 @@ export default class AboutSection extends HTMLElement {
       // Create technical skills section
       await this.createTechnicalSkillsSection();
 
+      const switch2 = await slice.build('Switch', {
+         label: 'Toggle Debugger Props',
+         customColor:"blue"
+      });
+
       // Create values section
       await this.createCarruselSection();
 
@@ -106,6 +111,9 @@ export default class AboutSection extends HTMLElement {
             await slice.router.navigate('/projects');
          }
       });
+
+
+
       projectsBtn.classList.add('cta-ghost');
 
       const cvLink = document.createElement('a');
@@ -206,7 +214,6 @@ export default class AboutSection extends HTMLElement {
             title: cardData.title,
             text: cardData.text,
             customColor: cardData.customColor,
-            animationDelay: index * 0.2
          });
 
          // Inyectar Lucide SVG en card-media-content (reemplaza al slice-icon default).
@@ -256,9 +263,6 @@ export default class AboutSection extends HTMLElement {
       const techExpertise = await slice.build('TechExpertise', {
          title: 'Technical Expertise',
          subtitle: 'Technologies & tools I\'ve mastered through years of development',
-         showcaseTitle: 'Featured Skills',
-         autoPlay: true,
-         autoPlaySpeed: 5000,
          marqueeSpeed: 15
       });
 

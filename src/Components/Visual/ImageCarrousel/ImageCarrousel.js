@@ -302,7 +302,7 @@ export default class ImageCarrousel extends HTMLElement {
 
   updateSlideDisplay() {
     if (this.$currentSlide) {
-      this.$currentSlide.textContent = this.currentIndex + 1;
+      this.$currentSlide.textContent = String(this.currentIndex + 1);
     }
   }
 
