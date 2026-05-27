@@ -27,7 +27,7 @@ export default class WhatIsSlice extends HTMLElement {
         subtitle: 'Visual Library',
         description: 'Reusable visual components designed for real Slice applications.',
         links: [
-          { label: 'GitHub', href: 'https://github.com/VKneider/slice.js_visual_library' }
+          { label: 'Open Library', href: 'https://slice-js-visual-library.vercel.app/' }
         ]
       },
       {
