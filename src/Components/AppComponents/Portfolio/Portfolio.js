@@ -58,7 +58,7 @@ export default class Portfolio extends HTMLElement {
       // Create multi-route for content sections
       const portfolioRoutes = await slice.build('MultiRoute', {
          routes: [
-            { path: '/', component: 'Charts' },
+            { path: '/', component: 'AboutSection' },
             { path: '/experience', component: 'ExperienceSection' },
             { path: '/education', component: 'EducationSection' },
             { path: '/slice-js', component: 'WhatIsSlice' },
