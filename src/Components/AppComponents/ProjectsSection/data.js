@@ -13,7 +13,7 @@ const projectsData = [
             category: 'Framework',
             status: 'Active',
             githubUrl: 'https://github.com/vkneider/slice.js',
-            liveUrl: 'https://slice-js-demo.vercel.app',
+            liveUrl: 'https://slicejs.com',
             featured: true,
             date: '2024-01-15'
          },

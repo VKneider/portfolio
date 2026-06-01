@@ -75,7 +75,7 @@
   {
     id: 4,
     company: 'Freelance / Personal Projects',
-    position: 'Full-Stack Developer & Framework Creator',
+            position: 'Computer Engineer & Framework Creator',
     logo: '/images/companies/freelance.png',
     period: '2020 - Present',
     type: 'Self-employed',

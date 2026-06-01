@@ -18,7 +18,7 @@ export default class WhatIsSlice extends HTMLElement {
         subtitle: 'Documentation Site',
         description: 'Concepts, guides, and examples that explain the philosophy and the architecture.',
         links: [
-          { label: 'Open Docs', href: 'https://slice-js-docs.vercel.app/' },
+          { label: 'Open Docs', href: 'https://slicejs.com/' },
           { label: 'GitHub', href: 'https://github.com/VKneider/sliceDocs' }
         ]
       },
@@ -27,7 +27,7 @@ export default class WhatIsSlice extends HTMLElement {
         subtitle: 'Visual Library',
         description: 'Reusable visual components designed for real Slice applications.',
         links: [
-          { label: 'Open Library', href: 'https://slice-js-visual-library.vercel.app/' }
+          { label: 'Open Library', href: 'https://components.slicejs.com/' }
         ]
       },
       {

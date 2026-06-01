@@ -77,10 +77,9 @@ export default class AboutSection extends HTMLElement {
                <span class="role-switcher">Computer Engineer</span>
             </h2>
          </div>
-         <p class="hero-description">
-            Computer Engineer, Professor, and creator of Slice.js.
-            I specialize in building efficient software solutions and modern web architectures, bridging academic theory with practical application.
-         </p>
+          <p class="hero-description">
+             Computer Engineer, Professor, and creator of Slice.js. I specialize in designing and architecting professional software — I build it, I teach it, and I share what I learn along the way.
+          </p>
       `;
 
       // Enhanced CTA Buttons
