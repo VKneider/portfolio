@@ -4,7 +4,5 @@ allowBuilds:
   sharp: true
   slicejs-cli: true
 minimumReleaseAgeExclude:
-  - slicejs-cli@3.5.0
-  - slicejs-web-framework@3.3.1
-  - slicejs-cli@3.7.1
-  - slicejs-web-framework@3.5.1
+  - slicejs-cli
+  - slicejs-web-framework
