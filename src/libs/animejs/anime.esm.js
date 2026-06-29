@@ -2121,9 +2121,9 @@ const killEngine = () => {
 
 const lookups = {
   /** @type {TweenReplaceLookups} */
-  _rep: new WeakMap(),
+  rep: new WeakMap(),
   /** @type {TweenAdditiveLookups} */
-  _add: new Map(),
+  add: new Map(),
 };
 
 /**
@@ -2132,7 +2132,7 @@ const lookups = {
  * @param  {String} lookup
  * @return {TweenPropertySiblings}
  */
-const getTweenSiblings = (target, property, lookup = '_rep') => {
+const getTweenSiblings = (target, property, lookup = 'rep') => {
   const lookupMap = lookups[lookup];
   let targetLookup = lookupMap.get(target);
   if (!targetLookup) {
@@ -2292,8 +2292,8 @@ const composeTween = (tween, siblings) => {
 
   } else if (tweenCompositionType === compositionTypes.blend) {
 
-    const additiveTweenSiblings = getTweenSiblings(tween.target, tween.property, '_add');
-    const additiveAnimation = addAdditiveAnimation(lookups._add);
+    const additiveTweenSiblings = getTweenSiblings(tween.target, tween.property, 'add');
+    const additiveAnimation = addAdditiveAnimation(lookups.add);
 
     let lookupTween = additiveTweenSiblings._head;
 
@@ -2347,12 +2347,12 @@ const removeTweenSliblings = tween => {
   if (tweenComposition !== compositionTypes.none) {
     const tweenTarget = tween.target;
     const tweenProperty = tween.property;
-    const replaceTweensLookup = lookups._rep;
+    const replaceTweensLookup = lookups.rep;
     const replaceTargetProps = replaceTweensLookup.get(tweenTarget);
     const tweenReplaceSiblings = replaceTargetProps[tweenProperty];
     removeChild(tweenReplaceSiblings, tween, '_prevRep', '_nextRep');
     if (tweenComposition === compositionTypes.blend) {
-      const addTweensLookup = lookups._add;
+      const addTweensLookup = lookups.add;
       const addTargetProps = addTweensLookup.get(tweenTarget);
       if (!addTargetProps) return;
       const additiveTweenSiblings = addTargetProps[tweenProperty];
