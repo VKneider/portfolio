@@ -39,7 +39,7 @@ const projectsData = [
              description: 'A structured group decision-making tool for teams. A leader creates a template with mixable decision modes — assignment, voting, ranking, and free-text brainstorming — each person responds independently on their own device, and then everyone imports and compares responses to reach consensus without endless meetings. All data stays client-side in the browser.',
              image: './images/projects/conclave.png',
              images: [
-                 './images/projects/conclave.png'
+                 './images/projects/conclave.png', './images/projects/conclave2.png', './images/projects/conclave3.png'
              ],
              technologies: ['Slice.js', 'JavaScript', 'CSS3', 'HTML5', 'Express', 'localStorage'],
              category: 'Web App',
