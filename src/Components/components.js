@@ -1,6 +1,7 @@
 const components = {
   "AboutSection": "AppComponents",
   "Animations": "AppComponents",
+  "BareImportsDemo": "AppComponents",
   "Charts": "AppComponents",
   "DomPurify": "AppComponents",
   "EducationSection": "AppComponents",

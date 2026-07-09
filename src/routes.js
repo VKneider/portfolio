@@ -4,6 +4,7 @@ const routes = [
    { path: '/charts', component: 'Charts' },
    { path: '/dompurify', component: 'DomPurify' },
    { path: '/animejs', component: 'Animations' },
+   { path: '/bare-imports', component: 'BareImportsDemo' },
    { path: '/experience', component: 'Portfolio' },
    { path: '/education', component: 'Portfolio' },
    { path: '/slice-js', component: 'Portfolio' },

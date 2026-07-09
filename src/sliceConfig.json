@@ -75,6 +75,7 @@
     "loading":{
         "enabled": true
     },
+    "bareImports": true,
     "server": {
         "port": 3001,
         "host": "localhost"

@@ -17,22 +17,38 @@ const projectsData = [
             featured: true,
             date: '2024-01-15'
          },
-         {
-            id: 2,
-            title: 'Parish Automated Ecosystem',
-            description: 'Zero-cost digital ecosystem for San Ramón Nonato Parish. Engineered an automated content pipeline using Google Sheets/Forms as a Headless CMS. Custom ETL scripts transform administration data into a performant web experience, streamlining information flow for parish groups without recurring costs.',
-            image: './images/projects/sanramonmcbo.png',
-            images: [
-                './images/projects/sanramonmcbo.png',
-                './images/projects/sanramonmcbo2.png'
-            ],
-            technologies: ['Google Apps Script', 'Process Automation', 'ETL Pipelines', 'Cost Optimization', 'Vercel'],
-            category: 'Engineering & Automation',
-            status: 'Live',
-            liveUrl: 'https://sanramonmcbo.vercel.app',
-            featured: true,
-            date: '2024-06-01'
-         }
-      ];
+          {
+             id: 2,
+             title: 'Parish Automated Ecosystem',
+             description: 'Zero-cost digital ecosystem for San Ramón Nonato Parish. Engineered an automated content pipeline using Google Sheets/Forms as a Headless CMS. Custom ETL scripts transform administration data into a performant web experience, streamlining information flow for parish groups without recurring costs.',
+             image: './images/projects/sanramonmcbo.png',
+             images: [
+                 './images/projects/sanramonmcbo.png',
+                 './images/projects/sanramonmcbo2.png'
+             ],
+             technologies: ['Google Apps Script', 'Process Automation', 'ETL Pipelines', 'Cost Optimization', 'Vercel'],
+             category: 'Engineering & Automation',
+             status: 'Live',
+             liveUrl: 'https://sanramonmcbo.vercel.app',
+             featured: true,
+             date: '2024-06-01'
+          },
+          {
+             id: 3,
+             title: 'Conclave',
+             description: 'A structured group decision-making tool for teams. A leader creates a template with mixable decision modes — assignment, voting, ranking, and free-text brainstorming — each person responds independently on their own device, and then everyone imports and compares responses to reach consensus without endless meetings. All data stays client-side in the browser.',
+             image: './images/projects/conclave.png',
+             images: [
+                 './images/projects/conclave.png'
+             ],
+             technologies: ['Slice.js', 'JavaScript', 'CSS3', 'HTML5', 'Express', 'localStorage'],
+             category: 'Web App',
+             status: 'Active',
+             githubUrl: 'https://github.com/VKneider/conclave',
+             liveUrl: 'https://conclave.vkneider.dev',
+             featured: true,
+             date: '2026-07-07'
+          }
+       ];
 
 export default projectsData;

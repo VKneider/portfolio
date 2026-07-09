@@ -1,0 +1,72 @@
+.bi-page {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: system-ui, sans-serif;
+}
+.bi-header h1 { margin: 0; }
+.bi-header code {
+  background: #e0e0e0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.bi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.bi-card {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.bi-card h2 { margin: 0 0 0.75rem; font-size: 1.2rem; }
+.bi-card p { margin: 0.5rem 0 0; font-size: 0.95rem; }
+.bi-chart-wrapper {
+  height: 160px;
+}
+.bi-chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+.bi-anime-track {
+  height: 60px;
+  background: #ddd;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.bi-anime-box {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 44px;
+  height: 44px;
+  background: #ffb703;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.bi-card-wide { grid-column: 1 / -1; }
+.bi-d3-container {
+  min-height: 220px;
+  background: #1a1a2e;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.bi-d3-container svg {
+  display: block;
+}
+.bi-summary { grid-column: 1 / -1; }
+.bi-status {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.bi-pass { color: #1b7e1b; font-weight: 600; }
+.bi-pass::before { content: "✓ "; }
