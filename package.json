@@ -47,7 +47,7 @@
     "animejs": "^4.5.0",
     "chart.js": "^4.5.1",
     "d3": "^7.9.0",
-    "dayjs": "^1.11.21",
+
     "dompurify": "^3.4.11",
     "express": "^5.2.1",
     "slicejs-cli": "^3.7.2",

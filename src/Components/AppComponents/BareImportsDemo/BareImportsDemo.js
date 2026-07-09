@@ -1,14 +1,7 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/es';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { Chart, registerables } from 'chart.js';
 import anime from 'animejs';
 import DOMPurify from 'dompurify';
 import * as d3 from 'd3';
-
-dayjs.extend(advancedFormat);
-dayjs.extend(relativeTime);
 
 window._sliceBareImportsReady = true;
 
@@ -21,7 +14,6 @@ export default class BareImportsDemo extends HTMLElement {
 
   init() {
     this.statusEl = this.querySelector('.bi-status');
-    this.dayjsDemo = this.querySelector('.bi-dayjs');
     this.chartCanvas = this.querySelector('.bi-chart-canvas');
     this.chartStatus = this.querySelector('.bi-chart-status');
     this.animeBox = this.querySelector('.bi-anime-box');
@@ -31,20 +23,10 @@ export default class BareImportsDemo extends HTMLElement {
     this.d3Container = this.querySelector('.bi-d3-container');
     this.d3Status = this.querySelector('.bi-d3-status');
 
-    this.testDayjs();
     this.testChartjs();
     this.testAnimejs();
     this.testDompurify();
     this.testD3();
-  }
-
-  testDayjs() {
-    dayjs.locale('es');
-    const now = dayjs();
-    const formatted = now.format('dddd, D [de] MMMM [de] YYYY');
-    const relative = now.from(dayjs('2025-01-01'));
-    this.dayjsDemo.textContent = `${formatted} (${relative})`;
-    this.addPass('dayjs');
   }
 
   testChartjs() {
