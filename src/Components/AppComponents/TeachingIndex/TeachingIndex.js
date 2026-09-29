@@ -14,6 +14,17 @@ export default class TeachingIndex extends HTMLElement {
     this.$grid = this.querySelector('.teaching-grid');
     this.$title = this.querySelector('.teaching-index__title');
     this.$subtitle = this.querySelector('.teaching-index__subtitle');
+
+    // Nothing intercepts plain anchors, so an <a href> would trigger a full
+    // page reload instead of a router navigation. Delegated on the grid so it
+    // survives the innerHTML re-render below.
+    this.$grid.addEventListener('click', (event) => {
+      const link = event.target.closest?.('a.teaching-card__link');
+      if (!link) return;
+      event.preventDefault();
+      slice.router.navigate(link.getAttribute('href'));
+    });
+
     this.courses = teachingData.courses || [];
     return this.render();
   }
@@ -25,6 +36,7 @@ export default class TeachingIndex extends HTMLElement {
     if (title) this.$title.replaceChildren(title);
     this.$subtitle.textContent = 'A selection of courses, syllabi, and learning resources I develop and share. Each entry links to its public repository.';
 
+    slice.controller.destroyByContainer(this.$grid);
     this.$grid.innerHTML = this.courses.map(c => `
       <article class="teaching-card">
         <header class="teaching-card__header">
@@ -33,9 +45,7 @@ export default class TeachingIndex extends HTMLElement {
         </header>
         <p class="teaching-card__description">${c.description}</p>
         ${c.institution ? `<span class="teaching-card__institution">Taught at ${c.institution}</span>` : ''}
-        <a class="teaching-card__link" href="/teaching/${c.slug}" data-navigo>
-          View syllabus →
-        </a>
+        <a class="teaching-card__link" href="/teaching/${c.slug}">View syllabus →</a>
       </article>
     `).join('');
   }
