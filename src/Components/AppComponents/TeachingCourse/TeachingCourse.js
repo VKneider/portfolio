@@ -1,5 +1,7 @@
 import { teachingData } from '../TeachingIndex/data/teaching.js';
 
+const brandTitle = 'Victor Kneider — Software Design & Architecture';
+
 export default class TeachingCourse extends HTMLElement {
   constructor(props) {
     super();
@@ -62,6 +64,7 @@ export default class TeachingCourse extends HTMLElement {
     this.$breadcrumb.hidden = !this.course;
 
     if (!this.course) {
+      document.title = `Course Not Found | Teaching | ${brandTitle}`;
       this.$notFound.innerHTML = `
         <span class="teaching-course__not-found-mark" aria-hidden="true">404</span>
         <h1>Course not found</h1>
@@ -72,6 +75,7 @@ export default class TeachingCourse extends HTMLElement {
     }
 
     const { name, code, description, repo, units } = this.course;
+    document.title = `${name} | Teaching | ${brandTitle}`;
     this.$eyebrow.textContent = this.course.institution
       ? `Course syllabus · ${this.course.institution}`
       : 'Course syllabus';

@@ -1,22 +1,14 @@
 import Slice from '/Slice/Slice.js';
-import { teachingData } from '../Components/AppComponents/TeachingIndex/data/teaching.js';
 
 const brandTitle = 'Victor Kneider — Software Design & Architecture';
-const courseBySlug = new Map(teachingData.courses.map((course) => [course.slug, course]));
 
 slice.router.afterEach((to) => {
-   if (to.path === '/teaching') {
-      document.title = `Teaching | ${brandTitle}`;
-      return;
-   }
-
-   if (to.path.startsWith('/teaching/')) {
-      const course = courseBySlug.get(to.params?.slug);
-      document.title = course
-         ? `${course.name} | Teaching | ${brandTitle}`
-         : `Course Not Found | Teaching | ${brandTitle}`;
-      return;
-   }
+   // The /teaching routes own their document.title from the component that renders
+   // them (TeachingIndex / TeachingCourse). This entry module must not import the
+   // course data: App/index.js belongs to no route bundle, so a relative import
+   // survives the build as a runtime request to /Components/**, which the
+   // production server does not serve.
+   if (to.path === '/teaching' || to.path.startsWith('/teaching/')) return;
 
    document.title = to.metadata?.title
       ? `${to.metadata.title} | ${brandTitle}`

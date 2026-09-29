@@ -1,5 +1,7 @@
 import { teachingData } from './data/teaching.js';
 
+const brandTitle = 'Victor Kneider — Software Design & Architecture';
+
 export default class TeachingIndex extends HTMLElement {
   constructor(props) {
     super();
@@ -18,6 +20,7 @@ export default class TeachingIndex extends HTMLElement {
 
   async render() {
     if (!this.$grid) return;
+    document.title = `Teaching | ${brandTitle}`;
     const title = await slice.build('SectionTitle', { text: 'Teaching' });
     if (title) this.$title.replaceChildren(title);
     this.$subtitle.textContent = 'A selection of courses, syllabi, and learning resources I develop and share. Each entry links to its public repository.';
