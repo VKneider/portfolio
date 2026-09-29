@@ -12,21 +12,23 @@ export default class ThemeSelector extends HTMLElement {
     this.$toggle = this.querySelector('.theme-toggle');
     this.$options = this.querySelectorAll('.theme-toggle-option');
 
-    this.currentThemeName =
-      slice.stylesManager?.themeManager?.currentTheme || 'Dark';
-
     slice.controller.setComponentProps(this, props);
     this.debuggerProps = ['currentTheme'];
   }
 
   async init() {
     this._bindEvents();
+    this.currentThemeName = this._getCurrentTheme();
     this._syncActive();
 
     document.addEventListener('themeChanged', (event) => {
       this.currentThemeName = event.detail.themeName;
       this._syncActive();
     });
+  }
+
+  _getCurrentTheme() {
+    return slice.theme || slice.stylesManager?.themeManager?.currentTheme || 'Light';
   }
 
   _bindEvents() {
@@ -70,7 +72,7 @@ export default class ThemeSelector extends HTMLElement {
   }
 
   get currentTheme() {
-    return this.currentThemeName;
+    return this._getCurrentTheme();
   }
 
   set currentTheme(value) {

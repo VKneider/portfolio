@@ -1,4 +1,4 @@
-import domPurify from '../../../libs/DOMpurify/purify.es.mjs';
+import domPurify from 'dompurify';
 
 export default class DomPurify extends HTMLElement {
   constructor(props) {

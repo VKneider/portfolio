@@ -1,5 +1,5 @@
-import '../../../libs/chartjs/chart.umd.js';
-import domPurify from '../../../libs/DOMpurify/purify.es.mjs';
+import 'chart.js/auto';
+import domPurify from 'dompurify';
 
 const ChartLib = typeof window !== 'undefined' ? window.Chart : null;
 

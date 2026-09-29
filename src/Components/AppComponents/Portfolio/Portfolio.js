@@ -47,7 +47,8 @@ export default class Portfolio extends HTMLElement {
             { text: 'Experience', path: '/experience' },
             { text: 'Education', path: '/education' },
             { text: 'Slice.js', path: '/slice-js' },
-            { text: 'Projects', path: '/projects' }
+            { text: 'Projects', path: '/projects' },
+            { text: 'Teaching', path: '/teaching' }
          ],
          elements:[{
             element: themeSelector,
@@ -62,7 +63,9 @@ export default class Portfolio extends HTMLElement {
             { path: '/experience', component: 'ExperienceSection' },
             { path: '/education', component: 'EducationSection' },
             { path: '/slice-js', component: 'WhatIsSlice' },
-            { path: '/projects', component: 'ProjectsSection' }
+            { path: '/projects', component: 'ProjectsSection' },
+            { path: '/teaching', component: 'TeachingIndex' },
+            { path: '/teaching/${slug}', component: 'TeachingCourse' }
          ]
       });
 

@@ -1,4 +1,4 @@
-import { animate, createTimeline } from '../../../libs/animejs/anime.esm.js';
+import { animate, createTimeline } from 'animejs';
 
 const MOTION_DEFAULTS = {
   speed: 1,

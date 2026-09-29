@@ -1,4 +1,4 @@
-import { animate, createTimeline, stagger, utils } from '../../../libs/animejs/anime.esm.js';
+import { animate, createTimeline, stagger, utils } from 'animejs';
 
 /**
  * AnimationsProvider

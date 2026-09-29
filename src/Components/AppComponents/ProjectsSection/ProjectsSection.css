@@ -13,7 +13,7 @@ slice-projects-section {
 .projects-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 2rem 2rem 5rem;
 }
 
 .projects-grid-container {
@@ -40,12 +40,12 @@ slice-projects-section .project-image {
     grid-template-columns: 1fr;
   }
   .projects-container {
-    padding: 4rem 1.5rem;
+    padding: 2rem 1.5rem 4rem;
   }
 }
 
 @media (max-width: 480px) {
   .projects-container {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem 3rem;
   }
 }
