@@ -2,7 +2,10 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export default async function discoverThemes() {
-    const themesDir = path.join(process.cwd(), 'src', 'Themes');
+    const projectRoot = process.cwd();
+    const sourceThemesDir = path.join(projectRoot, 'src', 'public', 'Themes');
+    const distThemesDir = path.join(projectRoot, 'dist', 'public', 'Themes');
+    const themesDir = await fs.access(distThemesDir).then(() => distThemesDir).catch(() => sourceThemesDir);
 
     try {
         await fs.access(themesDir);
