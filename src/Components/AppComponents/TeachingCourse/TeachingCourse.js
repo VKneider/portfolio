@@ -18,6 +18,16 @@ export default class TeachingCourse extends HTMLElement {
     this.$syllabus = this.querySelector('.teaching-course__syllabus');
     this.$notFound = this.querySelector('.teaching-course__not-found');
 
+    // The not-found block is re-rendered with innerHTML, so its internal link is
+    // intercepted by delegation: nothing intercepts plain anchors, so an
+    // <a href="/teaching"> would trigger a full page reload.
+    this.$notFound.addEventListener('click', (event) => {
+      const link = event.target.closest?.('a[href^="/"]');
+      if (!link) return;
+      event.preventDefault();
+      slice.router.navigate(link.getAttribute('href'));
+    });
+
     this.course = null;
     this.courses = teachingData.courses || [];
     this.params = {};
