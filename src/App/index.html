@@ -73,6 +73,23 @@
       }
     </script>
 
+    <!--
+      El tema y los estilos globales tambien los carga el framework en runtime
+      (StylesManager/ThemeManager). Isn't los descarga DESPUES del primer
+      paint, y sliceStyles.css pinta body { background-color: var(--bg) }: sin
+      --bg definido todavia no hay fondo, y como <meta name="color-scheme"> hace
+      que el navegador pinte el canvas segun la preferencia del SO, se ve un
+      flash (negro en dark mode) hasta que el tema entra.
+
+      Declararlos aqui como render-blocking hace que el primer paint ya tenga el
+      fondo correcto, sin hardcodear ningun color: --bg sigue teniendo una sola
+      fuente de verdad (Themes/Light.css, el defaultTheme de sliceConfig.json).
+      Son 474 B + 5790 B; la segunda peticion que hace el framework sale de
+      cache.
+    -->
+    <link rel="stylesheet" href="/Themes/Light.css" />
+    <link rel="stylesheet" href="/Styles/sliceStyles.css" />
+
     <!-- Marca: trío tipográfico (Crimson Pro + Inter Tight + JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
