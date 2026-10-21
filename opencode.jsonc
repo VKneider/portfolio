@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Slice.js documentation MCP (stdio). The skill uses these tools for the
+  // authoritative, version-specific docs; the offline references stay local.
+  "mcp": {
+    "servers": {
+      "slicejs": {
+        "type": "local",
+        "command": ["npx", "-y", "slicejs-mcp"]
+      }
+    }
+  },
+  // The Slice.js developer skill is installed by `slice skill add` in the
+  // Claude-compatible location. OpenCode reads that location natively; this
+  // entry makes it explicit for this project.
+  "skills": [".claude/skills"]
+}
