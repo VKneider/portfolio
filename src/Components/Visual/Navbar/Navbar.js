@@ -48,10 +48,8 @@ export default class Navbar extends HTMLElement {
          this.addElements(this.elements);
       }
 
-      // Mantener lógica original de ajuste de layout
-      if (window.screen.width >= 1020 && this.items && this.logo && (this.buttons || this.elements)) {
-         this.$menu.style.maxWidth = '60%';
-      }
+      // El layout desktop usa grid (logo · menú · acciones), así que el menú
+      // no necesita un max-width artificial: el grid ya reserva su espacio.
    }
 
    /**
@@ -269,8 +267,10 @@ export default class Navbar extends HTMLElement {
       this._logo = value;
       const img = document.createElement('img');
       img.src = value.src;
+      img.alt = value.alt || 'Logo';
       this.$logoContainer.appendChild(img);
       this.$logoContainer.href = value.path;
+      this.$logoContainer.setAttribute('aria-label', value.alt || 'Go to home');
 
       this.$logoContainer.addEventListener('click', (e) => {
          e.preventDefault();

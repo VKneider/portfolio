@@ -36,12 +36,12 @@ export default class Portfolio extends HTMLElement {
 
       const navbar = await slice.build('Navbar', {
          position: 'fixed',
-         // Logo deshabilitado hasta tener arte final de marca (el PNG de Slice
-         // no encaja con la paleta dual: blanco invisible en light mode).
-         // logo: {
-         //    src: '/images/Slice.js-logo.png',
-         //    path: '/',
-         // },
+         // Monograma personal (mismo arte que el favicon).
+         logo: {
+            src: '/images/favicon.svg',
+            path: '/',
+            alt: 'Victor Kneider — home'
+         },
          items: [
             { text: 'About', path: '/' },
             { text: 'Experience', path: '/experience' },

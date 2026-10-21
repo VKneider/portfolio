@@ -94,10 +94,18 @@
   transition: width 0.3s ease, left 0.3s ease;
 }
 .slice_nav_header li {
-  margin: 25px;
+  margin: 22px;
   display: flex;
   justify-content: center;
   position: relative;
+}
+
+/* En el rango donde el logo y el theme toggle dejan menos espacio, reduce
+ * la separación entre enlaces para que el menú completo siga centrado. */
+@media (min-width: 1021px) and (max-width: 1150px) {
+  .slice_nav_header li {
+    margin: 16px;
+  }
 }
 
 .slice_nav_header li:hover .anim-item {
@@ -105,13 +113,32 @@
   left: 0;
 }
 .slice_nav_header .logo_container {
-  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
 }
+
 .logo_container img {
   pointer-events: none;
   user-select: none;
-  max-height: 50px;
-  max-width: 200px;
+  width: 40px;
+  height: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  display: block;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease;
+}
+
+.slice_nav_header .logo_container:hover img {
+  transform: scale(1.04);
+}
+
+.slice_nav_header .logo_container:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 .nav_bar_buttons {
   justify-content: flex-end;
