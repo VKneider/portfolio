@@ -116,15 +116,16 @@ export default class AboutSection extends HTMLElement {
 
       projectsBtn.classList.add('cta-ghost');
 
-      const cvLink = document.createElement('a');
-      cvLink.className = 'cta-micro';
-      cvLink.href = '/assets/Victor_Kneider_CV.pdf';
-      cvLink.download = 'Victor_Kneider_CV.pdf';
-      cvLink.textContent = '→ Download CV';
+      const linkedinLink = document.createElement('a');
+      linkedinLink.className = 'cta-micro';
+      linkedinLink.href = 'https://www.linkedin.com/in/vkneider/';
+      linkedinLink.target = '_blank';
+      linkedinLink.rel = 'noopener noreferrer';
+      linkedinLink.textContent = '→ View LinkedIn';
 
       ctaButtons.appendChild(contactBtn);
       ctaButtons.appendChild(projectsBtn);
-      ctaButtons.appendChild(cvLink);
+      ctaButtons.appendChild(linkedinLink);
 
       // Assemble hero content
       heroContent.appendChild(profileContainer);
@@ -136,7 +137,7 @@ export default class AboutSection extends HTMLElement {
       this.AnimationsProvider.slideInLeft(heroText, { duration: 900, delay: 300 });
 
       // Animar los botones de CTA
-      [contactBtn, projectsBtn, cvLink].forEach((btn, idx) => {
+      [contactBtn, projectsBtn, linkedinLink].forEach((btn, idx) => {
          this.AnimationsProvider.fadeIn(btn, { duration: 700, delay: 600 + idx * 120, translateY: ['20px', '0px'] });
       });
 

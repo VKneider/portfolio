@@ -22,7 +22,7 @@ slice-about-section {
 
   animation: heroGlow 4s ease-in-out infinite alternate;
   /* Hacer que ocupe toda la altura horizontal */
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-height));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -939,5 +939,36 @@ slice-about-section {
   
   .highlight-description {
     font-size: 0.8rem;
+  }
+}
+
+/* En laptops de poca altura, el hero necesita compactarse para que los CTAs
+ * queden visibles sin hacer scroll. Solo afecta al espaciado, no al contenido. */
+@media (max-height: 880px) and (min-width: 769px) {
+  .hero-section {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .title-container {
+    margin-bottom: 1rem;
+  }
+
+  .roles-container {
+    height: 56px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-description {
+    margin-bottom: 1.5rem;
   }
 }
