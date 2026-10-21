@@ -152,6 +152,89 @@
   }
 }
 
+/* Perfect attendance — professional recognition, not a course. */
+.teaching-recognitions {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  background: var(--teaching-card);
+  border: 1px solid var(--teaching-rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+
+.teaching-recognitions__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-rgb, 180, 83, 9), 0.35);
+  color: var(--accent);
+}
+
+.teaching-recognitions__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.teaching-recognitions__title {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.teaching-recognitions__text {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.teaching-recognitions__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.teaching-recognitions__terms li {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--teaching-rule);
+  color: var(--text-2);
+  font: 500 0.68rem/1.2 var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .teaching-recognitions {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .teaching-recognitions__terms {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .teaching-recognitions {
+    grid-template-columns: 1fr;
+  }
+
+  .teaching-recognitions__icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .teaching-card,
   .teaching-card::before,

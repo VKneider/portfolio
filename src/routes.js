@@ -9,6 +9,7 @@ const routes = [
    { path: '/education', component: 'Portfolio', metadata: { title: 'Education' } },
    { path: '/slice-js', component: 'Portfolio', metadata: { title: 'Slice.js' } },
    { path: '/projects', component: 'Portfolio', metadata: { title: 'Projects' } },
+   { path: '/contact', component: 'Portfolio', metadata: { title: 'Contact' } },
    { path: '/teaching', component: 'Portfolio', metadata: { title: 'Teaching' } },
    { path: '/teaching/${slug}', component: 'Portfolio', metadata: { title: 'Course | Teaching' } },
    { path: '/imposter', component: 'TheImposterGame', metadata: { title: 'The Imposter Game' } },

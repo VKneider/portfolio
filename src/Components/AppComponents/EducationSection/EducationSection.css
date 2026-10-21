@@ -14,151 +14,269 @@ slice-education-section {
 
 /* Studies Section */
 .education-studies {
-  margin-bottom: 6rem; /* Increased from 5rem */
+  margin-bottom: 5rem;
 }
 
 .studies-container {
   display: flex;
   flex-direction: column;
-  gap: 4rem; /* Increased from 3rem */
+  gap: 2rem;
 }
 
-/* StudyCard styles viven en /Components/AtomicAppComponents/StudyCard/StudyCard.css.
 /* StudyCard styles → /Components/AtomicAppComponents/StudyCard/StudyCard.css */
 
 /* Certificates Section */
 .education-certificates {
-   margin-bottom: 4rem; /* Increased from 3rem */
+  margin-bottom: 4rem;
 }
 
 .certificates-toolbar {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 1rem;
-   max-width: 1100px;
-   margin: 0 auto 2rem;
-   flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto 1.75rem;
+  flex-wrap: wrap;
 }
 
 .certificates-search {
-   display: flex;
-   align-items: center;
-   gap: 0.6rem;
-   padding: 0.6rem 0.9rem;
-   border-radius: 999px;
-   background-color: var(--bg);
-   border: 1px solid rgba(var(--accent-rgb), 0.2);
-   min-width: min(360px, 100%);
-   transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  min-width: min(360px, 100%);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .certificates-search:focus-within {
-   border-color: var(--accent);
-   box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
-   transform: translateY(-1px);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
+  transform: translateY(-1px);
 }
 
 .search-icon {
-   color: var(--text-2);
-   font-size: 0.9rem;
+  color: var(--text-2);
+  font-size: 0.9rem;
 }
 
 .certificates-search-input {
-   border: none;
-   outline: none;
-   background: transparent;
-   width: 100%;
-   color: var(--text-1);
-   font-size: 0.95rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  color: var(--text-1);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
 }
 
 .certificates-search-input::placeholder {
-   color: var(--text-2);
-}
-
-.certificates-empty {
-   text-align: center;
-   padding: 2.5rem 1.5rem;
-   border-radius: var(--border-radius-slice);
-   border: 1px dashed rgba(var(--accent-rgb), 0.25);
-   background-color: var(--bg);
-   color: var(--text-2);
-   font-size: 0.95rem;
+  color: var(--text-2);
 }
 
 .certificates-count {
-   font-size: 0.95rem;
-   color: var(--text-2);
-   font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
 }
 
 .certificates-grid {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-   gap: 1.5rem;
-   max-width: 1100px;
-   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+  align-items: stretch;
+  gap: 1.4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.certificates-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(var(--accent-rgb), 0.25);
+  background-color: var(--bg);
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.certificates-empty p {
+  margin: 0;
 }
 
 .certificates-pagination {
-   display: flex;
-   justify-content: center;
-   gap: 0.6rem;
-   margin-top: 2.5rem;
-   flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.25rem;
+  flex-wrap: wrap;
 }
 
 .certificate-page-btn {
-   border: 1px solid rgba(var(--accent-rgb), 0.22);
-   background-color: var(--bg);
-   color: var(--text-1);
-   padding: 0.45rem 0.9rem;
-   border-radius: 999px;
-   font-size: 0.85rem;
-   font-weight: 600;
-   cursor: pointer;
-   transition: all 0.2s ease;
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  background-color: var(--bg);
+  color: var(--text-1);
+  padding: 0.5rem 0.9rem;
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
 .certificate-page-btn:hover {
-   border-color: var(--accent);
-   color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.certificate-page-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .certificate-page-btn.is-active {
-   background-color: var(--accent);
-   color: var(--on-accent);
-   border-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
 }
 
 .certificate-page-btn:disabled {
-   opacity: 0.5;
-   cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-/* Certificate Cards Styles moved to CertificateCard component */
-
-/* Animations */
-@keyframes slideInFromLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.certificates-footnote {
+  max-width: 1100px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--text-2);
+  opacity: 0.8;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Certificate Cards styles → CertificateCard.css */
+
+/* Certificate modal -------------------------------------------------- */
+
+slice-modal.certificate-modal .slice-modal {
+  --modal-max-height: min(88vh, 760px);
+  box-shadow: var(--shadow-modal);
 }
 
-/* Responsive — StudyCard responsive vive en su propio CSS. Aquí solo lo que es de section. */
+slice-modal.certificate-modal .slice-modal__header {
+  padding: 1rem 1.25rem 0.85rem;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: var(--ls-heading);
+}
+
+slice-modal.certificate-modal .slice-modal__title {
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+slice-modal.certificate-modal .slice-modal__body {
+  padding: 0;
+  background-color: var(--bg);
+}
+
+slice-modal.certificate-modal .slice-modal__footer {
+  padding: 0.8rem 1.25rem 1rem;
+}
+
+.certificate-modal-preview {
+  background-color: #FFFFFF;
+}
+
+.certificate-modal-frame {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 50vh, 500px);
+  border: 0;
+  background-color: #FFFFFF;
+}
+
+.certificate-modal-frame[hidden],
+.certificate-modal-image[hidden] {
+  display: none;
+}
+
+.certificate-modal-image {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 50vh, 500px);
+  padding: 1rem;
+  object-fit: contain;
+  background-color: #FFFFFF;
+}
+
+.certificate-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.85rem;
+  padding: 0.85rem 1.25rem 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+}
+
+.certificate-modal-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.certificate-modal-meta span + span::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--text-2);
+  opacity: 0.5;
+}
+
+.certificate-modal-meta span:first-child {
+  color: var(--text-1);
+  font-weight: 500;
+}
+
+.certificate-modal-note {
+  margin: 0;
+  padding: 0.35rem 1.25rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--text-2);
+  opacity: 0.85;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .certificates-grid {
     grid-template-columns: 1fr;
     gap: 1.2rem;
+  }
+
+  .certificate-modal-frame {
+    height: 52vh;
   }
 }
 
@@ -167,7 +285,15 @@ slice-education-section {
     padding: 1rem;
   }
 
-  .certificate-content {
-    padding: 1rem;
+  .certificates-toolbar {
+    align-items: stretch;
+  }
+
+  .certificates-search {
+    min-width: 100%;
+  }
+
+  .certificates-count {
+    text-align: right;
   }
 }

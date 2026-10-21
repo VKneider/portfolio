@@ -35,13 +35,27 @@
 
   --border-radius-slice: 5px;
   --slice-border: 1px;
+
+  /* Escala de radios y elevación — una sola fuente para cards, paneles y chips. */
+  --nav-height: 64px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 14px 32px rgba(var(--accent-rgb), 0.12);
+  --shadow-modal: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
 * { box-sizing: border-box; }
 
 html, body { max-width: 100%; overflow-x: hidden; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* La navbar es fixed: cualquier ancla o scrollIntoView debe dejar aire. */
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+}
 
 body {
   margin: 0;

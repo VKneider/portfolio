@@ -3,12 +3,13 @@
   <div class="education-certificates">
     <div class="certificates-toolbar">
       <div class="certificates-search">
-        <span class="search-icon">⌕</span>
-        <input type="text" class="certificates-search-input" placeholder="Search certificates">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input type="text" class="certificates-search-input" placeholder="Search certificates" aria-label="Search certificates">
       </div>
-      <div class="certificates-count"></div>
+      <div class="certificates-count" aria-live="polite"></div>
     </div>
     <div class="certificates-grid"></div>
     <div class="certificates-pagination"></div>
+    <p class="certificates-footnote">Every certificate links to its original document on Google Drive.</p>
   </div>
 </div>

@@ -50,10 +50,12 @@ export default class Portfolio extends HTMLElement {
             { text: 'Projects', path: '/projects' },
             { text: 'Teaching', path: '/teaching' }
          ],
-         elements:[{
-            element: themeSelector,
-            section:"actions"
-         }]
+         elements: [
+            {
+               element: themeSelector,
+               section: 'actions'
+            }
+         ]
       });
 
       // Create multi-route for content sections
@@ -64,6 +66,7 @@ export default class Portfolio extends HTMLElement {
             { path: '/education', component: 'EducationSection' },
             { path: '/slice-js', component: 'WhatIsSlice' },
             { path: '/projects', component: 'ProjectsSection' },
+            { path: '/contact', component: 'ContactSection' },
             { path: '/teaching', component: 'TeachingIndex' },
             { path: '/teaching/${slug}', component: 'TeachingCourse' }
          ]
@@ -104,6 +107,12 @@ export default class Portfolio extends HTMLElement {
             url: 'mailto:victorkneider@gmail.com', 
             id: 'email',
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>'
+         },
+         {
+            name: 'Contact',
+            url: '/contact',
+            id: 'contact',
+            svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>'
          }
       ];
 
@@ -111,15 +120,23 @@ export default class Portfolio extends HTMLElement {
       this.$socialLinks.innerHTML = '';
       socialData.forEach(social => {
          const link = document.createElement('a');
+         const isInternal = social.url.startsWith('/');
          link.href = social.url;
-         link.target = '_blank';
-         link.rel = 'noopener noreferrer';
+         link.target = isInternal ? '_self' : '_blank';
+         link.rel = isInternal ? '' : 'noopener noreferrer';
          link.classList.add('social-link');
          link.classList.add(`social-link-${social.id}`);
          link.innerHTML = `
             <span class="social-icon">${social.svg}</span>
             <span class="social-text">${social.name}</span>
          `;
+         if (isInternal) {
+            link.addEventListener('click', async (event) => {
+               event.preventDefault();
+               await slice.router.navigate(social.url);
+               window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+         }
          this.$socialLinks.appendChild(link);
       });
 

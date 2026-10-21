@@ -1,19 +1,20 @@
 /* Study Card — featured con barra lateral bronce (skill §3 5.6 Receta 3). */
 .study-card {
    background-color: var(--surface-1);
-   border-radius: 14px;
+   border-radius: var(--radius-lg);
    padding: 2rem 2.25rem;
    border: 1px solid var(--border);
    border-left: 4px solid var(--accent);
-   animation: slideInFromLeft 0.6s ease-out forwards;
-   opacity: 0;
-   transform: translateX(-50px);
-   transition: transform 0.3s ease;
+   animation: slideInFromLeft 0.6s ease-out backwards;
+   opacity: 1;
+   transform: translateX(0);
+   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
    margin-bottom: 1.5rem;
 }
 
 .study-card:hover {
    transform: translateX(0) translateY(-3px);
+   box-shadow: var(--shadow-card);
 }
 
 .study-header {
@@ -27,8 +28,9 @@
    width: 64px;
    height: 64px;
    object-fit: contain;
-   border-radius: 8px;
-   background-color: var(--bg);
+   border-radius: var(--radius-sm);
+   /* Placa blanca: el logo azul de URU necesita contraste también en dark. */
+   background-color: #ffffff;
    padding: 8px;
    border: 1px solid var(--border);
    flex-shrink: 0;
@@ -42,7 +44,7 @@
    justify-content: center;
    background-color: var(--accent);
    color: var(--on-accent);
-   border-radius: 8px;
+   border-radius: var(--radius-sm);
    font-family: var(--font-mono);
    font-weight: 600;
    font-size: 1.1rem;
@@ -82,7 +84,7 @@
 .study-meta span {
    background-color: transparent;
    padding: 0.2rem 0.55rem;
-   border-radius: 99px;
+   border-radius: var(--radius-pill);
    border: 1px solid var(--border);
    font-family: var(--font-mono);
    font-size: 10px;
@@ -159,7 +161,7 @@
    background-color: transparent;
    color: var(--text-1);
    padding: 0.35rem 0.75rem;
-   border-radius: 99px;
+   border-radius: var(--radius-pill);
    border: 1px solid var(--border);
    font-family: var(--font-mono);
    font-size: 11px;
@@ -174,9 +176,20 @@
 }
 
 @keyframes slideInFromLeft {
+   from {
+      opacity: 0;
+      transform: translateX(-50px);
+   }
+
    to {
       opacity: 1;
       transform: translateX(0);
+   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .study-card {
+      animation: none;
    }
 }
 

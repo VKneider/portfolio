@@ -95,7 +95,8 @@ export default class AboutSection extends HTMLElement {
             label: 'var(--on-accent)'
          },
          onClickCallback: async () => {
-            window.location.href = 'mailto:victorkneider@gmail.com';
+            await slice.router.navigate('/contact');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
          }
       });
       contactBtn.classList.add('cta-primary');

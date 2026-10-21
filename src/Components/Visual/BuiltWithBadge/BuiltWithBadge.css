@@ -17,7 +17,7 @@ slice-built-with-badge:hover {
 slice-built-with-badge .slice-built-with-badge-container {
     background: var(--bg);
     padding: 0.6rem 1rem;
-    border-radius: 50px;
+    border-radius: var(--radius-pill);
     box-shadow: 0 4px 15px rgba(var(--accent-rgb),0.1), 0 0 0 1px rgba(var(--accent-rgb),0.05);
     display: flex;
     align-items: center;
@@ -29,6 +29,11 @@ slice-built-with-badge .slice-built-with-badge-container {
     -webkit-backdrop-filter: blur(8px);
 }
 
+slice-built-with-badge:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
 slice-built-with-badge .slice-framework-name {
     font-weight: 600;
     color: var(--accent);
@@ -36,14 +41,9 @@ slice-built-with-badge .slice-framework-name {
     letter-spacing: 0.5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1020px) {
+    /* En mobile/tablet el badge flota sobre cards y CTAs; es decorativo. */
     slice-built-with-badge {
-        bottom: 1rem !important;
-        left: 1rem !important;
-    }
-    
-    slice-built-with-badge .slice-built-with-badge-container {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.75rem;
+        display: none !important;
     }
 }

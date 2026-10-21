@@ -1,0 +1,263 @@
+slice-contact-section {
+  display: block;
+  color: var(--text-1);
+  font-family: var(--font-family);
+}
+
+.contact-section {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) 2rem clamp(4rem, 8vw, 7rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.contact-intro {
+  max-width: 620px;
+}
+
+.contact-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background-color: var(--accent);
+}
+
+.contact-title {
+  max-width: 12ch;
+  margin: 0 0 1.5rem;
+  color: var(--heading);
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 5.4vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.contact-lede {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--text-2);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+/* El host de Button trae padding propio; lo neutralizamos para alinear
+ * ambos CTAs con el ritmo tipográfico de la sección. */
+.contact-btn {
+  padding: 0;
+}
+
+.contact-btn .slice_button {
+  min-height: 44px;
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-btn .slice_button:hover {
+  transform: translateY(-1px);
+}
+
+.contact-btn-ghost .slice_button {
+  border-color: var(--border);
+  background-color: transparent;
+  color: var(--text-1);
+}
+
+.contact-btn-ghost .slice_button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.contact-btn .slice_button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.contact-location {
+  margin: 2rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-panel {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.contact-panel-title {
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.contact-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.contact-list li:last-child {
+  padding-bottom: 0.35rem;
+}
+
+.contact-num {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.contact-list h3 {
+  margin: 0 0 0.25rem;
+  color: var(--heading);
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.contact-list p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.contact-elsewhere {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.contact-elsewhere a {
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.contact-elsewhere a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.contact-elsewhere a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-title {
+    max-width: 14ch;
+  }
+
+  .contact-intro {
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .contact-title {
+    max-width: none;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-btn {
+    width: 100%;
+  }
+
+  .contact-btn .slice_button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-intro,
+  .contact-panel {
+    animation: contactRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .contact-panel {
+    animation-delay: 0.08s;
+  }
+}
+
+@keyframes contactRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

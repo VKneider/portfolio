@@ -15,9 +15,9 @@ slice-portfolio {
 
 .portfolio-main {
   flex: 1;
-  /* Compensa la altura del navbar fixed (min-height 64px en navbar). */
-  padding-top: 64px;
-  min-height: calc(100vh - 64px);
+  /* Compensa la altura del navbar fixed (--nav-height). */
+  padding-top: var(--nav-height);
+  min-height: calc(100vh - var(--nav-height));
 }
 
 
@@ -75,8 +75,10 @@ slice-portfolio {
   background-color: var(--card-background-color);
   color: var(--text-1);
   text-decoration: none;
-  border-radius: 50px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: var(--radius-pill);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   font-weight: 600;
   box-shadow: 0 4px 6px rgba(var(--accent-rgb),0.1);
   border: 2px solid transparent;
@@ -97,7 +99,8 @@ slice-portfolio {
 
 .social-link-github,
 .social-link-linkedin,
-.social-link-email {
+.social-link-email,
+.social-link-contact {
   background-color: var(--surface-1);
   color: var(--text-1);
   border: 1px solid var(--border);
@@ -105,7 +108,8 @@ slice-portfolio {
 
 .social-link-github:hover,
 .social-link-linkedin:hover,
-.social-link-email:hover {
+.social-link-email:hover,
+.social-link-contact:hover {
   border-color: var(--accent);
   box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.15);
 }

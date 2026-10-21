@@ -2,9 +2,13 @@ export default class CertificateCard extends HTMLElement {
    constructor(props) {
       super();
       slice.attachTemplate(this);
-      
-      // Get template elements
+
+      // Template elements
       this.$card = this.querySelector('.certificate-card');
+      this.$previewWrap = this.querySelector('.certificate-preview-wrap');
+      this.$preview = this.querySelector('.certificate-preview');
+      this.$thumbnail = this.querySelector('.certificate-thumbnail');
+      this.$previewFallback = this.querySelector('.certificate-preview-fallback');
       this.$issuerLogo = this.querySelector('.issuer-logo');
       this.$issuerInitials = this.querySelector('.issuer-initials');
       this.$title = this.querySelector('.certificate-title');
@@ -14,94 +18,146 @@ export default class CertificateCard extends HTMLElement {
       this.$credentialId = this.querySelector('.credential-id');
       this.$skillsList = this.querySelector('.skills-list');
       this.$actions = this.querySelector('.certificate-actions');
-      
+
+      this.$preview.addEventListener('click', () => this.requestView());
+
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = ['certificate', 'animationDelay'];
    }
 
    async init() {
       if (!this.certificate) return;
-      
-      // Set animation delay
+
       if (this.animationDelay) {
          this.$card.style.animationDelay = `${this.animationDelay}s`;
       }
-      
-      // Populate template with data
+
       await this.populateTemplate();
    }
 
    async populateTemplate() {
-      // Set issuer logo
-      if (this.certificate.issuerLogo) {
-         this.$issuerLogo.src = this.certificate.issuerLogo;
-         this.$issuerLogo.alt = `${this.certificate.issuer} logo`;
-         this.$issuerLogo.onerror = () => {
-            this.$issuerLogo.style.display = 'none';
-         };
+      const certificate = this.certificate;
+
+      this.renderPreview(certificate);
+      this.renderIssuer(certificate);
+
+      this.$title.textContent = certificate.title;
+      this.$issuer.textContent = certificate.issuer;
+      this.$description.textContent = certificate.description || '';
+
+      this.$dates.textContent = this.buildMetaText(certificate);
+
+      const credentialId = certificate.credentialId ? String(certificate.credentialId) : '';
+      if (credentialId) {
+         const shortId = credentialId.length > 16
+            ? `${credentialId.slice(0, 12)}…`
+            : credentialId;
+         this.$credentialId.textContent = `ID: ${shortId}`;
+         this.$credentialId.title = credentialId;
       } else {
-         this.$issuerLogo.style.display = 'none';
+         this.$credentialId.hidden = true;
       }
 
-      if (this.$issuerInitials) {
-         const initials = this.certificate.issuer
-            .split(' ')
-            .filter(Boolean)
-            .slice(0, 2)
-            .map((word) => word[0].toUpperCase())
-            .join('');
-         this.$issuerInitials.textContent = initials || 'CI';
-         if (this.certificate.issuerLogo) {
-            this.$issuerInitials.style.display = 'none';
-         }
-      }
-
-      // Set basic info
-      this.$title.textContent = this.certificate.title;
-      this.$issuer.textContent = this.certificate.issuer;
-      this.$description.textContent = this.certificate.description;
-
-      // Set meta information
-      const issueDate = new Date(this.certificate.date).toLocaleDateString('en-US', {
-         year: 'numeric',
-         month: 'long'
-      });
-      
-      let validityText = `Issued: ${issueDate}`;
-      if (this.certificate.validUntil) {
-         const validDate = new Date(this.certificate.validUntil).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long'
-         });
-         validityText += ` | Valid until: ${validDate}`;
-      } else {
-         validityText += ' | No expiration';
-      }
-      
-      this.$dates.textContent = validityText;
-      this.$credentialId.textContent = `ID: ${this.certificate.credentialId}`;
-
-      // Populate skills
       this.$skillsList.innerHTML = '';
-      this.certificate.skills.forEach(skill => {
+      for (const skill of certificate.skills || []) {
          const skillTag = document.createElement('span');
          skillTag.classList.add('skill-tag');
          skillTag.textContent = skill;
          this.$skillsList.appendChild(skillTag);
-      });
+      }
 
-      // Clear existing buttons and create view certificate button
       this.$actions.innerHTML = '';
       const viewBtn = await slice.build('Button', {
-         value: 'Verify credential',
+         value: 'View certificate',
          customColor: {
             button: 'var(--accent)',
             label: 'var(--on-accent)'
          },
-         onClickCallback: () => window.open(this.certificate.certificateUrl, '_blank')
+         onClickCallback: () => this.requestView()
       });
       viewBtn.classList.add('view-certificate-btn');
       this.$actions.appendChild(viewBtn);
+   }
+
+   renderPreview(certificate) {
+      const label = certificate.title ? `Preview: ${certificate.title}` : 'Preview certificate';
+      this.$preview.setAttribute('aria-label', label);
+
+      if (!certificate.thumbnail) {
+         this.showPreviewFallback(certificate);
+         return;
+      }
+
+      this.$thumbnail.addEventListener('load', () => {
+         this.$thumbnail.classList.add('loaded');
+      }, { once: true });
+      this.$thumbnail.addEventListener('error', () => this.showPreviewFallback(certificate), { once: true });
+      this.$thumbnail.src = certificate.thumbnail;
+
+      // The image may already be cached before the listener is attached.
+      if (this.$thumbnail.complete && this.$thumbnail.naturalWidth > 0) {
+         this.$thumbnail.classList.add('loaded');
+      }
+   }
+
+   showPreviewFallback(certificate) {
+      this.$thumbnail.hidden = true;
+      this.$previewWrap.classList.add('is-fallback');
+      this.$previewFallback.textContent = this.getInitials(certificate.issuer);
+   }
+
+   renderIssuer(certificate) {
+      if (certificate.logo) {
+         this.$issuerLogo.src = certificate.logo;
+         this.$issuerLogo.alt = `${certificate.issuer} logo`;
+         this.$issuerLogo.onerror = () => {
+            this.$issuerLogo.hidden = true;
+            this.$issuerInitials.hidden = false;
+         };
+         this.$issuerInitials.hidden = true;
+      } else {
+         this.$issuerLogo.hidden = true;
+      }
+
+      this.$issuerInitials.textContent = this.getInitials(certificate.issuer);
+      this.$issuerInitials.hidden = Boolean(certificate.logo);
+   }
+
+   buildMetaText(certificate) {
+      const parts = [];
+      if (certificate.date) parts.push(this.formatMonth(certificate.date));
+      if (certificate.grade) parts.push(`Grade ${certificate.grade}`);
+      return parts.join(' · ');
+   }
+
+   formatMonth(value) {
+      const match = /^(\d{4})-(\d{2})/.exec(String(value));
+      if (!match) return String(value);
+
+      const date = new Date(Number(match[1]), Number(match[2]) - 1, 1);
+      return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+   }
+
+   getInitials(name = '') {
+      const initials = String(name)
+         .split(/\s+/)
+         .filter(Boolean)
+         .filter((word) => !['de', 'del', 'la', 'las', 'los', 'for', 'the', 'and'].includes(word.toLowerCase()))
+         .slice(0, 2)
+         .map((word) => word[0].toUpperCase())
+         .join('');
+
+      return initials || 'CI';
+   }
+
+   requestView() {
+      if (!this.certificate) return;
+
+      this.dispatchEvent(new CustomEvent('certificate-view', {
+         bubbles: true,
+         composed: true,
+         detail: { certificate: this.certificate }
+      }));
    }
 
    // Getters and setters
@@ -111,8 +167,7 @@ export default class CertificateCard extends HTMLElement {
 
    set certificate(value) {
       this._certificate = value;
-      // Don't call populateTemplate here to avoid duplication
-      // It will be called in init() when the component is ready
+      // init() populates the template once the component is mounted.
    }
 
    get animationDelay() {
@@ -127,5 +182,4 @@ export default class CertificateCard extends HTMLElement {
    }
 }
 
-customElements.define("slice-certificate-card", CertificateCard);
-
+customElements.define('slice-certificate-card', CertificateCard);
