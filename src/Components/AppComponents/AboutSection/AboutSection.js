@@ -82,50 +82,39 @@ export default class AboutSection extends HTMLElement {
           </p>
       `;
 
-      // Enhanced CTA Buttons
-      const ctaButtons = document.createElement('div');
-      ctaButtons.classList.add('cta-buttons');
+       // Enhanced CTA Buttons
+       const ctaButtons = document.createElement('div');
+       ctaButtons.classList.add('cta-buttons');
 
-      // Skill §3 3.5 caso 2: solo 2 estilos de botón (primary + ghost).
-      // Tercer CTA va como micro-CTA link (§3 3.5 caso 4 + §3 3.2 H).
-      const contactBtn = await slice.build('Button', {
-         value: 'Get In Touch',
+       // Skill §3 3.5 caso 2: solo 2 estilos de botón (primary + ghost).
+       // Los dos CTA principales representan contacto profesional y CV.
+       const contactBtn = await slice.build('Button', {
+          value: 'Get In Touch',
          customColor: {
             button: 'var(--accent)',
             label: 'var(--on-accent)'
          },
-         onClickCallback: async () => {
-            await slice.router.navigate('/contact');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-         }
-      });
-      contactBtn.classList.add('cta-primary');
+          onClickCallback: () => {
+             window.open('https://www.linkedin.com/in/vkneider/', '_blank', 'noopener,noreferrer');
+          }
+       });
+       contactBtn.classList.add('cta-primary');
 
-      const projectsBtn = await slice.build('Button', {
-         value: 'View Projects',
-         customColor: {
-            button: 'transparent',
-            label: 'var(--text-1)'
-         },
-         onClickCallback: async () => {
-            await slice.router.navigate('/projects');
-         }
-      });
+       const projectsBtn = await slice.build('Button', {
+          value: 'Download CV',
+          customColor: {
+             button: 'transparent',
+             label: 'var(--text-1)'
+          },
+          onClickCallback: () => {
+             window.open('https://vkneider.dev/cv/Victor_Kneider_CV_en.pdf', '_blank', 'noopener,noreferrer');
+          }
+       });
 
+       projectsBtn.classList.add('cta-ghost');
 
-
-      projectsBtn.classList.add('cta-ghost');
-
-      const linkedinLink = document.createElement('a');
-      linkedinLink.className = 'cta-micro';
-      linkedinLink.href = 'https://www.linkedin.com/in/vkneider/';
-      linkedinLink.target = '_blank';
-      linkedinLink.rel = 'noopener noreferrer';
-      linkedinLink.textContent = '→ View LinkedIn';
-
-      ctaButtons.appendChild(contactBtn);
-      ctaButtons.appendChild(projectsBtn);
-      ctaButtons.appendChild(linkedinLink);
+       ctaButtons.appendChild(contactBtn);
+       ctaButtons.appendChild(projectsBtn);
 
       // Assemble hero content
       heroContent.appendChild(profileContainer);
@@ -137,7 +126,7 @@ export default class AboutSection extends HTMLElement {
       this.AnimationsProvider.slideInLeft(heroText, { duration: 900, delay: 300 });
 
       // Animar los botones de CTA
-      [contactBtn, projectsBtn, linkedinLink].forEach((btn, idx) => {
+       [contactBtn, projectsBtn].forEach((btn, idx) => {
          this.AnimationsProvider.fadeIn(btn, { duration: 700, delay: 600 + idx * 120, translateY: ['20px', '0px'] });
       });
 
