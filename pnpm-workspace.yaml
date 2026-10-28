@@ -1,5 +1,9 @@
 # pnpm 11+ workspace settings (single-project setup, no workspace).
 # Allowlist de paquetes con install scripts permitidos (ignoreScripts=true en .npmrc).
+# pnpm installs before running a script when node_modules looks out of date.
+# Inside a larger workspace that re-resolves slicejs-cli from npm and drops the
+# local link, so the install stays explicit.
+verifyDepsBeforeRun: false
 allowBuilds:
   esbuild: true
   sharp: true

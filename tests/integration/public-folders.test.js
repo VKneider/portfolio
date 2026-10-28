@@ -25,7 +25,7 @@ test('production mode only serves public folders and bundles', async () => {
   const baseUrl = `http://localhost:${PORT}`;
 
   // Act & Assert
-  await expectStatus(`${baseUrl}/Themes/CobaltBlue.css`, 200);
+  await expectStatus(`${baseUrl}/Themes/Light.css`, 200);
 
   const sliceResponse = await fetchWithRetry(`${baseUrl}/Slice/Slice.js`);
   assert.equal(sliceResponse.status, 200);
