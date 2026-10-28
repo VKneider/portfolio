@@ -1,9 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildProject, startServer, stopServer } from './utils/server.js';
 import { fetchWithRetry, expectStatus } from './utils/http.js';
 
-const projectRoot = new URL('../../', import.meta.url).pathname;
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 const PORT = 4320;
 let serverProcess;
 
@@ -38,15 +39,18 @@ test('build emits bundle config and JS bundles in dist', async () => {
   );
   assert.equal(hasFrameworkStructural, true);
 
+  // Bundling V2 contract: every bundle exports SLICE_BUNDLE_META and registerAll.
   const criticalBundlePath = `${baseUrl}/bundles/${config.bundles.critical.file}`;
   const criticalResponse = await expectStatus(criticalBundlePath, 200);
   const criticalText = await criticalResponse.text();
-  assert.match(criticalText, /SLICE_BUNDLE_COMPONENTS/);
+  assert.match(criticalText, /SLICE_BUNDLE_META/);
+  assert.match(criticalText, /registerAll/);
 
   const frameworkBundlePath = `${baseUrl}/bundles/${config.bundles.framework.file}`;
   const frameworkResponse = await expectStatus(frameworkBundlePath, 200);
   const frameworkText = await frameworkResponse.text();
-  assert.match(frameworkText, /SLICE_BUNDLE_COMPONENTS/);
+  assert.match(frameworkText, /SLICE_BUNDLE_META/);
+  assert.match(frameworkText, /registerAll/);
 });
 
 test('bundle integrity values are present in config', async () => {

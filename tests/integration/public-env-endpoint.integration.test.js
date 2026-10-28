@@ -1,9 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { startServer, stopServer } from './utils/server.js';
 import { expectStatus } from './utils/http.js';
 
-const projectRoot = new URL('../../', import.meta.url).pathname;
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 const DEV_PORT = 4340;
 const PROD_PORT = 4341;
 let serverProcess;
@@ -42,7 +43,10 @@ test('production mode /slice-env.json returns 200 with mode and filtered env', a
   await assertPublicEnvContract(response, 'production');
 });
 
-test('production mode bundle headers: unhashed no-store, hashed immutable', async () => {
+// Bundler v2 serves every bundle as no-store, with or without `?v=`. That is the
+// framework's contract now, so this app no longer adds an immutable path for
+// hashed URLs: correctness over the extra cache hit.
+test('production mode bundle headers: always no-store', async () => {
   serverProcess = await startServer({
     cwd: projectRoot,
     port: PROD_PORT,
@@ -69,7 +73,7 @@ test('production mode bundle headers: unhashed no-store, hashed immutable', asyn
     200
   );
   const hashedCacheControl = hashedResponse.headers.get('cache-control') || '';
-  assert.match(hashedCacheControl, /immutable/i);
+  assert.match(hashedCacheControl, /no-store/i);
 });
 
 async function assertPublicEnvContract(response, expectedMode) {

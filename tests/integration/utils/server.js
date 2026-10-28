@@ -6,7 +6,7 @@ import { fetchWithRetry } from './http.js';
 
 export async function buildProject({ cwd, env, extraArgs = [] }) {
   const cliPath = resolveCliPath(cwd);
-  await runCommand('node', [cliPath, 'build', ...extraArgs], { cwd, env });
+  await runCommand(process.execPath, [cliPath, 'build', ...extraArgs], { cwd, env });
 }
 
 export async function startServer({ cwd, port, env, build = false }) {
@@ -17,7 +17,7 @@ export async function startServer({ cwd, port, env, build = false }) {
     await buildProject({ cwd, env });
   }
 
-  const serverProcess = spawn('node', [serverEntry, modeFlag, '--port', String(port)], {
+  const serverProcess = spawn(process.execPath, [serverEntry, modeFlag, '--port', String(port)], {
     cwd,
     env: {
       ...process.env,
@@ -64,7 +64,7 @@ async function waitForReady(serverProcess, port, timeoutMs) {
       if (response.ok) {
         return;
       }
-    } catch (error) {}
+    } catch (error) { /* the server is still booting */ }
 
     await delay(200);
   }

@@ -1,9 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { startServer, stopServer } from './utils/server.js';
 import { expectStatus, fetchWithRetry } from './utils/http.js';
 
-const projectRoot = new URL('../../', import.meta.url).pathname;
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 const PORT = 4310;
 let serverProcess;
 

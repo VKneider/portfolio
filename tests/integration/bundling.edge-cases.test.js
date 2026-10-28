@@ -2,11 +2,12 @@ import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { buildProject, startServer, stopServer } from './utils/server.js';
 import { fetchWithRetry, expectStatus } from './utils/http.js';
 
-const projectRoot = new URL('../../', import.meta.url).pathname;
-const distPath = new URL('../../dist', import.meta.url).pathname;
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
+const distPath = fileURLToPath(new URL('../../dist', import.meta.url));
 const PORT = 4330;
 let serverProcess;
 
