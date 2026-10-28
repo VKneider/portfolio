@@ -30,6 +30,22 @@ export interface BadgeCarouselProps {
   title?: string;
 }
 
+export interface BareImportsDemoProps {
+  [key: string]: unknown;
+}
+
+export interface BreadcrumbsProps {
+  [key: string]: unknown;
+  children?: { children?: unknown[]; path: string; text?: string; title?: string; }[];
+  currentPath?: string;
+  includeCurrent?: boolean;
+  items?: { path?: string; text: string; }[];
+  maxItems?: number;
+  onClick?: (...args: unknown[]) => unknown;
+  onClickCallback?: (...args: unknown[]) => unknown;
+  separator?: string;
+}
+
 export interface BuiltWithBadgeProps {
   [key: string]: unknown;
 }
@@ -96,6 +112,10 @@ export interface ConfirmationModalProps {
   [key: string]: unknown;
 }
 
+export interface ContactSectionProps {
+  [key: string]: unknown;
+}
+
 export interface DetailsProps {
   [key: string]: unknown;
   text?: string;
@@ -103,6 +123,10 @@ export interface DetailsProps {
 }
 
 export interface DomPurifyProps {
+  [key: string]: unknown;
+}
+
+export interface DragDropServiceProps {
   [key: string]: unknown;
 }
 
@@ -225,6 +249,19 @@ export interface MainMenuProps {
   [key: string]: unknown;
 }
 
+export interface ModalProps {
+  [key: string]: unknown;
+  customColor?: Record<string, unknown>;
+  dismissable?: boolean;
+  draggable?: boolean;
+  maxWidth?: string;
+  onClose?: (...args: unknown[]) => unknown;
+  open?: boolean;
+  resizable?: boolean;
+  title?: string;
+  width?: string;
+}
+
 export interface MultiRouteProps {
   [key: string]: unknown;
 }
@@ -308,6 +345,14 @@ export interface TabsProps {
   [key: string]: unknown;
 }
 
+export interface TeachingCourseProps {
+  [key: string]: unknown;
+}
+
+export interface TeachingIndexProps {
+  [key: string]: unknown;
+}
+
 export interface TeachingSectionProps {
   [key: string]: unknown;
   accentColor?: string;
@@ -342,6 +387,11 @@ export interface ThemeSelectorProps {
 
 export interface TimelineProps {
   [key: string]: unknown;
+  description?: string;
+  items: unknown[];
+  onSelect?: (...args: unknown[]) => unknown;
+  orientation?: string;
+  title?: string;
 }
 
 export interface ToolTipProps {
@@ -381,6 +431,8 @@ export interface SliceComponentPropsMap {
   AnimationsProvider: AnimationsProviderProps;
   BackgroundAudioToggle: BackgroundAudioToggleProps;
   BadgeCarousel: BadgeCarouselProps;
+  BareImportsDemo: BareImportsDemoProps;
+  Breadcrumbs: BreadcrumbsProps;
   BuiltWithBadge: BuiltWithBadgeProps;
   Button: ButtonProps;
   Card: CardProps;
@@ -391,8 +443,10 @@ export interface SliceComponentPropsMap {
   ClickSoundToggle: ClickSoundToggleProps;
   CodeVisualizer: CodeVisualizerProps;
   ConfirmationModal: ConfirmationModalProps;
+  ContactSection: ContactSectionProps;
   Details: DetailsProps;
   DomPurify: DomPurifyProps;
+  DragDropService: DragDropServiceProps;
   DropDown: DropDownProps;
   EducationSection: EducationSectionProps;
   ElementCarrousel: ElementCarrouselProps;
@@ -414,6 +468,7 @@ export interface SliceComponentPropsMap {
   Loading: LoadingProps;
   LocalStorageManager: LocalStorageManagerProps;
   MainMenu: MainMenuProps;
+  Modal: ModalProps;
   MultiRoute: MultiRouteProps;
   MyNavigation: MyNavigationProps;
   NameManagerModal: NameManagerModalProps;
@@ -430,6 +485,8 @@ export interface SliceComponentPropsMap {
   StudyCard: StudyCardProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
+  TeachingCourse: TeachingCourseProps;
+  TeachingIndex: TeachingIndexProps;
   TeachingSection: TeachingSectionProps;
   TechExpertise: TechExpertiseProps;
   TechnicalSkillsSection: TechnicalSkillsSectionProps;
@@ -484,6 +541,9 @@ declare module 'slicejs-web-framework' {
       name: K,
       props?: SliceComponentPropsMap[K]
     ): Promise<SliceDynamicElement | null>;
+    getComponent<K extends SliceComponentName>(
+      componentSliceId: K | `${K}-${string}`
+    ): SliceDynamicElement | undefined;
     getComponent<T extends SliceDynamicElement = SliceDynamicElement>(
       componentSliceId: string
     ): T | undefined;

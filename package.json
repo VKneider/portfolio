@@ -30,7 +30,10 @@
     "run": "node ./node_modules/slicejs-cli/client.js dev",
     "test:e2e": "SLICE_BUILD=true playwright test --config tests/e2e/playwright.config.js",
     "test:e2e:dev": "playwright test --project=dev-mode --config tests/e2e/playwright.config.js",
-    "test:e2e:prod": "SLICE_BUILD=true playwright test --project=production-mode --config tests/e2e/playwright.config.js"
+    "test:e2e:prod": "SLICE_BUILD=true playwright test --project=production-mode --config tests/e2e/playwright.config.js",
+    "lint": "slice lint",
+    "lint:fix": "slice lint --fix",
+    "typecheck": "slice typecheck"
   },
   "keywords": [
     "portfolio",
@@ -52,7 +55,9 @@
     "@babel/parser": "^7.28.5",
     "@babel/traverse": "^7.28.5",
     "@playwright/test": "^1.59.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "eslint": "^9.39.5",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "animejs": "^4.5.0",

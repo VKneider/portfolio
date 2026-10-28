@@ -45,6 +45,9 @@ export default class Modal extends HTMLElement {
 
   static _openCount = 0;
   static _scrollY = null;
+  static _originalBodyPosition = null;
+  static _originalBodyTop = null;
+  static _originalBodyWidth = null;
 
   set open(value) {
     const next = value === true;

@@ -105,10 +105,12 @@ export default class Breadcrumbs extends HTMLElement {
     this.render();
   }
 
+  // @ts-expect-error - props API: `children` is breadcrumb data, not DOM nodes.
   get children() {
     return this._children;
   }
 
+  // @ts-expect-error - same prop, keeping the public API.
   set children(value) {
     this._children = Array.isArray(value) ? value : [];
     this.render();
@@ -323,4 +325,5 @@ export default class Breadcrumbs extends HTMLElement {
   }
 }
 
+// @ts-expect-error - the `children` override above makes the class type diverge.
 customElements.define('slice-breadcrumbs', Breadcrumbs);

@@ -48,6 +48,7 @@ const components = {
   "TreeItem": "Visual",
   "TreeView": "Visual",
   "AnimationsProvider": "Service",
+  "DragDropService": "Service",
   "FetchManager": "Service",
   "IndexedDbManager": "Service",
   "LocalStorageManager": "Service",

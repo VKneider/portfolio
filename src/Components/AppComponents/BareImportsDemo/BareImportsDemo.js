@@ -1,5 +1,5 @@
 import { Chart, registerables } from 'chart.js';
-import anime from 'animejs';
+import { animate } from 'animejs';
 import DOMPurify from 'dompurify';
 import * as d3 from 'd3';
 
@@ -53,13 +53,12 @@ export default class BareImportsDemo extends HTMLElement {
   }
 
   testAnimejs() {
-    if (typeof anime !== 'function') {
+    if (typeof animate !== 'function') {
       this.animeStatus.textContent = '❌ anime is not a function';
       return;
     }
     this.animeBox.style.transform = 'translateX(0)';
-    anime({
-      targets: this.animeBox,
+    animate(this.animeBox, {
       translateX: [0, 180],
       direction: 'alternate',
       loop: true,

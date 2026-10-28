@@ -525,8 +525,8 @@ export default class GameSetup extends HTMLElement {
         });
 
         const updatedConfig = this.contextService?.getGameConfig() || {};
-        let word = '';
-        let categoryName = '';
+        let word;
+        let categoryName;
 
         if (updatedConfig.mode === 'automatic') {
             const words = this.categories[updatedConfig.category];
@@ -849,7 +849,7 @@ export default class GameSetup extends HTMLElement {
     }
 
     loadSavedLists() {
-        let saved = null;
+        let saved;
         if (this.storage?.getItem) {
             saved = this.storage.getItem(this.storageListsKey);
         } else {
@@ -1069,7 +1069,7 @@ export default class GameSetup extends HTMLElement {
 
     syncPlayerInput() {
         if (!this.useNames || !this.$playerInput) return;
-        let count = 0;
+        let count;
         if (this.useSavedNames) {
             count = this.getActiveSavedNames().length;
         } else {

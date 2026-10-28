@@ -228,10 +228,10 @@ export default class CodeVisualizer extends HTMLElement {
       extractTokens(/\/\*[\s\S]*?\*\//g, 'code-comment');
       
       // Selectores CSS
-      extractTokens(/([^\{\}]+)(?=\{)/g, 'code-selector');
+      extractTokens(/([^{}]+)(?=\{)/g, 'code-selector');
       
       // Propiedad y valor CSS (manipulando la coincidencia para preservar la estructura)
-      tokenizedCode = tokenizedCode.replace(/(\s*)([a-zA-Z-]+)(\s*):(\s*)([^;\{\}]+)(?=;)/g, (match, space1, prop, space2, space3, value) => {
+      tokenizedCode = tokenizedCode.replace(/(\s*)([a-zA-Z-]+)(\s*):(\s*)([^;{}]+)(?=;)/g, (match, space1, prop, space2, space3, value) => {
          const propTokenId = generateTokenId(tokens.length);
          tokens.push({ id: propTokenId, content: prop, className: 'code-property' });
          
