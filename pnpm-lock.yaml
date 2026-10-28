@@ -24,11 +24,11 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1
       slicejs-cli:
-        specifier: ^4.2.0
-        version: 4.2.0
+        specifier: ^4.4.0
+        version: 4.4.0(eslint@9.39.5)
       slicejs-web-framework:
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^4.1.1
+        version: 4.1.1
     devDependencies:
       '@babel/parser':
         specifier: ^7.28.5
@@ -276,6 +276,15 @@ packages:
   '@eslint/eslintrc@3.3.7':
     resolution: {integrity: sha512-F42g89Qd5oAWtp0k0nnSrjziAKza7w8SVT4mStc18LZMaRb4J1HQAHLCalEtDCxrTuksx7NU9qsmeLwpOfPqWw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@10.0.1':
+    resolution: {integrity: sha512-zeR9k5pd4gxjZ0abRoIaxdc7I3nDktoXZk2qOv9gCNWx3mVwEn32VRhyLaRsDiJjTs0xq/T8mfPtyuXu7GWBcA==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+    peerDependencies:
+      eslint: ^10.0.0
+    peerDependenciesMeta:
+      eslint:
+        optional: true
 
   '@eslint/js@9.39.5':
     resolution: {integrity: sha512-QywQuszQh77pIXCsq998c8hbhSTI/azTty1Z6N53dmAudKHhy573j3yvRLsX2BSp8YpLtoCEG8E9DJe+8zUh4A==}
@@ -1190,6 +1199,10 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
+  globals@17.13.0:
+    resolution: {integrity: sha512-RwMTC61u7hrG3ZJMkZQOK4JLJrKS8QtoTii63EmWvFXHqycY9FObBJQCbsLxSO8kjKhWE5kV1GC+Vb1g3RI0Zg==}
+    engines: {node: '>=18'}
+
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
@@ -1631,17 +1644,17 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  slicejs-cli@4.2.0:
-    resolution: {integrity: sha512-7LTYHcC8l+xqMbExx6QitP9qqCSyUN3Qf7NvAs11icmwpsbTTlkQ1CaiQIZeN4c0VruKbkYDuYgxh7Di+qhXxQ==}
+  slicejs-cli@4.4.0:
+    resolution: {integrity: sha512-Hcy5qezcOpHsNYYYES0iIuhQewiconX6mqJrjZMMm5Usm6BUKSqDX3XbzRKLp7ewSZVF+riYy2UqbjycRJfwuQ==}
     engines: {node: '>=20.0.0'}
     hasBin: true
 
-  slicejs-web-framework@3.5.1:
-    resolution: {integrity: sha512-eeY2nF6vnRV1kRk47wrGV66G4aiP+XvdZA+ESMKDBSl9wqHl2zHix/EAR7009WLkyl2zKnwX9bE08V4hnzHQMg==}
-    engines: {node: '>=20'}
-
   slicejs-web-framework@4.0.2:
     resolution: {integrity: sha512-homVktLSEDQMBnDShGGsD1KdGHFc1A4SrB74G9DthKneZgYaA5pit2+83fRYTbFhGXpH/cn6I/HCpiXHZibhcQ==}
+    engines: {node: '>=20'}
+
+  slicejs-web-framework@4.1.1:
+    resolution: {integrity: sha512-WL2El655pJtnOq5uLrC6KvcDwZdh8IhJsx/ohNkdZn0GdI1kVruvbGtP54oLDBB+65paGbqANaz7CKmhicxA/w==}
     engines: {node: '>=20'}
 
   source-map-support@0.5.21:
@@ -1930,6 +1943,10 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  '@eslint/js@10.0.1(eslint@9.39.5)':
+    optionalDependencies:
+      eslint: 9.39.5
 
   '@eslint/js@9.39.5': {}
 
@@ -2861,6 +2878,8 @@ snapshots:
 
   globals@14.0.0: {}
 
+  globals@17.13.0: {}
+
   gopd@1.2.0: {}
 
   graceful-fs@4.2.11: {}
@@ -3319,10 +3338,11 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  slicejs-cli@4.2.0:
+  slicejs-cli@4.4.0(eslint@9.39.5):
     dependencies:
       '@babel/parser': 7.29.3
       '@babel/traverse': 7.29.0
+      '@eslint/js': 10.0.1(eslint@9.39.5)
       chalk: 5.6.2
       chokidar: 3.6.0
       clean-css: 5.3.3
@@ -3330,23 +3350,27 @@ snapshots:
       commander: 12.1.0
       esbuild: 0.28.2
       fs-extra: 11.3.5
+      globals: 17.13.0
       html-minifier-terser: 7.2.0
       inquirer: 12.11.1
       ora: 8.2.0
-      slicejs-web-framework: 3.5.1
+      slicejs-web-framework: 4.0.2
       terser: 5.48.0
     transitivePeerDependencies:
       - '@types/node'
+      - eslint
       - supports-color
 
-  slicejs-web-framework@3.5.1:
+  slicejs-web-framework@4.0.2:
     dependencies:
       compression: 1.8.1
+      es-module-lexer: 2.3.2
+      esbuild: 0.28.2
       express: 4.22.2
     transitivePeerDependencies:
       - supports-color
 
-  slicejs-web-framework@4.0.2:
+  slicejs-web-framework@4.1.1:
     dependencies:
       compression: 1.8.1
       es-module-lexer: 2.3.2
