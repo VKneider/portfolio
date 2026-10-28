@@ -39,7 +39,12 @@ const ASSET_EXTENSIONS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll([...APP_SHELL, ...BUNDLE_URLS]))
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await cache.addAll(APP_SHELL);
+      // Bundles only exist after `slice build`. In dev the bundle config 404s,
+      // and addAll rejects the whole batch on one miss, so these are optional.
+      await Promise.allSettled(BUNDLE_URLS.map((url) => cache.add(url)));
+    })
   );
 });
 
