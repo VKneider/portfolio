@@ -22,6 +22,8 @@ export default class Navbar extends HTMLElement {
 
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = ['logo', 'items', 'buttons', 'elements'];
+      this._itemsToken = 0;
+      this._initialized = false;
    }
 
    closeMobileMenu() {
@@ -32,10 +34,10 @@ export default class Navbar extends HTMLElement {
    }
 
    async init() {
+      this._initialized = true;
+
       // Mantener comportamiento original
-      if (this.items) {
-         await this.addItems(this.items);
-      }
+      await this._renderItems();
       
       if (this.buttons) {
          this.buttons.forEach(async (item) => {
@@ -242,9 +244,19 @@ export default class Navbar extends HTMLElement {
    // MÉTODOS ORIGINALES (Sin cambios para retrocompatibilidad)
    // ===============================
 
-   async addItems(items) {
+   async _renderItems() {
+      if (!this.$menu) return;
+
+      const token = ++this._itemsToken;
+      slice.controller.destroyByContainer(this.$menu);
+      this.$menu.replaceChildren();
+      await this.addItems(this._items || [], this.$menu, token);
+   }
+
+   async addItems(items, target = this.$menu, token = this._itemsToken) {
       for (let i = 0; i < items.length; i++) {
-         await this.addItem(items[i], this.$menu);
+         if (token !== this._itemsToken) return;
+         await this.addItem(items[i], target, token);
       }
    }
 
@@ -290,6 +302,7 @@ export default class Navbar extends HTMLElement {
 
    set items(values) {
       this._items = values;
+      if (this._initialized) this._renderItems();
    }
 
    get buttons() {
@@ -319,7 +332,7 @@ export default class Navbar extends HTMLElement {
       }
    }
 
-   async addItem(value, addTo) {
+   async addItem(value, addTo, token = this._itemsToken) {
       const item = document.createElement('li');
       const hover = document.createElement('div');
       hover.classList.add('anim-item');
@@ -332,6 +345,10 @@ export default class Navbar extends HTMLElement {
             path: value.path,
             classes: 'item',
          });
+         if (token !== this._itemsToken) {
+            if (link) slice.controller.destroyComponent(link);
+            return;
+         }
          link.addEventListener('click', () => {
             this.closeMobileMenu();
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -343,6 +360,10 @@ export default class Navbar extends HTMLElement {
             label: value.text,
             options: value.options,
          });
+         if (token !== this._itemsToken) {
+            if (d) slice.controller.destroyComponent(d);
+            return;
+         }
          d.classList.add('item');
          item.appendChild(d);
       }
