@@ -1,5 +1,3 @@
-import { certificatesData, studiesData } from "./data.js";
-
 export default class EducationSection extends HTMLElement {
    constructor(props) {
       super();
@@ -8,6 +6,7 @@ export default class EducationSection extends HTMLElement {
       this.$container = this.querySelector('.education-container');
       this.$studies = this.querySelector('.education-studies');
       this.$certificates = this.querySelector('.education-certificates');
+      this.$certificatesTitle = this.querySelector('.certificates-title');
       this.$certificatesGrid = this.querySelector('.certificates-grid');
       this.$certificatesSearch = this.querySelector('.certificates-search-input');
       this.$certificatesCount = this.querySelector('.certificates-count');
@@ -15,11 +14,12 @@ export default class EducationSection extends HTMLElement {
 
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
-      this.studiesData = studiesData || [];
-      this.certificatesData = certificatesData || [];
-      this.filteredCertificates = [...this.certificatesData];
+      this.studiesData = [];
+      this.certificatesData = [];
+      this.filteredCertificates = [];
       this.certificatesPage = 1;
       this.certificatesPerPage = 6;
+      this.searchQuery = '';
 
       this.$certificatesGrid.addEventListener('certificate-view', (event) => {
          this.openCertificateModal(event.detail?.certificate);
@@ -27,40 +27,76 @@ export default class EducationSection extends HTMLElement {
    }
 
    async init() {
+      await this.loadContent();
       await this.createCertificateModal();
-      await this.createStudiesSection();
-      await this.createCertificatesSection();
+      await this.render();
+
+      this.bindCertificateSearch();
+
+      slice.translator.watch(this, async () => {
+         const state = this.captureState();
+         this.closeCertificateModal();
+         await this.loadContent();
+         await this.render();
+         this.restoreState(state);
+      });
    }
 
-   async createStudiesSection() {
-      const studiesTitle = await slice.build('SectionTitle', { text: 'Educational Background' });
+   async loadContent() {
+      const document = await slice.t.content('education');
+      this.studiesData = Array.isArray(document?.studies) ? document.studies : [];
+      this.certificatesData = Array.isArray(document?.certificates) ? document.certificates : [];
+   }
+
+   captureState() {
+      return { query: this.searchQuery, page: this.certificatesPage };
+   }
+
+   restoreState(state) {
+      this.searchQuery = state.query || '';
+      this.certificatesPage = state.page || 1;
+      if (this.$certificatesSearch) this.$certificatesSearch.value = this.searchQuery;
+   }
+
+   async render() {
+      await this.renderStudies();
+      await this.renderCertificates();
+   }
+
+   async renderStudies() {
+      slice.controller.destroyByContainer(this.$studies);
+      this.$studies.innerHTML = '';
+
+      const studiesTitle = await slice.build('SectionTitle', { text: slice.t('education.studies') });
+      this.$studies.appendChild(studiesTitle);
 
       const studiesContainer = document.createElement('div');
       studiesContainer.classList.add('studies-container');
 
       for (const [index, study] of this.studiesData.entries()) {
          const studyCard = await slice.build('StudyCard', {
-            study: study,
+            study,
             animationDelay: index * 0.2
          });
          studiesContainer.appendChild(studyCard);
       }
 
-      this.$studies.appendChild(studiesTitle);
       this.$studies.appendChild(studiesContainer);
    }
 
-   async createCertificatesSection() {
-      const certificatesTitle = await slice.build('SectionTitle', { text: 'Professional Certifications' });
-      this.$certificates.insertBefore(certificatesTitle, this.$certificates.firstChild);
+   async renderCertificates() {
+      slice.controller.destroyByContainer(this.$certificatesTitle);
+      this.$certificatesTitle.innerHTML = '';
+      const certificatesTitle = await slice.build('SectionTitle', { text: slice.t('education.certificates') });
+      this.$certificatesTitle.appendChild(certificatesTitle);
 
-      this.bindCertificateSearch();
+      this.filterCertificates();
       await this.renderCertificatesPage();
    }
 
    async createCertificateModal() {
       this.$certificateModal = await slice.build('Modal', {
-         title: 'Certificate',
+         title: slice.t('education.modal.title'),
          width: 'min(1080px, 94vw)',
          maxWidth: '1080px',
          customColor: {
@@ -80,7 +116,7 @@ export default class EducationSection extends HTMLElement {
 
       this.$certificateFrame = document.createElement('iframe');
       this.$certificateFrame.className = 'certificate-modal-frame';
-      this.$certificateFrame.title = 'Certificate preview';
+      this.$certificateFrame.title = slice.t('education.modal.previewTitle');
       this.$certificateFrame.src = 'about:blank';
       this.$certificateFrame.setAttribute('allowfullscreen', '');
       this.$certificateFrame.setAttribute('referrerpolicy', 'no-referrer');
@@ -105,7 +141,7 @@ export default class EducationSection extends HTMLElement {
       this.$certificateModal.appendBody(body);
 
       this.$driveButton = await slice.build('Button', {
-         value: 'Open in Drive',
+         value: slice.t('education.modal.openDrive'),
          customColor: {
             button: 'var(--accent)',
             label: 'var(--on-accent)'
@@ -117,10 +153,9 @@ export default class EducationSection extends HTMLElement {
       });
       this.$certificateModal.appendFooter(this.$driveButton);
 
-      // The library labels its close control in Spanish; this site is English.
       this.$certificateModal
          .querySelector('.slice-modal__close')
-         ?.setAttribute('aria-label', 'Close');
+         ?.setAttribute('aria-label', slice.t('common.close'));
 
       this.appendChild(this.$certificateModal);
    }
@@ -130,7 +165,7 @@ export default class EducationSection extends HTMLElement {
 
       this.activeCertificate = certificate;
       this.$certificateModal.title = certificate.title;
-      this.$certificateFrame.title = `Preview: ${certificate.title}`;
+      this.$certificateFrame.title = slice.t('education.modal.preview', { title: certificate.title });
 
       const useImage = certificate.previewMode === 'image' && Boolean(certificate.thumbnail);
       this.$certificateFrame.hidden = useImage;
@@ -139,21 +174,21 @@ export default class EducationSection extends HTMLElement {
       if (useImage) {
          this.$certificateFrame.src = 'about:blank';
          this.$certificateImage.src = certificate.thumbnail;
-         this.$certificateImage.alt = `Preview of ${certificate.title}`;
-         this.$certificateModalNote.textContent = 'Preview image. Open in Drive to view the original PDF.';
+         this.$certificateImage.alt = slice.t('education.modal.previewAlt', { title: certificate.title });
+         this.$certificateModalNote.textContent = slice.t('education.modal.imageNote');
       } else {
          this.$certificateImage.removeAttribute('src');
          this.$certificateFrame.src = certificate.previewUrl || 'about:blank';
-         this.$certificateModalNote.textContent = 'Preview hosted by Google Drive. If it does not load, use “Open in Drive”.';
+         this.$certificateModalNote.textContent = slice.t('education.modal.driveNote');
       }
 
       this.$certificateModalMeta.innerHTML = '';
       const meta = [
          certificate.issuer,
          certificate.date ? this.formatMonth(certificate.date) : '',
-         certificate.grade ? `Grade ${certificate.grade}` : '',
-         certificate.validUntil ? `Valid until ${this.formatMonth(certificate.validUntil)}` : '',
-         certificate.credentialId ? `ID ${certificate.credentialId}` : ''
+         certificate.grade ? slice.t('education.modal.grade', { grade: certificate.grade }) : '',
+         certificate.validUntil ? slice.t('education.modal.validUntil', { date: this.formatMonth(certificate.validUntil) }) : '',
+         certificate.credentialId ? slice.t('education.modal.id', { id: certificate.credentialId }) : ''
       ].filter(Boolean);
 
       for (const text of meta) {
@@ -164,6 +199,11 @@ export default class EducationSection extends HTMLElement {
 
       this.$driveButton.hidden = !certificate.certificateUrl;
       this.$certificateModal.open = true;
+   }
+
+   closeCertificateModal() {
+      if (this.$certificateModal?.open) this.$certificateModal.open = false;
+      this.resetCertificateModal();
    }
 
    resetCertificateModal() {
@@ -188,42 +228,45 @@ export default class EducationSection extends HTMLElement {
       if (!match) return String(value);
 
       const date = new Date(Number(match[1]), Number(match[2]) - 1, 1);
-      return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      return slice.translator.format.date(date, { month: 'short', year: 'numeric' });
+   }
+
+   filterCertificates() {
+      const query = this.searchQuery.trim().toLowerCase();
+      if (!query) {
+         this.filteredCertificates = [...this.certificatesData];
+         return;
+      }
+      this.filteredCertificates = this.certificatesData.filter((certificate) => {
+         const haystack = [
+            certificate.title,
+            certificate.issuer,
+            certificate.category,
+            certificate.credentialId,
+            certificate.description,
+            certificate.grade,
+            ...(certificate.skills || [])
+         ]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase();
+         return haystack.includes(query);
+      });
    }
 
    bindCertificateSearch() {
       if (!this.$certificatesSearch) return;
       this.$certificatesSearch.addEventListener('input', () => {
-         const query = this.$certificatesSearch.value.trim().toLowerCase();
-         if (!query) {
-            this.filteredCertificates = [...this.certificatesData];
-         } else {
-            this.filteredCertificates = this.certificatesData.filter((certificate) => {
-               const haystack = [
-                  certificate.title,
-                  certificate.issuer,
-                  certificate.category,
-                  certificate.credentialId,
-                  certificate.description,
-                  certificate.grade,
-                  ...(certificate.skills || [])
-               ]
-                  .filter(Boolean)
-                  .join(' ')
-                  .toLowerCase();
-               return haystack.includes(query);
-            });
-         }
+         this.searchQuery = this.$certificatesSearch.value;
          this.certificatesPage = 1;
+         this.filterCertificates();
          this.renderCertificatesPage();
       });
    }
 
    updateCertificateCount() {
       if (!this.$certificatesCount) return;
-      const total = this.filteredCertificates.length;
-      const label = total === 1 ? 'certificate' : 'certificates';
-      this.$certificatesCount.textContent = `${total} ${label}`;
+      this.$certificatesCount.textContent = slice.t('education.count', { count: this.filteredCertificates.length });
    }
 
    async renderCertificatesPage() {
@@ -244,7 +287,7 @@ export default class EducationSection extends HTMLElement {
 
       for (const [index, certificate] of pageItems.entries()) {
          const certificateCard = await slice.build('CertificateCard', {
-            certificate: certificate,
+            certificate,
             animationDelay: index * 0.08
          });
          this.$certificatesGrid.appendChild(certificateCard);
@@ -283,7 +326,7 @@ export default class EducationSection extends HTMLElement {
       };
 
       this.$certificatesPagination.appendChild(
-         createButton('Prev', Math.max(1, this.certificatesPage - 1), this.certificatesPage === 1)
+         createButton(slice.t('education.prev'), Math.max(1, this.certificatesPage - 1), this.certificatesPage === 1)
       );
 
       const maxButtons = 5;
@@ -298,7 +341,7 @@ export default class EducationSection extends HTMLElement {
 
       this.$certificatesPagination.appendChild(
          createButton(
-            'Next',
+            slice.t('education.next'),
             Math.min(totalPages, this.certificatesPage + 1),
             this.certificatesPage === totalPages
          )
@@ -312,16 +355,17 @@ export default class EducationSection extends HTMLElement {
       empty.className = 'certificates-empty';
 
       const text = document.createElement('p');
-      text.textContent = 'No certificates match your search.';
+      text.textContent = slice.t('education.empty');
 
       const clearButton = document.createElement('button');
       clearButton.type = 'button';
       clearButton.className = 'certificate-page-btn';
-      clearButton.textContent = 'Clear search';
+      clearButton.textContent = slice.t('education.clear');
       clearButton.addEventListener('click', () => {
+         this.searchQuery = '';
          this.$certificatesSearch.value = '';
-         this.filteredCertificates = [...this.certificatesData];
          this.certificatesPage = 1;
+         this.filterCertificates();
          this.renderCertificatesPage();
          this.$certificatesSearch.focus();
       });

@@ -2,6 +2,13 @@ import Slice from '/Slice/Slice.js';
 
 const brandTitle = 'Victor Kneider — Software Design & Architecture';
 
+function applyTitle(metadata) {
+   const key = metadata?.titleKey;
+   const title = key ? slice.t(key) : metadata?.title;
+   const brand = slice.t('brand.title') || brandTitle;
+   document.title = title ? `${title} | ${brand}` : brand;
+}
+
 slice.router.afterEach((to) => {
    // The /teaching routes own their document.title from the component that renders
    // them (TeachingIndex / TeachingCourse). This entry module must not import the
@@ -9,10 +16,14 @@ slice.router.afterEach((to) => {
    // survives the build as a runtime request to /Components/**, which the
    // production server does not serve.
    if (to.path === '/teaching' || to.path.startsWith('/teaching/')) return;
+   applyTitle(to.metadata);
+});
 
-   const key = to.metadata?.titleKey;
-   const title = key ? slice.t(key) : to.metadata?.title;
-   document.title = title ? `${title} | ${brandTitle}` : brandTitle;
+// The router re-applies the route metadata on a locale change; the brand suffix is
+// localized here, after the router has written the route title.
+slice.translator.watch(() => {
+   if (slice.path === '/teaching' || slice.path.startsWith('/teaching/')) return;
+   applyTitle(slice.router.activeMetadata);
 });
 
 if ('serviceWorker' in navigator) {

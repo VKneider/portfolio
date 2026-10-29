@@ -12,8 +12,20 @@ export default class NotFound extends HTMLElement {
    }
 
    init() {
-      //change title of the page
-      document.title = '404 - Not Found';
+      const links = [...this.querySelectorAll('a[data-route]')];
+      const applyHrefs = () => {
+         for (const link of links) link.href = slice.href(link.dataset.route);
+      };
+      applyHrefs();
+
+      this.addEventListener('click', (event) => {
+         const link = event.target.closest?.('a[data-route]');
+         if (!link) return;
+         event.preventDefault();
+         slice.router.navigate(link.dataset.route);
+      });
+
+      slice.translator.watch(this, applyHrefs);
    }
 }
 

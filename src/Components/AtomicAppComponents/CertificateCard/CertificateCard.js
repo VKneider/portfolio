@@ -52,7 +52,7 @@ export default class CertificateCard extends HTMLElement {
          const shortId = credentialId.length > 16
             ? `${credentialId.slice(0, 12)}…`
             : credentialId;
-         this.$credentialId.textContent = `ID: ${shortId}`;
+         this.$credentialId.textContent = slice.t('education.certificate.id', { id: shortId });
          this.$credentialId.title = credentialId;
       } else {
          this.$credentialId.hidden = true;
@@ -68,7 +68,7 @@ export default class CertificateCard extends HTMLElement {
 
       this.$actions.innerHTML = '';
       const viewBtn = await slice.build('Button', {
-         value: 'View certificate',
+         value: slice.t('education.certificate.view'),
          customColor: {
             button: 'var(--accent)',
             label: 'var(--on-accent)'
@@ -80,7 +80,9 @@ export default class CertificateCard extends HTMLElement {
    }
 
    renderPreview(certificate) {
-      const label = certificate.title ? `Preview: ${certificate.title}` : 'Preview certificate';
+      const label = certificate.title
+         ? slice.t('education.certificate.preview', { title: certificate.title })
+         : slice.t('education.certificate.previewFallback');
       this.$preview.setAttribute('aria-label', label);
 
       if (!certificate.thumbnail) {
@@ -126,7 +128,7 @@ export default class CertificateCard extends HTMLElement {
    buildMetaText(certificate) {
       const parts = [];
       if (certificate.date) parts.push(this.formatMonth(certificate.date));
-      if (certificate.grade) parts.push(`Grade ${certificate.grade}`);
+      if (certificate.grade) parts.push(slice.t('education.certificate.grade', { grade: certificate.grade }));
       return parts.join(' · ');
    }
 
@@ -135,7 +137,7 @@ export default class CertificateCard extends HTMLElement {
       if (!match) return String(value);
 
       const date = new Date(Number(match[1]), Number(match[2]) - 1, 1);
-      return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      return slice.translator.format.date(date, { month: 'short', year: 'numeric' });
    }
 
    getInitials(name = '') {

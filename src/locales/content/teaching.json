@@ -1,0 +1,266 @@
+{
+  "courses": [
+    {
+      "slug": "pr2",
+      "code": "",
+      "repo": "https://github.com/VKneider/URU-Prog2",
+      "copy": {
+        "en": {
+          "name": "Programming 2",
+          "institution": "Rafael Urdaneta University (URU)",
+          "description": "Structured and object-oriented programming in C++: modularization, text and binary file handling, and application design with separation between logic and presentation."
+        },
+        "es": {
+          "name": "Programación 2",
+          "institution": "Universidad Rafael Urdaneta (URU)",
+          "description": "Programación estructurada y orientada a objetos en C++: modularización, manejo de archivos de texto y binarios, y diseño de aplicaciones con separación entre lógica y presentación."
+        }
+      },
+      "units": [
+        {
+          "copy": {
+            "en": { "title": "Modularization and Libraries" },
+            "es": { "title": "Modularización y bibliotecas" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Functions and parameter passing" }, "es": { "title": "Funciones y paso de parámetros" } } },
+            { "copy": { "en": { "title": "File separation: .h and .cpp" }, "es": { "title": "Separación de archivos: .h y .cpp" } } },
+            { "copy": { "en": { "title": "Custom libraries" }, "es": { "title": "Bibliotecas propias" } } },
+            { "copy": { "en": { "title": "Separation between logic and presentation" }, "es": { "title": "Separación entre lógica y presentación" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Composite Data Types" },
+            "es": { "title": "Tipos de datos compuestos" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Structures (struct)" }, "es": { "title": "Estructuras (struct)" } } },
+            { "copy": { "en": { "title": "Arrays of structures" }, "es": { "title": "Arreglos de estructuras" } } },
+            { "copy": { "en": { "title": "Functions returning entities" }, "es": { "title": "Funciones que devuelven entidades" } } },
+            { "copy": { "en": { "title": "Memory, sizeof and padding" }, "es": { "title": "Memoria, sizeof y padding" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Text Files" },
+            "es": { "title": "Archivos de texto" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Input and output streams (fstream)" }, "es": { "title": "Flujos de entrada y salida (fstream)" } } },
+            { "copy": { "en": { "title": "Reading and parsing CSV" }, "es": { "title": "Lectura y parseo de CSV" } } },
+            { "copy": { "en": { "title": "Validation of invalid records" }, "es": { "title": "Validación de registros inválidos" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Binary Files" },
+            "es": { "title": "Archivos binarios" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Structure serialization" }, "es": { "title": "Serialización de estructuras" } } },
+            { "copy": { "en": { "title": "Random access with seekg and seekp" }, "es": { "title": "Acceso aleatorio con seekg y seekp" } } },
+            { "copy": { "en": { "title": "In-place record modification" }, "es": { "title": "Modificación de registros en sitio" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Object-Oriented Programming" },
+            "es": { "title": "Programación orientada a objetos" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Classes and objects" }, "es": { "title": "Clases y objetos" } } },
+            { "copy": { "en": { "title": "Encapsulation, constructors and methods" }, "es": { "title": "Encapsulamiento, constructores y métodos" } } },
+            { "copy": { "en": { "title": "OOP principles" }, "es": { "title": "Principios de POO" } } },
+            { "copy": { "en": { "title": "Object persistence in binary files" }, "es": { "title": "Persistencia de objetos en archivos binarios" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Data Structures" },
+            "es": { "title": "Estructuras de datos" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Pointers and dynamic memory" }, "es": { "title": "Punteros y memoria dinámica" } } },
+            { "copy": { "en": { "title": "Linked lists" }, "es": { "title": "Listas enlazadas" } } },
+            { "copy": { "en": { "title": "Stacks and queues" }, "es": { "title": "Pilas y colas" } } }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "clientes-web",
+      "code": "",
+      "repo": "https://github.com/VKneider/URU-LenguajeClientesWeb",
+      "copy": {
+        "en": {
+          "name": "Client-Side Web Development",
+          "institution": "Rafael Urdaneta University (URU)",
+          "description": "Client-side web development with HTML, CSS and JavaScript without frameworks: from how the web works to applications with external APIs, native components and browser persistence."
+        },
+        "es": {
+          "name": "Desarrollo Web del Cliente",
+          "institution": "Universidad Rafael Urdaneta (URU)",
+          "description": "Desarrollo web del lado del cliente con HTML, CSS y JavaScript sin frameworks: desde cómo funciona la web hasta aplicaciones con APIs externas, componentes nativos y persistencia en el navegador."
+        }
+      },
+      "units": [
+        {
+          "copy": {
+            "en": { "title": "Web Fundamentals" },
+            "es": { "title": "Fundamentos de la web" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Client-server model" }, "es": { "title": "Modelo cliente-servidor" } } },
+            { "copy": { "en": { "title": "URL anatomy" }, "es": { "title": "Anatomía de una URL" } } },
+            { "copy": { "en": { "title": "HTTP protocol: methods and status codes" }, "es": { "title": "Protocolo HTTP: métodos y códigos de estado" } } },
+            { "copy": { "en": { "title": "Frontend and backend" }, "es": { "title": "Frontend y backend" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "HTML and CSS" },
+            "es": { "title": "HTML y CSS" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "HTML structure and semantics" }, "es": { "title": "Estructura y semántica HTML" } } },
+            { "copy": { "en": { "title": "Forms" }, "es": { "title": "Formularios" } } },
+            { "copy": { "en": { "title": "Selectors, cascade and specificity" }, "es": { "title": "Selectores, cascada y especificidad" } } },
+            { "copy": { "en": { "title": "Layout with Flexbox and Grid" }, "es": { "title": "Layout con Flexbox y Grid" } } },
+            { "copy": { "en": { "title": "Responsive design" }, "es": { "title": "Diseño responsive" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "JavaScript and the DOM" },
+            "es": { "title": "JavaScript y el DOM" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Language fundamentals" }, "es": { "title": "Fundamentos del lenguaje" } } },
+            { "copy": { "en": { "title": "DOM manipulation" }, "es": { "title": "Manipulación del DOM" } } },
+            { "copy": { "en": { "title": "Events" }, "es": { "title": "Eventos" } } },
+            { "copy": { "en": { "title": "Client-side validation" }, "es": { "title": "Validación del lado del cliente" } } },
+            { "copy": { "en": { "title": "State management" }, "es": { "title": "Manejo de estado" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Asynchronicity and APIs" },
+            "es": { "title": "Asincronía y APIs" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Promises and async/await" }, "es": { "title": "Promesas y async/await" } } },
+            { "copy": { "en": { "title": "Fetch and REST API consumption" }, "es": { "title": "Fetch y consumo de APIs REST" } } },
+            { "copy": { "en": { "title": "Parallel requests and partial failures" }, "es": { "title": "Peticiones en paralelo y fallos parciales" } } },
+            { "copy": { "en": { "title": "In-memory caching" }, "es": { "title": "Caché en memoria" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Components and Single Page Applications" },
+            "es": { "title": "Componentes y Single Page Applications" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Classes in JavaScript" }, "es": { "title": "Clases en JavaScript" } } },
+            { "copy": { "en": { "title": "ES Modules" }, "es": { "title": "Módulos ES" } } },
+            { "copy": { "en": { "title": "Custom Elements" }, "es": { "title": "Custom Elements" } } },
+            { "copy": { "en": { "title": "Navigation between views in a SPA" }, "es": { "title": "Navegación entre vistas en una SPA" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Persistence and Visualization" },
+            "es": { "title": "Persistencia y visualización" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "LocalStorage" }, "es": { "title": "LocalStorage" } } },
+            { "copy": { "en": { "title": "IndexedDB and transactions" }, "es": { "title": "IndexedDB y transacciones" } } },
+            { "copy": { "en": { "title": "Client-side modeling of related entities" }, "es": { "title": "Modelado de entidades relacionadas en el cliente" } } },
+            { "copy": { "en": { "title": "Charts with Chart.js" }, "es": { "title": "Gráficas con Chart.js" } } }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "components",
+      "code": "252T60",
+      "repo": "",
+      "copy": {
+        "en": {
+          "name": "Component-Based Programming",
+          "institution": "Rafael Urdaneta University (URU)",
+          "description": "Tenth-semester elective on component-based frontend architecture: frameworks, communication patterns, design systems and design patterns applied to components."
+        },
+        "es": {
+          "name": "Programación Basada en Componentes",
+          "institution": "Universidad Rafael Urdaneta (URU)",
+          "description": "Electiva de décimo semestre sobre arquitectura frontend basada en componentes: frameworks, patrones de comunicación, design systems y patrones de diseño aplicados a componentes."
+        }
+      },
+      "units": [
+        {
+          "copy": {
+            "en": { "title": "Unit I · Component Fundamentals" },
+            "es": { "title": "Unidad I · Fundamentos de componentes" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "What is a component and why componentize" }, "es": { "title": "Qué es un componente y por qué componentizar" } } },
+            { "copy": { "en": { "title": "Web Components and the platform standard" }, "es": { "title": "Web Components y el estándar de la plataforma" } } },
+            { "copy": { "en": { "title": "Component lifecycle" }, "es": { "title": "Ciclo de vida de un componente" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Unit II · Component-Based Frameworks" },
+            "es": { "title": "Unidad II · Frameworks basados en componentes" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Slice.js: a component-based framework case study" }, "es": { "title": "Slice.js: estudio de caso de un framework de componentes" } } },
+            { "copy": { "en": { "title": "Component communication: Props, Context and Event Bus" }, "es": { "title": "Comunicación entre componentes: Props, Context y Event Bus" } } },
+            { "copy": { "en": { "title": "Router, themes and global managers" }, "es": { "title": "Router, temas y gestores globales" } } },
+            { "copy": { "en": { "title": "Design Systems" }, "es": { "title": "Design Systems" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Unit III · Component Design Patterns" },
+            "es": { "title": "Unidad III · Patrones de diseño de componentes" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Atomic Design" }, "es": { "title": "Atomic Design" } } },
+            { "copy": { "en": { "title": "Compound Components and Headless Components" }, "es": { "title": "Compound Components y Headless Components" } } },
+            { "copy": { "en": { "title": "Strategy, Factory and Observer" }, "es": { "title": "Strategy, Factory y Observer" } } },
+            { "copy": { "en": { "title": "Repository and Middleware" }, "es": { "title": "Repository y Middleware" } } },
+            { "copy": { "en": { "title": "Case study: the Logger project" }, "es": { "title": "Estudio de caso: el proyecto Logger" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Unit IV · Application Architecture and Component Packages" },
+            "es": { "title": "Unidad IV · Arquitectura de aplicaciones y paquetes de componentes" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Designing componentized architectures" }, "es": { "title": "Diseño de arquitecturas componentizadas" } } },
+            { "copy": { "en": { "title": "Justifying and defending design decisions" }, "es": { "title": "Justificación y defensa de decisiones de diseño" } } },
+            { "copy": { "en": { "title": "Integration with external APIs" }, "es": { "title": "Integración con APIs externas" } } },
+            { "copy": { "en": { "title": "Packaging and publishing reusable components" }, "es": { "title": "Empaquetado y publicación de componentes reutilizables" } } },
+            { "copy": { "en": { "title": "Semantic versioning and release management" }, "es": { "title": "Versionado semántico y gestión de releases" } } },
+            { "copy": { "en": { "title": "Component package maintenance and backward compatibility" }, "es": { "title": "Mantenimiento y compatibilidad hacia atrás de paquetes de componentes" } } }
+          ]
+        },
+        {
+          "copy": {
+            "en": { "title": "Unit V · Component Testing and Documentation" },
+            "es": { "title": "Unidad V · Pruebas y documentación de componentes" }
+          },
+          "topics": [
+            { "copy": { "en": { "title": "Unit testing for components" }, "es": { "title": "Pruebas unitarias de componentes" } } },
+            { "copy": { "en": { "title": "Integration testing between components" }, "es": { "title": "Pruebas de integración entre componentes" } } },
+            { "copy": { "en": { "title": "End-to-end (E2E) testing" }, "es": { "title": "Pruebas end-to-end (E2E)" } } },
+            { "copy": { "en": { "title": "Storybook integration for component development and documentation" }, "es": { "title": "Integración con Storybook para desarrollo y documentación" } } }
+          ]
+        }
+      ]
+    }
+  ]
+}

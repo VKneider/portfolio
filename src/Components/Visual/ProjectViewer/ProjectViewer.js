@@ -84,7 +84,7 @@ export default class ProjectViewer extends HTMLElement {
       this.projects.forEach((project, index) => {
          const btn = document.createElement('button');
          btn.className = 'thumbnail-btn';
-         btn.setAttribute('aria-label', `View ${project.title}`);
+         btn.setAttribute('aria-label', slice.t('projects.view', { title: project.title }));
          if (index === 0) btn.classList.add('active');
          
          btn.innerHTML = `
@@ -103,6 +103,15 @@ export default class ProjectViewer extends HTMLElement {
          });
          
          this.$thumbnails.appendChild(btn);
+      });
+   }
+
+   selectProject(id) {
+      const project = this.projects.find((item) => String(item.id) === String(id));
+      if (!project) return;
+      this.setActiveProject(project);
+      this.querySelectorAll('.thumbnail-btn').forEach((button, index) => {
+         button.classList.toggle('active', String(this.projects[index].id) === String(id));
       });
    }
 
@@ -133,7 +142,7 @@ export default class ProjectViewer extends HTMLElement {
                        const img = document.createElement('img');
                        img.className = 'preview-image';
                        img.src = imgSrc;
-                       img.alt = `${project.title} - View ${idx + 1}`;
+                       img.alt = slice.t('projects.imageAlt', { title: project.title, index: idx + 1 });
                        img.loading = "eager"; 
                        
                        img.onclick = () => this.openModal(images, idx);
@@ -152,7 +161,7 @@ export default class ProjectViewer extends HTMLElement {
                
                // Status Badge
                if (project.status) {
-                    this.$statusBadge.className = `status-badge status-${project.status.toLowerCase().replace(/\s/g, '-')}`;
+                    this.$statusBadge.className = `status-badge status-${(project.statusKey || project.status).toLowerCase().replace(/\s/g, '-')}`;
                     this.$statusBadge.textContent = project.status;
                     this.$statusBadge.style.display = 'inline-block';
                } else {
@@ -245,7 +254,7 @@ export default class ProjectViewer extends HTMLElement {
    async createActionButtons(project) {
       if (project.githubUrl) {
          const githubBtn = await slice.build('Button', {
-            value: 'GitHub',
+            value: slice.t('projects.github'),
             customColor: { button: 'var(--surface-1)', label: 'var(--text-1)' },
             onClickCallback: () => window.open(project.githubUrl, '_blank')
          });
@@ -255,7 +264,7 @@ export default class ProjectViewer extends HTMLElement {
 
       if (project.liveUrl) {
          const liveBtn = await slice.build('Button', {
-            value: 'Live Demo',
+            value: slice.t('projects.live'),
             customColor: { button: 'var(--accent)', label: 'var(--on-accent)' },
             onClickCallback: () => window.open(project.liveUrl, '_blank')
          });

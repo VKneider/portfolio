@@ -27,11 +27,6 @@ export default class AboutSection extends HTMLElement {
       // Create technical skills section
       await this.createTechnicalSkillsSection();
 
-      const switch2 = await slice.build('Switch', {
-         label: 'Toggle Debugger Props',
-         customColor:"blue"
-      });
-
       // Create values section
       await this.createCarruselSection();
 
@@ -45,6 +40,22 @@ export default class AboutSection extends HTMLElement {
             .filter(section => section instanceof Node),
          { direction: 'up', duration: 700, distance: 40, delayStep: 0 }
       );
+
+      slice.translator.watch(this, () => {
+         if (this.$profileImage) this.$profileImage.alt = slice.t('about.hero.alt');
+         this.AnimationsProvider.stopSwitcher('roleSwitcher');
+         this.AnimationsProvider.roleSwitcher(
+            this.$heroText?.querySelector('.role-switcher'),
+            slice.t.list('about.hero.roles'),
+            { interval: 3000 }
+         );
+      });
+   }
+
+   beforeDestroy() {
+      if (this._onResize) window.removeEventListener('resize', this._onResize);
+      this.AnimationsProvider?.stopSwitcher('roleSwitcher');
+      this.AnimationsProvider?.stopSwitcher('brandSwitcher');
    }
 
    async setupEnhancedHero() {
@@ -56,7 +67,7 @@ export default class AboutSection extends HTMLElement {
 
       const profileImage = document.createElement('img');
       profileImage.src = "https://avatars.githubusercontent.com/u/103617388?v=4";
-      profileImage.alt = 'Victor Kneider — Computer Engineer & University Professor';
+      profileImage.alt = slice.t('about.hero.alt');
       profileImage.classList.add('profile-image');
 
       profileContainer.appendChild(profileImage);
@@ -74,12 +85,10 @@ export default class AboutSection extends HTMLElement {
          </div>
          <div class="roles-container">
             <h2 class="role-title">
-               <span class="role-switcher">Computer Engineer</span>
+               <span class="role-switcher">${slice.t.list('about.hero.roles')[0] || ''}</span>
             </h2>
          </div>
-          <p class="hero-description">
-             Computer Engineer, Professor, and creator of Slice.js. I specialize in designing and architecting professional software — I build it, I teach it, and I share what I learn along the way.
-          </p>
+          <p class="hero-description" data-t="about.hero.description"></p>
       `;
 
        // Enhanced CTA Buttons
@@ -89,11 +98,11 @@ export default class AboutSection extends HTMLElement {
        // Skill §3 3.5 caso 2: solo 2 estilos de botón (primary + ghost).
        // Los dos CTA principales representan contacto profesional y CV.
        const contactBtn = await slice.build('Button', {
-          value: 'Get In Touch',
-         customColor: {
-            button: 'var(--accent)',
-            label: 'var(--on-accent)'
-         },
+          value: slice.t.ref('about.cta.contact'),
+          customColor: {
+             button: 'var(--accent)',
+             label: 'var(--on-accent)'
+          },
           onClickCallback: () => {
              window.open('https://www.linkedin.com/in/vkneider/', '_blank', 'noopener,noreferrer');
           }
@@ -101,13 +110,14 @@ export default class AboutSection extends HTMLElement {
        contactBtn.classList.add('cta-primary');
 
        const projectsBtn = await slice.build('Button', {
-          value: 'Download CV',
+          value: slice.t.ref('about.cta.cv'),
           customColor: {
              button: 'transparent',
              label: 'var(--text-1)'
           },
           onClickCallback: () => {
-             window.open('https://vkneider.dev/cv/Victor_Kneider_CV_en.pdf', '_blank', 'noopener,noreferrer');
+             const file = slice.locale === 'es' ? 'Victor_Kneider_CV_es.pdf' : 'Victor_Kneider_CV_en.pdf';
+             window.open(`https://vkneider.dev/cv/${file}`, '_blank', 'noopener,noreferrer');
           }
        });
 
@@ -143,14 +153,10 @@ export default class AboutSection extends HTMLElement {
          }
       );
 
-      // Role switcher: cicla los cinco roles profesionales cada 3s.
-      const roles = [
-         'Computer Engineer',
-         'Framework Creator',
-         'University Professor',
-         'Software Engineer',
-         'Web Architect'
-      ];
+      // Role switcher: cicla los roles profesionales cada 3s.
+      this.$heroText = heroText;
+      this.$profileImage = profileImage;
+      const roles = slice.t.list('about.hero.roles');
       this.AnimationsProvider.roleSwitcher(
          heroText.querySelector('.role-switcher'),
          roles,
@@ -159,7 +165,7 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createEnhancedAboutCards() {
-      const aboutTitle = await slice.build('SectionTitle', { text: 'About Me' });
+      const aboutTitle = await slice.build('SectionTitle', { text: slice.t.ref('about.sections.about') });
       this.$about.appendChild(aboutTitle);
 
       // Skill §3 3.3 r.1 + §3 4.5: cards en surface-1, sin emojis/slice-icons.
@@ -175,20 +181,20 @@ export default class AboutSection extends HTMLElement {
 
       const aboutData = [
          {
-            title: 'Cloud & Engineering',
-            text: 'Remote Engineer with 1+ year experience in Cloud Platforms (Azure) and Process Automation. Expert in building scalable architectures and leveraging AI tools like Claude Code & Cursor for efficient development.',
+            title: slice.t.ref('about.cards.engineering.title'),
+            text: slice.t.ref('about.cards.engineering.text'),
             lucide: lucide.cloud,
             customColor: cardSurface
          },
          {
-            title: 'Educational Leadership',
-            text: 'University Professor passionate about making complex technology concepts accessible. Experienced in curriculum development, innovative teaching methodologies, and mentoring the next generation of developers.',
+            title: slice.t.ref('about.cards.teaching.title'),
+            text: slice.t.ref('about.cards.teaching.text'),
             lucide: lucide.book,
             customColor: cardSurface
          },
          {
-            title: 'AI & Innovation',
-            text: 'Early adopter of Model Context Protocol (MCP) and AI-driven development. Dedicated to researching new technologies and bridging the gap between academic theory, cloud infrastructure, and automation.',
+            title: slice.t.ref('about.cards.research.title'),
+            text: slice.t.ref('about.cards.research.text'),
             lucide: lucide.sparkles,
             customColor: cardSurface
          }
@@ -223,7 +229,7 @@ export default class AboutSection extends HTMLElement {
       }
 
       // Make responsive for mobile
-      window.addEventListener('resize', () => {
+      this._onResize = () => {
          if (window.innerWidth <= 768) {
             grid.columns = 1;
             grid.rows = 3;
@@ -231,7 +237,8 @@ export default class AboutSection extends HTMLElement {
             grid.columns = 3;
             grid.rows = 1;
          }
-      });
+      };
+      window.addEventListener('resize', this._onResize);
 
       if (window.innerWidth <= 768) {
          grid.columns = 1;
@@ -251,8 +258,8 @@ export default class AboutSection extends HTMLElement {
 
    async createTechnicalSkillsSection() {
       const techExpertise = await slice.build('TechExpertise', {
-         title: 'Technical Expertise',
-         subtitle: 'Technologies & tools I\'ve mastered through years of development',
+         title: slice.t.ref('about.sections.skills'),
+         subtitle: slice.t.ref('about.sections.skillsSubtitle'),
          marqueeSpeed: 15
       });
 
@@ -264,7 +271,7 @@ export default class AboutSection extends HTMLElement {
    }
 
    async createCarruselSection() {
-      const valuesTitle = await slice.build('SectionTitle', { text: 'My Journey & Experiences' });
+      const valuesTitle = await slice.build('SectionTitle', { text: slice.t.ref('about.sections.journey') });
 
       // Contenedor principal con grid 60/40
       const mainContainer = document.createElement('div');
@@ -278,15 +285,15 @@ export default class AboutSection extends HTMLElement {
          images: [
             {
                url: './images/aboutSection/estudiantes.jpeg',
-               label: 'Computer Engineering Project Showcase',
-               date: 'July 2025',
-               alt: 'Eng. Victor Kneider — Project exposition for the Engineering Faculty at Universidad Rafael Urdaneta'
+               label: slice.t.ref('about.carousel.showcase.label'),
+               date: slice.t.ref('about.carousel.showcase.date'),
+               alt: slice.t.ref('about.carousel.showcase.alt')
             },
             {
                url: './images/aboutSection/firma.jpeg',
-               label: 'Professional Development',
-               date: 'August 2024',
-               alt: 'Graduation day at Universidad Rafael Urdaneta — Victor Kneider'
+               label: slice.t.ref('about.carousel.graduation.label'),
+               date: slice.t.ref('about.carousel.graduation.date'),
+               alt: slice.t.ref('about.carousel.graduation.alt')
             }
          ],
          autoplay: true,
@@ -305,25 +312,34 @@ export default class AboutSection extends HTMLElement {
       statsContainer.classList.add('stats-container');
 
       const stats = [
-         { number: '4+', label: 'Years Building Software' },
-         { number: '10+', label: 'Academic & Personal Projects' },
-         { number: '120+', label: 'Students Mentored' },
-         { number: '1', label: 'Custom Framework Built' },
-         { number: '100+', label: 'Slice features forgotten (too powerful)' },
-         { number: '0', label: 'Fear of refactoring' },
-         { number: 'Early', label: 'Technology Adoption' },
-         { number: '∞', label: 'Console Logs Written' },
+         { number: '4+', key: 'years' },
+         { number: '10+', key: 'projects' },
+         { number: '120+', key: 'students' },
+         { number: '1', key: 'framework' },
+         { number: '100+', key: 'features' },
+         { number: '0', key: 'refactors' },
+         { number: 'Early', key: 'adoption' },
+         { number: '∞', key: 'logs' },
       ];
 
       stats.forEach(stat => {
          const statItem = document.createElement('div');
          statItem.classList.add('stat-item');
 
-         statItem.innerHTML = `
-            <div class="stat-number">${stat.number}</div>
-            <div class="stat-label">${stat.label}</div>
-         `;
+         const number = document.createElement('div');
+         number.classList.add('stat-number');
+         if (stat.key === 'adoption') {
+            number.dataset.t = 'about.stats.adoption.number';
+         } else {
+            number.textContent = stat.number;
+         }
 
+         const label = document.createElement('div');
+         label.classList.add('stat-label');
+         label.dataset.t = `about.stats.${stat.key}.label`;
+
+         statItem.appendChild(number);
+         statItem.appendChild(label);
          statsContainer.appendChild(statItem);
       });
 
@@ -335,37 +351,22 @@ export default class AboutSection extends HTMLElement {
       textSection.classList.add('text-section');
 
       const personalTitle = document.createElement('h3');
-      personalTitle.textContent = 'Beyond the Code';
       personalTitle.classList.add('personal-title');
+      personalTitle.dataset.t = 'about.journey.title';
 
       const personalDescription = document.createElement('p');
-      personalDescription.innerHTML = `
-         My journey in technology goes far beyond writing code. I'm passionate about
-         <strong>sharing knowledge</strong> and <strong>building communities</strong> that drive innovation forward.
-      `;
       personalDescription.classList.add('personal-description');
+      personalDescription.dataset.t = 'about.journey.description';
 
       const highlightsList = document.createElement('div');
       highlightsList.classList.add('highlights-list');
 
       // Skill §3 4.5: la marca no usa emojis. Cada highlight se numera en mono (§3 3.2 G).
       const highlights = [
-         {
-            title: 'Community Building',
-            description: 'Creating spaces where developers can learn, grow, and collaborate together.'
-         },
-         {
-            title: 'Innovation Leadership',
-            description: 'Leading by example in adopting and promoting cutting-edge technologies.'
-         },
-         {
-            title: 'Knowledge Sharing',
-            description: 'Committed to making complex concepts accessible to everyone.'
-         },
-         {
-            title: 'Mentorship',
-            description: 'Guiding the next generation of developers and engineers.'
-         }
+         { key: 'community' },
+         { key: 'openSource' },
+         { key: 'knowledge' },
+         { key: 'mentorship' }
       ];
 
       highlights.forEach((highlight, index) => {
@@ -376,8 +377,8 @@ export default class AboutSection extends HTMLElement {
          highlightItem.innerHTML = `
             <div class="highlight-num">${num}</div>
             <div class="highlight-content">
-               <h4 class="highlight-title">${highlight.title}</h4>
-               <p class="highlight-description">${highlight.description}</p>
+               <h4 class="highlight-title" data-t="about.highlights.${highlight.key}.title"></h4>
+               <p class="highlight-description" data-t="about.highlights.${highlight.key}.description"></p>
             </div>
          `;
 

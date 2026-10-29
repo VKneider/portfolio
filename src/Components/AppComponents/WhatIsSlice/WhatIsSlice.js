@@ -7,35 +7,35 @@ export default class WhatIsSlice extends HTMLElement {
     this.ecosystemProjects = [
       {
         name: 'slice.js',
-        subtitle: 'Official Repo',
-        description: 'The core framework and the place where Slice evolves in public.',
+        subtitleKey: 'what.ecosystem.slice.subtitle',
+        descriptionKey: 'what.ecosystem.slice.description',
         links: [
-          { label: 'GitHub', href: 'https://github.com/VKneider/slice.js' }
+          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/slice.js' }
         ]
       },
       {
         name: 'sliceDocs',
-        subtitle: 'Documentation Site',
-        description: 'Concepts, guides, and examples that explain the philosophy and the architecture.',
+        subtitleKey: 'what.ecosystem.docs.subtitle',
+        descriptionKey: 'what.ecosystem.docs.description',
         links: [
-          { label: 'Open Docs', href: 'https://slicejs.com/' },
-          { label: 'GitHub', href: 'https://github.com/VKneider/sliceDocs' }
+          { labelKey: 'what.ecosystem.links.openDocs', href: 'https://slicejs.com/' },
+          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/sliceDocs' }
         ]
       },
       {
         name: 'slice.js_visual_library',
-        subtitle: 'Visual Library',
-        description: 'Reusable visual components designed for real Slice applications.',
+        subtitleKey: 'what.ecosystem.library.subtitle',
+        descriptionKey: 'what.ecosystem.library.description',
         links: [
-          { label: 'Open Library', href: 'https://components.slicejs.com/' }
+          { labelKey: 'what.ecosystem.links.openLibrary', href: 'https://components.slicejs.com/' }
         ]
       },
       {
         name: 'slicejs-mcp',
-        subtitle: 'Slice Docs MCP',
-        description: 'MCP bridge to consume Slice documentation in AI-assisted workflows.',
+        subtitleKey: 'what.ecosystem.mcp.subtitle',
+        descriptionKey: 'what.ecosystem.mcp.description',
         links: [
-          { label: 'GitHub', href: 'https://github.com/VKneider/slicejs-mcp' }
+          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/slicejs-mcp' }
         ]
       }
     ];
@@ -44,6 +44,11 @@ export default class WhatIsSlice extends HTMLElement {
   async init() {
     this.renderEcosystemCards();
     this.decorateExternalLinks();
+
+    slice.translator.watch(this, () => {
+      this.renderEcosystemCards();
+      this.decorateExternalLinks();
+    });
   }
 
   renderEcosystemCards() {
@@ -52,14 +57,14 @@ export default class WhatIsSlice extends HTMLElement {
 
     const cardMarkup = this.ecosystemProjects.map((project) => {
       const linksMarkup = project.links
-        .map((link) => `<a class="ecosystem-link" href="${link.href}" target="_blank" rel="noopener noreferrer">${project.name} ${link.label}</a>`)
+        .map((link) => `<a class="ecosystem-link" href="${link.href}" target="_blank" rel="noopener noreferrer">${project.name} ${slice.t(link.labelKey)}</a>`)
         .join('');
 
       return `
         <article class="ecosystem-card">
-          <p class="ecosystem-subtitle">${project.subtitle}</p>
+          <p class="ecosystem-subtitle">${slice.t(project.subtitleKey)}</p>
           <h3>${project.name}</h3>
-          <p>${project.description}</p>
+          <p>${slice.t(project.descriptionKey)}</p>
           <div class="ecosystem-actions">${linksMarkup}</div>
         </article>
       `;

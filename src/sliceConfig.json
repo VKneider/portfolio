@@ -76,8 +76,7 @@
     "routesFile": "/routes.js"
   },
   "router": {
-    "defaultRoute": "/",
-    "titleSuffix": " | Victor Kneider — Software Design & Architecture"
+    "defaultRoute": "/"
   },
   "translator": {
     "enabled": true,

@@ -1,15 +1,17 @@
 <div class="random-facts-container">
     <div class="header-container">
-        <h2 class="section-title">Random Facts</h2>
+        <h2 class="section-title" data-t="about.factsUI.title"></h2>
     </div>
     
     <div class="board-wrapper">
         <div class="board" id="corkboard">
-            <div id="add-note-btn" class="control-btn add-note-btn" title="Create your own note">
+            <div id="add-note-btn" class="control-btn add-note-btn" data-t="about.factsUI.add" title>
                 <span class="icon">+</span>
             </div>
-            <div id="trash-can" class="control-zone trash-zone" title="Drag notes here to remove">
-                <span class="icon">🗑️</span>
+            <div id="trash-can" class="control-zone trash-zone" data-t="about.factsUI.trash" title>
+                <span class="icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v5M14 11v5"/></svg>
+                </span>
             </div>
         </div>
     </div>

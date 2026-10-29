@@ -80,9 +80,12 @@ export default class ExperienceCard extends HTMLElement {
          const card = document.createElement('div');
          card.className = 'achievement-item';
          card.innerHTML = `
-            <span class="achievement-icon">🚀</span>
-            <span class="achievement-text">${achievement}</span>
+            <span class="achievement-icon" aria-hidden="true">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <span class="achievement-text"></span>
          `;
+         card.querySelector('.achievement-text').textContent = achievement;
          achievementsGrid.appendChild(card);
       });
    }

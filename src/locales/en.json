@@ -4,10 +4,28 @@
     "timeline": {
       "title": "My Journey Map",
       "description": "Explore my professional path. Drag nodes to reshape the timeline or click to view details."
+    },
+    "card": {
+      "responsibilities": "Key responsibilities",
+      "technologies": "Technologies",
+      "achievements": "Impact & achievements"
     }
   },
   "locale": {
     "ariaLabel": "Language"
+  },
+  "nav": {
+    "logoAlt": "Victor Kneider — home",
+    "about": "About",
+    "experience": "Experience",
+    "education": "Education",
+    "slice": "Slice.js",
+    "projects": "Projects",
+    "teaching": "Teaching",
+    "contact": "Contact"
+  },
+  "footer": {
+    "poweredBy": "Powered by"
   },
   "routes": {
     "about": "About",
@@ -23,5 +41,293 @@
     "teaching": "Teaching",
     "imposter": "The Imposter Game",
     "notFound": "Not Found"
+  },
+  "common": {
+    "close": "Close"
+  },
+  "education": {
+    "studies": "Educational Background",
+    "certificates": "Professional Certifications",
+    "search": {
+      "placeholder": "Search certificates",
+      "ariaLabel": "Search certificates"
+    },
+    "count": {
+      "one": "{count} certificate",
+      "other": "{count} certificates"
+    },
+    "prev": "Prev",
+    "next": "Next",
+    "empty": "No certificates match your search.",
+    "clear": "Clear search",
+    "footnote": "Every certificate links to its original document on Google Drive.",
+    "study": {
+      "achievements": "Key achievements",
+      "coursework": "Relevant coursework"
+    },
+    "certificate": {
+      "focus": "Focus",
+      "view": "View certificate",
+      "preview": "Preview: {title}",
+      "previewFallback": "Preview certificate",
+      "id": "ID: {id}",
+      "grade": "Grade {grade}"
+    },
+    "modal": {
+      "title": "Certificate",
+      "previewTitle": "Certificate preview",
+      "preview": "Preview: {title}",
+      "previewAlt": "Preview of {title}",
+      "imageNote": "Preview image. Open in Drive to view the original PDF.",
+      "driveNote": "Preview hosted by Google Drive. If it does not load, use “Open in Drive”.",
+      "grade": "Grade {grade}",
+      "validUntil": "Valid until {date}",
+      "id": "ID {id}",
+      "openDrive": "Open in Drive"
+    }
+  },
+  "projects": {
+    "title": "My Projects ({count})",
+    "listTitle": "Projects",
+    "technologies": "Technologies",
+    "select": "Select a project",
+    "scrollHint": "Scroll to explore",
+    "featured": "Featured",
+    "github": "GitHub",
+    "live": "Live Demo",
+    "view": "View {title}",
+    "imageAlt": "{title} — image {index}",
+    "modal": {
+      "close": { "ariaLabel": "Close image" },
+      "prev": { "ariaLabel": "Previous image" },
+      "next": { "ariaLabel": "Next image" },
+      "image": { "alt": "Expanded project image" }
+    }
+  },
+  "teaching": {
+    "title": "Teaching",
+    "subtitle": "A selection of courses, syllabi, and learning resources I develop and share. Each entry links to its public repository.",
+    "taughtAt": "Taught at {institution}",
+    "viewSyllabus": "View syllabus",
+    "syllabus": "Syllabus",
+    "syllabusAria": { "ariaLabel": "Course syllabus" },
+    "eyebrow": "Course syllabus",
+    "eyebrowInstitution": "Course syllabus · {institution}",
+    "viewRepo": "View full repository",
+    "viewUnit": "View unit on GitHub",
+    "topics": { "one": "{count} topic", "other": "{count} topics" },
+    "course": "Course",
+    "notFound": "Course not found",
+    "notFoundText": "There is no course with the address {slug}.",
+    "browseAll": "Browse all courses",
+    "recognition": {
+      "title": "Perfect attendance",
+      "text": "Recognized by the School of Computer Engineering at Universidad Rafael Urdaneta for 100% attendance across the academic periods below.",
+      "terms": { "ariaLabel": "Academic periods" }
+    }
+  },
+  "brand": {
+    "title": "Victor Kneider — Software Design & Architecture"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's build something that holds up.",
+    "lede": "I work on component systems, full-stack products and technical training. If you're designing something complex — or need someone to make it legible — tell me what you're building.",
+    "location": "Maracaibo, Venezuela · Working remotely",
+    "helpTitle": "What I can help with",
+    "help": {
+      "architecture": {
+        "title": "Architecture & technical design",
+        "text": "System boundaries, trade-offs and a delivery path that survives real constraints."
+      },
+      "components": {
+        "title": "Component systems",
+        "text": "Reusable UI primitives, theming, documentation and the conventions that keep them coherent."
+      },
+      "delivery": {
+        "title": "Full-stack delivery",
+        "text": "Node/Express APIs, PostgreSQL and Azure automation, from schema to interface."
+      },
+      "teaching": {
+        "title": "Teaching & training",
+        "text": "Courses, workshops and curriculum that turn architecture into something people can apply."
+      }
+    },
+    "viewProjects": "View projects",
+    "email": "Email me",
+    "linkedin": "Connect on LinkedIn",
+    "subject": "Project inquiry"
+  },
+  "what": {
+    "manifesto": "Slice Manifesto",
+    "title": "Slice is born to teach by building.",
+    "intro": "Slice.js is born to be a framework where you can learn, in a practical way, the core patterns behind component-based programming and modern frameworks.",
+    "purpose": "Its purpose is to help you build complete web applications from a vanilla perspective, without non-standard abstractions or syntax outside HTML, CSS, and JavaScript. It does not seek to compete. It seeks a different way of building.",
+    "values": {
+      "webComponents": "Web Components",
+      "learning": "Learning by doing",
+      "architecture": "Architecture with intent"
+    },
+    "aria": {
+      "values": { "ariaLabel": "Slice values" },
+      "narrative": { "ariaLabel": "Slice narrative" }
+    },
+    "logoCaption": "A practical ecosystem for building and understanding modern frontend systems.",
+    "narrative": {
+      "why": {
+        "title": "Why",
+        "text": "To close the gap between documentation theory and the daily reality of building products."
+      },
+      "how": {
+        "title": "How",
+        "text": "By embracing native browser APIs, explicit component lifecycles, and a transparent architecture."
+      },
+      "not": {
+        "title": "What it is not",
+        "text": "A trend chase. Slice is a long-term learning and shipping framework, not a popularity race."
+      }
+    },
+    "ecosystem": {
+      "eyebrow": "Ecosystem",
+      "title": "Ecosystem Projects",
+      "description": "Slice grows as a connected ecosystem: framework, documentation, visual resources, and MCP tooling.",
+      "slice": {
+        "subtitle": "Official Repo",
+        "description": "The core framework and the place where Slice evolves in public."
+      },
+      "docs": {
+        "subtitle": "Documentation Site",
+        "description": "Concepts, guides, and examples that explain the philosophy and the architecture."
+      },
+      "library": {
+        "subtitle": "Visual Library",
+        "description": "Reusable visual components designed for real Slice applications."
+      },
+      "mcp": {
+        "subtitle": "Slice Docs MCP",
+        "description": "MCP bridge to consume Slice documentation in AI-assisted workflows."
+      },
+      "links": {
+        "github": "GitHub",
+        "openDocs": "Open docs",
+        "openLibrary": "Open library"
+      }
+    },
+    "collaborate": {
+      "eyebrow": "Contribute",
+      "title": "How to Collaborate",
+      "issues": "Open issues with clear reproduction steps and expected behavior.",
+      "docs": "Improve documentation and examples for real use cases.",
+      "experiments": "Share experiments, benchmarks, and production lessons."
+    },
+    "closing": "Build with intention. Learn the internals. Share the craft."
+  },
+  "notFound": {
+    "error": "Error 404: Not Found"
+  },
+  "about": {    "sections": {
+      "about": "About Me",
+      "skills": "Technical Expertise",
+      "skillsSubtitle": "Technologies and tools I use, with the trade-offs I have learned.",
+      "journey": "My Journey & Experiences"
+    },
+    "hero": {
+      "alt": "Victor Kneider — Computer Engineer and University Professor",
+      "description": "Computer Engineer, professor, and creator of Slice.js. I design and build professional software — I build it, I teach it, and I share what I learn along the way.",
+      "roles": ["Computer Engineer", "Framework Creator", "University Professor", "Software Engineer", "Web Architect"]
+    },
+    "cta": {
+      "contact": "Get in touch",
+      "cv": "Download CV"
+    },
+    "cards": {
+      "engineering": {
+        "title": "Software engineering",
+        "text": "I design and build production software: architecture, APIs, data, and the trade-offs behind each decision."
+      },
+      "teaching": {
+        "title": "Teaching",
+        "text": "I teach programming and component-based design. The goal is not to memorize APIs; it is to understand why the system works."
+      },
+      "research": {
+        "title": "Research & tooling",
+        "text": "I study browser APIs, component models, and developer tooling. Slice.js is the long-running experiment where those ideas become code."
+      }
+    },
+    "stats": {
+      "years": { "label": "Years building software" },
+      "projects": { "label": "Academic and personal projects" },
+      "students": { "label": "Students mentored" },
+      "framework": { "label": "Framework built" },
+      "features": { "label": "Slice features I forgot I built" },
+      "refactors": { "label": "Fear of refactoring" },
+      "adoption": { "label": "Technology adoption", "number": "Early" },
+      "logs": { "label": "Console logs written" }
+    },
+    "journey": {
+      "title": "Beyond the Code",
+      "description": "My work in technology is not only code. I write, teach and maintain open-source tools so other people can build with the same criteria."
+    },
+    "highlights": {
+      "community": {
+        "title": "Community",
+        "description": "I create spaces where developers can read code, ask questions and improve their own work."
+      },
+      "openSource": {
+        "title": "Open source",
+        "description": "Slice.js and its tooling are public: the code, the decisions and the documentation."
+      },
+      "knowledge": {
+        "title": "Knowledge",
+        "description": "I explain complex topics with examples that can be run, not with slides."
+      },
+      "mentorship": {
+        "title": "Mentorship",
+        "description": "I supervise student projects and review code with the same standards I use in production."
+      }
+    },
+    "carousel": {
+      "showcase": {
+        "label": "Computer Engineering Project Showcase",
+        "date": "July 2025",
+        "alt": "Victor Kneider at the Engineering Faculty project exposition, Universidad Rafael Urdaneta"
+      },
+      "graduation": {
+        "label": "Professional Development",
+        "date": "August 2024",
+        "alt": "Graduation day at Universidad Rafael Urdaneta — Victor Kneider"
+      }
+    },
+    "tech": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Cloud & environments",
+      "ai": "AI & modern tools",
+      "other": "Other"
+    },
+    "factsUI": {
+      "title": "Random Facts",
+      "add": { "title": "Create your own note" },
+      "trash": { "title": "Drag notes here to remove" },
+      "editTitle": "Edit note",
+      "pinTitle": "Click to pin this fact"
+    },
+    "facts": {
+      "jwt": "I save JWTs in HttpOnly cookies",
+      "warnings": "I treat warnings like errors (lots of try/catch)",
+      "docs": "I actually read the documentation",
+      "centering": "Centering a div is (not) my superpower",
+      "const": "I prefer const over let",
+      "machine": "Works on my machine (and yours)",
+      "semicolon": "Yes, the bug was a missing semicolon",
+      "components": "Component architecture everywhere",
+      "teaching": "Teaching code means teaching thinking",
+      "slice": "All of this is built with Slice.js",
+      "languages": "I speak English, Spanish, some German and Arabic",
+      "coffee": "In love with my coffee machine",
+      "numpad": "Numpad keyboards are life",
+      "lightTheme": "Do you have the light theme? Are you okay?",
+      "debugging": "The bug is always in the last place you look"
+    }
   }
 }

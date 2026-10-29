@@ -50,7 +50,7 @@ export default class ProjectCard extends HTMLElement {
       if (project.featured) {
          this.$card.classList.add('featured');
          this.$featuredBadge.style.display = 'block';
-         this.$featuredBadge.textContent = '⭐ Featured';
+         this.$featuredBadge.textContent = slice.t('projects.featured');
       } else {
          this.$card.classList.remove('featured');
          this.$featuredBadge.style.display = 'none';
@@ -81,7 +81,7 @@ export default class ProjectCard extends HTMLElement {
       }
 
       // Configure status badge
-      this.$statusBadge.className = `status-badge status-${project.status.toLowerCase().replace(' ', '-')}`;
+      this.$statusBadge.className = `status-badge status-${(project.statusKey || project.status).toLowerCase().replace(' ', '-')}`;
       this.$statusBadge.textContent = project.status;
 
       // Configure title and description
@@ -167,7 +167,7 @@ export default class ProjectCard extends HTMLElement {
       // GitHub button
       if (project.githubUrl) {
          const githubBtn = await slice.build('Button', {
-            value: '⭐ GitHub',
+            value: slice.t('projects.github'),
             customColor: {
                button: '#24292e',
                label: '#ffffff'
@@ -181,7 +181,7 @@ export default class ProjectCard extends HTMLElement {
       // Live demo button
       if (project.liveUrl) {
          const liveBtn = await slice.build('Button', {
-            value: 'Live Demo',
+            value: slice.t('projects.live'),
             customColor: {
                button: 'var(--accent)',
                label: 'var(--on-accent)'

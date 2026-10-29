@@ -253,6 +253,15 @@ export default class BadgeCarousel extends HTMLElement {
   }
 
   // Getters y Setters
+  get title() {
+    return this._title ?? '';
+  }
+
+  set title(value) {
+    this._title = value ?? '';
+    if (this.$carouselTitle) this.$carouselTitle.textContent = this._title;
+  }
+
   get configuration() {
     return {
       title: this.title,

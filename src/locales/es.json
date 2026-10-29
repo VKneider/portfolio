@@ -4,10 +4,28 @@
     "timeline": {
       "title": "Mi recorrido profesional",
       "description": "Explora mi trayectoria. Arrastra los nodos para reordenar la línea de tiempo o haz clic para ver el detalle."
+    },
+    "card": {
+      "responsibilities": "Responsabilidades principales",
+      "technologies": "Tecnologías",
+      "achievements": "Impacto y logros"
     }
   },
   "locale": {
     "ariaLabel": "Idioma"
+  },
+  "nav": {
+    "logoAlt": "Victor Kneider — inicio",
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "education": "Formación",
+    "slice": "Slice.js",
+    "projects": "Proyectos",
+    "teaching": "Docencia",
+    "contact": "Contacto"
+  },
+  "footer": {
+    "poweredBy": "Hecho con"
   },
   "routes": {
     "about": "Sobre mí",
@@ -23,5 +41,294 @@
     "teaching": "Docencia",
     "imposter": "The Imposter Game",
     "notFound": "Página no encontrada"
+  },
+  "common": {
+    "close": "Cerrar"
+  },
+  "education": {
+    "studies": "Formación académica",
+    "certificates": "Certificaciones profesionales",
+    "search": {
+      "placeholder": "Buscar certificados",
+      "ariaLabel": "Buscar certificados"
+    },
+    "count": {
+      "one": "{count} certificado",
+      "other": "{count} certificados"
+    },
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "empty": "Ningún certificado coincide con la búsqueda.",
+    "clear": "Limpiar búsqueda",
+    "footnote": "Cada certificado enlaza a su documento original en Google Drive.",
+    "study": {
+      "achievements": "Logros principales",
+      "coursework": "Materias relevantes"
+    },
+    "certificate": {
+      "focus": "Enfoque",
+      "view": "Ver certificado",
+      "preview": "Vista previa: {title}",
+      "previewFallback": "Vista previa del certificado",
+      "id": "ID: {id}",
+      "grade": "Calificación {grade}"
+    },
+    "modal": {
+      "title": "Certificado",
+      "previewTitle": "Vista previa del certificado",
+      "preview": "Vista previa: {title}",
+      "previewAlt": "Vista previa de {title}",
+      "imageNote": "Imagen de vista previa. Abre en Drive para ver el PDF original.",
+      "driveNote": "Vista previa alojada en Google Drive. Si no carga, usa “Abrir en Drive”.",
+      "grade": "Calificación {grade}",
+      "validUntil": "Válido hasta {date}",
+      "id": "ID {id}",
+      "openDrive": "Abrir en Drive"
+    }
+  },
+  "projects": {
+    "title": "Mis proyectos ({count})",
+    "listTitle": "Proyectos",
+    "technologies": "Tecnologías",
+    "select": "Selecciona un proyecto",
+    "scrollHint": "Desplázate para explorar",
+    "featured": "Destacado",
+    "github": "GitHub",
+    "live": "Ver demo",
+    "view": "Ver {title}",
+    "imageAlt": "{title} — imagen {index}",
+    "modal": {
+      "close": { "ariaLabel": "Cerrar imagen" },
+      "prev": { "ariaLabel": "Imagen anterior" },
+      "next": { "ariaLabel": "Imagen siguiente" },
+      "image": { "alt": "Imagen ampliada del proyecto" }
+    }
+  },
+  "teaching": {
+    "title": "Docencia",
+    "subtitle": "Una selección de cursos, programas y materiales que desarrollo y comparto. Cada entrada enlaza a su repositorio público.",
+    "taughtAt": "Impartido en {institution}",
+    "viewSyllabus": "Ver programa",
+    "syllabus": "Programa",
+    "syllabusAria": { "ariaLabel": "Programa del curso" },
+    "eyebrow": "Programa del curso",
+    "eyebrowInstitution": "Programa del curso · {institution}",
+    "viewRepo": "Ver repositorio completo",
+    "viewUnit": "Ver unidad en GitHub",
+    "topics": { "one": "{count} tema", "other": "{count} temas" },
+    "course": "Curso",
+    "notFound": "Curso no encontrado",
+    "notFoundText": "No existe un curso con la dirección {slug}.",
+    "browseAll": "Ver todos los cursos",
+    "recognition": {
+      "title": "Asistencia perfecta",
+      "text": "Reconocimiento de la Escuela de Ingeniería en Computación de la Universidad Rafael Urdaneta por 100% de asistencia en los periodos académicos siguientes.",
+      "terms": { "ariaLabel": "Periodos académicos" }
+    }
+  },
+  "brand": {
+    "title": "Victor Kneider — Diseño y arquitectura de software profesional"
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Construyamos algo que aguante.",
+    "lede": "Trabajo en sistemas de componentes, productos full-stack y formación técnica. Si estás diseñando algo complejo —o necesitas que alguien lo haga legible— cuéntame qué estás construyendo.",
+    "location": "Maracaibo, Venezuela · Trabajo en remoto",
+    "helpTitle": "En qué puedo ayudar",
+    "help": {
+      "architecture": {
+        "title": "Arquitectura y diseño técnico",
+        "text": "Límites del sistema, trade-offs y un camino de entrega que sobrevive a restricciones reales."
+      },
+      "components": {
+        "title": "Sistemas de componentes",
+        "text": "Primitivas de UI reutilizables, temas, documentación y las convenciones que las mantienen coherentes."
+      },
+      "delivery": {
+        "title": "Entrega full-stack",
+        "text": "APIs con Node/Express, PostgreSQL y automatización en Azure, del esquema a la interfaz."
+      },
+      "teaching": {
+        "title": "Docencia y formación",
+        "text": "Cursos, talleres y currículo que convierten la arquitectura en algo aplicable."
+      }
+    },
+    "viewProjects": "Ver proyectos",
+    "email": "Escríbeme",
+    "linkedin": "Conectar en LinkedIn",
+    "subject": "Consulta de proyecto"
+  },
+  "what": {
+    "manifesto": "Manifiesto Slice",
+    "title": "Slice nace para enseñar construyendo.",
+    "intro": "Slice.js nace como un framework para aprender, de forma práctica, los patrones centrales de la programación basada en componentes y los frameworks modernos.",
+    "purpose": "Su propósito es ayudarte a construir aplicaciones web completas desde una perspectiva vanilla, sin abstracciones no estándar ni sintaxis fuera de HTML, CSS y JavaScript. No busca competir: busca otra forma de construir.",
+    "values": {
+      "webComponents": "Web Components",
+      "learning": "Aprender haciendo",
+      "architecture": "Arquitectura con intención"
+    },
+    "aria": {
+      "values": { "ariaLabel": "Valores de Slice" },
+      "narrative": { "ariaLabel": "Narrativa de Slice" }
+    },
+    "logoCaption": "Un ecosistema práctico para construir y entender sistemas frontend modernos.",
+    "narrative": {
+      "why": {
+        "title": "Por qué",
+        "text": "Para cerrar la brecha entre la teoría de la documentación y la realidad diaria de construir productos."
+      },
+      "how": {
+        "title": "Cómo",
+        "text": "Adoptando APIs nativas del navegador, ciclos de vida explícitos y una arquitectura transparente."
+      },
+      "not": {
+        "title": "Qué no es",
+        "text": "Una persecución de tendencias. Slice es un framework de aprendizaje y entrega a largo plazo, no una carrera de popularidad."
+      }
+    },
+    "ecosystem": {
+      "eyebrow": "Ecosistema",
+      "title": "Proyectos del ecosistema",
+      "description": "Slice crece como un ecosistema conectado: framework, documentación, recursos visuales y herramientas MCP.",
+      "slice": {
+        "subtitle": "Repositorio oficial",
+        "description": "El framework central y el lugar donde Slice evoluciona en público."
+      },
+      "docs": {
+        "subtitle": "Sitio de documentación",
+        "description": "Conceptos, guías y ejemplos que explican la filosofía y la arquitectura."
+      },
+      "library": {
+        "subtitle": "Biblioteca visual",
+        "description": "Componentes visuales reutilizables para aplicaciones Slice reales."
+      },
+      "mcp": {
+        "subtitle": "MCP de documentación",
+        "description": "Puente MCP para consumir la documentación de Slice en flujos asistidos por IA."
+      },
+      "links": {
+        "github": "GitHub",
+        "openDocs": "Abrir docs",
+        "openLibrary": "Abrir biblioteca"
+      }
+    },
+    "collaborate": {
+      "eyebrow": "Contribuye",
+      "title": "Cómo colaborar",
+      "issues": "Abre issues con pasos de reproducción claros y el comportamiento esperado.",
+      "docs": "Mejora la documentación y los ejemplos para casos de uso reales.",
+      "experiments": "Comparte experimentos, benchmarks y lecciones de producción."
+    },
+    "closing": "Construye con intención. Aprende las entrañas. Comparte el oficio."
+  },
+  "notFound": {
+    "error": "Error 404: Página no encontrada"
+  },
+  "about": {
+    "sections": {
+      "about": "Sobre mí",
+      "skills": "Experiencia técnica",
+      "skillsSubtitle": "Tecnologías y herramientas que uso, con los trade-offs que he aprendido.",
+      "journey": "Mi recorrido y experiencias"
+    },
+    "hero": {
+      "alt": "Victor Kneider — Ingeniero en Computación y profesor universitario",
+      "description": "Ingeniero en Computación, profesor y creador de Slice.js. Diseño y construyo software profesional: lo construyo, lo enseño y divulgo lo que aprendo en el camino.",
+      "roles": ["Ingeniero en Computación", "Creador de frameworks", "Profesor universitario", "Ingeniero de software", "Arquitecto web"]
+    },
+    "cta": {
+      "contact": "Hablemos",
+      "cv": "Descargar CV"
+    },
+    "cards": {
+      "engineering": {
+        "title": "Ingeniería de software",
+        "text": "Diseño y construyo software en producción: arquitectura, APIs, datos y los trade-offs detrás de cada decisión."
+      },
+      "teaching": {
+        "title": "Docencia",
+        "text": "Enseño programación y diseño basado en componentes. El objetivo no es memorizar APIs: es entender por qué funciona el sistema."
+      },
+      "research": {
+        "title": "Investigación y herramientas",
+        "text": "Estudio APIs del navegador, modelos de componentes y herramientas de desarrollo. Slice.js es el experimento de largo plazo donde esas ideas se convierten en código."
+      }
+    },
+    "stats": {
+      "years": { "label": "Años construyendo software" },
+      "projects": { "label": "Proyectos académicos y personales" },
+      "students": { "label": "Estudiantes acompañados" },
+      "framework": { "label": "Framework construido" },
+      "features": { "label": "Funciones de Slice que olvidé que construí" },
+      "refactors": { "label": "Miedo a refactorizar" },
+      "adoption": { "label": "Adopción temprana", "number": "Temprana" },
+      "logs": { "label": "Console.logs escritos" }
+    },
+    "journey": {
+      "title": "Más allá del código",
+      "description": "Mi trabajo en tecnología no es solo código. Escribo, enseño y mantengo herramientas de código abierto para que otras personas construyan con el mismo criterio."
+    },
+    "highlights": {
+      "community": {
+        "title": "Comunidad",
+        "description": "Creo espacios donde otros desarrolladores pueden leer código, hacer preguntas y mejorar su propio trabajo."
+      },
+      "openSource": {
+        "title": "Código abierto",
+        "description": "Slice.js y sus herramientas son públicos: el código, las decisiones y la documentación."
+      },
+      "knowledge": {
+        "title": "Conocimiento",
+        "description": "Explico temas complejos con ejemplos ejecutables, no con diapositivas."
+      },
+      "mentorship": {
+        "title": "Acompañamiento",
+        "description": "Superviso proyectos de estudiantes y reviso código con el mismo criterio que uso en producción."
+      }
+    },
+    "carousel": {
+      "showcase": {
+        "label": "Muestra de proyectos de Ingeniería en Computación",
+        "date": "Julio 2025",
+        "alt": "Victor Kneider en la exposición de proyectos de la Facultad de Ingeniería, Universidad Rafael Urdaneta"
+      },
+      "graduation": {
+        "label": "Desarrollo profesional",
+        "date": "Agosto 2024",
+        "alt": "Día de graduación en la Universidad Rafael Urdaneta — Victor Kneider"
+      }
+    },
+    "tech": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Cloud y entornos",
+      "ai": "IA y herramientas modernas",
+      "other": "Otros"
+    },
+    "factsUI": {
+      "title": "Datos aleatorios",
+      "add": { "title": "Crea tu propia nota" },
+      "trash": { "title": "Arrastra notas aquí para borrarlas" },
+      "editTitle": "Editar nota",
+      "pinTitle": "Haz clic para fijar este dato"
+    },
+    "facts": {
+      "jwt": "Guardo los JWT en cookies HttpOnly",
+      "warnings": "Trato los warnings como errores (mucho try/catch)",
+      "docs": "Sí leo la documentación",
+      "centering": "Centrar un div es (no es) mi superpoder",
+      "const": "Prefiero const antes que let",
+      "machine": "Funciona en mi máquina (y en la tuya)",
+      "semicolon": "Sí, el bug era un punto y coma",
+      "components": "Arquitectura de componentes en todas partes",
+      "teaching": "Enseñar código es enseñar a pensar",
+      "slice": "Todo esto está construido con Slice.js",
+      "languages": "Hablo español, inglés, algo de alemán y árabe",
+      "coffee": "Enamorado de mi cafetera",
+      "numpad": "Los teclados con numpad son vida",
+      "lightTheme": "¿Tienes el tema claro? ¿Estás bien?",
+      "debugging": "El bug siempre está en el último lugar donde buscas"
+    }
   }
 }

@@ -1,0 +1,199 @@
+{
+  "studies": [
+    {
+      "id": 1,
+      "institution": "Universidad Rafael Urdaneta (URU)",
+      "logo": "/images/uru-logo-seo.png",
+      "copy": {
+        "en": {
+          "degree": "Computer Engineering",
+          "period": "2020 — 2024",
+          "location": "Maracaibo, Venezuela",
+          "description": "Bachelor's degree in Computer Engineering. The program covered algorithms, data structures, software engineering, databases, networks, and component-based programming. Graduated Magna Cum Laude.",
+          "achievements": [
+            "Graduated Magna Cum Laude with academic honors",
+            "Built Slice.js as part of academic and research work",
+            "Consistent academic performance across the program",
+            "Focused on web technologies and framework design"
+          ],
+          "coursework": [
+            "Programming Fundamentals",
+            "Data Structures and Algorithms",
+            "Software Engineering",
+            "Database Systems",
+            "Web Development",
+            "Computer Networks",
+            "Systems Analysis and Design",
+            "Component-Based Programming"
+          ]
+        },
+        "es": {
+          "degree": "Ingeniería en Computación",
+          "period": "2020 — 2024",
+          "location": "Maracaibo, Venezuela",
+          "description": "Título de Ingeniero en Computación. El programa cubrió algoritmos, estructuras de datos, ingeniería de software, bases de datos, redes y programación basada en componentes. Graduado Magna Cum Laude.",
+          "achievements": [
+            "Graduado Magna Cum Laude con honores académicos",
+            "Desarrollé Slice.js como parte del trabajo académico y de investigación",
+            "Rendimiento académico constante durante la carrera",
+            "Enfoque en tecnologías web y diseño de frameworks"
+          ],
+          "coursework": [
+            "Fundamentos de Programación",
+            "Estructuras de Datos y Algoritmos",
+            "Ingeniería de Software",
+            "Sistemas de Bases de Datos",
+            "Desarrollo Web",
+            "Redes de Computadoras",
+            "Análisis y Diseño de Sistemas",
+            "Programación Basada en Componentes"
+          ]
+        }
+      }
+    }
+  ],
+  "certificates": [
+    {
+      "id": 1,
+      "issuer": "World Association for Curriculum Quality (WACQ)",
+      "date": "2025-08-01",
+      "validUntil": "2027-08-01",
+      "credentialId": "TME-2025-1001",
+      "certificateUrl": "https://drive.google.com/file/d/1JC8eISjk7FPtkfbUr2Fxgh9f523LLPV3/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1JC8eISjk7FPtkfbUr2Fxgh9f523LLPV3/preview",
+      "thumbnail": "/images/certificates/didactica-superior.webp",
+      "previewMode": "image",
+      "copy": {
+        "en": {
+          "title": "Specialist in Higher Education Didactics",
+          "category": "Teaching",
+          "description": "International credential in higher-education didactics: planning, delivering, and assessing learning experiences. Level 4, aligned with the European Qualifications Framework.",
+          "skills": ["Higher Education Didactics", "Curriculum Design", "Learning Assessment", "Instructional Planning"]
+        },
+        "es": {
+          "title": "Especialista en Didáctica de la Educación Superior",
+          "category": "Docencia",
+          "description": "Credencial internacional en didáctica de la educación superior: planificación, impartición y evaluación de experiencias de aprendizaje. Nivel 4, alineado con el Marco Europeo de Cualificaciones.",
+          "skills": ["Didáctica de la Educación Superior", "Diseño Curricular", "Evaluación del Aprendizaje", "Planificación Instruccional"]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "issuer": "Universidad Rafael Urdaneta",
+      "date": "2024-10-25",
+      "credentialId": null,
+      "certificateUrl": "https://drive.google.com/file/d/1UJL_tBguOap__eg8i82vk1BqM7_aPsI_/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1UJL_tBguOap__eg8i82vk1BqM7_aPsI_/preview",
+      "thumbnail": "/images/certificates/ia-avanzada-ii.webp",
+      "previewMode": "image",
+      "copy": {
+        "en": {
+          "title": "Advanced Artificial Intelligence II",
+          "category": "AI",
+          "description": "Advanced Artificial Intelligence course (Level II) taught by the School of Computer Engineering at Universidad Rafael Urdaneta.",
+          "skills": ["Artificial Intelligence", "Applied AI", "Computer Engineering"]
+        },
+        "es": {
+          "title": "Inteligencia Artificial Avanzada II",
+          "category": "IA",
+          "description": "Curso de Inteligencia Artificial Avanzada (Nivel II) impartido por la Escuela de Ingeniería en Computación de la Universidad Rafael Urdaneta.",
+          "skills": ["Inteligencia Artificial", "IA Aplicada", "Ingeniería en Computación"]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "issuer": "Social Oplesk",
+      "date": "2022-10-02",
+      "credentialId": "7349b616-9209-4030-9a17-3b42dd2a9d4c",
+      "certificateUrl": "https://drive.google.com/file/d/1x5nw0Q46GwjZ1H9kmCyR5Uy2nKaY_YGo/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1x5nw0Q46GwjZ1H9kmCyR5Uy2nKaY_YGo/preview",
+      "thumbnail": "/images/certificates/fullstack-social-oplesk.webp",
+      "copy": {
+        "en": {
+          "title": "Fullstack Developer",
+          "category": "Development",
+          "description": "Fullstack Developer program covering frontend, backend, APIs, and databases.",
+          "skills": ["Full-Stack Development", "JavaScript", "Node.js", "Web APIs", "Database Design"]
+        },
+        "es": {
+          "title": "Desarrollador Fullstack",
+          "category": "Desarrollo",
+          "description": "Programa de Desarrollador Fullstack: frontend, backend, APIs y bases de datos.",
+          "skills": ["Desarrollo Full-Stack", "JavaScript", "Node.js", "APIs Web", "Diseño de Bases de Datos"]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "issuer": "Social Oplesk",
+      "date": "2022-07-07",
+      "credentialId": null,
+      "certificateUrl": "https://drive.google.com/file/d/1iYamX1jyia5xD99vpKMD9CW0qufpH4Fr/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1iYamX1jyia5xD99vpKMD9CW0qufpH4Fr/preview",
+      "thumbnail": "/images/certificates/hackathon-chatbot.webp",
+      "copy": {
+        "en": {
+          "title": "ChatBOT Hackathon",
+          "category": "Award",
+          "description": "Second place in the ChatBOT development hackathon, awarded by Social Oplesk.",
+          "skills": ["Chatbot Design", "Conversational UX", "JavaScript", "Problem Solving"]
+        },
+        "es": {
+          "title": "Hackathon ChatBOT",
+          "category": "Reconocimiento",
+          "description": "Segundo lugar en el hackathon de desarrollo de ChatBOT, otorgado por Social Oplesk.",
+          "skills": ["Diseño de Chatbots", "UX Conversacional", "JavaScript", "Resolución de Problemas"]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "issuer": "Acción Católica de Venezuela",
+      "date": "2022-07-16",
+      "credentialId": null,
+      "certificateUrl": "https://drive.google.com/file/d/1FGDe_Ln5LL4PBihx9ctwG4AOJuUQlQ52/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1FGDe_Ln5LL4PBihx9ctwG4AOJuUQlQ52/preview",
+      "thumbnail": "/images/certificates/taller-liderazgo.webp",
+      "copy": {
+        "en": {
+          "title": "Catholic Leadership Workshop",
+          "category": "Leadership",
+          "description": "First Catholic Leadership Workshop in Maracaibo, focused on community service, teamwork, and ethical leadership.",
+          "skills": ["Leadership", "Community Service", "Teamwork", "Ethics"]
+        },
+        "es": {
+          "title": "Taller de Liderazgo Católico",
+          "category": "Liderazgo",
+          "description": "Primer Taller de Liderazgo Católico en Maracaibo, enfocado en servicio comunitario, trabajo en equipo y liderazgo ético.",
+          "skills": ["Liderazgo", "Servicio Comunitario", "Trabajo en Equipo", "Ética"]
+        }
+      }
+    },
+    {
+      "id": 6,
+      "issuer": "Centro Electrónico de Idiomas",
+      "date": "2020-11-13",
+      "grade": "92/100",
+      "credentialId": "027961",
+      "certificateUrl": "https://drive.google.com/file/d/1x_bAaCNxbQudf2urIgOPsHNpGqx1Ai_k/view?usp=sharing",
+      "previewUrl": "https://drive.google.com/file/d/1x_bAaCNxbQudf2urIgOPsHNpGqx1Ai_k/preview",
+      "thumbnail": "/images/certificates/english-c1.webp",
+      "copy": {
+        "en": {
+          "title": "Advanced English (C1)",
+          "category": "Languages",
+          "description": "Advanced (C1) English program for adults, completed with a grade of 92/100.",
+          "skills": ["Advanced English (C1)", "Academic Writing", "Professional Communication", "Presentations"]
+        },
+        "es": {
+          "title": "Inglés Avanzado (C1)",
+          "category": "Idiomas",
+          "description": "Programa de inglés avanzado (C1) para adultos, completado con una calificación de 92/100.",
+          "skills": ["Inglés Avanzado (C1)", "Escritura Académica", "Comunicación Profesional", "Presentaciones"]
+        }
+      }
+    }
+  ]
+}

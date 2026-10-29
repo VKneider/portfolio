@@ -1,46 +1,57 @@
-import  projectsData from "./data.js";
-
 export default class ProjectsSection extends HTMLElement {
    constructor(props) {
       super();
       slice.attachTemplate(this);
-      
+
       this.$container = this.querySelector('.projects-container');
       this.$grid = this.querySelector('.projects-grid');
-      
+
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
-      this.projectsData = projectsData || [];
+      this.projectsData = [];
+      this.projectViewer = null;
+      this.activeProjectId = null;
    }
 
    async init() {
+      await this.loadContent();
       await this.renderProjects();
+
+      slice.translator.watch(this, async () => {
+         const state = this.projectViewer?.activeProject?.id ?? this.activeProjectId;
+         await this.loadContent();
+         await this.renderProjects();
+         if (state !== null && state !== undefined) {
+            this.projectViewer?.selectProject(state);
+         }
+      });
+   }
+
+   async loadContent() {
+      const document = await slice.t.content('projects');
+      this.projectsData = Array.isArray(document?.records) ? document.records : [];
    }
 
    async renderProjects() {
-      // Clear existing content
+      slice.controller.destroyByContainer(this.$grid);
       this.$grid.innerHTML = '';
 
-      const sectionTitle = await slice.build('SectionTitle', { text: `My Projects (${this.projectsData.length})` });
+      const sectionTitle = await slice.build('SectionTitle', {
+         text: slice.t('projects.title', { count: this.projectsData.length })
+      });
+      this.$grid.appendChild(sectionTitle);
 
-      // Sort projects: featured first, then by date
       const sortedProjects = [...this.projectsData].sort((a, b) => {
          if (a.featured !== b.featured) {
             return Number(b.featured) - Number(a.featured);
-            
          }
          return new Date(b.date).getTime() - new Date(a.date).getTime();
-
       });
-      
-      this.$grid.appendChild(sectionTitle);
 
-      // Call the Master-Detail Project Viewer
-      const projectViewer = await slice.build('ProjectViewer', {
-          projects: sortedProjects
+      this.projectViewer = await slice.build('ProjectViewer', {
+         projects: sortedProjects
       });
-      
-      this.$grid.appendChild(projectViewer);
+      this.$grid.appendChild(this.projectViewer);
    }
 }
 

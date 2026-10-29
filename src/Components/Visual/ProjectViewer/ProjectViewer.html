@@ -2,14 +2,12 @@
     <!-- Left Column: Thumbnails List -->
     <div class="thumbnails-column">
         <div class="column-header mobile-hidden">
-            <h3>Projects</h3>
+            <h3 data-t="projects.listTitle"></h3>
         </div>
         <div class="thumbnails-list">
             <!-- Items injected via JS -->
         </div>
-        <div class="thumbnails-scroll-hint mobile-only">
-             ← Scroll to explore →
-        </div>
+        <div class="thumbnails-scroll-hint mobile-only" data-t="projects.scrollHint"></div>
     </div>
 
     <!-- Center Column: Preview Stage -->
@@ -24,7 +22,7 @@
     <div class="details-column">
         <div class="details-panel">
             <div class="details-header">
-                <h2 class="project-title">Select a Project</h2>
+                <h2 class="project-title" data-t="projects.select"></h2>
                 <span class="status-badge"></span>
             </div>
             
@@ -33,7 +31,7 @@
             <div class="project-description"></div>
             
             <div class="tech-stack-container">
-                <h4>Technologies</h4>
+                <h4 data-t="projects.technologies"></h4>
                 <div class="tech-list"></div>
             </div>
         </div>
@@ -42,8 +40,8 @@
 
 <!-- Image Modal -->
 <div class="image-modal">
-    <div class="close-modal">&times;</div>
-    <button class="modal-nav-btn prev-btn">❮</button>
-    <img class="modal-content" id="expanded-image" alt="Expanded Project View">
-    <button class="modal-nav-btn next-btn">❯</button>
+    <div class="close-modal" data-t="projects.modal.close" aria-label role="button" tabindex="0">&times;</div>
+    <button class="modal-nav-btn prev-btn" data-t="projects.modal.prev" aria-label>❮</button>
+    <img class="modal-content" id="expanded-image" data-t="projects.modal.image" alt>
+    <button class="modal-nav-btn next-btn" data-t="projects.modal.next" aria-label>❯</button>
 </div>

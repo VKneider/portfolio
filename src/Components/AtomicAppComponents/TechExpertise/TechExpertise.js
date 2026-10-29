@@ -81,7 +81,7 @@ export default class TechExpertise extends HTMLElement {
       const carouselData = this.badgeCarousels[i];
       
       const carousel = await slice.build('BadgeCarousel', {
-        title: carouselData.category,
+        title: slice.t.ref(`about.tech.${carouselData.key}`),
         badges: carouselData.skills,
         primaryColor: carouselData.color,
         secondaryColor: carouselData.color,

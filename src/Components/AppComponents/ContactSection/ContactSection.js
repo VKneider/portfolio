@@ -11,20 +11,20 @@ export default class ContactSection extends HTMLElement {
 
   async init() {
     const emailButton = await slice.build('Button', {
-      value: 'Email me',
+      value: slice.t.ref('contact.email'),
       customColor: {
         button: 'var(--accent)',
         label: 'var(--on-accent)'
       },
       onClickCallback: () => {
-        const subject = encodeURIComponent('Project inquiry');
+        const subject = encodeURIComponent(slice.t('contact.subject'));
         window.location.href = `mailto:victorkneider@gmail.com?subject=${subject}`;
       }
     });
     emailButton.classList.add('contact-btn', 'contact-btn-primary');
 
     const linkedinButton = await slice.build('Button', {
-      value: 'Connect on LinkedIn',
+      value: slice.t.ref('contact.linkedin'),
       customColor: {
         button: 'transparent',
         label: 'var(--text-1)'
@@ -37,14 +37,19 @@ export default class ContactSection extends HTMLElement {
 
     this.$actions.append(emailButton, linkedinButton);
 
-    const projectsLink = this.querySelector('.contact-elsewhere a[href="/projects"]');
-    if (projectsLink) {
-      projectsLink.addEventListener('click', async (event) => {
+    this.$projectsLink = this.querySelector('.contact-projects-link');
+    if (this.$projectsLink) {
+      this.$projectsLink.href = slice.href('/projects');
+      this.$projectsLink.addEventListener('click', async (event) => {
         event.preventDefault();
         await slice.router.navigate('/projects');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
+
+    slice.translator.watch(this, () => {
+      if (this.$projectsLink) this.$projectsLink.href = slice.href('/projects');
+    });
   }
 }
 

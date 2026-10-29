@@ -4,7 +4,7 @@ import {
   sliceFallback,
   sliceErrorHandler
 } from 'slicejs-web-framework/api/framework/server.js';
-import { teachingData } from '../src/Components/AppComponents/TeachingIndex/data/teaching.js';
+import { readContent, resolveContentFor } from 'slicejs-web-framework/api/framework/content.js';
 import discoverThemes from './utils/themesDiscovery.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -15,6 +15,61 @@ const app = express();
 const brandTitle = 'Victor Kneider — Software Design & Architecture';
 const defaultImage = 'https://vkneider.dev/images/og-image.png';
 const origin = (process.env.PUBLIC_SITE_URL || 'https://vkneider.dev').replace(/\/+$/, '');
+const contentRoot = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
+
+async function readTranslatorConfig() {
+  try {
+    const file = path.join(process.cwd(), contentRoot, 'sliceConfig.json');
+    return JSON.parse(await fs.readFile(file, 'utf8')).translator || {};
+  } catch {
+    return { defaultLocale: 'en', locales: ['en'], path: '/locales' };
+  }
+}
+
+async function readDictionaries(config) {
+  const folder = String(config.path || '/locales').replace(/^\/+|\/+$/g, '') || 'locales';
+  const locales = [...new Set([config.defaultLocale, ...(config.locales || [])].filter(Boolean))];
+  const dictionaries = {};
+  for (const locale of locales) {
+    try {
+      dictionaries[locale] = JSON.parse(
+        await fs.readFile(path.join(process.cwd(), contentRoot, folder, `${locale}.json`), 'utf8')
+      );
+    } catch {
+      dictionaries[locale] = {};
+    }
+  }
+  return dictionaries;
+}
+
+const translatorConfig = await readTranslatorConfig();
+const dictionaries = await readDictionaries(translatorConfig);
+const teachingByLocale = {};
+
+for (const locale of translatorConfig.locales || [translatorConfig.defaultLocale || 'en']) {
+  try {
+    const document = readContent(process.cwd(), 'teaching', {
+      deployedFolder: contentRoot,
+      translator: translatorConfig
+    });
+    teachingByLocale[locale] = resolveContentFor(document, translatorConfig, locale);
+  } catch (error) {
+    console.warn(`[portfolio] Could not read teaching content for "${locale}": ${error.message}`);
+  }
+}
+
+function brandFor(locale) {
+  return dictionaries[locale]?.brand?.title || brandTitle;
+}
+
+function teachingLabel(locale) {
+  return dictionaries[locale]?.teaching?.title || 'Teaching';
+}
+
+function teachingDescription(locale) {
+  return dictionaries[locale]?.teaching?.subtitle
+    || 'Course syllabi and learning resources developed and shared by Victor Kneider.';
+}
 
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -36,26 +91,26 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function metadataForCourse(course, canonicalUrl) {
+function metadataForCourse(course, canonicalUrl, locale) {
   if (!course) {
     return {
-      title: `Course Not Found | Teaching | ${brandTitle}`,
-      description: 'Browse courses and learning resources shared by Victor Kneider.',
+      title: `${dictionaries[locale]?.teaching?.notFound || 'Course not found'} | ${teachingLabel(locale)} | ${brandFor(locale)}`,
+      description: teachingDescription(locale),
       canonicalUrl
     };
   }
 
   return {
-    title: `${course.name} | Teaching | ${brandTitle}`,
+    title: `${course.name} | ${teachingLabel(locale)} | ${brandFor(locale)}`,
     description: course.description,
     canonicalUrl
   };
 }
 
-function metadataForTeachingHub(canonicalUrl) {
+function metadataForTeachingHub(canonicalUrl, locale) {
   return {
-    title: `Teaching | ${brandTitle}`,
-    description: 'Course syllabi and learning resources developed and shared by Victor Kneider.',
+    title: `${teachingLabel(locale)} | ${brandFor(locale)}`,
+    description: teachingDescription(locale),
     canonicalUrl
   };
 }
@@ -127,14 +182,17 @@ async function sendTeachingPreview(req, res, next, metadata) {
   }
 }
 
-app.get('/teaching', (req, res, next) => {
-  sendTeachingPreview(req, res, next, metadataForTeachingHub(`${origin}/teaching`));
+app.get(['/teaching', '/es/teaching'], (req, res, next) => {
+  const locale = req.path.startsWith('/es/') ? 'es' : (translatorConfig.defaultLocale || 'en');
+  sendTeachingPreview(req, res, next, metadataForTeachingHub(`${origin}${req.path}`, locale));
 });
 
-app.get('/teaching/:slug', (req, res, next) => {
-  const course = teachingData.courses.find(({ slug }) => slug === req.params.slug);
-  const canonicalUrl = `${origin}/teaching/${encodeURIComponent(req.params.slug)}`;
-  const metadata = metadataForCourse(course, canonicalUrl);
+app.get(['/teaching/:slug', '/es/teaching/:slug'], (req, res, next) => {
+  const locale = req.path.startsWith('/es/') ? 'es' : (translatorConfig.defaultLocale || 'en');
+  const courses = teachingByLocale[locale]?.courses || [];
+  const course = courses.find(({ slug }) => slug === req.params.slug) || null;
+  const canonicalUrl = `${origin}${req.path}`;
+  const metadata = metadataForCourse(course, canonicalUrl, locale);
   if (!course) metadata.status = 404;
   sendTeachingPreview(req, res, next, metadata);
 });

@@ -42,15 +42,15 @@ export default class Portfolio extends HTMLElement {
          logo: {
             src: '/images/favicon.svg',
             path: '/',
-            alt: 'Victor Kneider — home'
+            alt: slice.t.ref('nav.logoAlt')
          },
          items: [
-            { text: 'About', path: '/' },
-            { text: 'Experience', path: '/experience' },
-            { text: 'Education', path: '/education' },
-            { text: 'Slice.js', path: '/slice-js' },
-            { text: 'Projects', path: '/projects' },
-            { text: 'Teaching', path: '/teaching' }
+            { text: slice.t.ref('nav.about'), path: '/' },
+            { text: slice.t.ref('nav.experience'), path: '/experience' },
+            { text: slice.t.ref('nav.education'), path: '/education' },
+            { text: slice.t.ref('nav.slice'), path: '/slice-js' },
+            { text: slice.t.ref('nav.projects'), path: '/projects' },
+            { text: slice.t.ref('nav.teaching'), path: '/teaching' }
          ],
          elements: [
             {
@@ -80,6 +80,7 @@ export default class Portfolio extends HTMLElement {
 
       // Populate footer using template
       this.populateFooter();
+      slice.translator.watch(this, () => this.populateFooter());
 
       // Create "Built with Slice" badge
       const badge = await slice.build('BuiltWithBadge', {});
@@ -157,7 +158,7 @@ export default class Portfolio extends HTMLElement {
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>'
          },
          {
-            name: 'Contact',
+            name: slice.t('nav.contact'),
             url: '/contact',
             id: 'contact',
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>'

@@ -28,6 +28,7 @@ export default class RandomFacts extends HTMLElement {
             this.addDragFunctionality();
             this.startCycle();
             this.setupControls();
+            slice.translator.watch(this, () => this.initialRender());
         });
     }
 
@@ -63,7 +64,7 @@ export default class RandomFacts extends HTMLElement {
         const displayedTexts = this.slots
             .map(s => s.note ? s.note.querySelector('span')?.textContent : '')
             .filter(t => t);
-        const availableFacts = factsData.filter(f => !displayedTexts.includes(f.text));
+        const availableFacts = factsData.filter(f => !displayedTexts.includes(slice.t(f.key)));
         if (availableFacts.length === 0) return factsData[Math.floor(Math.random() * factsData.length)];
         return availableFacts[Math.floor(Math.random() * availableFacts.length)];
     }
@@ -82,7 +83,7 @@ export default class RandomFacts extends HTMLElement {
             // Edit Button (Pencil)
             const editBtn = document.createElement('div');
             editBtn.className = 'edit-note-btn';
-            editBtn.title = 'Edit Note';
+            editBtn.title = slice.t('about.factsUI.editTitle');
             editBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
             editBtn.addEventListener('click', (e) => {
                 e.preventDefault(); 
@@ -95,7 +96,7 @@ export default class RandomFacts extends HTMLElement {
             note.classList.add(`type-${fact.type}`);
             const pin = document.createElement('div');
             pin.className = 'pin-indicator';
-            pin.title = 'Click to pin this fact';
+            pin.title = slice.t('about.factsUI.pinTitle');
             note.appendChild(pin);
         }
 
@@ -111,7 +112,7 @@ export default class RandomFacts extends HTMLElement {
                 }
             });
         } else {
-            textContainer.textContent = fact.text;
+            textContainer.textContent = slice.t(fact.key);
         }
         note.appendChild(textContainer);
 

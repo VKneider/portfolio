@@ -1,0 +1,89 @@
+{
+  "records": [
+    {
+      "id": 1,
+      "image": "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG",
+      "images": [
+        "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG",
+        "./images/projects/slice2.png",
+        "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/code-example.JPG"
+      ],
+      "technologies": ["JavaScript", "Web Components", "CSS3", "HTML5"],
+      "githubUrl": "https://github.com/vkneider/slice.js",
+      "liveUrl": "https://slicejs.com",
+      "featured": true,
+      "date": "2024-01-15",
+      "statusKey": "active",
+      "copy": {
+        "en": {
+          "title": "Slice.js Framework",
+          "description": "A component framework built on native Web Components to understand modern frontend architecture from the inside. Reactive state without a virtual DOM, scoped styles, component-level dependency injection, and a CLI for scaffolding and building. The point is not to replace React; it is to show what a framework actually does.",
+          "category": "Framework",
+          "status": "Active"
+        },
+        "es": {
+          "title": "Framework Slice.js",
+          "description": "Un framework de componentes sobre Web Components nativos para entender la arquitectura frontend moderna desde dentro. Estado reactivo sin DOM virtual, estilos con alcance, inyección de dependencias por componente y un CLI para scaffolding y build. No pretende reemplazar a React: muestra qué hace un framework por dentro.",
+          "category": "Framework",
+          "status": "Activo"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "image": "./images/projects/sanramonmcbo.png",
+      "images": [
+        "./images/projects/sanramonmcbo.png",
+        "./images/projects/sanramonmcbo2.png"
+      ],
+      "technologies": ["Google Apps Script", "Process Automation", "ETL Pipelines", "Vercel"],
+      "liveUrl": "https://sanramonmcbo.vercel.app",
+      "featured": true,
+      "date": "2024-06-01",
+      "statusKey": "live",
+      "copy": {
+        "en": {
+          "title": "Parish Automated Ecosystem",
+          "description": "A zero-recurring-cost digital ecosystem for San Ramón Nonato Parish. Google Sheets and Forms act as a headless CMS; ETL scripts turn administrative data into a fast public site, so the parish can publish without paying for infrastructure or maintaining a database.",
+          "category": "Engineering & Automation",
+          "status": "Live"
+        },
+        "es": {
+          "title": "Ecosistema automatizado para una parroquia",
+          "description": "Ecosistema digital sin coste recurrente para la Parroquia San Ramón Nonato. Google Sheets y Forms funcionan como CMS headless; scripts ETL convierten los datos administrativos en un sitio público rápido, sin pagar infraestructura ni mantener una base de datos.",
+          "category": "Ingeniería y automatización",
+          "status": "En producción"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "image": "./images/projects/conclave.png",
+      "images": [
+        "./images/projects/conclave.png",
+        "./images/projects/conclave2.png",
+        "./images/projects/conclave3.png"
+      ],
+      "technologies": ["Slice.js", "JavaScript", "CSS3", "HTML5", "Express", "localStorage"],
+      "githubUrl": "https://github.com/VKneider/conclave",
+      "liveUrl": "https://conclave.vkneider.dev",
+      "featured": true,
+      "date": "2026-07-07",
+      "statusKey": "active",
+      "copy": {
+        "en": {
+          "title": "Conclave",
+          "description": "A structured group decision-making tool. A facilitator creates a template with combinable modes — assignment, voting, ranking, and free-text brainstorming — each person responds independently on their device, and the responses are imported and compared to reach consensus without another meeting. Data stays in the browser.",
+          "category": "Web Application",
+          "status": "Active"
+        },
+        "es": {
+          "title": "Conclave",
+          "description": "Herramienta de toma de decisiones grupales. Quien facilita crea una plantilla con modos combinables —asignación, votación, ranking y lluvia de ideas—, cada persona responde en su dispositivo y las respuestas se importan y comparan para llegar a consenso sin otra reunión. Los datos se quedan en el navegador.",
+          "category": "Aplicación web",
+          "status": "Activo"
+        }
+      }
+    }
+  ]
+}
