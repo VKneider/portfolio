@@ -27,6 +27,31 @@
   "footer": {
     "poweredBy": "Powered by"
   },
+  "seo": {
+    "titleSuffix": " | Victor Kneider — Software Design & Architecture",
+    "defaultDescription": "Software engineer. I design, build, teach and share professional software.",
+    "teachingCourseTitle": "Course | Teaching",
+    "descriptions": {
+      "about": "About Victor Kneider: software engineering, teaching and open-source work.",
+      "experience": "Professional experience in software engineering and university teaching.",
+      "education": "Academic background and professional certifications.",
+      "slice": "Slice.js: a component framework built on native Web Components.",
+      "projects": "Selected software projects: Slice.js, Conclave and automation work.",
+      "contact": "Contact Victor Kneider for software architecture, component systems and technical training.",
+      "teaching": "Course syllabi and learning resources in programming and component-based design.",
+      "teachingCourse": "Course syllabus and learning resources.",
+      "notFound": "Page not found.",
+      "charts": "Interactive charts built with Slice.js.",
+      "animations": "Animation experiments built with Slice.js.",
+      "dompurify": "Safe HTML rendering with DOMPurify and Slice.js.",
+      "bareImports": "Using npm packages through bare imports in Slice.js.",
+      "imposter": "The Imposter Game, built with Slice.js."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist."
+    }
+  },
   "routes": {
     "about": "About",
     "charts": "Charts",

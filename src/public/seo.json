@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "origin": "https://vkneider.dev",
+  "defaults": {
+    "titleSuffix": { "t": "seo.titleSuffix" },
+    "description": { "t": "seo.defaultDescription" },
+    "siteName": "Victor Kneider",
+    "image": "/images/og-image.png"
+  },
+  "routes": {
+    "/": {
+      "title": { "t": "routes.about" },
+      "description": { "t": "seo.descriptions.about" },
+      "sitemap": { "priority": 1.0, "changefreq": "weekly" }
+    },
+    "/experience": {
+      "title": { "t": "routes.experience" },
+      "description": { "t": "seo.descriptions.experience" },
+      "sitemap": { "priority": 0.8, "changefreq": "monthly" }
+    },
+    "/education": {
+      "title": { "t": "routes.education" },
+      "description": { "t": "seo.descriptions.education" },
+      "sitemap": { "priority": 0.7, "changefreq": "monthly" }
+    },
+    "/slice-js": {
+      "title": { "t": "routes.slice" },
+      "description": { "t": "seo.descriptions.slice" },
+      "sitemap": { "priority": 0.8, "changefreq": "monthly" }
+    },
+    "/projects": {
+      "title": { "t": "routes.projects" },
+      "description": { "t": "seo.descriptions.projects" },
+      "sitemap": { "priority": 0.8, "changefreq": "monthly" }
+    },
+    "/contact": {
+      "title": { "t": "routes.contact" },
+      "description": { "t": "seo.descriptions.contact" },
+      "sitemap": { "priority": 0.7, "changefreq": "yearly" }
+    },
+    "/teaching": {
+      "title": { "t": "routes.teaching" },
+      "description": { "t": "seo.descriptions.teaching" },
+      "sitemap": { "priority": 0.6, "changefreq": "monthly" }
+    },
+    "/teaching/${slug}": {
+      "title": { "t": "seo.teachingCourseTitle" },
+      "description": { "t": "seo.descriptions.teachingCourse" },
+      "sitemap": false
+    },
+    "/404": {
+      "title": { "t": "routes.notFound" },
+      "description": { "t": "seo.descriptions.notFound" },
+      "robots": false,
+      "sitemap": false
+    },
+    "/charts": {
+      "title": { "t": "routes.charts" },
+      "description": { "t": "seo.descriptions.charts" },
+      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+    },
+    "/animejs": {
+      "title": { "t": "routes.animations" },
+      "description": { "t": "seo.descriptions.animations" },
+      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+    },
+    "/dompurify": {
+      "title": { "t": "routes.dompurify" },
+      "description": { "t": "seo.descriptions.dompurify" },
+      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+    },
+    "/bare-imports": {
+      "title": { "t": "routes.bareImports" },
+      "description": { "t": "seo.descriptions.bareImports" },
+      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+    },
+    "/imposter": {
+      "title": { "t": "routes.imposter" },
+      "description": { "t": "seo.descriptions.imposter" },
+      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+    }
+  },
+  "locales": {
+    "en": { "ogLocale": "en_US" },
+    "es": { "ogLocale": "es_ES" }
+  },
+  "sitemap": true
+}

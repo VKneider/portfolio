@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://vkneider.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/" />
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/animejs</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/animejs" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/animejs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/animejs" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/bare-imports</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/bare-imports" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/bare-imports" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/bare-imports" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/charts</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/charts" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/charts" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/charts" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/contact" />
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/dompurify</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/dompurify" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/dompurify" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/dompurify" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/education</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/education" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/education" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/education" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/" />
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/animejs</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/animejs" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/animejs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/animejs" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/bare-imports</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/bare-imports" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/bare-imports" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/bare-imports" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/charts</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/charts" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/charts" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/charts" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/contact" />
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/dompurify</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/dompurify" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/dompurify" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/dompurify" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/education</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/education" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/education" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/education" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/experience</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/experience" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/experience" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/experience" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/imposter</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/imposter" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/imposter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/imposter" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/projects" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/projects" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/slice-js</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/slice-js" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/slice-js" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/slice-js" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/teaching</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/experience</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/experience" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/experience" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/experience" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/imposter</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/imposter" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/imposter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/imposter" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/projects" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/projects" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/slice-js</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/slice-js" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/slice-js" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/slice-js" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/teaching</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

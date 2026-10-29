@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   createSliceServer,
+  prepareSeo,
   sliceFallback,
   sliceErrorHandler
 } from 'slicejs-web-framework/api/framework/server.js';
@@ -91,28 +92,42 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function metadataForCourse(course, canonicalUrl, locale) {
+function metadataForCourse(course, canonicalUrl, locale, alternates) {
   if (!course) {
     return {
       title: `${dictionaries[locale]?.teaching?.notFound || 'Course not found'} | ${teachingLabel(locale)} | ${brandFor(locale)}`,
       description: teachingDescription(locale),
-      canonicalUrl
+      canonicalUrl,
+      locale,
+      alternates
     };
   }
 
   return {
     title: `${course.name} | ${teachingLabel(locale)} | ${brandFor(locale)}`,
     description: course.description,
-    canonicalUrl
+    canonicalUrl,
+    locale,
+    alternates
   };
 }
 
-function metadataForTeachingHub(canonicalUrl, locale) {
+function metadataForTeachingHub(canonicalUrl, locale, alternates) {
   return {
     title: `${teachingLabel(locale)} | ${brandFor(locale)}`,
     description: teachingDescription(locale),
-    canonicalUrl
+    canonicalUrl,
+    locale,
+    alternates
   };
+}
+
+function teachingAlternates(locale, path) {
+  return [
+    { hreflang: 'en', href: `${origin}${path}` },
+    { hreflang: 'es', href: `${origin}/es${path}` },
+    { hreflang: 'x-default', href: `${origin}${path}` }
+  ];
 }
 
 function injectPreviewMetadata(html, metadata) {
@@ -120,7 +135,17 @@ function injectPreviewMetadata(html, metadata) {
   const description = escapeHtml(metadata.description);
   const canonicalUrl = escapeHtml(metadata.canonicalUrl);
   const image = escapeHtml(defaultImage);
-  let output = html.replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
+  const locale = metadata.locale === 'es' ? 'es' : 'en';
+  const ogLocale = locale === 'es' ? 'es_ES' : 'en_US';
+  let output = html
+    .replace(/<html\b([^>]*)>/i, (match, attributes) => {
+      const next = /\slang="/i.test(attributes)
+        ? attributes.replace(/\slang="[^"]*"/i, ` lang="${locale}"`)
+        : `${attributes} lang="${locale}"`;
+      return `<html${next}>`;
+    })
+    .replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, `<title>${title}</title>`)
+    .replace(/\s*<link\s+rel=["']alternate["'][^>]*>/gi, '');
   const metadataTags = [
     [/\s*<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${description}">`],
     [/\s*<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${canonicalUrl}">`],
@@ -129,6 +154,7 @@ function injectPreviewMetadata(html, metadata) {
     [/\s*<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${description}">`],
     [/\s*<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${canonicalUrl}">`],
     [/\s*<meta\s+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${image}">`],
+    [/\s*<meta\s+property=["']og:locale["'][^>]*>/i, `<meta property="og:locale" content="${ogLocale}">`],
     [/\s*<meta\s+name=["']twitter:card["'][^>]*>/i, '<meta name="twitter:card" content="summary_large_image">'],
     [/\s*<meta\s+name=["']twitter:title["'][^>]*>/i, `<meta name="twitter:title" content="${title}">`],
     [/\s*<meta\s+name=["']twitter:description["'][^>]*>/i, `<meta name="twitter:description" content="${description}">`],
@@ -142,6 +168,11 @@ function injectPreviewMetadata(html, metadata) {
       output = output.replace(/<\/head>/i, `    ${tag}\n  </head>`);
     }
   }
+
+  const alternates = (metadata.alternates || [])
+    .map((alternate) => `<link rel="alternate" hreflang="${escapeHtml(alternate.hreflang)}" href="${escapeHtml(alternate.href)}">`)
+    .join('\n    ');
+  if (alternates) output = output.replace(/<\/head>/i, `    ${alternates}\n  </head>`);
   return output;
 }
 
@@ -184,7 +215,12 @@ async function sendTeachingPreview(req, res, next, metadata) {
 
 app.get(['/teaching', '/es/teaching'], (req, res, next) => {
   const locale = req.path.startsWith('/es/') ? 'es' : (translatorConfig.defaultLocale || 'en');
-  sendTeachingPreview(req, res, next, metadataForTeachingHub(`${origin}${req.path}`, locale));
+  sendTeachingPreview(
+    req,
+    res,
+    next,
+    metadataForTeachingHub(`${origin}${req.path}`, locale, teachingAlternates(locale, '/teaching'))
+  );
 });
 
 app.get(['/teaching/:slug', '/es/teaching/:slug'], (req, res, next) => {
@@ -192,9 +228,20 @@ app.get(['/teaching/:slug', '/es/teaching/:slug'], (req, res, next) => {
   const courses = teachingByLocale[locale]?.courses || [];
   const course = courses.find(({ slug }) => slug === req.params.slug) || null;
   const canonicalUrl = `${origin}${req.path}`;
-  const metadata = metadataForCourse(course, canonicalUrl, locale);
+  const path = `/teaching/${encodeURIComponent(req.params.slug)}`;
+  const metadata = metadataForCourse(course, canonicalUrl, locale, teachingAlternates(locale, path));
   if (!course) metadata.status = 404;
   sendTeachingPreview(req, res, next, metadata);
+});
+
+// Per-route, per-locale head: the framework reads seo.json, prerenders every literal
+// route and serves the cached page from the fallback. The custom teaching handlers above
+// still own the course-specific metadata (a ${slug} title cannot come from the manifest).
+const seo = await prepareSeo({
+  projectRoot: process.cwd(),
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  port: Number(process.env.PORT) || 3001,
+  seo: { manifest: './seo.json' }
 });
 
 // Delegate all other requests to the framework app. Only this outer app listens.
@@ -204,7 +251,7 @@ app.use(sliceServer.app);
 // stack: without the fallback, "/" (and every SPA route) answers Express's
 // default 404 ("Cannot GET /") in production and on Vercel. `start()` mounts
 // these automatically for apps that use it; this adapter closes the chain here.
-app.use(sliceFallback(serverOptions));
+app.use(sliceFallback({ ...serverOptions, seo }));
 app.use(sliceErrorHandler(serverOptions));
 
 if (!process.env.VERCEL) {
