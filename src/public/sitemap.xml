@@ -153,6 +153,30 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vkneider.dev/es/teaching/clientes-web</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/clientes-web" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/clientes-web" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/clientes-web" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/teaching/components</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/components" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/components" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/components" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/es/teaching/pr2</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/pr2" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/pr2" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/pr2" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vkneider.dev/experience</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/experience" />
     <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/experience" />
@@ -191,5 +215,29 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching" />
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/teaching/clientes-web</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/clientes-web" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/clientes-web" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/clientes-web" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/teaching/components</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/components" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/components" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/components" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vkneider.dev/teaching/pr2</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vkneider.dev/teaching/pr2" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vkneider.dev/es/teaching/pr2" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vkneider.dev/teaching/pr2" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

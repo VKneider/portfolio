@@ -46,7 +46,11 @@
     "/teaching/${slug}": {
       "title": { "t": "seo.teachingCourseTitle" },
       "description": { "t": "seo.descriptions.teachingCourse" },
-      "sitemap": false
+      "sitemap": {
+        "paths": ["pr2", "clientes-web", "components"],
+        "priority": 0.5,
+        "changefreq": "monthly"
+      }
     },
     "/404": {
       "title": { "t": "routes.notFound" },
