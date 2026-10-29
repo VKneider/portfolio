@@ -268,16 +268,20 @@ export default class Navbar extends HTMLElement {
       const img = document.createElement('img');
       img.src = value.src;
       img.alt = value.alt || 'Logo';
-      this.$logoContainer.appendChild(img);
-      this.$logoContainer.href = value.path;
+      // The logo prop is re-assigned on a locale change (its alt is a marker):
+      // replace the previous image instead of appending a second one.
+      this.$logoContainer.replaceChildren(img);
+      this.$logoContainer.href = slice.href(value.path || '/');
       this.$logoContainer.setAttribute('aria-label', value.alt || 'Go to home');
 
-      this.$logoContainer.addEventListener('click', (e) => {
+      if (this._logoClick) this.$logoContainer.removeEventListener('click', this._logoClick);
+      this._logoClick = (e) => {
          e.preventDefault();
-         slice.router.navigate(value.path);
+         slice.router.navigate(value.path || '/');
          window.scrollTo({ top: 0, behavior: 'smooth' });
          this.closeMobileMenu();
-      });
+      };
+      this.$logoContainer.addEventListener('click', this._logoClick);
    }
 
    get items() {

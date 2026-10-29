@@ -284,13 +284,13 @@ export default class AboutSection extends HTMLElement {
       const carousel = await slice.build('ImageCarrousel', {
          images: [
             {
-               url: './images/aboutSection/estudiantes.jpeg',
+               url: '/images/aboutSection/estudiantes.jpeg',
                label: slice.t.ref('about.carousel.showcase.label'),
                date: slice.t.ref('about.carousel.showcase.date'),
                alt: slice.t.ref('about.carousel.showcase.alt')
             },
             {
-               url: './images/aboutSection/firma.jpeg',
+               url: '/images/aboutSection/firma.jpeg',
                label: slice.t.ref('about.carousel.graduation.label'),
                date: slice.t.ref('about.carousel.graduation.date'),
                alt: slice.t.ref('about.carousel.graduation.alt')
