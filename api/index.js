@@ -1,11 +1,16 @@
 import express from 'express';
-import { createSliceServer } from 'slicejs-web-framework/api/framework/server.js';
+import {
+  createSliceServer,
+  sliceFallback,
+  sliceErrorHandler
+} from 'slicejs-web-framework/api/framework/server.js';
 import { teachingData } from '../src/Components/AppComponents/TeachingIndex/data/teaching.js';
 import discoverThemes from './utils/themesDiscovery.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const sliceServer = createSliceServer({ projectRoot: process.cwd() });
+const serverOptions = { projectRoot: process.cwd() };
+const sliceServer = createSliceServer(serverOptions);
 const app = express();
 const brandTitle = 'Victor Kneider — Software Design & Architecture';
 const defaultImage = 'https://vkneider.dev/images/og-image.png';
@@ -136,6 +141,13 @@ app.get('/teaching/:slug', (req, res, next) => {
 
 // Delegate all other requests to the framework app. Only this outer app listens.
 app.use(sliceServer.app);
+
+// This entrypoint never calls `sliceServer.start()`, so it owns the end of the
+// stack: without the fallback, "/" (and every SPA route) answers Express's
+// default 404 ("Cannot GET /") in production and on Vercel. `start()` mounts
+// these automatically for apps that use it; this adapter closes the chain here.
+app.use(sliceFallback(serverOptions));
+app.use(sliceErrorHandler(serverOptions));
 
 if (!process.env.VERCEL) {
   const port = process.env.PORT || 3001;
