@@ -1,77 +1,76 @@
-/**
- * ThemeSelector — toggle pill Light/Dark con iconos sun/moon (Lucide).
- * Referencia visual: vkneider_sistema_visual_final.html (.theme-toggle).
- */
-
 slice-theme-selector {
   display: inline-flex;
 }
 
 .theme-toggle {
-  display: inline-flex;
   position: relative;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  padding: 3px;
-  cursor: pointer;
-}
-
-.theme-toggle-option {
-  position: relative;
-  z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-1);
   color: var(--text-2);
-  background: transparent;
-  border: none;
   cursor: pointer;
-  line-height: 1;
-  transition: color 0.25s ease;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.12s ease;
 }
 
-.theme-toggle-option:hover {
+.theme-toggle:hover {
   color: var(--text-1);
+  border-color: var(--accent);
 }
 
-.theme-toggle-option.active {
-  color: var(--on-accent);
+.theme-toggle:active {
+  transform: scale(0.96);
 }
 
-.theme-toggle-icon {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-/* Indicador: width 50% del toggle (las dos opciones son simétricas).
- * Posición controlada por data-mode en el host. */
-.theme-toggle-indicator {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  left: 3px;
-  width: calc(50% - 3px);
-  background: var(--accent);
-  border-radius: 99px;
-  z-index: 1;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(0);
-}
-
-.theme-toggle[data-mode="dark"] .theme-toggle-indicator {
-  transform: translateX(100%);
-}
-
-/* Estado de loading mientras swap de theme */
 .theme-toggle.loading {
   opacity: 0.7;
   pointer-events: none;
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+    filter 0.25s ease;
+}
+
+/* Light: sun visible, moon hidden. Dark: the opposite. */
+.theme-toggle[data-mode="light"] .theme-toggle__sun,
+.theme-toggle[data-mode="dark"] .theme-toggle__moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  filter: blur(0);
+}
+
+.theme-toggle[data-mode="light"] .theme-toggle__moon,
+.theme-toggle[data-mode="dark"] .theme-toggle__sun {
+  opacity: 0;
+  transform: scale(0.25) rotate(-30deg);
+  filter: blur(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle__icon {
+    transition: none;
+  }
 }

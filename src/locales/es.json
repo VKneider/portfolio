@@ -12,7 +12,11 @@
     }
   },
   "locale": {
-    "ariaLabel": "Idioma"
+    "choose": "Cambiar idioma"
+  },
+  "theme": {
+    "toDark": "Cambiar a modo oscuro",
+    "toLight": "Cambiar a modo claro"
   },
   "nav": {
     "logoAlt": "Victor Kneider — inicio",

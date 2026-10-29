@@ -1,50 +1,47 @@
 /**
- * <slice-theme-selector> — toggle pill Light/Dark.
- * Iconos sun/moon (Lucide), indicador animado bronce.
- * Mantiene la integración con slice.stylesManager.themeManager y el
- * evento global 'themeChanged' para sincronizar con otros consumidores.
+ * <slice-theme-selector> — one circular toggle. The sun and the moon cross-fade
+ * with the active mode, and the label says what the click will do.
+ * Keeps the slice.stylesManager.themeManager integration and the global
+ * 'themeChanged' event.
  */
 export default class ThemeSelector extends HTMLElement {
   constructor(props) {
     super();
     slice.attachTemplate(this);
 
-    this.$toggle = this.querySelector('.theme-toggle');
-    this.$options = this.querySelectorAll('.theme-toggle-option');
+    this.$button = this.querySelector('.theme-toggle');
 
     slice.controller.setComponentProps(this, props);
     this.debuggerProps = ['currentTheme'];
   }
 
   async init() {
-    this._bindEvents();
     this.currentThemeName = this._getCurrentTheme();
     this._syncActive();
+    this.$button.addEventListener('click', () => this._toggle());
 
     document.addEventListener('themeChanged', (event) => {
       this.currentThemeName = event.detail.themeName;
       this._syncActive();
     });
+
+    // The label depends on the active mode and the locale.
+    slice.translator.watch(this, () => this._syncActive());
   }
 
   _getCurrentTheme() {
     return slice.theme || slice.stylesManager?.themeManager?.currentTheme || 'Light';
   }
 
-  _bindEvents() {
-    this.$options.forEach((option) => {
-      option.addEventListener('click', async (e) => {
-        e.stopPropagation();
-        const theme = option.dataset.theme;
-        if (theme && theme !== this.currentThemeName) {
-          await this._selectTheme(theme);
-        }
-      });
-    });
+  async _toggle() {
+    const next = this.currentThemeName.toLowerCase() === 'dark' ? 'Light' : 'Dark';
+    await this._selectTheme(next);
   }
 
   async _selectTheme(themeName) {
-    this.$toggle.classList.add('loading');
+    if (themeName === this.currentThemeName) return;
+
+    this.$button.classList.add('loading');
     try {
       await slice.setTheme(themeName);
       this.currentThemeName = themeName;
@@ -55,20 +52,18 @@ export default class ThemeSelector extends HTMLElement {
     } catch (error) {
       console.error('Error changing theme:', error);
     } finally {
-      this.$toggle.classList.remove('loading');
+      this.$button.classList.remove('loading');
     }
   }
 
   _syncActive() {
-    this.$options.forEach((option) => {
-      option.classList.toggle(
-        'active',
-        option.dataset.theme === this.currentThemeName
-      );
-    });
-    // El indicador se posiciona vía CSS según data-mode en el host.
-    // Light = pos 0, Dark = pos 1 (translateX(100%) en .theme-toggle-indicator).
-    this.$toggle.dataset.mode = this.currentThemeName.toLowerCase();
+    const isDark = this.currentThemeName.toLowerCase() === 'dark';
+    const label = slice.t(isDark ? 'theme.toLight' : 'theme.toDark');
+
+    this.$button.dataset.mode = isDark ? 'dark' : 'light';
+    this.$button.setAttribute('aria-pressed', String(isDark));
+    this.$button.setAttribute('aria-label', label);
+    this.$button.title = label;
   }
 
   get currentTheme() {
@@ -80,8 +75,8 @@ export default class ThemeSelector extends HTMLElement {
     this._syncActive();
   }
 
-  // La API antigua exponía `themes`. El toggle solo opera con Dark/Light
-  // canónicos del manual, así que el setter ignora cualquier otro tema.
+  // The old API exposed `themes`. The toggle only operates with the canonical
+  // Dark/Light pair, so the setter ignores any other theme.
   set themes(value) { this._themes = value; }
   get themes() { return this._themes; }
 }

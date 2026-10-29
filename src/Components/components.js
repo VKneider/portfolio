@@ -32,6 +32,7 @@ const components = {
   "Layout": "Visual",
   "Link": "Visual",
   "Loading": "Visual",
+  "LocaleSwitcher": "Visual",
   "Modal": "Visual",
   "MultiRoute": "Visual",
   "Navbar": "Visual",

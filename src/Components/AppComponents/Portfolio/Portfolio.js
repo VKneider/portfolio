@@ -34,7 +34,7 @@ export default class Portfolio extends HTMLElement {
          themes
       });
 
-      const localeSwitcher = this.buildLocaleSwitcher();
+      const localeSwitcher = await slice.build('LocaleSwitcher');
 
       const navbar = await slice.build('Navbar', {
          position: 'fixed',
@@ -92,36 +92,6 @@ export default class Portfolio extends HTMLElement {
 
       // Handle route changes
       //this.handleRouteChange();
-   }
-
-   buildLocaleSwitcher() {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'locale-switcher';
-      wrapper.setAttribute('role', 'group');
-      wrapper.setAttribute('aria-label', '');
-      wrapper.dataset.t = 'locale';
-
-      for (const locale of ['en', 'es']) {
-         const button = document.createElement('button');
-         button.type = 'button';
-         button.className = 'locale-switcher__button';
-         button.textContent = locale.toUpperCase();
-         button.setAttribute('aria-pressed', String(slice.locale === locale));
-         button.addEventListener('click', async () => {
-            if (slice.locale === locale) return;
-            try {
-               await slice.translator.setLocale(locale);
-               for (const other of wrapper.querySelectorAll('button')) {
-                  other.setAttribute('aria-pressed', String(other.textContent.toLowerCase() === slice.locale));
-               }
-            } catch (error) {
-               console.error(`Could not switch the locale to "${locale}":`, error);
-            }
-         });
-         wrapper.appendChild(button);
-      }
-
-      return wrapper;
    }
 
    populateFooter() {
