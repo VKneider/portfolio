@@ -1,0 +1,147 @@
+{
+  "records": [
+    {
+      "id": 2,
+      "logo": "/images/uru-logo-seo.png",
+      "startYear": 2024,
+      "endYear": null,
+      "technologies": ["JavaScript", "Web Components", "Node.js", "PostgreSQL", "HTML5", "CSS3", "Slice.js"],
+      "copy": {
+        "en": {
+          "company": "Universidad Rafael Urdaneta (URU)",
+          "position": "Computer Engineering Professor",
+          "period": "2024 — Present",
+          "type": "Full-time",
+          "location": "Maracaibo, Venezuela",
+          "description": "Professor in the Computer Engineering program. I teach programming, component-based design, and web client development, and I supervise undergraduate projects. The work sits between professional practice and the classroom: the same engineering standards apply to both.",
+          "responsibilities": [
+            "Teach Programming I and II, Component-Based Programming, and Web Client Languages",
+            "Design course material and repositories students can run, read, and extend",
+            "Supervise undergraduate thesis projects",
+            "Maintain academic tooling with Node.js and PostgreSQL",
+            "Research and develop the Slice.js framework"
+          ],
+          "achievements": [
+            "Slice.js used in academic and personal projects",
+            "Course repositories reused across terms",
+            "Active-learning methods incorporated into the curriculum"
+          ]
+        },
+        "es": {
+          "company": "Universidad Rafael Urdaneta (URU)",
+          "position": "Profesor de Ingeniería en Computación",
+          "period": "2024 — Actualidad",
+          "type": "Tiempo completo",
+          "location": "Maracaibo, Venezuela",
+          "description": "Profesor en el programa de Ingeniería en Computación. Enseño programación, diseño basado en componentes y desarrollo web del cliente, y superviso proyectos de grado. El trabajo está entre la práctica profesional y el aula: aplico el mismo criterio de ingeniería en ambos.",
+          "responsibilities": [
+            "Impartir Programación I y II, Programación Basada en Componentes y Lenguajes Web del Cliente",
+            "Diseñar material y repositorios que el estudiante pueda ejecutar, leer y extender",
+            "Supervisar proyectos de grado",
+            "Mantener herramientas académicas con Node.js y PostgreSQL",
+            "Investigar y desarrollar el framework Slice.js"
+          ],
+          "achievements": [
+            "Slice.js utilizado en proyectos académicos y personales",
+            "Repositorios de curso reutilizados entre semestres",
+            "Métodos de aprendizaje activo incorporados al currículo"
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "logo": "/images/companies/propilven.png",
+      "startYear": 2023,
+      "endYear": 2023,
+      "technologies": ["Python", "SQL", "System Administration"],
+      "copy": {
+        "en": {
+          "company": "Industrial automation company",
+          "position": "IT Department Intern",
+          "period": "2023",
+          "type": "Internship",
+          "location": "Venezuela",
+          "description": "Six-month internship in the IT department of an industrial automation company. I worked on internal tooling, process documentation, and day-to-day infrastructure support. No employer or client details are disclosed.",
+          "responsibilities": [
+            "Maintain internal automation and support tools",
+            "Document technical processes and procedures",
+            "Assist with infrastructure management and troubleshooting",
+            "Participate in system analysis and optimization work"
+          ],
+          "achievements": [
+            "Completed the six-month internship",
+            "Left reusable documentation for internal processes",
+            "First contact with industrial IT environments"
+          ]
+        },
+        "es": {
+          "company": "Empresa de automatización industrial",
+          "position": "Pasante del departamento de TI",
+          "period": "2023",
+          "type": "Pasantía",
+          "location": "Venezuela",
+          "description": "Pasantía de seis meses en el departamento de TI de una empresa de automatización industrial. Trabajé en herramientas internas, documentación de procesos y soporte de infraestructura. No se divulgan datos del empleador ni de sus clientes.",
+          "responsibilities": [
+            "Mantener herramientas internas de automatización y soporte",
+            "Documentar procesos y procedimientos técnicos",
+            "Apoyar la gestión y el diagnóstico de la infraestructura",
+            "Participar en análisis y optimización de sistemas"
+          ],
+          "achievements": [
+            "Completé la pasantía de seis meses",
+            "Dejé documentación reutilizable de procesos internos",
+            "Primer contacto con entornos de TI industrial"
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "logo": "/images/companies/freelance.png",
+      "startYear": 2020,
+      "endYear": null,
+      "technologies": ["JavaScript", "Node.js", "Express", "HTML5", "CSS3", "Git", "Web Components", "MongoDB"],
+      "copy": {
+        "en": {
+          "company": "Independent practice",
+          "position": "Software Engineer & Framework Creator",
+          "period": "2020 — Present",
+          "type": "Self-employed",
+          "location": "Remote",
+          "description": "Independent engineering practice: architecture, web applications, and developer tooling. The main long-running project is Slice.js, a component framework built on native Web Components. Work is documented and published as open source when the client or project allows it.",
+          "responsibilities": [
+            "Design and maintain the Slice.js architecture and runtime",
+            "Build web applications with modern JavaScript and Web Components",
+            "Write documentation, examples, and developer tooling",
+            "Research browser APIs and component-model trade-offs"
+          ],
+          "achievements": [
+            "Slice.js: a component framework with its own CLI and build",
+            "Educational and experimental applications published as open source",
+            "Technical writing that supports the framework's adoption"
+          ]
+        },
+        "es": {
+          "company": "Práctica independiente",
+          "position": "Ingeniero de software y creador de frameworks",
+          "period": "2020 — Actualidad",
+          "type": "Independiente",
+          "location": "Remoto",
+          "description": "Práctica independiente de ingeniería: arquitectura, aplicaciones web y herramientas para desarrolladores. El proyecto principal es Slice.js, un framework de componentes sobre Web Components nativos. El trabajo se documenta y se publica como código abierto cuando el cliente o el proyecto lo permiten.",
+          "responsibilities": [
+            "Diseñar y mantener la arquitectura y el runtime de Slice.js",
+            "Construir aplicaciones web con JavaScript moderno y Web Components",
+            "Escribir documentación, ejemplos y herramientas de desarrollo",
+            "Investigar APIs del navegador y trade-offs del modelo de componentes"
+          ],
+          "achievements": [
+            "Slice.js: un framework de componentes con su propio CLI y build",
+            "Aplicaciones educativas y experimentales publicadas como código abierto",
+            "Documentación técnica que sostiene la adopción del framework"
+          ]
+        }
+      }
+    }
+  ]
+}

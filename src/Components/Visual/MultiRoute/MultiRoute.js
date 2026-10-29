@@ -75,7 +75,7 @@ export default class MultiRoute extends HTMLElement {
    }
 
    async render() {
-      const currentPath = window.location.pathname;
+      const currentPath = slice.path;
       const { route: routeMatch, params } = this.matchRoute(currentPath);
 
       if (routeMatch) {
@@ -139,7 +139,7 @@ export default class MultiRoute extends HTMLElement {
    }
 
    async renderIfCurrentRoute() {
-      const currentPath = window.location.pathname;
+      const currentPath = slice.path;
       const { route: routeMatch } = this.matchRoute(currentPath);
 
       if (routeMatch) {
@@ -150,7 +150,7 @@ export default class MultiRoute extends HTMLElement {
    }
 
    removeComponent() {
-      const currentPath = window.location.pathname;
+      const currentPath = slice.path;
       const { route: routeMatch } = this.matchRoute(currentPath);
 
       if (routeMatch) {

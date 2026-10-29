@@ -1,0 +1,27 @@
+{
+  "experience": {
+    "title": "Professional Experience",
+    "timeline": {
+      "title": "My Journey Map",
+      "description": "Explore my professional path. Drag nodes to reshape the timeline or click to view details."
+    }
+  },
+  "locale": {
+    "ariaLabel": "Language"
+  },
+  "routes": {
+    "about": "About",
+    "charts": "Charts",
+    "dompurify": "DOMPurify",
+    "animations": "Animations",
+    "bareImports": "Bare Imports",
+    "experience": "Experience",
+    "education": "Education",
+    "slice": "Slice.js",
+    "projects": "Projects",
+    "contact": "Contact",
+    "teaching": "Teaching",
+    "imposter": "The Imposter Game",
+    "notFound": "Not Found"
+  }
+}

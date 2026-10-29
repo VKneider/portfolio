@@ -1,0 +1,27 @@
+{
+  "experience": {
+    "title": "Experiencia profesional",
+    "timeline": {
+      "title": "Mi recorrido profesional",
+      "description": "Explora mi trayectoria. Arrastra los nodos para reordenar la línea de tiempo o haz clic para ver el detalle."
+    }
+  },
+  "locale": {
+    "ariaLabel": "Idioma"
+  },
+  "routes": {
+    "about": "Sobre mí",
+    "charts": "Gráficas",
+    "dompurify": "DOMPurify",
+    "animations": "Animaciones",
+    "bareImports": "Bare Imports",
+    "experience": "Experiencia",
+    "education": "Formación",
+    "slice": "Slice.js",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "teaching": "Docencia",
+    "imposter": "The Imposter Game",
+    "notFound": "Página no encontrada"
+  }
+}

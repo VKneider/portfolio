@@ -10,9 +10,9 @@ slice.router.afterEach((to) => {
    // production server does not serve.
    if (to.path === '/teaching' || to.path.startsWith('/teaching/')) return;
 
-   document.title = to.metadata?.title
-      ? `${to.metadata.title} | ${brandTitle}`
-      : brandTitle;
+   const key = to.metadata?.titleKey;
+   const title = key ? slice.t(key) : to.metadata?.title;
+   document.title = title ? `${title} | ${brandTitle}` : brandTitle;
 });
 
 if ('serviceWorker' in navigator) {

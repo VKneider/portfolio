@@ -76,7 +76,17 @@
     "routesFile": "/routes.js"
   },
   "router": {
-    "defaultRoute": "/"
+    "defaultRoute": "/",
+    "titleSuffix": " | Victor Kneider — Software Design & Architecture"
+  },
+  "translator": {
+    "enabled": true,
+    "defaultLocale": "en",
+    "locales": ["en", "es"],
+    "path": "/locales",
+    "saveLocally": true,
+    "useBrowserLocale": false,
+    "localePrefix": "except-default"
   },
   "loading": {
     "enabled": true

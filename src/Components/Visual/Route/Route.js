@@ -65,7 +65,7 @@ export default class Route extends HTMLElement {
    }
 
    async renderIfCurrentRoute() {
-      if (this.props.path === window.location.pathname) {
+      if (this.props.path === slice.path) {
          if (this.rendered) {
             if (Route.componentCache[this.props.component]) {
                const cachedComponent = Route.componentCache[this.props.component];
