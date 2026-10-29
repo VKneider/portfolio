@@ -65,7 +65,7 @@
     "d3": "^7.9.0",
     "dompurify": "^3.4.11",
     "express": "^5.2.1",
-    "slicejs-cli": "^4.4.0",
-    "slicejs-web-framework": "^4.1.1"
+    "slicejs-cli": "^4.5.0",
+    "slicejs-web-framework": "^4.2.0"
   }
 }
