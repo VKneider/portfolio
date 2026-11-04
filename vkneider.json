@@ -1,0 +1,10 @@
+{
+  "registry": "https://github.com/VKneider/registry.git",
+  "branch": "main",
+  "defaultTargets": [
+    "opencode"
+  ],
+  "defaultScope": "project",
+  "installMode": "vendored",
+  "minCliVersion": "0.1.0"
+}
