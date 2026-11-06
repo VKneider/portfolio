@@ -8,11 +8,13 @@ slice-about-section {
 }
 
 /* Enhanced Hero Section - COMPACTO */
-.hero-section {
+slice-about-section .hero-section {
   position: relative;
+  box-sizing: border-box;
   text-align: center;
-  padding: 4rem 2rem; /* Aumentado aún más */
-  padding-top: 4.5rem; /* Aumentado para dar más espacio arriba */
+  /* El espaciado vertical respira en pantallas altas y se comprime en las
+   * bajas para que el contenido nunca empuje los CTAs fuera del viewport. */
+  padding: clamp(1rem, 4vh, 4rem) clamp(1rem, 4vw, 2rem);
   background-color: var(--surface-1);
   margin-bottom: 3rem;
   /* Remover border-radius y border para que ocupe todo el ancho */
@@ -21,8 +23,12 @@ slice-about-section {
   overflow: hidden;
 
   animation: heroGlow 4s ease-in-out infinite alternate;
-  /* Hacer que ocupe toda la altura horizontal */
-  min-height: calc(100vh - var(--nav-height));
+  /* Ocupa exactamente la primera pantalla, descontando el navbar fixed.
+   * 100svh (small viewport height) es la altura visible cuando el navegador
+   * móvil muestra sus barras, que es justo el estado del primer paint.
+   * El fallback 100vh queda para navegadores sin soporte de svh. */
+  height: calc(100vh - var(--nav-height));
+  height: calc(100svh - var(--nav-height));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,18 +44,30 @@ slice-about-section {
   display: none;
 }
 
-.hero-content {
+slice-about-section .hero-content {
   position: relative;
+  display: block;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
   z-index: 2;
+  /* El CSS de componentes es global: TheImposterGame define su propio
+   * .hero-content (display:flex + animación). Lo neutralizamos aquí para que
+   * el hero del portfolio conserve su composición vertical en cualquier ruta. */
+  animation: none;
+  gap: 0;
+  /* Safety net: AboutSection's fitHeroToViewport() only sets this variable
+   * when the content still does not fit after the responsive rules below.
+   * Using scale (not width/height) keeps the typographic system intact. */
+  transform: scale(var(--hero-fit-scale, 1));
+  transform-origin: center center;
 }
 
 /* Enhanced Profile Image - COMPACTO */
 .profile-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 2.5rem; /* Reducido de 3rem para mejor balance */
+  margin-bottom: clamp(1.25rem, 3vh, 2.5rem);
 }
 
 /* profile-ring removido por petición de Victor — la foto va sola. */
@@ -72,7 +90,7 @@ slice-about-section {
 /* Enhanced Hero Text - COMPACTO */
 .title-container {
   position: relative;
-  margin-bottom: 1.5rem; /* Ajustado de 1.8rem */
+  margin-bottom: clamp(1.25rem, 1.5vh, 1.5rem);
 }
 
 .hero-text h1 {
@@ -102,7 +120,7 @@ slice-about-section {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.8rem; /* Ajustado de 2rem */
+  margin-bottom: clamp(0.75rem, 1.8vh, 1.8rem);
 }
 
 .role-title {
@@ -127,7 +145,7 @@ slice-about-section {
   font-size: 1.3rem; /* Reducido de 1.5rem para mejor balance */
   line-height: 1.7; /* Ajustado de 1.8 */
   color: var(--text-1);
-  margin-bottom: 2.2rem; /* Ajustado de 2.5rem */
+  margin-bottom: clamp(1rem, 2.2vh, 2.2rem);
   max-width: 750px; /* Ajustado de 800px */
   margin-left: auto;
   margin-right: auto;
@@ -135,7 +153,7 @@ slice-about-section {
 }
 
 /* Hero Stats - COMPACTO */
-.hero-stats {
+slice-about-section .hero-stats {
   display: flex;
   justify-content: center;
   gap: 1rem; /* Reducido de 1.5rem */
@@ -431,7 +449,7 @@ slice-about-section {
 }
 
 @media (max-width: 968px) {
-  .hero-stats {
+  slice-about-section .hero-stats {
     gap: 1.5rem;
   }
   
@@ -441,12 +459,11 @@ slice-about-section {
 }
 
 @media (max-width: 768px) {
-  .hero-section {
-    padding: 2.5rem 2rem; /* Ajustado */
-    padding-top: 3rem; /* Ajustado */
-    margin-bottom: 2.5rem; /* Ajustado */
-    min-height: 80vh; /* Ajustado */
-    /* Mantener el ancho completo en mobile */
+  slice-about-section .hero-section {
+    /* La altura la fija la regla base (100svh - navbar); aquí solo ajustamos
+     * el aire lateral y el ritmo vertical dentro de esa altura. */
+    padding-inline: 1.25rem;
+    margin-bottom: 2.5rem;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -462,7 +479,6 @@ slice-about-section {
   
   .hero-description {
     font-size: 1.2rem; /* Ajustado de 1.3rem */
-    margin-bottom: 1.8rem; /* Ajustado */
   }
   
   .profile-image {
@@ -470,13 +486,8 @@ slice-about-section {
     height: 200px; /* Ajustado de 220px */
   }
   
-  .profile-container {
-    margin-bottom: 2rem; /* Ajustado */
-  }
-  
   .roles-container {
     height: 60px; /* Ajustado de 65px */
-    margin-bottom: 1.5rem; /* Ajustado */
   }
   
   .stat-item {
@@ -493,12 +504,9 @@ slice-about-section {
 }
 
 @media (max-width: 480px) {
-  .hero-section {
-    padding: 2rem 1.5rem; /* Ajustado */
-    padding-top: 2.5rem; /* Ajustado */
-    margin-bottom: 2rem; /* Ajustado */
-    min-height: 70vh; /* Ajustado */
-    /* Mantener el ancho completo en mobile */
+  slice-about-section .hero-section {
+    padding-inline: 1rem;
+    margin-bottom: 2rem;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -513,13 +521,8 @@ slice-about-section {
     height: 160px; /* Ajustado de 180px */
   }
   
-  .profile-container {
-    margin-bottom: 1.8rem; /* Ajustado */
-  }
-  
   .roles-container {
     height: 50px; /* Ajustado de 55px */
-    margin-bottom: 1.3rem; /* Ajustado */
   }
   
   .role-title {
@@ -528,11 +531,10 @@ slice-about-section {
   
   .hero-description {
     font-size: 1.1rem; /* Ajustado de 1.2rem */
-    margin-bottom: 1.5rem; /* Ajustado */
     line-height: 1.6; /* Ajustado */
   }
   
-  .hero-stats {
+  slice-about-section .hero-stats {
     gap: 1rem; /* Ajustado */
     margin-bottom: 1rem; /* Ajustado */
   }
@@ -556,12 +558,9 @@ slice-about-section {
 }
 
 @media (max-width: 360px) {
-  .hero-section {
-    padding: 1.8rem 1rem; /* Ajustado */
-    padding-top: 2.2rem; /* Ajustado */
-    margin-bottom: 1.8rem; /* Ajustado */
-    min-height: 65vh; /* Ajustado */
-    /* Mantener el ancho completo en mobile */
+  slice-about-section .hero-section {
+    padding-inline: 1rem;
+    margin-bottom: 1.8rem;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -576,13 +575,8 @@ slice-about-section {
     height: 130px; /* Ajustado de 140px */
   }
   
-  .profile-container {
-    margin-bottom: 1.5rem; /* Ajustado */
-  }
-  
   .roles-container {
     height: 42px; /* Ajustado de 45px */
-    margin-bottom: 1.1rem; /* Ajustado */
   }
   
   .role-title {
@@ -591,11 +585,10 @@ slice-about-section {
   
   .hero-description {
     font-size: 1rem; /* Ajustado de 1.1rem */
-    margin-bottom: 1.3rem; /* Ajustado */
     line-height: 1.5; /* Ajustado */
   }
   
-  .hero-stats {
+  slice-about-section .hero-stats {
     flex-direction: column;
     gap: 0.9rem; /* Ajustado */
     margin-bottom: 0.9rem; /* Ajustado */
@@ -945,7 +938,7 @@ slice-about-section {
 /* En laptops de poca altura, el hero necesita compactarse para que los CTAs
  * queden visibles sin hacer scroll. Solo afecta al espaciado, no al contenido. */
 @media (max-height: 880px) and (min-width: 769px) {
-  .hero-section {
+  slice-about-section .hero-section {
     padding-top: 2.75rem;
     padding-bottom: 2.75rem;
   }
@@ -970,5 +963,147 @@ slice-about-section {
 
   .hero-description {
     margin-bottom: 1.5rem;
+  }
+}
+
+/* Pantallas bajas y anchas (móvil en horizontal, laptops pequeñas): el hero
+ * pasa a dos columnas. La foto ocupa la izquierda y el bloque de texto + CTAs
+ * la derecha, aprovechando el ancho disponible para no empujar contenido
+ * fuera del viewport. */
+@media (max-height: 640px) and (orientation: landscape) {
+  slice-about-section .hero-section {
+    padding-block: clamp(0.75rem, 4vh, 1.5rem);
+  }
+
+  slice-about-section .hero-content {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "photo text"
+      "photo cta";
+    align-items: center;
+    justify-items: start;
+    column-gap: clamp(1rem, 4vw, 2.5rem);
+    row-gap: clamp(0.5rem, 2vh, 1rem);
+    max-width: 1000px;
+    text-align: left;
+  }
+
+  .profile-container {
+    grid-area: photo;
+    margin-bottom: 0;
+  }
+
+  .profile-image {
+    width: clamp(96px, 30vh, 200px);
+    height: clamp(96px, 30vh, 200px);
+  }
+
+  .hero-text {
+    grid-area: text;
+    min-width: 0;
+  }
+
+  .title-container {
+    margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+  }
+
+  .hero-text h1 {
+    font-size: clamp(1.75rem, 8.5vh, 3.25rem);
+  }
+
+  .title-accent {
+    bottom: -10px;
+    left: 0;
+    transform: none;
+  }
+
+  .roles-container {
+    height: clamp(2rem, 7vh, 3.5rem);
+    justify-content: flex-start;
+    margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+  }
+
+  .role-title {
+    font-size: clamp(1rem, 4.8vh, 1.75rem);
+  }
+
+  .hero-description {
+    max-width: 58ch;
+    margin: 0 0 clamp(0.5rem, 2vh, 1rem);
+    font-size: clamp(0.875rem, 2.6vh, 1.15rem);
+    line-height: 1.5;
+  }
+
+  .cta-buttons {
+    grid-area: cta;
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .cta-buttons slice-button {
+    padding: 4px;
+  }
+
+  .cta-buttons .slice_button {
+    padding: 7px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Retrato muy bajo (móviles pequeños o ventanas estrechas y bajas): última
+ * pasada de compactación antes de que entre el auto-fit por JavaScript. */
+@media (max-height: 520px) and (orientation: portrait) {
+  slice-about-section .hero-section {
+    padding-block: 0.75rem;
+  }
+
+  .profile-image {
+    width: 104px;
+    height: 104px;
+  }
+
+  .profile-container {
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.75rem;
+  }
+
+  .title-container {
+    margin-bottom: 0.75rem;
+  }
+
+  .title-accent {
+    bottom: -10px;
+  }
+
+  .roles-container {
+    height: 36px;
+    margin-bottom: 0.75rem;
+  }
+
+  .role-title {
+    font-size: 1.15rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-buttons {
+    gap: 0.75rem;
+  }
+
+  .cta-buttons slice-button {
+    padding: 4px;
+  }
+
+  .cta-buttons .slice_button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
   }
 }

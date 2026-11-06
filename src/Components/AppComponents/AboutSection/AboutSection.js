@@ -4,6 +4,7 @@ export default class AboutSection extends HTMLElement {
       slice.attachTemplate(this);
 
       this.$hero = this.querySelector('.hero-section');
+      this.$heroContent = this.querySelector('.hero-content');
       this.$about = this.querySelector('.about-content');
       this.$skills = this.querySelector('.skills-section');
       this.$values = this.querySelector('.values-section');
@@ -20,6 +21,30 @@ export default class AboutSection extends HTMLElement {
 
       // Set up enhanced hero section
       await this.setupEnhancedHero();
+
+      // El hero debe caber completo en la primera pantalla. Las reglas CSS
+      // cubren los tamaños habituales; este auto-fit es la red de seguridad
+      // para proporciones extremas (poca altura, zoom de texto, etc.).
+      this._fitHeroFrame = null;
+      this._fitHero = () => {
+         if (this._fitHeroFrame) cancelAnimationFrame(this._fitHeroFrame);
+         this._fitHeroFrame = requestAnimationFrame(() => {
+            this._fitHeroFrame = null;
+            this.fitHeroToViewport();
+         });
+      };
+      window.addEventListener('resize', this._fitHero);
+      window.addEventListener('orientationchange', this._fitHero);
+      if ('ResizeObserver' in window) {
+         this._heroResizeObserver = new ResizeObserver(this._fitHero);
+         this._heroResizeObserver.observe(this.$hero);
+         if (this.$heroContent) this._heroResizeObserver.observe(this.$heroContent);
+      }
+      this._fitHero();
+      this.fitHeroToViewport();
+      if (document.fonts?.ready) {
+         document.fonts.ready.then(() => this._fitHero());
+      }
 
       // Create enhanced about content cards
       await this.createEnhancedAboutCards();
@@ -49,11 +74,18 @@ export default class AboutSection extends HTMLElement {
             slice.t.list('about.hero.roles'),
             { interval: 3000 }
          );
+         this._fitHero?.();
       });
    }
 
    beforeDestroy() {
       if (this._onResize) window.removeEventListener('resize', this._onResize);
+      if (this._fitHeroFrame) cancelAnimationFrame(this._fitHeroFrame);
+      if (this._fitHero) {
+         window.removeEventListener('resize', this._fitHero);
+         window.removeEventListener('orientationchange', this._fitHero);
+      }
+      this._heroResizeObserver?.disconnect();
       this.AnimationsProvider?.stopSwitcher('roleSwitcher');
       this.AnimationsProvider?.stopSwitcher('brandSwitcher');
    }
@@ -162,6 +194,39 @@ export default class AboutSection extends HTMLElement {
          roles,
          { interval: 3000 }
       );
+   }
+
+   /**
+    * Garantiza que el contenido del hero quepa dentro de la primera pantalla.
+    *
+    * La altura del hero es fija (100svh - navbar) y el CSS ya compacta
+    * tipografía, foto y espaciados en viewports bajos. Si aun así el contenido
+    * natural supera el alto disponible (proporciones extremas o zoom de texto),
+    * se escala el bloque completo lo justo para que vuelva a entrar.
+    */
+   fitHeroToViewport() {
+      const hero = this.$hero;
+      const content = this.$heroContent;
+      if (!hero?.isConnected || !content?.isConnected) return;
+
+      // Medimos siempre sin la escala aplicada (offsetHeight ya ignora
+      // transforms, pero el reset mantiene la intención explícita).
+      content.style.removeProperty('--hero-fit-scale');
+
+      const heroStyle = getComputedStyle(hero);
+      const verticalPadding =
+         parseFloat(heroStyle.paddingTop) + parseFloat(heroStyle.paddingBottom);
+      const available = hero.clientHeight - verticalPadding;
+      const needed = content.offsetHeight;
+
+      if (available <= 2 || needed <= 0) return;
+
+      if (needed > available) {
+         // El suelo de 0.35 evita que un caso absurdamente pequeño deje el
+         // texto ilegible; por debajo de eso ya no hay diseño posible.
+         const scale = Math.max(0.35, (available - 1) / needed);
+         content.style.setProperty('--hero-fit-scale', scale.toFixed(3));
+      }
    }
 
    async createEnhancedAboutCards() {
