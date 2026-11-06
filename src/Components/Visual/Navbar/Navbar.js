@@ -277,12 +277,27 @@ export default class Navbar extends HTMLElement {
 
    set logo(value) {
       this._logo = value;
-      const img = document.createElement('img');
-      img.src = value.src;
-      img.alt = value.alt || 'Logo';
-      // The logo prop is re-assigned on a locale change (its alt is a marker):
-      // replace the previous image instead of appending a second one.
-      this.$logoContainer.replaceChildren(img);
+      const createLogo = (src, themeClass) => {
+         const img = document.createElement('img');
+         img.src = src;
+         img.alt = value.alt || 'Logo';
+         img.loading = 'eager';
+         img.decoding = 'async';
+         img.classList.add('logo-mark');
+         if (themeClass) img.classList.add(themeClass);
+         return img;
+      };
+
+      // El logo oficial existe en dos variantes cromáticas: la oscura para
+      // fondos indigo y la clara para fondos cream. Ambas viven en el DOM y
+      // Navbar.css muestra la que corresponde a [data-slice-theme], sin JS de
+      // por medio: el cambio de tema ya lo aplica ThemeManager.
+      const logos = [createLogo(value.src, value.srcLight ? 'logo-mark--dark' : null)];
+      if (value.srcLight) {
+         logos.push(createLogo(value.srcLight, 'logo-mark--light'));
+      }
+
+      this.$logoContainer.replaceChildren(...logos);
       this.$logoContainer.href = slice.href(value.path || '/');
       this.$logoContainer.setAttribute('aria-label', value.alt || 'Go to home');
 

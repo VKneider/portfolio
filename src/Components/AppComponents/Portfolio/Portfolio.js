@@ -38,9 +38,10 @@ export default class Portfolio extends HTMLElement {
 
       const navbar = await slice.build('Navbar', {
          position: 'fixed',
-         // Monograma personal (mismo arte que el favicon).
+         // Monograma personal: variante oficial del sistema de marca para cada tema.
          logo: {
-            src: '/images/favicon.svg',
+            src: '/images/brand/vkneider-mark-dark.svg',
+            srcLight: '/images/brand/vkneider-mark-light.svg',
             path: '/',
             alt: slice.t.ref('nav.logoAlt')
          },

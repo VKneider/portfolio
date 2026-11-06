@@ -10,10 +10,11 @@
     <meta name="author" content="vkneider.dev" />
     <link rel="canonical" href="https://vkneider.dev" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-    <link rel="apple-touch-icon" href="/images/og-image.png" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1D4ED8" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#FAF7EE" />
+    <meta name="color-scheme" content="light" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Victor Kneider — Diseño y arquitectura de software profesional" />
     <meta property="og:description" content="Diseño y arquitectura de software profesional. Lo construyo, lo enseño, lo divulgo. Portfolio de Victor Kneider, ingeniero de software, educador e investigador." />
@@ -75,11 +76,10 @@
 
     <!--
       El tema y los estilos globales tambien los carga el framework en runtime
-      (StylesManager/ThemeManager). Isn't los descarga DESPUES del primer
-      paint, y sliceStyles.css pinta body { background-color: var(--bg) }: sin
-      --bg definido todavia no hay fondo, y como <meta name="color-scheme"> hace
-      que el navegador pinte el canvas segun la preferencia del SO, se ve un
-      flash (negro en dark mode) hasta que el tema entra.
+      (StylesManager/ThemeManager) y los descarga DESPUES del primer paint.
+      sliceStyles.css pinta body { background-color: var(--bg) }: sin --bg
+      definido todavia no hay fondo, y el canvas puede quedar con el color por
+      defecto del navegador hasta que el tema entra.
 
       Declararlos aqui como render-blocking hace que el primer paint ya tenga el
       fondo correcto, sin hardcodear ningun color: --bg sigue teniendo una sola

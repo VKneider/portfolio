@@ -1,11 +1,17 @@
-const CACHE_NAME = 'portfolio-pwa-v3';
+const CACHE_NAME = 'portfolio-pwa-v4';
 const APP_SHELL = [
   '/',
   '/App/index.html',
   '/App/index.js',
   '/App/style.css',
   '/manifest.json',
-  '/images/favicon.ico'
+  '/images/favicon.ico',
+  '/images/favicon.svg',
+  '/images/apple-touch-icon.png',
+  '/images/pwa/icon-192.png',
+  '/images/pwa/icon-512.png',
+  '/images/pwa/icon-maskable-192.png',
+  '/images/pwa/icon-maskable-512.png'
 ];
 
 const BUNDLE_URLS = [

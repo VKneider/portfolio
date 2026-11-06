@@ -12,6 +12,7 @@
 :root {
   /* 8 tokens canónicos */
   --bg:          #FAF7EE;
+  --primary-background-color: var(--bg);
   --surface-1:   #F5F1E8;
   --surface-2:   #EDE7D8;
   --border:      #D6CFC0;

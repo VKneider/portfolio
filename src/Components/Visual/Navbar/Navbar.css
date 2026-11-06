@@ -122,14 +122,34 @@
 .logo_container img {
   pointer-events: none;
   user-select: none;
-  width: 40px;
-  height: 40px;
-  max-height: 40px;
-  max-width: 40px;
+  width: auto;
+  height: 32px;
+  max-height: 32px;
+  max-width: 38px;
   display: block;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  border-radius: 0;
+  border: 0;
+  background: transparent;
   transition: transform 0.2s ease;
+}
+
+/* Dos variantes oficiales del monograma: la oscura para fondos indigo y la
+ * clara para fondos cream. ThemeManager expone el tema activo en
+ * <html data-slice-theme="Dark|Light">, así que el cambio ocurre en CSS. */
+.logo_container .logo-mark--dark {
+  display: none;
+}
+
+.logo_container .logo-mark--light {
+  display: block;
+}
+
+html[data-slice-theme="Dark"] .logo_container .logo-mark--dark {
+  display: block;
+}
+
+html[data-slice-theme="Dark"] .logo_container .logo-mark--light {
+  display: none;
 }
 
 .slice_nav_header .logo_container:hover img {
