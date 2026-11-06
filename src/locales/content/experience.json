@@ -54,44 +54,44 @@
       "logo": "/images/companies/propilven.png",
       "startYear": 2023,
       "endYear": 2023,
-      "technologies": ["Python", "SQL", "System Administration"],
+      "technologies": ["Python", "SQL", "Windows Server", "Industrial Automation", "System Administration"],
       "copy": {
         "en": {
-          "company": "Industrial automation company",
-          "position": "IT Department Intern",
+          "company": "Polipropileno de Venezuela (PROPILVEN, S.A.)",
+          "position": "Computer Engineer - AIT Department Internship",
           "period": "2023",
           "type": "Internship",
-          "location": "Venezuela",
-          "description": "Six-month internship in the IT department of an industrial automation company. I worked on internal tooling, process documentation, and day-to-day infrastructure support. No employer or client details are disclosed.",
+          "location": "Zulia, Venezuela",
+          "description": "Six-month internship in the Information and Technology (AIT) Department of Propilven, the Venezuelan polypropylene producer. I worked on automation systems and software solutions for industrial processes, together with infrastructure support and technical documentation.",
           "responsibilities": [
-            "Maintain internal automation and support tools",
-            "Document technical processes and procedures",
-            "Assist with infrastructure management and troubleshooting",
-            "Participate in system analysis and optimization work"
+            "Develop and maintain automation software systems",
+            "Assist with IT infrastructure management and troubleshooting",
+            "Create documentation for technical processes and procedures",
+            "Participate in system analysis and optimization projects"
           ],
           "achievements": [
-            "Completed the six-month internship",
-            "Left reusable documentation for internal processes",
-            "First contact with industrial IT environments"
+            "Completed the six-month internship program",
+            "Contributed to process automation improvements",
+            "Gained hands-on experience in industrial IT environments"
           ]
         },
         "es": {
-          "company": "Empresa de automatización industrial",
-          "position": "Pasante del departamento de TI",
+          "company": "Polipropileno de Venezuela (PROPILVEN, S.A.)",
+          "position": "Ingeniero en Computación - Pasantía en el departamento AIT",
           "period": "2023",
           "type": "Pasantía",
-          "location": "Venezuela",
-          "description": "Pasantía de seis meses en el departamento de TI de una empresa de automatización industrial. Trabajé en herramientas internas, documentación de procesos y soporte de infraestructura. No se divulgan datos del empleador ni de sus clientes.",
+          "location": "Zulia, Venezuela",
+          "description": "Pasantía de seis meses en el departamento de Información y Tecnología (AIT) de Propilven, productora venezolana de polipropileno. Trabajé en sistemas de automatización y soluciones de software para procesos industriales, junto con soporte de infraestructura y documentación técnica.",
           "responsibilities": [
-            "Mantener herramientas internas de automatización y soporte",
-            "Documentar procesos y procedimientos técnicos",
-            "Apoyar la gestión y el diagnóstico de la infraestructura",
-            "Participar en análisis y optimización de sistemas"
+            "Desarrollar y mantener sistemas de software para automatización",
+            "Apoyar la gestión y el diagnóstico de la infraestructura de TI",
+            "Crear documentación de procesos y procedimientos técnicos",
+            "Participar en proyectos de análisis y optimización de sistemas"
           ],
           "achievements": [
-            "Completé la pasantía de seis meses",
-            "Dejé documentación reutilizable de procesos internos",
-            "Primer contacto con entornos de TI industrial"
+            "Completé el programa de pasantía de seis meses",
+            "Contribuí a mejoras en la automatización de procesos",
+            "Adquirí experiencia práctica en entornos de TI industrial"
           ]
         }
       }
