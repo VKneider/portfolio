@@ -50,8 +50,7 @@ export default class Button extends HTMLElement {
    async init() {
       if (this.icon) {
          this.$icon = await slice.build('Icon', {
-            name: this.icon.name,           // ✅ CORREGIDO: usar this.icon.name
-            iconStyle: this.icon.iconStyle, // ✅ AÑADIDO: pasar también iconStyle
+            name: this.icon.name,
             size: '20px',
             color: 'currentColor',
          });
@@ -68,7 +67,6 @@ export default class Button extends HTMLElement {
       this._icon = value;
       if (!this.$icon) return;
       this.$icon.name = value.name;
-      this.$icon.iconStyle = value.iconStyle;
    }
 
    get audioOnClickEnabled() {

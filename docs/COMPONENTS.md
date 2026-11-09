@@ -345,6 +345,7 @@ No son propiedad del portfolio; son componentes de la librería o servicios que 
 | `Navbar` | Visual | Shell, navegación, logo, tema/locale, estado activo |
 | `MultiRoute` | Visual | Cambia la sección según la ruta |
 | `Button` | Visual | CTAs de hero, contacto, certificados y proyectos |
+| `Icon` | Visual | Iconos de UI. Lucide inline SVG (registry 2.0.0): sin fuente, un solo estilo y `aria-hidden` salvo que reciba `label` |
 | `Card` | Visual | Cards de las tres dimensiones en About |
 | `Grid` | Visual | Layout de las cards de About |
 | `SectionTitle` | Visual | Títulos de sección |
@@ -373,6 +374,8 @@ No son propiedad del portfolio; son componentes de la librería o servicios que 
 | `DragDropService` | Service | Random Facts / juegos |
 
 **Archivados:** `ImageDemo`, `MainMenu`, `MyNavigation`, `TeachingSection`, `TechExpertise`, `TechnicalSkillsSection`, `RandomFacts` y `BadgeCarousel` viven en `src/Components/Archived/`. **No están registrados en `components.js`**, así que no se construyen ni se bundlean. Se conservan como referencia; ver `Archived/README.md`. `ProjectViewer` y `ProjectCard` se retiraron al migrar Projects a la variante nueva.
+
+**Iconos:** `Icon` se actualizó al componente del registry `slicejs-components@2.0.0`, que dibuja SVG inline generados desde Lucide (`icons.generated.js`). Ya no hay `@font-face`, ni fuente `slc`, ni `iconStyle`: los consumidores pasan `name`, `size` y `color`. Los nombres públicos antiguos siguen resolviendo por `ALIASES`/`LEGACY_NODES`, y un nombre inválido deja el SVG vacío con un aviso en consola que sugiere el nombre correcto. `Card` y `Button` dejaron de reenviar `iconStyle`.
 
 ---
 

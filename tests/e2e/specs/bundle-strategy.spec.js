@@ -264,6 +264,8 @@ test.describe('Bundle loading strategy', () => {
     );
 
     const EVENT_TIMEOUT_MS = 10_000;
+    const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const vendorPath = `/bundles/${vendorBundleInfo.file}`;
 
     const waitWithTimeout = (promise, label, timeoutMs = EVENT_TIMEOUT_MS) =>
       Promise.race([
@@ -289,13 +291,15 @@ test.describe('Bundle loading strategy', () => {
       resolveFirstDependentRequest = resolve;
     });
 
-    await page.route(`**/bundles/${vendorBundleInfo.file}`, async (route) => {
+    // Bundle URLs carry a `?v=<hash>` cache-buster, so a glob that ends at the
+    // file name never matches. Match the pathname and ignore the query.
+    await page.route(new RegExp(`${escapeRegExp(vendorPath)}(\\?|$)`), async (route) => {
       vendorRequestCount += 1;
       await new Promise((resolve) => setTimeout(resolve, 300));
       await route.continue();
     });
 
-    const isVendorRequest = (req) => req.url().includes(`/bundles/${vendorBundleInfo.file}`);
+    const isVendorRequest = (req) => new URL(req.url()).pathname === vendorPath;
 
     page.on('request', (req) => {
       if (!isVendorRequest(req) || vendorStartedAt !== null) return;

@@ -319,19 +319,19 @@ export default class AboutSection extends HTMLElement {
          {
             title: slice.t.ref('about.cards.engineering.title'),
             text: slice.t.ref('about.cards.engineering.text'),
-            headerIcon: { name: 'cloud-arrow-up', color: 'var(--on-accent)', iconStyle: 'outlined' },
+            headerIcon: { name: 'cloud-arrow-up', color: 'var(--on-accent)' },
             path: '/experience'
          },
          {
             title: slice.t.ref('about.cards.teaching.title'),
             text: slice.t.ref('about.cards.teaching.text'),
-            headerIcon: { name: 'book-open', color: 'var(--on-accent)', iconStyle: 'outlined' },
+            headerIcon: { name: 'book-open', color: 'var(--on-accent)' },
             path: '/teaching'
          },
          {
             title: slice.t.ref('about.cards.research.title'),
             text: slice.t.ref('about.cards.research.text'),
-            headerIcon: { name: 'wand-magic-sparkles', color: 'var(--on-accent)', iconStyle: 'outlined' },
+            headerIcon: { name: 'wand-magic-sparkles', color: 'var(--on-accent)' },
             path: '/slice-js'
          }
       ];

@@ -427,7 +427,6 @@ export default class Card extends HTMLElement {
          name: this._iconName(this._icon),
          size: spec.size || 'var(--slice-card-icon-size)',
          color: spec.color || 'currentColor',
-         iconStyle: spec.iconStyle || 'outlined',
       });
       if (token !== this._tokens.media || !this._ready) {
          if (icon) slice.controller.destroyComponent(icon);
@@ -448,7 +447,7 @@ export default class Card extends HTMLElement {
          return;
       }
       const spec = typeof this._headerIcon === 'object' ? this._headerIcon : {};
-      const icon = await slice.build('Icon', { name, size: spec.size || '20px', color: spec.color || 'currentColor', iconStyle: spec.iconStyle || 'outlined' });
+      const icon = await slice.build('Icon', { name, size: spec.size || '20px', color: spec.color || 'currentColor' });
       if (token !== this._tokens.mark || !this._ready) {
          if (icon) slice.controller.destroyComponent(icon);
          return;

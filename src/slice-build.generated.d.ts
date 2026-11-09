@@ -214,6 +214,7 @@ export interface IconProps {
   [key: string]: unknown;
   color?: string;
   iconStyle?: string;
+  label?: string;
   name?: string;
   size?: string;
 }
