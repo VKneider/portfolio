@@ -99,6 +99,33 @@ slice-localeswitcher {
     visibility 0s linear 0s;
 }
 
+/* Auto/top: el menú se ancla al borde superior del botón y crece hacia arriba. */
+.locale-switcher__menu[data-placement="top"] {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform: translateY(4px) scale(0.98);
+  transform-origin: bottom right;
+}
+
+.locale-switcher__menu[data-placement="top"][data-open="true"] {
+  transform: translateY(0) scale(1);
+}
+
+/* En el overlay móvil el botón vive cerca del borde inferior: abre siempre
+   hacia arriba para que el menú no se pierda contra el viewport. */
+@media (max-width: 1020px) {
+  .locale-switcher__menu {
+    top: auto;
+    bottom: calc(100% + 8px);
+    transform: translateY(4px) scale(0.98);
+    transform-origin: bottom right;
+  }
+
+  .locale-switcher__menu[data-open="true"] {
+    transform: translateY(0) scale(1);
+  }
+}
+
 .locale-switcher__item {
   display: flex;
   align-items: center;

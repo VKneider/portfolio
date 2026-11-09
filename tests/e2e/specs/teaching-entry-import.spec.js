@@ -72,15 +72,17 @@ test.describe('Teaching data import', () => {
     await waitForApp(page);
 
     await expect(page.locator('.teaching-course__not-found')).toBeVisible();
-    await expect(page).toHaveTitle(/^Course Not Found \| Teaching \| /);
+    await expect(page).toHaveTitle(/^Course not found \| /i);
   });
 
   test('client-side navigation to another course refreshes title and content', async ({ page }) => {
     await page.goto('/teaching');
     await waitForApp(page);
-    await expect(page.locator('.teaching-card')).toHaveCount(3);
+    await expect(page.locator('.teaching-card')).toHaveCount(3, { timeout: 15_000 });
 
-    await page.locator('.teaching-card__link', { hasText: 'Component-Based Programming' }).click();
+    await page.locator('.teaching-card', { hasText: 'Component-Based Programming' })
+      .locator('.teaching-card__link')
+      .click();
     await expect(page).toHaveURL(/\/teaching\/components$/);
     await expect(page.locator('.teaching-course__name')).toContainText('Component-Based Programming');
     await expect(page).toHaveTitle(/^Component-Based Programming \| Teaching \| /);

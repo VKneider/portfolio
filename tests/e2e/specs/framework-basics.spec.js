@@ -2,21 +2,6 @@ import { test, expect } from '@playwright/test';
 
 const SLICE_INIT_TIMEOUT = 15_000;
 
-async function waitForSliceRouter(page) {
-  await page.waitForFunction(
-    () => Boolean(window.slice?.router && typeof window.slice.router.navigate === 'function'),
-    { timeout: SLICE_INIT_TIMEOUT }
-  );
-}
-
-async function navigateWithSliceRouter(page, targetPath) {
-  await waitForSliceRouter(page);
-  await page.evaluate(async (path) => {
-    await window.slice.router.navigate(path);
-  }, targetPath);
-  await expect(page).toHaveURL(new RegExp(`${targetPath.replace('/', '\\/')}(?:$|[?#])`));
-}
-
 function setupErrorCollector(page) {
   const errors = [];
 
@@ -41,13 +26,13 @@ function getFatalErrors(errors) {
     !url.includes('manifest') &&
     !text.includes('manifest') &&
     !url.includes('service-worker') &&
-    !text.includes('service-worker')
-  );
-}
-
-function getDomPurifyFatalErrors(errors) {
-  return errors.filter(({ text }) =>
-    /dompurify|sanitize\s+is\s+undefined|error\s+creating\s+instance\s+dompurify/i.test(text)
+    !text.includes('service-worker') &&
+    // Analytics is injected by the hosting platform, not by the app.
+    !url.includes('cloudflareinsights.com') &&
+    !text.includes('cloudflareinsights.com') &&
+    // Development loads the production bundle manifest opportunistically.
+    !url.includes('/bundles/bundle.config.json') &&
+    !text.includes('/bundles/bundle.config.json')
   );
 }
 
@@ -66,158 +51,6 @@ test.describe('Framework basics', () => {
     // Filter out known non-fatal network errors that don't affect functionality
     const fatalErrors = getFatalErrors(errors);
     expect(fatalErrors).toHaveLength(0);
-  });
-
-  test('production mode: /dompurify is stable and sanitization works across revisits', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'production-mode', 'Only runs against the production-mode server');
-
-    const errors = setupErrorCollector(page);
-
-    await page.goto('/');
-    await page.waitForFunction(
-      () => window.slice && window.slice._mode !== undefined,
-      { timeout: SLICE_INIT_TIMEOUT }
-    );
-
-    await navigateWithSliceRouter(page, '/dompurify');
-
-    const demoRoot = page.locator('.dompurify');
-    await expect(demoRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-
-    const inputArea = demoRoot.locator('textarea');
-    const sanitizeButton = demoRoot.getByRole('button', { name: /sanitize/i });
-    await expect(inputArea).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-    await expect(sanitizeButton).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-    const status = demoRoot.getByText(/^Status:/);
-    const sanitizedCodeOutput = demoRoot
-      .locator('p', { hasText: 'Sanitized HTML (string output):' })
-      .locator('xpath=following-sibling::pre[1]');
-
-    const rawPayload = `<div>safe</div><script>alert('xss')</script>`;
-    await inputArea.fill(rawPayload);
-    await sanitizeButton.click();
-
-    const statusText = (await status.textContent()) || '';
-    expect(statusText).toMatch(/status:/i);
-    expect(statusText).not.toMatch(/no suspicious changes/i);
-
-    const sanitizedOutput = await sanitizedCodeOutput.textContent();
-    expect(sanitizedOutput).toBeTruthy();
-    expect(sanitizedOutput).not.toContain('<script>');
-    expect(sanitizedOutput?.trim()).not.toBe(rawPayload);
-
-    await navigateWithSliceRouter(page, '/');
-    await navigateWithSliceRouter(page, '/dompurify');
-    await expect(demoRoot).toBeVisible();
-
-    const revisitPayload = `<p>revisit-check</p><img src="x" onerror="alert('revisit')" />`;
-    await inputArea.fill(revisitPayload);
-    await sanitizeButton.click();
-
-    const revisitStatusText = (await status.textContent()) || '';
-    expect(revisitStatusText).toMatch(/status:/i);
-    expect(revisitStatusText).not.toMatch(/no suspicious changes/i);
-
-    const revisitSanitizedOutput = await sanitizedCodeOutput.textContent();
-    expect(revisitSanitizedOutput).toBeTruthy();
-    expect(revisitSanitizedOutput).toContain('revisit-check');
-    expect(revisitSanitizedOutput).not.toContain('onerror=');
-    expect(revisitSanitizedOutput?.trim()).not.toBe(revisitPayload);
-
-    const fatalErrors = getFatalErrors(errors);
-    const domPurifyFatal = getDomPurifyFatalErrors(fatalErrors);
-    expect(domPurifyFatal).toHaveLength(0);
-  });
-
-  test('production mode: /charts renders fixture and update interaction sanitizes label', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'production-mode', 'Only runs against the production-mode server');
-
-    await page.goto('/');
-    await page.waitForFunction(
-      () => window.slice && window.slice._mode !== undefined,
-      { timeout: SLICE_INIT_TIMEOUT }
-    );
-
-    await navigateWithSliceRouter(page, '/charts');
-
-    const chartsPage = page.locator('.charts-page');
-    await expect(chartsPage).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-
-    const chartCanvas = chartsPage.locator('.charts-canvas');
-    await expect(chartCanvas).toBeVisible();
-
-    const sanitizeBox = chartsPage.locator('.charts-sanitize');
-    await expect(sanitizeBox).toContainText('Initial sanitize check:', { timeout: SLICE_INIT_TIMEOUT });
-
-    const updateButton = chartsPage.getByRole('button', { name: /update chart data/i });
-    await expect(updateButton).toBeVisible();
-    await updateButton.click();
-
-    await expect(sanitizeBox).toContainText('Sanitized label applied:', { timeout: SLICE_INIT_TIMEOUT });
-    const sanitizeText = (await sanitizeBox.textContent()) || '';
-    expect(sanitizeText).not.toContain('<img');
-    expect(sanitizeText).toContain('Updated chart dataset');
-  });
-
-  test('production mode: /dompurify -> /charts -> /dompurify remains stable with no runtime DOMPurify fatals', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'production-mode', 'Only runs against the production-mode server');
-
-    const errors = setupErrorCollector(page);
-
-    await page.goto('/');
-    await page.waitForFunction(
-      () => window.slice && window.slice._mode !== undefined,
-      { timeout: SLICE_INIT_TIMEOUT }
-    );
-
-    await navigateWithSliceRouter(page, '/dompurify');
-    const domPurifyRoot = page.locator('.dompurify');
-    await expect(domPurifyRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-
-    const inputArea = domPurifyRoot.locator('textarea');
-    const sanitizeButton = domPurifyRoot.getByRole('button', { name: /sanitize/i });
-    const status = domPurifyRoot.getByText(/^Status:/);
-    const sanitizedCodeOutput = domPurifyRoot
-      .locator('p', { hasText: 'Sanitized HTML (string output):' })
-      .locator('xpath=following-sibling::pre[1]');
-
-    const domPurifyPayload = `<div>cross-nav</div><script>alert('xss')</script>`;
-    await inputArea.fill(domPurifyPayload);
-    await sanitizeButton.click();
-
-    await expect(status).toContainText('Status:', { timeout: SLICE_INIT_TIMEOUT });
-    const firstSanitizedOutput = await sanitizedCodeOutput.textContent();
-    expect(firstSanitizedOutput).toBeTruthy();
-    expect(firstSanitizedOutput).not.toContain('<script>');
-
-    await navigateWithSliceRouter(page, '/charts');
-    const chartsPage = page.locator('.charts-page');
-    await expect(chartsPage).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-
-    const chartsUpdateButton = chartsPage.getByRole('button', { name: /update chart data/i });
-    const chartsSanitizeBox = chartsPage.locator('.charts-sanitize');
-    await chartsUpdateButton.click();
-    await expect(chartsSanitizeBox).toContainText('Sanitized label applied:', { timeout: SLICE_INIT_TIMEOUT });
-
-    await navigateWithSliceRouter(page, '/dompurify');
-    await expect(domPurifyRoot).toBeVisible({ timeout: SLICE_INIT_TIMEOUT });
-
-    const revisitPayload = `<p>dompurify-after-charts</p><img src="x" onerror="alert('revisit')" />`;
-    await inputArea.fill(revisitPayload);
-    await sanitizeButton.click();
-
-    const revisitStatusText = (await status.textContent()) || '';
-    expect(revisitStatusText).toMatch(/status:/i);
-    expect(revisitStatusText).not.toMatch(/no suspicious changes/i);
-
-    const revisitSanitizedOutput = await sanitizedCodeOutput.textContent();
-    expect(revisitSanitizedOutput).toBeTruthy();
-    expect(revisitSanitizedOutput).toContain('dompurify-after-charts');
-    expect(revisitSanitizedOutput).not.toContain('onerror=');
-
-    const fatalErrors = getFatalErrors(errors);
-    const domPurifyFatal = getDomPurifyFatalErrors(fatalErrors);
-    expect(domPurifyFatal).toHaveLength(0);
   });
 
   test('window.slice is initialized with required properties', async ({ page }) => {

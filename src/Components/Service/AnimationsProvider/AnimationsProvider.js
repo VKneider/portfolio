@@ -359,14 +359,26 @@ export default class AnimationsProvider {
             const elementIndex = els.indexOf(el);
             const delay = delayStep > 0 && elementIndex >= 0 ? elementIndex * delayStep : 0;
 
-            this._animate(el, {
+            const motion = {
                opacity: [0, 1],
-               translateX: ['none'],
-               translateY: ['none'],
                duration,
                delay,
-               ease: 'outCubic'
-            });
+               ease: 'outCubic',
+               onComplete: () => {
+                  // Limpia el transform inline del estado inicial; si no, el
+                  // elemento queda desplazado para siempre (el footer del
+                  // About acababa debajo del borde del footer global).
+                  el.style.opacity = '1';
+                  el.style.transform = '';
+               }
+            };
+
+            if (direction === 'up') motion.translateY = [distance, 0];
+            else if (direction === 'down') motion.translateY = [-distance, 0];
+            else if (direction === 'left') motion.translateX = [-distance, 0];
+            else if (direction === 'right') motion.translateX = [distance, 0];
+
+            this._animate(el, motion);
 
             if (once) observer.unobserve(el);
          });

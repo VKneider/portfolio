@@ -1,12 +1,9 @@
 slice-built-with-badge {
-    position: fixed !important;
-    bottom: 2rem !important;
-    left: 2rem !important;
-    z-index: 10000 !important;
+    position: static;
+    display: inline-block;
     font-family: inherit;
     cursor: pointer;
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: block; /* Ensure it has layout */
     width: fit-content;
 }
 
@@ -39,11 +36,4 @@ slice-built-with-badge .slice-framework-name {
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-@media (max-width: 1020px) {
-    /* En mobile/tablet el badge flota sobre cards y CTAs; es decorativo. */
-    slice-built-with-badge {
-        display: none !important;
-    }
 }

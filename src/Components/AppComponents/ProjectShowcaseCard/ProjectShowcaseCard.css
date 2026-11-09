@@ -1,0 +1,134 @@
+slice-project-showcase-card {
+  display: block;
+}
+
+.project-v2-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.project-v2-card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-slice);
+  background: var(--surface-2);
+}
+
+.project-v2-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.project-v2-card-media:hover img {
+  transform: scale(1.02);
+}
+
+.project-v2-card-media:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project-v2-year {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.project-v2-card-body {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.project-v2-eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.project-v2-card-body h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.project-v2-card-body h2 a {
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.project-v2-card-body h2 a:hover {
+  color: var(--accent);
+}
+
+.project-v2-card-body h2 a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project-v2-summary {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.58;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-v2-meta {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+}
+
+.project-v2-link {
+  margin-top: 2px;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.project-v2-link:hover {
+  opacity: 0.72;
+}
+
+.project-v2-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .project-v2-card-body h2 {
+    font-size: 1.45rem;
+  }
+}

@@ -1,64 +1,211 @@
 <div class="whatisslice-container">
-  <section class="manifesto-hero">
-    <div class="hero-copy">
-      <p class="eyebrow" data-t="what.manifesto"></p>
-      <h1 data-t="what.title"></h1>
-      <p data-t="what.intro"></p>
-      <p class="hero-emphasis" data-t="what.purpose"></p>
-      <ul class="hero-tags" data-t="what.aria.values" aria-label>
-        <li data-t="what.values.webComponents"></li>
-        <li data-t="what.values.learning"></li>
-        <li data-t="what.values.architecture"></li>
-      </ul>
+  <section class="slice-case-hero">
+    <div class="slice-case-copy">
+      <p class="eyebrow" data-t="what.hero.eyebrow"></p>
+      <h1 data-t="what.hero.title"></h1>
+      <p class="slice-case-lede" data-t="what.hero.lede"></p>
+      <div class="slice-case-actions">
+        <a class="case-action case-action--primary" href="https://slicejs.com/" target="_blank" rel="noopener noreferrer" data-t="what.hero.actions.docs"></a>
+        <a class="case-action" href="https://github.com/VKneider/slice.js" target="_blank" rel="noopener noreferrer" data-t="what.hero.actions.github"></a>
+        <a class="case-action" href="https://revistas.fondoeditorial.uru.edu/index.php/tecnocientificauru/article/view/705" target="_blank" rel="noopener noreferrer" data-t="what.hero.actions.paper"></a>
+      </div>
     </div>
 
-    <div class="hero-visual" aria-hidden="true">
+    <div class="slice-case-visual">
       <div class="logo-panel">
         <img src="/images/Slice.js-logo.png" alt="Slice.js Logo" class="slice-logo">
-        <p class="logo-caption" data-t="what.logoCaption"></p>
+        <p class="logo-caption" data-t="what.hero.logoCaption"></p>
       </div>
     </div>
   </section>
 
-  <section class="narrative-strip" data-t="what.aria.narrative" aria-label>
-    <article class="narrative-card">
-      <h2 data-t="what.narrative.why.title"></h2>
-      <p data-t="what.narrative.why.text"></p>
-    </article>
-
-    <article class="narrative-card">
-      <h2 data-t="what.narrative.how.title"></h2>
-      <p data-t="what.narrative.how.text"></p>
-    </article>
-
-    <article class="narrative-card">
-      <h2 data-t="what.narrative.not.title"></h2>
-      <p data-t="what.narrative.not.text"></p>
-    </article>
-  </section>
-
-  <section class="ecosystem-section">
-    <div class="section-head">
-      <p class="eyebrow" data-t="what.ecosystem.eyebrow"></p>
-      <h2 data-t="what.ecosystem.title"></h2>
-      <p data-t="what.ecosystem.description"></p>
+  <section class="slice-glance">
+    <div class="slice-glance-item">
+      <span class="slice-glance-label" data-t="what.glance.role.label"></span>
+      <strong data-t="what.glance.role.value"></strong>
     </div>
-    <div class="ecosystem-grid"></div>
+    <div class="slice-glance-item">
+      <span class="slice-glance-label" data-t="what.glance.period.label"></span>
+      <strong data-t="what.glance.period.value"></strong>
+    </div>
+    <div class="slice-glance-item">
+      <span class="slice-glance-label" data-t="what.glance.stack.label"></span>
+      <strong data-t="what.glance.stack.value"></strong>
+    </div>
+    <div class="slice-glance-item">
+      <span class="slice-glance-label" data-t="what.glance.status.label"></span>
+      <strong data-t="what.glance.status.value"></strong>
+    </div>
   </section>
 
-  <section class="collaborate-section">
+  <section class="slice-section slice-built-section">
     <div class="section-head">
+      <p class="eyebrow" data-t="what.built.eyebrow"></p>
+      <h2 data-t="what.built.title"></h2>
+      <p data-t="what.built.description"></p>
+    </div>
+    <ol class="slice-built-list">
+      <li>
+        <span class="slice-built-index" aria-hidden="true">01</span>
+        <div class="slice-built-body">
+          <h3 data-t="what.built.items.runtime.title"></h3>
+          <p data-t="what.built.items.runtime.text"></p>
+          <a class="slice-text-link" href="https://slicejs.com/" target="_blank" rel="noopener noreferrer" data-t="what.built.items.runtime.link"></a>
+        </div>
+      </li>
+      <li>
+        <span class="slice-built-index" aria-hidden="true">02</span>
+        <div class="slice-built-body">
+          <h3 data-t="what.built.items.cli.title"></h3>
+          <p data-t="what.built.items.cli.text"></p>
+          <a class="slice-text-link" href="https://github.com/VKneider/slicejs-cli" target="_blank" rel="noopener noreferrer" data-t="what.built.items.cli.link"></a>
+        </div>
+      </li>
+      <li>
+        <span class="slice-built-index" aria-hidden="true">03</span>
+        <div class="slice-built-body">
+          <h3 data-t="what.built.items.components.title"></h3>
+          <p data-t="what.built.items.components.text"></p>
+          <a class="slice-text-link" href="https://components.slicejs.com/" target="_blank" rel="noopener noreferrer" data-t="what.built.items.components.link"></a>
+        </div>
+      </li>
+      <li>
+        <span class="slice-built-index" aria-hidden="true">04</span>
+        <div class="slice-built-body">
+          <h3 data-t="what.built.items.docs.title"></h3>
+          <p data-t="what.built.items.docs.text"></p>
+          <a class="slice-text-link" href="https://slicejs.com/" target="_blank" rel="noopener noreferrer" data-t="what.built.items.docs.link"></a>
+        </div>
+      </li>
+      <li>
+        <span class="slice-built-index" aria-hidden="true">05</span>
+        <div class="slice-built-body">
+          <h3 data-t="what.built.items.mcp.title"></h3>
+          <p data-t="what.built.items.mcp.text"></p>
+          <a class="slice-text-link" href="https://github.com/VKneider/slicejs-mcp" target="_blank" rel="noopener noreferrer" data-t="what.built.items.mcp.link"></a>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="slice-section">
+    <div class="section-head">
+      <p class="eyebrow" data-t="what.decisions.eyebrow"></p>
+      <h2 data-t="what.decisions.title"></h2>
+      <p data-t="what.decisions.description"></p>
+    </div>
+    <div class="slice-table-wrap">
+      <table class="slice-decisions-table">
+        <thead>
+          <tr>
+            <th scope="col" data-t="what.decisions.table.decision"></th>
+            <th scope="col" data-t="what.decisions.table.why"></th>
+            <th scope="col" data-t="what.decisions.table.cost"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-t="what.decisions.items.platform.title"></th>
+            <td data-t="what.decisions.items.platform.text"></td>
+            <td data-t="what.decisions.items.platform.cost"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-t="what.decisions.items.lifecycle.title"></th>
+            <td data-t="what.decisions.items.lifecycle.text"></td>
+            <td data-t="what.decisions.items.lifecycle.cost"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-t="what.decisions.items.buildless.title"></th>
+            <td data-t="what.decisions.items.buildless.text"></td>
+            <td data-t="what.decisions.items.buildless.cost"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-t="what.decisions.items.registry.title"></th>
+            <td data-t="what.decisions.items.registry.text"></td>
+            <td data-t="what.decisions.items.registry.cost"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slice-section">
+    <div class="section-head">
+      <p class="eyebrow" data-t="what.evidence.eyebrow"></p>
+      <h2 data-t="what.evidence.title"></h2>
+      <p data-t="what.evidence.description"></p>
+    </div>
+    <div class="slice-evidence-layout">
+      <div class="slice-metrics">
+        <div class="slice-metric">
+          <strong>2022</strong>
+          <span data-t="what.evidence.metrics.started"></span>
+        </div>
+        <div class="slice-metric">
+          <strong>120+</strong>
+          <span data-t="what.evidence.metrics.students"></span>
+        </div>
+        <div class="slice-metric">
+          <strong>4</strong>
+          <span data-t="what.evidence.metrics.surfaces"></span>
+        </div>
+        <div class="slice-metric">
+          <strong>v4.2</strong>
+          <span data-t="what.evidence.metrics.version"></span>
+        </div>
+      </div>
+      <ul class="slice-proof-list">
+        <li>
+          <a href="https://revistas.fondoeditorial.uru.edu/index.php/tecnocientificauru/article/view/705" target="_blank" rel="noopener noreferrer">
+            <span class="slice-proof-label" data-t="what.evidence.items.paper.label"></span>
+            <span data-t="what.evidence.items.paper.text"></span>
+          </a>
+          <a class="slice-proof-alt" href="https://zenodo.org/records/17651991" target="_blank" rel="noopener noreferrer" data-t="what.evidence.items.paper.zenodo"></a>
+        </li>
+        <li>
+          <a href="/teaching" data-route="/teaching">
+            <span class="slice-proof-label" data-t="what.evidence.items.classroom.label"></span>
+            <span data-t="what.evidence.items.classroom.text"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://components.slicejs.com/" target="_blank" rel="noopener noreferrer">
+            <span class="slice-proof-label" data-t="what.evidence.items.library.label"></span>
+            <span data-t="what.evidence.items.library.text"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/projects" data-route="/projects">
+            <span class="slice-proof-label" data-t="what.evidence.items.production.label"></span>
+            <span data-t="what.evidence.items.production.text"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slice-status">
+    <div class="slice-status-col">
       <p class="eyebrow" data-t="what.collaborate.eyebrow"></p>
       <h2 data-t="what.collaborate.title"></h2>
+      <p data-t="what.collaborate.description"></p>
     </div>
-    <ul>
-      <li data-t="what.collaborate.issues"></li>
-      <li data-t="what.collaborate.docs"></li>
-      <li data-t="what.collaborate.experiments"></li>
-    </ul>
+    <div class="slice-status-col">
+      <h3 data-t="what.collaborate.contributeTitle"></h3>
+      <ul>
+        <li data-t="what.collaborate.issues"></li>
+        <li data-t="what.collaborate.docs"></li>
+        <li data-t="what.collaborate.experiments"></li>
+      </ul>
+    </div>
   </section>
 
-  <section class="closing-motto">
+  <section class="slice-closing-band">
     <p data-t="what.closing"></p>
+    <div class="slice-case-actions">
+      <a class="case-action case-action--primary" href="https://slicejs.com/" target="_blank" rel="noopener noreferrer" data-t="what.actions.docs"></a>
+      <a class="case-action" href="https://github.com/VKneider/slice.js" target="_blank" rel="noopener noreferrer" data-t="what.actions.github"></a>
+      <a class="case-action" href="https://revistas.fondoeditorial.uru.edu/index.php/tecnocientificauru/article/view/705" target="_blank" rel="noopener noreferrer" data-t="what.actions.paper"></a>
+    </div>
   </section>
 </div>

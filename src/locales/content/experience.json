@@ -1,7 +1,59 @@
 {
   "records": [
     {
+      "id": 1,
+      "shortCompany": "Software Startup",
+      "startYear": 2025,
+      "endYear": null,
+      "technologies": ["Distributed Systems", "Full-stack", "LLM Integration", "Architecture"],
+      "copy": {
+        "en": {
+          "company": "Software Startup",
+          "position": "Lead Software Engineer",
+          "period": "2025 — Present",
+          "type": "Full-time",
+          "location": "Remote",
+          "description": "Lead software engineer at a software startup. I design distributed architectures, maintain the core software and shared libraries, and lead LLM integration. I also author proposals to improve productivity and optimize internal workflows. Details available on request.",
+          "responsibilities": [
+            "Design and evolve distributed architectures for product systems",
+            "Act as principal maintainer of the core software and shared libraries",
+            "Lead full-stack delivery across frontend, backend and data boundaries",
+            "Lead LLM integration: architecture, evaluation and production rollout",
+            "Author productivity and workflow proposals for the company"
+          ],
+          "achievements": [
+            "Design distributed architectures for production systems",
+            "Principal maintainer of the core software and shared libraries",
+            "Lead LLM integration from architecture to production rollout",
+            "Author of internal productivity and workflow proposals"
+          ]
+        },
+        "es": {
+          "company": "Software Startup",
+          "position": "Lead Software Engineer",
+          "period": "2025 — Actualidad",
+          "type": "Tiempo completo",
+          "location": "Remoto",
+          "description": "Lead Software Engineer en una startup de software. Diseño arquitecturas distribuidas, mantengo el software y las librerías principales, y lidero la integración con LLMs. También elaboro propuestas para mejorar la productividad y optimizar los flujos internos. Detalles disponibles a solicitud.",
+          "responsibilities": [
+            "Diseñar y evolucionar arquitecturas distribuidas para sistemas de producto",
+            "Ser el mantenedor principal del software y las librerías compartidas",
+            "Liderar la entrega full-stack entre frontend, backend y datos",
+            "Liderar la integración con LLMs: arquitectura, evaluación y puesta en producción",
+            "Elaborar propuestas de productividad y flujos de trabajo para la empresa"
+          ],
+          "achievements": [
+            "Diseño arquitecturas distribuidas para sistemas en producción",
+            "Mantenedor principal del software y las librerías compartidas",
+            "Liderazgo de la integración con LLMs, de la arquitectura a producción",
+            "Autor de propuestas internas de productividad y flujos de trabajo"
+          ]
+        }
+      }
+    },
+    {
       "id": 2,
+      "shortCompany": "URU",
       "logo": "/images/uru-logo-seo.png",
       "startYear": 2024,
       "endYear": null,
@@ -22,9 +74,9 @@
             "Research and develop the Slice.js framework"
           ],
           "achievements": [
-            "Slice.js used in academic and personal projects",
-            "Course repositories reused across terms",
-            "Active-learning methods incorporated into the curriculum"
+            "Designed course repositories reused across terms by 120+ students",
+            "Used Slice.js as the teaching framework in component-based programming",
+            "Incorporated active-learning methods into the curriculum"
           ]
         },
         "es": {
@@ -42,15 +94,16 @@
             "Investigar y desarrollar el framework Slice.js"
           ],
           "achievements": [
-            "Slice.js utilizado en proyectos académicos y personales",
-            "Repositorios de curso reutilizados entre semestres",
-            "Métodos de aprendizaje activo incorporados al currículo"
+            "Diseñé repositorios de curso reutilizados entre semestres por 120+ estudiantes",
+            "Usé Slice.js como framework de enseñanza en programación basada en componentes",
+            "Incorporé métodos de aprendizaje activo al currículo"
           ]
         }
       }
     },
     {
       "id": 3,
+      "shortCompany": "PROPILVEN",
       "logo": "/images/companies/propilven.png",
       "startYear": 2023,
       "endYear": 2023,
@@ -70,9 +123,9 @@
             "Participate in system analysis and optimization projects"
           ],
           "achievements": [
-            "Completed the six-month internship program",
-            "Contributed to process automation improvements",
-            "Gained hands-on experience in industrial IT environments"
+            "Six-month internship in the AIT department of a polypropylene plant",
+            "Delivered automation documentation used by the AIT team",
+            "Supported industrial IT infrastructure and process automation"
           ]
         },
         "es": {
@@ -89,15 +142,16 @@
             "Participar en proyectos de análisis y optimización de sistemas"
           ],
           "achievements": [
-            "Completé el programa de pasantía de seis meses",
-            "Contribuí a mejoras en la automatización de procesos",
-            "Adquirí experiencia práctica en entornos de TI industrial"
+            "Pasantía de seis meses en el departamento AIT de una planta de polipropileno",
+            "Entregué documentación de automatización usada por el equipo AIT",
+            "Apoyé infraestructura de TI industrial y automatización de procesos"
           ]
         }
       }
     },
     {
       "id": 4,
+      "shortCompany": "Independent",
       "logo": "/images/companies/freelance.png",
       "startYear": 2020,
       "endYear": null,

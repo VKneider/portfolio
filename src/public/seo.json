@@ -33,6 +33,15 @@
       "description": { "t": "seo.descriptions.projects" },
       "sitemap": { "priority": 0.8, "changefreq": "monthly" }
     },
+    "/projects/${slug}": {
+      "title": { "t": "routes.projects" },
+      "description": { "t": "seo.descriptions.projects" },
+      "sitemap": {
+        "paths": ["slicejs-components", "conclave", "parish-automated-ecosystem"],
+        "priority": 0.6,
+        "changefreq": "monthly"
+      }
+    },
     "/contact": {
       "title": { "t": "routes.contact" },
       "description": { "t": "seo.descriptions.contact" },
@@ -58,30 +67,11 @@
       "robots": false,
       "sitemap": false
     },
-    "/charts": {
-      "title": { "t": "routes.charts" },
-      "description": { "t": "seo.descriptions.charts" },
-      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
-    },
-    "/animejs": {
-      "title": { "t": "routes.animations" },
-      "description": { "t": "seo.descriptions.animations" },
-      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
-    },
-    "/dompurify": {
-      "title": { "t": "routes.dompurify" },
-      "description": { "t": "seo.descriptions.dompurify" },
-      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
-    },
-    "/bare-imports": {
-      "title": { "t": "routes.bareImports" },
-      "description": { "t": "seo.descriptions.bareImports" },
-      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
-    },
     "/imposter": {
       "title": { "t": "routes.imposter" },
       "description": { "t": "seo.descriptions.imposter" },
-      "sitemap": { "priority": 0.4, "changefreq": "monthly" }
+      "robots": false,
+      "sitemap": false
     }
   },
   "locales": {

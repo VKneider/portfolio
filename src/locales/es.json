@@ -28,8 +28,9 @@
     "teaching": "Docencia",
     "contact": "Contacto"
   },
-  "footer": {
-    "poweredBy": "Hecho con"
+  "carousel": {
+    "prev": { "ariaLabel": "Diapositiva anterior" },
+    "next": { "ariaLabel": "Diapositiva siguiente" }
   },
   "seo": {
     "titleSuffix": " | Victor Kneider — Diseño y arquitectura de software profesional",
@@ -45,10 +46,6 @@
       "teaching": "Programas de curso y materiales de programación y diseño basado en componentes.",
       "teachingCourse": "Programa del curso y materiales.",
       "notFound": "Página no encontrada.",
-      "charts": "Gráficas interactivas construidas con Slice.js.",
-      "animations": "Experimentos de animación construidos con Slice.js.",
-      "dompurify": "Renderizado seguro de HTML con DOMPurify y Slice.js.",
-      "bareImports": "Uso de paquetes npm mediante bare imports en Slice.js.",
       "imposter": "The Imposter Game, construido con Slice.js."
     },
     "notFound": {
@@ -58,10 +55,6 @@
   },
   "routes": {
     "about": "Sobre mí",
-    "charts": "Gráficas",
-    "dompurify": "DOMPurify",
-    "animations": "Animaciones",
-    "bareImports": "Bare Imports",
     "experience": "Experiencia",
     "education": "Formación",
     "slice": "Slice.js",
@@ -131,6 +124,36 @@
       "prev": { "ariaLabel": "Imagen anterior" },
       "next": { "ariaLabel": "Imagen siguiente" },
       "image": { "alt": "Imagen ampliada del proyecto" }
+    },
+    "index": {
+      "eyebrow": "Trabajo seleccionado",
+      "title": "Proyectos",
+      "lede": "Una colección de productos, librerías y sistemas que he diseñado y construido.",
+      "readCase": "Leer caso",
+      "more": "Más proyectos",
+      "selectedWork": "Trabajo seleccionado",
+      "empty": "Aún no hay proyectos.",
+      "carousel": {
+        "prev": "Imagen anterior",
+        "next": "Imagen siguiente",
+        "screenshots": "Capturas del proyecto"
+      },
+      "back": "Todos los proyectos",
+      "notFound": "Proyecto no encontrado",
+      "notFoundText": "No existe un proyecto con la dirección {slug}.",
+      "labels": {
+        "category": "Categoría",
+        "role": "Rol",
+        "team": "Equipo",
+        "duration": "Duración",
+        "stack": "Stack",
+        "problem": "El problema",
+        "built": "Qué construí",
+        "tradeoffs": "Trade-offs",
+        "result": "Resultado",
+        "learned": "Qué aprendí",
+        "gallery": "Galería"
+      }
     }
   },
   "teaching": {
@@ -160,8 +183,8 @@
   },
   "contact": {
     "eyebrow": "Contacto",
-    "title": "Construyamos algo que aguante.",
-    "lede": "Trabajo en sistemas de componentes, productos full-stack y formación técnica. Si estás diseñando algo complejo —o necesitas que alguien lo haga legible— cuéntame qué estás construyendo.",
+    "title": "Hablemos por LinkedIn.",
+    "lede": "Trabajo en arquitecturas distribuidas, sistemas de componentes y productos full-stack. La forma más rápida de contactarme es LinkedIn.",
     "location": "Maracaibo, Venezuela · Trabajo en remoto",
     "helpTitle": "En qué puedo ayudar",
     "help": {
@@ -183,91 +206,258 @@
       }
     },
     "viewProjects": "Ver proyectos",
-    "email": "Escríbeme",
-    "linkedin": "Conectar en LinkedIn",
-    "subject": "Consulta de proyecto"
+    "linkedin": "Conectar en LinkedIn"
   },
   "what": {
-    "manifesto": "Manifiesto Slice",
-    "title": "Slice nace para enseñar construyendo.",
-    "intro": "Slice.js nace como un framework para aprender, de forma práctica, los patrones centrales de la programación basada en componentes y los frameworks modernos.",
-    "purpose": "Su propósito es ayudarte a construir aplicaciones web completas desde una perspectiva vanilla, sin abstracciones no estándar ni sintaxis fuera de HTML, CSS y JavaScript. No busca competir: busca otra forma de construir.",
-    "values": {
-      "webComponents": "Web Components",
-      "learning": "Aprender haciendo",
-      "architecture": "Arquitectura con intención"
+    "logoAria": "Logos 3D de Slice.js y vkneider.dev",
+    "hero": {
+      "eyebrow": "Caso de estudio",
+      "title": "Slice.js",
+      "lede": "Un framework de componentes construido sobre Web Components nativos. Lo diseño, lo construyo y lo mantengo — y lo uso para enseñar cómo funciona un framework por dentro.",
+      "logoCaption": "El framework, sus componentes, su documentación y su catálogo MCP: un solo ecosistema.",
+      "actions": {
+        "docs": "Leer la documentación",
+        "github": "GitHub",
+        "paper": "Paper"
+      }
     },
-    "aria": {
-      "values": { "ariaLabel": "Valores de Slice" },
-      "narrative": { "ariaLabel": "Narrativa de Slice" }
+    "glance": {
+      "role": { "label": "Rol", "value": "Creador y mantenedor" },
+      "period": { "label": "Desde", "value": "2022" },
+      "stack": { "label": "Stack", "value": "JavaScript · Web Components · Node.js" },
+      "status": { "label": "Estado", "value": "Código abierto · v4.2" }
     },
-    "logoCaption": "Un ecosistema práctico para construir y entender sistemas frontend modernos.",
-    "narrative": {
-      "why": {
-        "title": "Por qué",
-        "text": "Para cerrar la brecha entre la teoría de la documentación y la realidad diaria de construir productos."
+    "built": {
+      "eyebrow": "Qué construí",
+      "title": "Un framework, no una demo.",
+      "description": "Slice es una cadena de herramientas completa: runtime, CLI, librería de componentes, documentación y catálogo MCP.",
+      "items": {
+        "runtime": {
+          "title": "Runtime",
+          "text": "Ciclo de vida de componentes, props mediante setters, eventos, contexto y router — sobre la plataforma, no alrededor de ella.",
+          "link": "Leer la documentación"
+        },
+        "cli": {
+          "title": "CLI y build",
+          "text": "Scaffolding, servidor de desarrollo, bundling de producción, generación de tipos y un comando doctor que detecta proyectos rotos antes del deploy.",
+          "link": "Repo de la CLI"
+        },
+        "components": {
+          "title": "Librería de componentes",
+          "text": "Componentes Visual y Service con APIs documentadas, ejemplos y tests; usados por Conclave y aplicaciones externas.",
+          "link": "Abrir librería"
+        },
+        "docs": {
+          "title": "Documentación",
+          "text": "Conceptos, guías y referencia de API escritos desde el código, no desde el marketing.",
+          "link": "Abrir docs"
+        },
+        "mcp": {
+          "title": "Catálogo MCP",
+          "text": "Un catálogo de documentación legible por máquinas para que los flujos asistidos por IA consulten Slice sin adivinar.",
+          "link": "Repo MCP"
+        }
+      }
+    },
+    "decisions": {
+      "eyebrow": "Decisiones de arquitectura",
+      "title": "Trade-offs elegidos a propósito.",
+      "description": "Lo interesante de un framework es lo que decide no hacer. Estas son las decisiones que dan forma a Slice.",
+      "table": {
+        "decision": "Decisión",
+        "why": "Por qué",
+        "cost": "Coste"
       },
-      "how": {
-        "title": "Cómo",
-        "text": "Adoptando APIs nativas del navegador, ciclos de vida explícitos y una arquitectura transparente."
+      "items": {
+        "platform": {
+          "title": "Web Components nativos en vez de DOM virtual",
+          "text": "El navegador ya tiene un modelo de componentes. Slice lo usa directamente en vez de enviar un segundo.",
+          "cost": "Coste: menos ergonómico que JSX, más boilerplate explícito."
+        },
+        "lifecycle": {
+          "title": "Ciclo de vida explícito en vez de reactividad implícita",
+          "text": "Constructor, init, update y beforeDestroy son visibles. Puedes leer un componente y saber cuándo se ejecuta.",
+          "cost": "Coste: más disciplina; el framework no esconde el orden por ti."
+        },
+        "buildless": {
+          "title": "Desarrollo sin build en vez de bundler-first",
+          "text": "Los módulos ES corren directamente en el navegador durante el desarrollo. La CLI es para producción, no para cada guardado.",
+          "cost": "Coste: más peticiones en desarrollo y un paso de build real para producción."
+        },
+        "registry": {
+          "title": "Docs como registro + MCP en vez de páginas estáticas",
+          "text": "La documentación es datos estructurados: componentes, APIs y ejemplos que humanos y agentes pueden consultar.",
+          "cost": "Coste: más infraestructura y disciplina de versionado."
+        }
+      }
+    },
+    "evidence": {
+      "eyebrow": "Evidencia",
+      "title": "Lo que respalda el trabajo.",
+      "description": "El código es un tipo de prueba. Estas son las otras.",
+      "metrics": {
+        "started": "Inicio",
+        "students": "Estudiantes con Slice",
+        "surfaces": "Superficies open source",
+        "version": "Versión actual"
       },
-      "not": {
-        "title": "Qué no es",
-        "text": "Una persecución de tendencias. Slice es un framework de aprendizaje y entrega a largo plazo, no una carrera de popularidad."
+      "items": {
+        "paper": {
+          "label": "Paper publicado",
+          "text": "Investigación revisada por pares sobre Slice.js, publicada en Tecnocientífica URU y archivada en Zenodo.",
+          "zenodo": "Archivo en Zenodo"
+        },
+        "classroom": {
+          "label": "Aula",
+          "text": "Usado en Programación Basada en Componentes en la Universidad Rafael Urdaneta; 120+ estudiantes entre semestres."
+        },
+        "library": {
+          "label": "Librería de componentes",
+          "text": "Los componentes Visual y Service oficiales, documentados y usados en producción."
+        },
+        "production": {
+          "label": "Producción",
+          "text": "Conclave, un producto de toma de decisiones grupales, está construido con Slice."
+        }
       }
     },
     "ecosystem": {
       "eyebrow": "Ecosistema",
-      "title": "Proyectos del ecosistema",
-      "description": "Slice crece como un ecosistema conectado: framework, documentación, recursos visuales y herramientas MCP.",
+      "title": "Un framework, cuatro superficies.",
+      "description": "Cada pieza tiene una función. Juntas cubren el framework, los componentes, la documentación y el flujo con IA.",
+      "note": "Los enlaces a cada superficie están en Qué construí.",
       "slice": {
-        "subtitle": "Repositorio oficial",
-        "description": "El framework central y el lugar donde Slice evoluciona en público."
+        "subtitle": "Framework",
+        "description": "El runtime, el router y la CLI donde Slice evoluciona en público."
+      },
+      "components": {
+        "subtitle": "Librería de componentes",
+        "description": "Componentes Visual y Service con APIs documentadas y ejemplos."
       },
       "docs": {
-        "subtitle": "Sitio de documentación",
-        "description": "Conceptos, guías y ejemplos que explican la filosofía y la arquitectura."
-      },
-      "library": {
-        "subtitle": "Biblioteca visual",
-        "description": "Componentes visuales reutilizables para aplicaciones Slice reales."
+        "subtitle": "Documentación",
+        "description": "Conceptos, guías y referencia de API generados desde el código."
       },
       "mcp": {
-        "subtitle": "MCP de documentación",
-        "description": "Puente MCP para consumir la documentación de Slice en flujos asistidos por IA."
+        "subtitle": "Catálogo MCP",
+        "description": "Documentación de Slice expuesta a flujos asistidos por IA."
       },
       "links": {
         "github": "GitHub",
         "openDocs": "Abrir docs",
-        "openLibrary": "Abrir biblioteca"
+        "openLibrary": "Abrir librería"
       }
     },
     "collaborate": {
-      "eyebrow": "Contribuye",
-      "title": "Cómo colaborar",
+      "eyebrow": "Estado y contribución",
+      "title": "Código abierto, mantenido activamente.",
+      "description": "Slice no es un producto que venda. Es un trabajo de largo plazo que mantengo, enseño y documento.",
+      "contributeTitle": "Cómo contribuir",
       "issues": "Abre issues con pasos de reproducción claros y el comportamiento esperado.",
       "docs": "Mejora la documentación y los ejemplos para casos de uso reales.",
       "experiments": "Comparte experimentos, benchmarks y lecciones de producción."
     },
-    "closing": "Construye con intención. Aprende las entrañas. Comparte el oficio."
+    "closing": "Construye con intención. Aprende las entrañas. Comparte el oficio.",
+    "actions": {
+      "docs": "Leer la documentación",
+      "github": "GitHub",
+      "paper": "Paper"
+    }
   },
   "notFound": {
-    "error": "Error 404: Página no encontrada"
+    "error": "Error 404: Página no encontrada",
+    "backHome": "Volver al inicio",
+    "contact": "Contacto"
   },
   "about": {
     "sections": {
-      "about": "Sobre mí",
-      "skills": "Experiencia técnica",
+      "whatIDo": "Lo que hago",
+      "beyond": "Más allá del código",
+      "skills": "Herramientas",
       "skillsSubtitle": "Tecnologías y herramientas que uso, con los trade-offs que he aprendido.",
+      "about": "Sobre mí",
       "journey": "Mi recorrido y experiencias"
+    },
+    "currently": {
+      "eyebrow": "Actualmente",
+      "title": "Lead Software Engineer en una startup de software.",
+      "description": "Diseño arquitecturas distribuidas, mantengo el software y las librerías principales, y lidero la integración con LLMs. También elaboro propuestas para mejorar la productividad y optimizar los flujos internos.",
+      "note": "Detalles disponibles a solicitud.",
+      "focus": { "label": "Foco", "value": "Sistemas distribuidos · Full-stack · Integración con LLMs" },
+      "location": { "label": "Ubicación", "value": "Maracaibo, Venezuela · Remoto" },
+      "mode": { "label": "Modalidad", "value": "Tiempo completo" }
+    },
+    "outcomes": {
+      "eyebrow": "Logros seleccionados",
+      "title": "Lo que ese trabajo ha producido.",
+      "items": {
+        "lead": {
+          "title": "Lead Software Engineer",
+          "text": "Arquitecturas distribuidas, software y librerías principales, integración con LLMs y propuestas internas de productividad."
+        },
+        "slice": {
+          "title": "Slice.js",
+          "text": "Un framework de componentes con CLI, build, librería de componentes, documentación y catálogo MCP."
+        },
+        "teaching": {
+          "title": "Docencia",
+          "text": "120+ estudiantes en Programación I/II y Programación Basada en Componentes; repositorios de curso reutilizables."
+        },
+        "research": {
+          "title": "Investigación",
+          "text": "1 paper publicado sobre Slice.js y dirección de tesis de grado en ingeniería de software."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Cómo trabajo",
+      "title": "Principios que aplico a cada sistema.",
+      "items": {
+        "architecture": {
+          "title": "Arquitectura con intención",
+          "text": "Cada frontera y dependencia es una decisión; documento el trade-off, no solo el diagrama."
+        },
+        "teaching": {
+          "title": "Enseñar construyendo",
+          "text": "La mejor explicación es un sistema que alguien puede ejecutar, leer y cambiar."
+        },
+        "spec": {
+          "title": "Leer la especificación",
+          "text": "Cuando la plataforma es la fuente de verdad, voy a la especificación antes que al blog."
+        }
+      }
+    },
+    "contact": {
+      "eyebrow": "Siguiente",
+      "title": "Hablemos por LinkedIn.",
+      "cta": "Contacto"
     },
     "hero": {
       "alt": "Victor Kneider — Ingeniero en Computación y profesor universitario",
       "description": "Ingeniero en Computación, profesor y creador de Slice.js. Diseño y construyo software profesional: lo construyo, lo enseño y divulgo lo que aprendo en el camino.",
-      "roles": ["Ingeniero en Computación", "Creador de frameworks", "Profesor universitario", "Ingeniero de software", "Arquitecto web"]
+      "roles": ["Ingeniero en Computación", "Creador de frameworks", "Profesor universitario", "Ingeniero de software", "Arquitecto web"],
+      "lede": "Ingeniero en Computación, profesor y creador de Slice.js. Diseño y construyo software profesional: lo construyo, lo enseño y divulgo lo que aprendo en el camino.",
+      "tabs": {
+        "ariaLabel": "Dimensiones profesionales",
+        "engineering": {
+          "label": "Ingeniería",
+          "text": "Arquitecturas distribuidas, sistemas full-stack e integración con LLMs.",
+          "link": "Ver experiencia"
+        },
+        "teaching": {
+          "label": "Docencia",
+          "text": "Programación basada en componentes, desarrollo web del cliente y dirección de tesis.",
+          "link": "Ver docencia"
+        },
+        "research": {
+          "label": "Investigación",
+          "text": "Slice.js, APIs del navegador y las partes de la plataforma que casi nadie mira.",
+          "link": "Ver Slice.js"
+        }
+      }
     },
     "cta": {
-      "contact": "Hablemos",
+      "contact": "Contacto",
       "cv": "Descargar CV"
     },
     "cards": {
@@ -286,8 +476,8 @@
     },
     "stats": {
       "years": { "label": "Años construyendo software" },
-      "projects": { "label": "Proyectos académicos y personales" },
       "students": { "label": "Estudiantes acompañados" },
+      "papers": { "label": "Paper publicado" },
       "framework": { "label": "Framework construido" },
       "features": { "label": "Funciones de Slice que olvidé que construí" },
       "refactors": { "label": "Miedo a refactorizar" },
@@ -317,6 +507,21 @@
       }
     },
     "carousel": {
+      "teaching": {
+        "label": "Docencia en la Universidad Rafael Urdaneta",
+        "date": "2026",
+        "alt": "Victor Kneider dictando una clase en la Universidad Rafael Urdaneta, con estudiantes en sus pupitres y una pizarra detrás"
+      },
+      "thesis": {
+        "label": "Defensa de tesis · Tutor · Mención publicación",
+        "date": "2026",
+        "alt": "Victor Kneider, como tutor de tesis, con dos tesistas después de su defensa en la Universidad Rafael Urdaneta; la tesis recibió mención publicación"
+      },
+      "aiFaculty": {
+        "label": "IA para todos los profesores de la URU",
+        "date": "2026",
+        "alt": "Clase virtual para toda la comunidad de profesores de la Universidad Rafael Urdaneta sobre el uso de IA para optimizar la evaluación y la generación de contenido de cursos"
+      },
       "showcase": {
         "label": "Muestra de proyectos de Ingeniería en Computación",
         "date": "Julio 2025",
@@ -333,7 +538,15 @@
       "backend": "Backend",
       "cloud": "Cloud y entornos",
       "ai": "IA y herramientas modernas",
-      "other": "Otros"
+      "other": "Otros",
+      "more": "+{count} más",
+      "summary": {
+        "frontend": "Sistemas de componentes, design systems y Web Components.",
+        "backend": "APIs, servicios y fronteras de datos.",
+        "cloud": "Despliegue, persistencia y herramientas de operación.",
+        "ai": "Integración de LLMs y flujos asistidos por IA.",
+        "other": "Las herramientas que mantienen la entrega predecible."
+      }
     },
     "factsUI": {
       "title": "Datos aleatorios",

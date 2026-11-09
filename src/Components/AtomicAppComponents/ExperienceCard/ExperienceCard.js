@@ -35,17 +35,25 @@ export default class ExperienceCard extends HTMLElement {
 
    populateTemplate() {
       // Set logo with fallback to initials
-      this.$logo.src = this.experience.logo;
-      this.$logo.alt = `${this.experience.company} logo`;
-      this.$logo.onerror = () => {
+      const initials = this.experience.company
+         .split(' ')
+         .map(word => word[0])
+         .join('')
+         .substring(0, 2);
+
+      if (this.experience.logo) {
+         this.$logo.src = this.experience.logo;
+         this.$logo.alt = `${this.experience.company} logo`;
+         this.$logo.onerror = () => {
+            this.$logo.style.display = 'none';
+            this.$initials.style.display = 'flex';
+            this.$initials.textContent = initials;
+         };
+      } else {
          this.$logo.style.display = 'none';
          this.$initials.style.display = 'flex';
-         this.$initials.textContent = this.experience.company
-            .split(' ')
-            .map(word => word[0])
-            .join('')
-            .substring(0, 2);
-      };
+         this.$initials.textContent = initials;
+      }
 
       // Set basic info
       this.$position.textContent = this.experience.position;
@@ -75,6 +83,7 @@ export default class ExperienceCard extends HTMLElement {
       // Populate achievements
       const achievementsGrid = this.querySelector('.achievements-grid');
       achievementsGrid.innerHTML = '';
+      achievementsGrid.classList.toggle('has-four', this.experience.achievements.length === 4);
       
       this.experience.achievements.forEach(achievement => {
          const card = document.createElement('div');

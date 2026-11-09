@@ -10,32 +10,19 @@ export default class ContactSection extends HTMLElement {
   }
 
   async init() {
-    const emailButton = await slice.build('Button', {
-      value: slice.t.ref('contact.email'),
+    const linkedinButton = await slice.build('Button', {
+      value: slice.t.ref('contact.linkedin'),
       customColor: {
         button: 'var(--accent)',
         label: 'var(--on-accent)'
       },
       onClickCallback: () => {
-        const subject = encodeURIComponent(slice.t('contact.subject'));
-        window.location.href = `mailto:victorkneider@gmail.com?subject=${subject}`;
-      }
-    });
-    emailButton.classList.add('contact-btn', 'contact-btn-primary');
-
-    const linkedinButton = await slice.build('Button', {
-      value: slice.t.ref('contact.linkedin'),
-      customColor: {
-        button: 'transparent',
-        label: 'var(--text-1)'
-      },
-      onClickCallback: () => {
         window.open('https://www.linkedin.com/in/vkneider/', '_blank', 'noopener,noreferrer');
       }
     });
-    linkedinButton.classList.add('contact-btn', 'contact-btn-ghost');
+    linkedinButton.classList.add('contact-btn', 'contact-btn-primary');
 
-    this.$actions.append(emailButton, linkedinButton);
+    this.$actions.append(linkedinButton);
 
     this.$projectsLink = this.querySelector('.contact-projects-link');
     if (this.$projectsLink) {

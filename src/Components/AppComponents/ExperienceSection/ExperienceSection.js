@@ -4,7 +4,7 @@ export default class ExperienceSection extends HTMLElement {
       slice.attachTemplate(this);
 
       this.$container = this.querySelector('.experience-container');
-      this.$timeline = this.querySelector('.experience-timeline');
+      this.$content = this.querySelector('.experience-content');
 
       slice.controller.setComponentProps(this, props);
       this.debuggerProps = [];
@@ -14,12 +14,12 @@ export default class ExperienceSection extends HTMLElement {
 
    async init() {
       await this.loadContent();
-      await this.createTimeline();
+      await this.createExperience();
 
       // Content is data, not `data-t`: it has to be read again for the new locale.
       slice.translator.watch(this, async () => {
          await this.loadContent();
-         await this.createTimeline();
+         await this.createExperience();
       });
    }
 
@@ -28,33 +28,16 @@ export default class ExperienceSection extends HTMLElement {
       this.experienceData = Array.isArray(document?.records) ? document.records : [];
    }
 
-   async createTimeline() {
-      // Destroy the components built inside the timeline before clearing it.
-      slice.controller.destroyByContainer(this.$timeline);
-      this.$timeline.innerHTML = '';
+   async createExperience() {
+      // Destroy the components built inside the section before clearing it.
+      slice.controller.destroyByContainer(this.$content);
+      this.$content.innerHTML = '';
 
-      const timelineTitle = await slice.build('SectionTitle', { text: slice.t('experience.title') });
-      this.$timeline.appendChild(timelineTitle);
-
-      const timelineContainer = document.createElement('div');
-      timelineContainer.classList.add('timeline-container');
+      const title = await slice.build('SectionTitle', { text: slice.t('experience.title') });
+      this.$content.appendChild(title);
 
       // Most recent first, without parsing the display string.
       const sortedExperience = [...this.experienceData].sort((a, b) => (b.startYear || 0) - (a.startYear || 0));
-
-      const timelineItems = sortedExperience.map((experience) => ({
-         id: experience.id,
-         date: experience.startYear ? String(experience.startYear) : '',
-         label: experience.company,
-         fullData: experience
-      }));
-
-      const timeline = await slice.build('Timeline', {
-         items: timelineItems,
-         orientation: 'horizontal',
-         title: slice.t('experience.timeline.title'),
-         description: slice.t('experience.timeline.description')
-      });
 
       const cards = [];
       for (const experience of sortedExperience) {
@@ -66,34 +49,21 @@ export default class ExperienceSection extends HTMLElement {
 
       const tabs = await slice.build('Tabs', {
          items: cards.map((card, index) => ({
-            label: sortedExperience[index].company,
+            label: sortedExperience[index].shortCompany || sortedExperience[index].company,
             content: card
          })),
          orientation: 'horizontal'
       });
 
-      this.$timeline.appendChild(tabs);
-
-      const timelineWrapper = document.createElement('div');
-      timelineWrapper.style.marginTop = '2rem';
-      timelineWrapper.style.width = '100%';
-      timelineWrapper.appendChild(timeline);
-      this.$timeline.appendChild(timelineWrapper);
+      this.$content.appendChild(tabs);
 
       // Restore the tab the visitor was reading before the locale changed.
       if (this.activeIndex > 0 && this.activeIndex < cards.length) {
          tabs.activateTab(this.activeIndex);
-         timeline.setActive(this.activeIndex);
       }
-
-      timeline.addEventListener('timeline-select', (event) => {
-         this.activeIndex = event.detail.index;
-         tabs.activateTab(event.detail.index);
-      });
 
       tabs.addEventListener('tab-change', (event) => {
          this.activeIndex = event.detail.index;
-         timeline.setActive(event.detail.index);
       });
    }
 }

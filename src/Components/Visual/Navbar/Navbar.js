@@ -24,6 +24,7 @@ export default class Navbar extends HTMLElement {
       this.debuggerProps = ['logo', 'items', 'buttons', 'elements'];
       this._itemsToken = 0;
       this._initialized = false;
+      this._onRouteChange = () => this.updateActiveItem();
    }
 
    closeMobileMenu() {
@@ -50,8 +51,38 @@ export default class Navbar extends HTMLElement {
          this.addElements(this.elements);
       }
 
+      window.addEventListener('router:change', this._onRouteChange);
+      this._events = slice.events?.bind?.(this);
+      this._events?.subscribe?.('router:change', () => this.updateActiveItem());
+      this.updateActiveItem();
       // El layout desktop usa grid (logo · menú · acciones), así que el menú
       // no necesita un max-width artificial: el grid ya reserva su espacio.
+   }
+
+   beforeDestroy() {
+      window.removeEventListener('router:change', this._onRouteChange);
+   }
+
+   updateActiveItem() {
+      if (!this.querySelectorAll) return;
+      const current = slice.path || '/';
+      const activePath = current;
+      this.querySelectorAll('a.slice-link').forEach((link) => {
+         const raw = link.getAttribute('href');
+         if (!raw || raw === '#') return;
+         const target = raw.startsWith('/') && typeof slice.href === 'function' ? slice.href(raw) : raw;
+         const isActive = target === activePath || (target !== '/' && activePath.startsWith(`${target}/`));
+         link.classList.toggle('active-item', isActive);
+         if (isActive) link.setAttribute('aria-current', 'page');
+         else link.removeAttribute('aria-current');
+      });
+
+      const logo = this.querySelector('.logo_container');
+      if (logo) {
+         const isHome = current === '/' || current === '/es';
+         if (isHome) logo.setAttribute('aria-current', 'page');
+         else logo.removeAttribute('aria-current');
+      }
    }
 
    /**
@@ -251,6 +282,7 @@ export default class Navbar extends HTMLElement {
       slice.controller.destroyByContainer(this.$menu);
       this.$menu.replaceChildren();
       await this.addItems(this._items || [], this.$menu, token);
+      this.updateActiveItem();
    }
 
    async addItems(items, target = this.$menu, token = this._itemsToken) {

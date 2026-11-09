@@ -224,7 +224,7 @@ slice-certificate-card {
 
 .certificate-skills h5 {
    font-family: var(--font-mono);
-   font-size: 10px;
+   font-size: 12px;
    text-transform: uppercase;
    letter-spacing: 0.16em;
    color: var(--text-2);
@@ -247,7 +247,7 @@ slice-certificate-card {
    padding: 0.22rem 0.55rem;
    border-radius: var(--radius-pill);
    font-family: var(--font-mono);
-   font-size: 10px;
+   font-size: 12px;
    font-weight: 500;
    line-height: 1.4;
    white-space: nowrap;

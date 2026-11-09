@@ -2,3 +2,9 @@ node_modules
 dist/*
 .worktrees
 test-results/
+
+# Local AI tooling. Skills are installed per machine through vkneider; the
+# project's own slice-js-developer skill stays tracked.
+.opencode/
+.claude/skills/*
+!.claude/skills/slice-js-developer/

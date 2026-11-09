@@ -84,6 +84,10 @@
 .slice_nav_header slice-link:hover .slice-link {
   color: var(--text-1);
 }
+
+.slice_nav_header .slice-link.active-item {
+  color: var(--accent);
+}
 .anim-item {
   position: absolute;
   top: 100%;

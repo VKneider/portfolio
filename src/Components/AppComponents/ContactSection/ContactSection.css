@@ -26,7 +26,7 @@ slice-contact-section {
   margin: 0 0 1.5rem;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -107,7 +107,7 @@ slice-contact-section {
   border-top: 1px solid var(--border-soft);
   color: var(--text-2);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -150,7 +150,7 @@ slice-contact-section {
 .contact-num {
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
 }
 
@@ -182,7 +182,7 @@ slice-contact-section {
 .contact-elsewhere a {
   color: var(--text-2);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;

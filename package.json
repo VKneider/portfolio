@@ -55,8 +55,9 @@
     "@babel/parser": "^7.28.5",
     "@babel/traverse": "^7.28.5",
     "@playwright/test": "^1.59.1",
-    "sharp": "^0.34.5",
+    "@types/three": "^0.185.4",
     "eslint": "^9.39.5",
+    "sharp": "^0.34.5",
     "typescript": "^5.9.3"
   },
   "dependencies": {
@@ -66,6 +67,7 @@
     "dompurify": "^3.4.11",
     "express": "^5.2.1",
     "slicejs-cli": "^4.5.0",
-    "slicejs-web-framework": "^4.2.0"
+    "slicejs-web-framework": "^4.2.0",
+    "three": "^0.185.1"
   }
 }

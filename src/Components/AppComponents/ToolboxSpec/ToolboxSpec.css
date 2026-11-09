@@ -1,0 +1,54 @@
+slice-toolbox-spec {
+  display: block;
+}
+
+.toolbox-spec {
+  display: block;
+  width: 100%;
+}
+
+.toolbox-spec slice-description-list {
+  display: block;
+  --slice-description-list-accent: var(--accent);
+  --slice-description-list-text: var(--text-1);
+  --slice-description-list-muted: var(--text-2);
+  --slice-description-list-bg: var(--bg);
+  --slice-description-list-border: var(--border);
+  --slice-description-list-line: var(--border);
+}
+
+.toolbox-spec slice-description-list .slice-description-list__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.toolbox-spec slice-description-list .slice-description-list__help {
+  margin-top: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-2);
+  opacity: 1;
+}
+
+.toolbox-spec slice-description-list .slice-description-list__tags {
+  gap: 7px;
+}
+
+.toolbox-spec slice-description-list .slice-description-list__field:not([hidden]) ~ .slice-description-list__field {
+  border-top-color: var(--border);
+}
+
+.toolbox-spec slice-badge {
+  --slice-badge-color: var(--text-2);
+  --slice-badge-ink: var(--text-1);
+  --slice-badge-font: 0.75rem;
+  --slice-badge-height: 26px;
+}

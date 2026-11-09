@@ -58,7 +58,7 @@
 /* Date como eyebrow mono (taxonómico), label como heading serif. */
 .carousel-date {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 1.8px;
   text-transform: uppercase;
@@ -91,7 +91,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
   box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.15);
   will-change: transform, background, box-shadow;
@@ -118,7 +122,14 @@
 .carousel-prev:active,
 .carousel-next:active {
   transform: translateY(-50%) scale(0.95);
-  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-prev:focus-visible,
+.carousel-next:focus-visible,
+.carousel-indicator:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* Indicadores */
@@ -139,7 +150,10 @@
   border: 2px solid rgba(var(--text-1-rgb), 0.6);
   background: transparent;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, background, border-color;
   padding: 0;
 }
@@ -170,7 +184,9 @@
   font-weight: 600;
   z-index: 10;
   backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, background;
 }
 
@@ -296,5 +312,24 @@
   .carousel-indicator {
     width: 10px;
     height: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide {
+    transition: none;
+  }
+
+  .carousel-slide.fade-in,
+  .carousel-slide.fade-out {
+    animation: none;
+  }
+
+  .carousel-prev,
+  .carousel-next,
+  .carousel-indicator,
+  .carousel-counter,
+  .carousel-counter .counter-separator {
+    transition: none;
   }
 }

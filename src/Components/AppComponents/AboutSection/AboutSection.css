@@ -73,8 +73,8 @@ slice-about-section .hero-content {
 /* profile-ring removido por petición de Victor — la foto va sola. */
 
 .profile-image {
-  width: 260px;
-  height: 260px;
+  width: clamp(170px, 24vh, 240px);
+  height: clamp(170px, 24vh, 240px);
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--bg);
@@ -90,7 +90,7 @@ slice-about-section .hero-content {
 /* Enhanced Hero Text - COMPACTO */
 .title-container {
   position: relative;
-  margin-bottom: clamp(1.25rem, 1.5vh, 1.5rem);
+  margin-bottom: clamp(1.75rem, 2.4vh, 2.25rem);
 }
 
 .hero-text h1 {
@@ -139,6 +139,136 @@ slice-about-section .hero-content {
   color: var(--accent);
   font-weight: 400;
   font-style: italic;
+}
+
+/* Hero: brand lockup + identity + dimension tabs */
+.hero-brand {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-lede {
+  margin: clamp(0.4rem, 0.8vh, 0.7rem) auto clamp(1.1rem, 2.2vh, 1.7rem);
+  max-width: 760px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 1.45vw, 1.38rem);
+  line-height: 1.58;
+  color: var(--text-1);
+  letter-spacing: 0.005em;
+}
+
+.hero-dimensions {
+  max-width: 760px;
+  margin: 0 auto clamp(1rem, 2vh, 1.6rem);
+}
+
+.hero-tablist {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.15rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-tab {
+  appearance: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.hero-tab:hover {
+  color: var(--accent);
+}
+
+.hero-tab.is-active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.hero-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hero-panel {
+  min-height: 4.6rem;
+  padding: 0.85rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hero-panel-text {
+  margin: 0;
+  max-width: 640px;
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.55;
+  color: var(--text-1);
+}
+
+.hero-panel-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.hero-panel-link:hover {
+  opacity: 0.75;
+}
+
+.hero-panel-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .hero-tablist {
+    gap: 0;
+  }
+
+  .hero-tab {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-lede {
+    font-size: 1.12rem;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-panel {
+    min-height: 4.2rem;
+  }
+
+  .hero-panel-text {
+    font-size: 0.98rem;
+  }
 }
 
 .hero-description {
@@ -257,18 +387,27 @@ slice-about-section .hero-stats {
   gap: 2rem;
 }
 
-/* Override default Card styles for better integration */
+/* Integración de la Card actual de la librería dentro de About. */
+.about-content slice-grid .grid-container {
+  gap: 2rem;
+  align-items: stretch;
+}
+
 .about-content slice-card {
   height: 100%;
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  transition: all 0.3s ease;
 }
 
 .about-content slice-card:hover {
-  transform: translateY(-8px);
-  
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.about-content slice-card .slice-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: var(--ls-heading);
+  color: var(--heading);
 }
 
 
@@ -299,7 +438,7 @@ slice-about-section .hero-stats {
   box-shadow: 
     0 6px 20px rgba(var(--accent-rgb), 0.1),
     0 0 20px rgba(var(--accent-rgb), 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
   transform: translateY(30px);
@@ -359,7 +498,7 @@ slice-about-section .hero-stats {
   font-size: 1rem;
   font-weight: 500;
   border: 2px solid var(--accent);
-  transition: all 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -635,7 +774,7 @@ slice-about-section .hero-stats {
 .stat-item {
   text-align: center;
   padding: 16px 8px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-item:hover {
@@ -713,7 +852,7 @@ slice-about-section .hero-stats {
 
 .highlight-num {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1.5px;
   color: var(--accent);
   flex-shrink: 0;
@@ -1105,5 +1244,231 @@ slice-about-section .hero-stats {
   .cta-buttons .slice_button {
     padding: 6px 10px;
     font-size: 0.9rem;
+  }
+}
+/* ============================================================
+ * About � work-first layout
+ * ============================================================ */
+.about-sections {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem) clamp(3rem, 6vw, 5rem);
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about-sections > section {
+  margin-bottom: 0;
+}
+
+.about-sections .eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.currently-section h2,
+.outcomes-section h2,
+.how-i-work-section h2,
+.about-contact-section h2 {
+  margin: 6px 0 18px;
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  line-height: 1.15;
+  color: var(--heading);
+}
+
+.currently-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.currently-main p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--text-2);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.currently-note {
+  margin-top: 10px !important;
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+}
+
+.currently-meta {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.currently-meta div {
+  display: grid;
+  gap: 2px;
+}
+
+.currently-meta dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.currently-meta dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-1);
+}
+
+.outcomes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.outcomes-list li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.outcomes-num {
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.outcomes-list h3 {
+  margin: 0 0 4px;
+  font-size: 1.08rem;
+}
+
+.outcomes-list p {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--text-2);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.about-skills-subtitle {
+  margin: -6px auto 24px;
+  max-width: 62ch;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.how-grid article {
+  padding-top: 14px;
+  border-top: 2px solid var(--accent);
+}
+
+.how-num {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.how-grid h3 {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+}
+
+.how-grid p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.about-contact-section {
+  padding: 30px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-slice);
+  background: var(--surface-1);
+  text-align: center;
+}
+
+.about-contact-section h2 {
+  margin-bottom: 14px;
+}
+
+.about-contact-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-xs);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.about-contact-link::after {
+  content: "?";
+  margin-left: 8px;
+}
+
+.about-contact-link:hover {
+  opacity: 0.9;
+}
+
+.about-contact-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .currently-grid,
+  .how-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .how-grid article {
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .outcomes-list li {
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+  }
+
+  .about-contact-section {
+    padding: 22px 16px;
   }
 }

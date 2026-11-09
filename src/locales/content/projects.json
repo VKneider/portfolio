@@ -2,86 +2,176 @@
   "records": [
     {
       "id": 1,
-      "image": "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG",
-      "images": [
-        "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/screenshot.JPG",
-        "/images/projects/slice2.png",
-        "https://raw.githubusercontent.com/VKneider/slice.js/refs/heads/master/readme_images/code-example.JPG"
-      ],
-      "technologies": ["JavaScript", "Web Components", "CSS3", "HTML5"],
-      "githubUrl": "https://github.com/vkneider/slice.js",
-      "liveUrl": "https://slicejs.com",
+      "slug": "slicejs-components",
+      "order": 1,
       "featured": true,
-      "date": "2024-01-15",
-      "statusKey": "active",
+      "year": "2024",
+      "role": "Author & maintainer",
+      "team": "Solo",
+      "duration": "2024 — present",
+      "technologies": ["JavaScript", "Web Components", "Slice.js", "Node.js"],
+      "githubUrl": "https://github.com/VKneider/slicejs-components",
+      "liveUrl": "https://components.slicejs.com",
+      "image": "/images/projects/slicejs-components.png",
+      "images": [
+        "/images/projects/slicejs-components.png",
+        "/images/projects/slicejs-components-docs.png",
+        "/images/projects/slicejs-components-theme.png"
+      ],
       "copy": {
         "en": {
-          "title": "Slice.js Framework",
-          "description": "A component framework built on native Web Components to understand modern frontend architecture from the inside. Reactive state without a virtual DOM, scoped styles, component-level dependency injection, and a CLI for scaffolding and building. The point is not to replace React; it is to show what a framework actually does.",
-          "category": "Framework",
-          "status": "Active"
+          "title": "Slice.js Components",
+          "category": "Component library",
+          "summary": "The official component library for Slice.js: reusable Visual and Service components with documented APIs, examples and tests.",
+          "problem": "Slice needed a shared component layer so apps did not rebuild the same primitives and the docs could stay in sync with the code.",
+          "built": [
+            "A registry of Visual and Service components.",
+            "Component documentation with live examples.",
+            "Theming and accessibility conventions.",
+            "Tests and a parser that validates the documentation contract."
+          ],
+          "tradeoffs": [
+            "Docs live next to the component source, so they cannot drift silently.",
+            "A registry instead of a monorepo keeps each component installable and replaceable.",
+            "Strict component APIs cost flexibility but make composition predictable."
+          ],
+          "result": "Consumed by Conclave and external Slice apps; the registry is also the source for the MCP catalog.",
+          "learned": "A component library is a documentation product as much as a code product."
         },
         "es": {
-          "title": "Framework Slice.js",
-          "description": "Un framework de componentes sobre Web Components nativos para entender la arquitectura frontend moderna desde dentro. Estado reactivo sin DOM virtual, estilos con alcance, inyección de dependencias por componente y un CLI para scaffolding y build. No pretende reemplazar a React: muestra qué hace un framework por dentro.",
-          "category": "Framework",
-          "status": "Activo"
+          "title": "Slice.js Components",
+          "category": "Librería de componentes",
+          "summary": "La librería oficial de componentes de Slice.js: componentes Visual y Service reutilizables, con APIs documentadas, ejemplos y tests.",
+          "problem": "Slice necesitaba una capa compartida de componentes para que las apps no reconstruyeran las mismas primitivas y la documentación no se separara del código.",
+          "built": [
+            "Un registro de componentes Visual y Service.",
+            "Documentación de componentes con ejemplos en vivo.",
+            "Convenciones de theming y accesibilidad.",
+            "Tests y un parser que valida el contrato de la documentación."
+          ],
+          "tradeoffs": [
+            "La documentación vive junto al código del componente, así no se desincroniza en silencio.",
+            "Un registro en vez de un monorepo mantiene cada componente instalable y reemplazable.",
+            "APIs estrictas cuestan flexibilidad, pero hacen la composición predecible."
+          ],
+          "result": "Usada por Conclave y por apps externas de Slice; el registro también alimenta el catálogo MCP.",
+          "learned": "Una librería de componentes es un producto de documentación tanto como un producto de código."
         }
       }
     },
     {
       "id": 2,
-      "image": "/images/projects/sanramonmcbo.png",
-      "images": [
-        "/images/projects/sanramonmcbo.png",
-        "/images/projects/sanramonmcbo2.png"
-      ],
-      "technologies": ["Google Apps Script", "Process Automation", "ETL Pipelines", "Vercel"],
-      "liveUrl": "https://sanramonmcbo.vercel.app",
+      "slug": "conclave",
+      "order": 2,
       "featured": true,
-      "date": "2024-06-01",
-      "statusKey": "live",
-      "copy": {
-        "en": {
-          "title": "Parish Automated Ecosystem",
-          "description": "A zero-recurring-cost digital ecosystem for San Ramón Nonato Parish. Google Sheets and Forms act as a headless CMS; ETL scripts turn administrative data into a fast public site, so the parish can publish without paying for infrastructure or maintaining a database.",
-          "category": "Engineering & Automation",
-          "status": "Live"
-        },
-        "es": {
-          "title": "Ecosistema automatizado para una parroquia",
-          "description": "Ecosistema digital sin coste recurrente para la Parroquia San Ramón Nonato. Google Sheets y Forms funcionan como CMS headless; scripts ETL convierten los datos administrativos en un sitio público rápido, sin pagar infraestructura ni mantener una base de datos.",
-          "category": "Ingeniería y automatización",
-          "status": "En producción"
-        }
-      }
-    },
-    {
-      "id": 3,
+      "year": "2026",
+      "role": "Creator & maintainer",
+      "team": "Solo",
+      "duration": "2026",
+      "technologies": ["Slice.js", "JavaScript", "CSS3", "HTML5", "Express", "localStorage"],
+      "githubUrl": "https://github.com/VKneider/conclave",
+      "liveUrl": "https://conclave.vkneider.dev",
       "image": "/images/projects/conclave.png",
       "images": [
         "/images/projects/conclave.png",
         "/images/projects/conclave2.png",
         "/images/projects/conclave3.png"
       ],
-      "technologies": ["Slice.js", "JavaScript", "CSS3", "HTML5", "Express", "localStorage"],
-      "githubUrl": "https://github.com/VKneider/conclave",
-      "liveUrl": "https://conclave.vkneider.dev",
-      "featured": true,
-      "date": "2026-07-07",
-      "statusKey": "active",
       "copy": {
         "en": {
           "title": "Conclave",
-          "description": "A structured group decision-making tool. A facilitator creates a template with combinable modes — assignment, voting, ranking, and free-text brainstorming — each person responds independently on their device, and the responses are imported and compared to reach consensus without another meeting. Data stays in the browser.",
-          "category": "Web Application",
-          "status": "Active"
+          "category": "Web application",
+          "summary": "A structured group decision-making tool: templates, independent responses, and consensus without another meeting.",
+          "problem": "Groups need to decide together, but meetings reward the loudest voice and lose the reasoning behind each option.",
+          "built": [
+            "Facilitator templates with combinable modes: assignment, voting, ranking and free text.",
+            "Independent responses on each participant's device.",
+            "Import and comparison of responses to surface agreement and gaps.",
+            "A browser-only data model that keeps responses local."
+          ],
+          "tradeoffs": [
+            "Browser-only data instead of a server: privacy and zero ops, at the cost of no real-time sync.",
+            "A facilitator-led flow instead of a free-for-all chat: structure over spontaneity.",
+            "Slice.js as the runtime: dogfooding the framework in a real product."
+          ],
+          "result": "A working product built with Slice, used as a real-world proof of the framework.",
+          "learned": "The hard part is not the UI; it is designing a decision process people can trust."
         },
         "es": {
           "title": "Conclave",
-          "description": "Herramienta de toma de decisiones grupales. Quien facilita crea una plantilla con modos combinables —asignación, votación, ranking y lluvia de ideas—, cada persona responde en su dispositivo y las respuestas se importan y comparan para llegar a consenso sin otra reunión. Los datos se quedan en el navegador.",
           "category": "Aplicación web",
-          "status": "Activo"
+          "summary": "Una herramienta estructurada de decisión grupal: plantillas, respuestas independientes y consenso sin otra reunión.",
+          "problem": "Los grupos necesitan decidir juntos, pero las reuniones premian al que habla más fuerte y pierden el razonamiento detrás de cada opción.",
+          "built": [
+            "Plantillas de facilitación con modos combinables: asignación, votación, ranking y texto libre.",
+            "Respuestas independientes en el dispositivo de cada participante.",
+            "Importación y comparación de respuestas para ver acuerdos y brechas.",
+            "Un modelo de datos solo en el navegador que mantiene las respuestas locales."
+          ],
+          "tradeoffs": [
+            "Datos solo en el navegador en vez de un servidor: privacidad y cero operaciones, a costa de no tener sincronización en tiempo real.",
+            "Un flujo guiado por quien facilita en vez de un chat libre: estructura antes que espontaneidad.",
+            "Slice.js como runtime: dogfooding del framework en un producto real."
+          ],
+          "result": "Un producto funcional construido con Slice, usado como prueba real del framework.",
+          "learned": "Lo difícil no es la UI; es diseñar un proceso de decisión en el que la gente pueda confiar."
+        }
+      }
+    },
+    {
+      "id": 3,
+      "slug": "parish-automated-ecosystem",
+      "order": 3,
+      "featured": true,
+      "year": "2024",
+      "role": "Engineer",
+      "team": "Solo",
+      "duration": "2024",
+      "technologies": ["Google Apps Script", "ETL", "Google Sheets", "Vercel"],
+      "liveUrl": "https://sanramonmcbo.vercel.app",
+      "image": "/images/projects/sanramonmcbo.png",
+      "images": [
+        "/images/projects/sanramonmcbo.png",
+        "/images/projects/sanramonmcbo2.png"
+      ],
+      "copy": {
+        "en": {
+          "title": "Parish Automated Ecosystem",
+          "category": "Engineering & automation",
+          "summary": "A zero-recurring-cost digital ecosystem for a parish: Google Sheets and Forms as a headless CMS, ETL into a fast public site.",
+          "problem": "The parish needed to publish information without paying for infrastructure or maintaining a database.",
+          "built": [
+            "Google Sheets and Forms as the content source.",
+            "ETL scripts that normalize and publish data.",
+            "A public site on Vercel.",
+            "An admin flow non-technical volunteers can use."
+          ],
+          "tradeoffs": [
+            "No database: cheap and simple, but the spreadsheet becomes the source of truth.",
+            "ETL instead of a CMS: less editorial control, but no recurring cost.",
+            "Static-first delivery: fast and cheap, but publishing is a batch process."
+          ],
+          "result": "The parish publishes without infrastructure cost; the site runs on Vercel with no database.",
+          "learned": "Constraints are a design tool: the cheapest architecture is the one with fewer moving parts."
+        },
+        "es": {
+          "title": "Parish Automated Ecosystem",
+          "category": "Ingeniería y automatización",
+          "summary": "Un ecosistema digital sin coste recurrente para una parroquia: Google Sheets y Forms como CMS headless, ETL hacia un sitio público rápido.",
+          "problem": "La parroquia necesitaba publicar información sin pagar infraestructura ni mantener una base de datos.",
+          "built": [
+            "Google Sheets y Forms como fuente de contenido.",
+            "Scripts ETL que normalizan y publican los datos.",
+            "Un sitio público en Vercel.",
+            "Un flujo de administración que voluntarios no técnicos pueden usar."
+          ],
+          "tradeoffs": [
+            "Sin base de datos: barato y simple, pero la hoja de cálculo se vuelve la fuente de verdad.",
+            "ETL en vez de un CMS: menos control editorial, pero sin coste recurrente.",
+            "Entrega estática primero: rápida y barata, pero publicar es un proceso por lotes."
+          ],
+          "result": "La parroquia publica sin coste de infraestructura; el sitio corre en Vercel sin base de datos.",
+          "learned": "Las restricciones son una herramienta de diseño: la arquitectura más barata es la que tiene menos piezas móviles."
         }
       }
     }

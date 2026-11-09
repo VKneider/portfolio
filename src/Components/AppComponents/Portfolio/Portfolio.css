@@ -124,6 +124,12 @@ slice-portfolio {
   font-size: 0.9rem;
 }
 
+.footer-badge {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.85rem;
+}
+
 .footer-info a {
   color: var(--accent);
   text-decoration: none;

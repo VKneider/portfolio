@@ -1,0 +1,17 @@
+slice-project-grid {
+  display: block;
+  width: 100%;
+}
+
+.projects-v2-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px 28px;
+}
+
+@media (max-width: 800px) {
+  .projects-v2-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

@@ -35,6 +35,17 @@
    margin-top: 0.8rem;
 }
 
+.achievements-grid.has-four {
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+   .achievements-grid,
+   .achievements-grid.has-four {
+      grid-template-columns: 1fr;
+   }
+}
+
 .achievement-item {
    display: flex;
    align-items: flex-start;
@@ -43,7 +54,7 @@
    padding: 1rem;
    border-radius: var(--border-radius-slice);
    border: 1px solid var(--text-2);
-   transition: all 0.2s ease;
+   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .achievement-item:hover {
@@ -154,7 +165,7 @@
    border-radius: 99px;
    border: 1px solid var(--border);
    font-family: var(--font-mono);
-   font-size: 10px;
+   font-size: 12px;
    letter-spacing: 1px;
    text-transform: uppercase;
    font-weight: 500;
@@ -246,7 +257,7 @@
    border-radius: 99px;
    border: 1px solid var(--border);
    font-family: var(--font-mono);
-   font-size: 11px;
+   font-size: 12px;
    font-weight: 500;
    letter-spacing: 0.2px;
    transition: border-color 0.2s ease, color 0.2s ease;

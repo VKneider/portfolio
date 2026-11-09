@@ -5,7 +5,7 @@ export default class BuiltWithBadge extends HTMLElement {
             slice.attachTemplate(this);
             slice.controller.setComponentProps(this, props);
 
-            const githubUrl = 'https://github.com/vkneider/slice.js';
+            const githubUrl = 'https://github.com/VKneider/slice.js';
             const openGithub = () => window.open(githubUrl, '_blank', 'noopener,noreferrer');
 
             this.setAttribute('role', 'link');

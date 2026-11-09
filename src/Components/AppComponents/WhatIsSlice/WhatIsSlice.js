@@ -3,74 +3,63 @@ export default class WhatIsSlice extends HTMLElement {
     super();
     slice.attachTemplate(this);
     slice.controller.setComponentProps(this, props);
-
-    this.ecosystemProjects = [
-      {
-        name: 'slice.js',
-        subtitleKey: 'what.ecosystem.slice.subtitle',
-        descriptionKey: 'what.ecosystem.slice.description',
-        links: [
-          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/slice.js' }
-        ]
-      },
-      {
-        name: 'sliceDocs',
-        subtitleKey: 'what.ecosystem.docs.subtitle',
-        descriptionKey: 'what.ecosystem.docs.description',
-        links: [
-          { labelKey: 'what.ecosystem.links.openDocs', href: 'https://slicejs.com/' },
-          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/sliceDocs' }
-        ]
-      },
-      {
-        name: 'slice.js_visual_library',
-        subtitleKey: 'what.ecosystem.library.subtitle',
-        descriptionKey: 'what.ecosystem.library.description',
-        links: [
-          { labelKey: 'what.ecosystem.links.openLibrary', href: 'https://components.slicejs.com/' }
-        ]
-      },
-      {
-        name: 'slicejs-mcp',
-        subtitleKey: 'what.ecosystem.mcp.subtitle',
-        descriptionKey: 'what.ecosystem.mcp.description',
-        links: [
-          { labelKey: 'what.ecosystem.links.github', href: 'https://github.com/VKneider/slicejs-mcp' }
-        ]
-      }
-    ];
   }
 
   async init() {
-    this.renderEcosystemCards();
+    this.applyInternalLinks();
+    this.labelDecisionTable();
     this.decorateExternalLinks();
+    await this.mountLogoStage();
+
+    this.addEventListener('click', (event) => {
+      const link = event.target.closest?.('a[data-route]');
+      if (!link) return;
+      event.preventDefault();
+      slice.router.navigate(link.dataset.route);
+    });
 
     slice.translator.watch(this, () => {
-      this.renderEcosystemCards();
+      this.applyInternalLinks();
+      this.labelDecisionTable();
       this.decorateExternalLinks();
     });
   }
 
-  renderEcosystemCards() {
-    const grid = this.querySelector('.ecosystem-grid');
-    if (!grid) return;
+  labelDecisionTable() {
+    const table = this.querySelector('.slice-decisions-table');
+    if (!table) return;
 
-    const cardMarkup = this.ecosystemProjects.map((project) => {
-      const linksMarkup = project.links
-        .map((link) => `<a class="ecosystem-link" href="${link.href}" target="_blank" rel="noopener noreferrer">${project.name} ${slice.t(link.labelKey)}</a>`)
-        .join('');
+    const why = slice.t('what.decisions.table.why');
+    const cost = slice.t('what.decisions.table.cost');
 
-      return `
-        <article class="ecosystem-card">
-          <p class="ecosystem-subtitle">${slice.t(project.subtitleKey)}</p>
-          <h3>${project.name}</h3>
-          <p>${slice.t(project.descriptionKey)}</p>
-          <div class="ecosystem-actions">${linksMarkup}</div>
-        </article>
-      `;
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      const cells = row.querySelectorAll('td');
+      if (cells[0]) cells[0].dataset.label = why;
+      if (cells[1]) cells[1].dataset.label = cost;
     });
+  }
 
-    grid.innerHTML = cardMarkup.join('');
+  applyInternalLinks() {
+    this.querySelectorAll('a[data-route]').forEach((link) => {
+      link.href = slice.href(link.dataset.route);
+    });
+  }
+
+  async mountLogoStage() {
+    try {
+      const stage = await slice.build('LogoStage');
+      if (!stage) return;
+
+      const legacyLogo = this.querySelector('.slice-logo');
+      if (legacyLogo) {
+        legacyLogo.replaceWith(stage);
+        return;
+      }
+
+      this.querySelector('.logo-panel')?.prepend(stage);
+    } catch (error) {
+      console.warn('WhatIsSlice: se mantiene el logo estático.', error);
+    }
   }
 
   decorateExternalLinks() {

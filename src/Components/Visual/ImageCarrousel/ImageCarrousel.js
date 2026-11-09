@@ -39,13 +39,16 @@ export default class ImageCarrousel extends HTMLElement {
     this.$currentSlide = this.querySelector('.current-slide-number');
     this.$totalSlides = this.querySelector('.total-slides');
 
-    slice.controller.setComponentProps(this, props);
-    this.debuggerProps = [];
-    
     this.currentIndex = 0;
     this.autoplayInterval = null;
     this.isTransitioning = false;
     this._initialized = false;
+    this._reducedMotion = typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+
+    slice.controller.setComponentProps(this, props);
+    this.debuggerProps = [];
   }
 
   async init() {
@@ -53,15 +56,11 @@ export default class ImageCarrousel extends HTMLElement {
       this.setupCarousel();
       this.setupEventListeners();
       this.updateSlideDisplay();
-      
-      // Verificar que el elemento carousel existe
-      console.log('Carousel element:', this.$carousel);
-      console.log('Autoplay enabled:', this.autoplay);
-      
-      if (this.autoplay) {
+
+      if (this.autoplay && !this._reducedMotion) {
         this.startAutoplay();
       }
-      
+
       this._initialized = true;
     }
   }
@@ -106,8 +105,11 @@ export default class ImageCarrousel extends HTMLElement {
       // Crear indicadores
       if (this.showIndicators) {
         const indicator = document.createElement('button');
+        indicator.type = 'button';
         indicator.className = 'carousel-indicator';
         indicator.setAttribute('data-slide', index);
+        indicator.setAttribute('aria-label', image.label || `Slide ${index + 1}`);
+        indicator.setAttribute('aria-current', index === 0 ? 'true' : 'false');
         indicator.addEventListener('click', () => {
           this.goToSlide(index);
           // Resetear autoplay cuando se hace clic en un indicador
@@ -147,12 +149,10 @@ export default class ImageCarrousel extends HTMLElement {
 
     // Usar el elemento raíz del componente para el hover (más confiable)
     this.addEventListener('mouseenter', () => {
-      console.log('Mouse enter - pausando autoplay');
       this.pauseAutoplay();
     });
-    
+
     this.addEventListener('mouseleave', () => {
-      console.log('Mouse leave - reanudando autoplay');
       if (this.autoplay) {
         this.startAutoplay();
       }
@@ -278,12 +278,14 @@ export default class ImageCarrousel extends HTMLElement {
     // Remover clase active del indicador actual con transición suave
     if (indicators[this.currentIndex]) {
       indicators[this.currentIndex].classList.remove('active');
+      indicators[this.currentIndex].setAttribute('aria-current', 'false');
     }
-    
+
     // Añadir clase active al nuevo indicador con transición suave
     if (indicators[activeIndex]) {
       setTimeout(() => {
         indicators[activeIndex].classList.add('active');
+        indicators[activeIndex].setAttribute('aria-current', 'true');
       }, 150);
     }
   }
@@ -309,12 +311,10 @@ export default class ImageCarrousel extends HTMLElement {
   startAutoplay() {
     // Siempre limpiar el interval existente primero
     this.pauseAutoplay();
-    
-    if (this.autoplay && !this.isTransitioning) {
-      console.log('Iniciando autoplay con velocidad:', this.autoplaySpeed);
+
+    if (this.autoplay && !this._reducedMotion && !this.isTransitioning) {
       this.autoplayInterval = setInterval(() => {
         if (!this.isTransitioning) {
-          console.log('Autoplay: cambiando slide automáticamente');
           this.nextSlide();
         }
       }, this.autoplaySpeed);
@@ -322,11 +322,9 @@ export default class ImageCarrousel extends HTMLElement {
   }
 
   pauseAutoplay() {
-    console.log('Pausando autoplay, interval existe:', !!this.autoplayInterval);
     if (this.autoplayInterval) {
       clearInterval(this.autoplayInterval);
       this.autoplayInterval = null;
-      console.log('Autoplay pausado correctamente');
     }
   }
 
@@ -338,8 +336,7 @@ export default class ImageCarrousel extends HTMLElement {
 
   // Resetear el timer del autoplay
   resetAutoplayTimer() {
-    if (this.autoplay && !this.isTransitioning) {
-      console.log('Reseteando autoplay timer');
+    if (this.autoplay && !this._reducedMotion && !this.isTransitioning) {
       // Pausa el actual y reinicia uno nuevo
       this.startAutoplay();
     }
@@ -380,7 +377,9 @@ export default class ImageCarrousel extends HTMLElement {
   get autoplay() { return this._autoplay !== false; }
   set autoplay(value) {
     this._autoplay = Boolean(value);
-    if (this._autoplay && !this.isTransitioning) {
+    if (!this._initialized) return;
+
+    if (this._autoplay && !this._reducedMotion && !this.isTransitioning) {
       this.startAutoplay();
     } else {
       this.pauseAutoplay();
@@ -390,7 +389,7 @@ export default class ImageCarrousel extends HTMLElement {
   get autoplaySpeed() { return this._autoplaySpeed || 5000; }
   set autoplaySpeed(value) {
     this._autoplaySpeed = value;
-    if (this.autoplay && !this.isTransitioning) {
+    if (this._initialized && this.autoplay && !this._reducedMotion && !this.isTransitioning) {
       this.startAutoplay();
     }
   }

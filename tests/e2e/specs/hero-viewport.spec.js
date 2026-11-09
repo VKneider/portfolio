@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 const HERO_ITEMS = [
   '.profile-image',
   '.hero-text h1',
-  '.roles-container',
-  '.hero-description',
+  '.hero-tablist',
+  '.hero-lede',
   '.cta-buttons',
 ];
 
@@ -26,6 +26,11 @@ test.describe('Hero fits inside the first viewport', () => {
       const hero = page.locator('.hero-section');
       await expect(hero).toBeVisible({ timeout: 15_000 });
       await expect(page.locator('.cta-buttons')).toBeVisible({ timeout: 15_000 });
+
+      // fitHeroToViewport() runs after the hero content is built and the web
+      // fonts settle; measure once that pass has landed, not on first paint.
+      await page.evaluate(() => document.fonts?.ready);
+      await page.waitForTimeout(250);
 
       const result = await page.evaluate((selectors) => {
         const heroRect = document.querySelector('.hero-section').getBoundingClientRect();

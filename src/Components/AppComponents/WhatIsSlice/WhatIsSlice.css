@@ -9,14 +9,11 @@ slice-whatisslice .whatisslice-container {
   margin: 0 auto;
   padding: 28px 20px 56px;
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 
-slice-whatisslice .manifesto-hero,
-slice-whatisslice .narrative-card,
-slice-whatisslice .ecosystem-card,
-slice-whatisslice .collaborate-section,
-slice-whatisslice .closing-motto {
+slice-whatisslice .slice-case-hero,
+slice-whatisslice .slice-glance {
   border-radius: var(--border-radius-slice);
   border: 1px solid var(--surface-2);
   background:
@@ -24,7 +21,7 @@ slice-whatisslice .closing-motto {
     var(--surface-1);
 }
 
-slice-whatisslice .manifesto-hero {
+slice-whatisslice .slice-case-hero {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: 22px;
@@ -32,8 +29,14 @@ slice-whatisslice .manifesto-hero {
   align-items: stretch;
 }
 
+slice-whatisslice .slice-case-copy {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
 slice-whatisslice .eyebrow {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -48,10 +51,10 @@ slice-whatisslice h3 {
   margin: 0;
 }
 
-slice-whatisslice .hero-copy h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.08;
-  margin-bottom: 12px;
+slice-whatisslice .slice-case-copy h1 {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
 }
 
 slice-whatisslice p {
@@ -59,51 +62,91 @@ slice-whatisslice p {
   line-height: 1.62;
 }
 
-slice-whatisslice .hero-copy {
-  display: grid;
-  gap: 12px;
+slice-whatisslice .slice-case-lede {
+  max-width: 58ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: var(--text-2);
 }
 
-slice-whatisslice .hero-emphasis {
-  border-left: 3px solid var(--accent);
-  padding-left: 12px;
-}
-
-slice-whatisslice .hero-tags {
-  list-style: none;
-  padding: 0;
-  margin: 6px 0 0;
+slice-whatisslice .slice-case-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-slice-whatisslice .hero-tags li {
-  border-radius: 999px;
-  border: 1px solid var(--surface-2);
-  padding: 6px 12px;
-  background: var(--bg);
-  font-size: 0.88rem;
+slice-whatisslice .case-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-1);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
 }
 
-slice-whatisslice .hero-visual {
+slice-whatisslice .case-action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+slice-whatisslice .case-action--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+slice-whatisslice .case-action--primary:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+  opacity: 0.9;
+}
+
+slice-whatisslice .case-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+slice-whatisslice .slice-case-visual {
   display: flex;
   min-height: 100%;
 }
 
 slice-whatisslice .logo-panel {
   width: 100%;
+  min-height: 340px;
   border-radius: calc(var(--border-radius-slice) - 2px);
   border: 1px solid rgba(var(--accent-rgb), 0.32);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(var(--accent-rgb), 0.1), transparent 55%),
+    radial-gradient(circle at 85% 80%, rgba(var(--accent-rgb), 0.06), transparent 60%),
+    var(--surface-1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 18px;
+}
+
+html[data-slice-theme="Dark"] slice-whatisslice .logo-panel {
   background:
     radial-gradient(circle at 20% 20%, rgba(var(--accent-rgb), 0.3), transparent 55%),
     radial-gradient(circle at 85% 80%, rgba(var(--accent-rgb), 0.24), transparent 60%),
     var(--bg);
-  display: grid;
-  place-content: center;
-  gap: 10px;
-  text-align: center;
-  padding: 18px;
+}
+
+slice-whatisslice .logo-panel slice-logostage {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 250px;
+  max-height: 360px;
 }
 
 slice-whatisslice .slice-logo {
@@ -112,31 +155,51 @@ slice-whatisslice .slice-logo {
   filter: brightness(0) saturate(100%) drop-shadow(0 0 0.3rem var(--accent));
 }
 
+html[data-slice-theme="Dark"] slice-whatisslice .slice-logo {
+  filter: brightness(0) invert(1) drop-shadow(0 0 0.3rem var(--accent));
+}
+
 slice-whatisslice .logo-caption {
+  flex: 0 0 auto;
   font-size: 0.9rem;
   color: var(--text-2);
 }
 
-slice-whatisslice .narrative-strip {
+slice-whatisslice .slice-glance {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
 }
 
-slice-whatisslice .narrative-card {
-  padding: 18px;
-  display: grid;
-  gap: 10px;
+slice-whatisslice .slice-glance-item {
+  padding: 16px 18px;
+  border-right: 1px solid var(--surface-2);
 }
 
-slice-whatisslice .narrative-card h2 {
-  font-size: 1.18rem;
+slice-whatisslice .slice-glance-item:last-child {
+  border-right: 0;
 }
 
-slice-whatisslice .ecosystem-section,
-slice-whatisslice .collaborate-section {
+slice-whatisslice .slice-glance-label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+slice-whatisslice .slice-glance-item strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+slice-whatisslice .slice-section {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 slice-whatisslice .section-head {
@@ -144,80 +207,343 @@ slice-whatisslice .section-head {
   gap: 8px;
 }
 
-slice-whatisslice .ecosystem-grid {
+slice-whatisslice .section-head h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  line-height: 1.12;
+}
+
+slice-whatisslice .section-head p {
+  max-width: 70ch;
+  color: var(--text-2);
+}
+
+/* What I built — editorial index, no cards */
+slice-whatisslice .slice-built-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+slice-whatisslice .slice-built-list li {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-slice-whatisslice .ecosystem-card {
-  padding: 18px;
-  display: grid;
-  gap: 10px;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-}
-
-slice-whatisslice .ecosystem-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 24px rgba(var(--accent-rgb), 0.14);
-}
-
-slice-whatisslice .ecosystem-subtitle {
-  font-size: 0.76rem;
+slice-whatisslice .slice-built-index {
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
   color: var(--accent);
 }
 
-slice-whatisslice .ecosystem-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+slice-whatisslice .slice-built-body {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
 }
 
-slice-whatisslice .ecosystem-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius-slice);
-  background: var(--accent);
-  color: var(--on-accent);
+slice-whatisslice .slice-built-body h3 {
+  font-size: 1.15rem;
+}
+
+slice-whatisslice .slice-built-body p {
+  max-width: 70ch;
+  font-size: 0.96rem;
+  color: var(--text-2);
+}
+
+slice-whatisslice .slice-text-link {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
   text-decoration: none;
-  font-weight: 700;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+slice-whatisslice .slice-text-link:hover {
+  opacity: 0.72;
+}
+
+slice-whatisslice .slice-text-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Decisions — table, not cards */
+slice-whatisslice .slice-table-wrap {
+  overflow-x: auto;
+}
+
+slice-whatisslice .slice-decisions-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+slice-whatisslice .slice-decisions-table thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+}
+
+slice-whatisslice .slice-decisions-table tbody th,
+slice-whatisslice .slice-decisions-table tbody td {
+  padding: 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+slice-whatisslice .slice-decisions-table tbody th {
+  width: 28%;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+slice-whatisslice .slice-decisions-table tbody td {
+  color: var(--text-2);
+}
+
+slice-whatisslice .slice-decisions-table tbody tr:hover {
+  background: rgba(var(--accent-rgb), 0.03);
+}
+
+/* Evidence — metrics + proof list, no cards */
+slice-whatisslice .slice-evidence-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+slice-whatisslice .slice-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 24px;
+}
+
+slice-whatisslice .slice-metric strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--heading);
+}
+
+slice-whatisslice .slice-metric span {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+slice-whatisslice .slice-proof-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+slice-whatisslice .slice-proof-list li {
+  border-bottom: 1px solid var(--border);
+}
+
+slice-whatisslice .slice-proof-list a {
+  display: grid;
+  gap: 3px;
+  padding: 12px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+slice-whatisslice .slice-proof-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+slice-whatisslice .slice-proof-list a span:last-child {
+  font-size: 0.92rem;
+  color: var(--text-2);
+}
+
+slice-whatisslice .slice-proof-list a:hover span:last-child {
+  color: var(--accent);
+}
+
+slice-whatisslice .slice-proof-list a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+slice-whatisslice .slice-proof-list .slice-proof-alt {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0 0 12px;
+  border-bottom: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+slice-whatisslice .slice-proof-list .slice-proof-alt:hover {
+  opacity: 0.72;
+}
+
+/* Ecosystem — connected map, no cards */
+slice-whatisslice .slice-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 18px;
+}
+
+slice-whatisslice .slice-map-node {
+  position: relative;
+  padding-top: 20px;
+}
+
+slice-whatisslice .slice-map-node::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+slice-whatisslice .slice-map-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+slice-whatisslice .slice-map-num {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+slice-whatisslice .slice-map-node h3 {
+  font-size: 1rem;
+}
+
+slice-whatisslice .slice-map-node p {
+  margin-top: 4px;
   font-size: 0.88rem;
-  padding: 9px 13px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  color: var(--text-2);
 }
 
-slice-whatisslice .ecosystem-link:hover {
-  transform: translateY(-1px);
+slice-whatisslice .slice-map-note {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-2);
 }
 
-slice-whatisslice .ecosystem-link:focus-visible {
-  outline: 2px solid var(--heading);
-  outline-offset: 2px;
+/* Status — two columns, no card */
+slice-whatisslice .slice-status {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
 
-slice-whatisslice .collaborate-section {
-  padding: 20px;
+slice-whatisslice .slice-status h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.15;
 }
 
-slice-whatisslice .collaborate-section ul {
+slice-whatisslice .slice-status p {
+  margin-top: 8px;
+  color: var(--text-2);
+}
+
+slice-whatisslice .slice-status h3 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+slice-whatisslice .slice-status ul {
   margin: 0;
   padding-left: 18px;
   display: grid;
-  gap: 8px;
+  gap: 6px;
+  color: var(--text-2);
 }
 
-slice-whatisslice .closing-motto {
-  padding: 24px;
+/* Closing — accent band, not a card */
+slice-whatisslice .slice-closing-band {
+  padding: 32px;
+  border-radius: var(--border-radius-slice);
+  background: var(--accent);
+  color: var(--on-accent);
   text-align: center;
-  font-size: 1.08rem;
+}
+
+slice-whatisslice .slice-closing-band > p {
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--heading);
+}
+
+slice-whatisslice .slice-closing-band .slice-case-actions {
+  justify-content: center;
+  margin-top: 16px;
+}
+
+slice-whatisslice .slice-closing-band .case-action {
+  border-color: rgba(250, 247, 238, 0.45);
+  color: var(--on-accent);
+}
+
+slice-whatisslice .slice-closing-band .case-action:hover {
+  border-color: var(--on-accent);
+  color: var(--on-accent);
+  background: rgba(250, 247, 238, 0.08);
+}
+
+slice-whatisslice .slice-closing-band .case-action--primary {
+  background: var(--on-accent);
+  border-color: var(--on-accent);
+  color: var(--accent);
+}
+
+slice-whatisslice .slice-closing-band .case-action--primary:hover {
+  background: var(--on-accent);
+  color: var(--accent);
 }
 
 @keyframes sliceReveal {
@@ -231,44 +557,191 @@ slice-whatisslice .closing-motto {
   }
 }
 
-slice-whatisslice .manifesto-hero,
-slice-whatisslice .narrative-card,
-slice-whatisslice .ecosystem-card,
-slice-whatisslice .collaborate-section,
-slice-whatisslice .closing-motto {
+slice-whatisslice .slice-case-hero,
+slice-whatisslice .slice-glance,
+slice-whatisslice .slice-built-list li,
+slice-whatisslice .slice-decisions-table tbody tr,
+slice-whatisslice .slice-metric,
+slice-whatisslice .slice-proof-list li,
+slice-whatisslice .slice-map-node,
+slice-whatisslice .slice-status,
+slice-whatisslice .slice-closing-band {
   animation: sliceReveal 0.46s ease both;
 }
 
-@media (max-width: 900px) {
-  slice-whatisslice .manifesto-hero {
-    grid-template-columns: 1fr;
-  }
-
-  slice-whatisslice .narrative-strip,
-  slice-whatisslice .ecosystem-grid {
-    grid-template-columns: 1fr;
+@media (prefers-reduced-motion: reduce) {
+  slice-whatisslice .slice-case-hero,
+  slice-whatisslice .slice-glance,
+  slice-whatisslice .slice-built-list li,
+  slice-whatisslice .slice-decisions-table tbody tr,
+  slice-whatisslice .slice-metric,
+  slice-whatisslice .slice-proof-list li,
+  slice-whatisslice .slice-map-node,
+  slice-whatisslice .slice-status,
+  slice-whatisslice .slice-closing-band {
+    animation: none;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 900px) {
+  slice-whatisslice .slice-case-hero {
+    grid-template-columns: 1fr;
+  }
+
+  slice-whatisslice .slice-glance {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  slice-whatisslice .slice-glance-item:nth-child(2) {
+    border-right: 0;
+  }
+
+  slice-whatisslice .slice-glance-item:nth-child(n + 3) {
+    border-top: 1px solid var(--surface-2);
+  }
+
+  slice-whatisslice .slice-evidence-layout,
+  slice-whatisslice .slice-status {
+    grid-template-columns: 1fr;
+  }
+
+  slice-whatisslice .slice-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
   slice-whatisslice .whatisslice-container {
     padding: 20px 14px 44px;
   }
 
-  slice-whatisslice .manifesto-hero,
-  slice-whatisslice .collaborate-section,
-  slice-whatisslice .closing-motto,
-  slice-whatisslice .narrative-card,
-  slice-whatisslice .ecosystem-card {
+  slice-whatisslice .slice-case-hero,
+  slice-whatisslice .slice-closing-band {
     padding: 16px;
   }
 
-  slice-whatisslice .ecosystem-actions {
+  slice-whatisslice .slice-case-hero {
+    gap: 16px;
+  }
+
+  slice-whatisslice .logo-panel {
+    min-height: 180px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  slice-whatisslice .logo-panel slice-logostage {
+    min-height: 150px;
+    max-height: 180px;
+  }
+
+  slice-whatisslice .logo-caption {
+    max-width: 34ch;
+    margin: 0 auto;
+    font-size: 0.8rem;
+  }
+
+  slice-whatisslice .slice-glance {
+    grid-template-columns: 1fr;
+  }
+
+  slice-whatisslice .slice-glance-item {
+    border-right: 0;
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  slice-whatisslice .slice-glance-item:last-child {
+    border-bottom: 0;
+  }
+
+  slice-whatisslice .slice-glance-item:nth-child(n + 3) {
+    border-top: 0;
+  }
+
+  slice-whatisslice .slice-built-list li {
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+  }
+
+  slice-whatisslice .slice-map {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0;
+  }
+
+  slice-whatisslice .slice-map-node {
+    padding: 14px 0 14px 20px;
+    border-left: 1px solid var(--border);
+  }
+
+  slice-whatisslice .slice-map-node::after {
+    display: none;
+  }
+
+  slice-whatisslice .slice-map-dot {
+    left: -4px;
+    top: 18px;
+  }
+
+  slice-whatisslice .slice-case-actions {
     display: grid;
     gap: 8px;
   }
 
-  slice-whatisslice .ecosystem-link {
+  slice-whatisslice .case-action {
     width: 100%;
+  }
+
+  slice-whatisslice .slice-closing-band .slice-case-actions {
+    justify-content: stretch;
+  }
+
+  slice-whatisslice .slice-decisions-table {
+    min-width: 0;
+  }
+
+  slice-whatisslice .slice-decisions-table thead {
+    display: none;
+  }
+
+  slice-whatisslice .slice-decisions-table,
+  slice-whatisslice .slice-decisions-table tbody,
+  slice-whatisslice .slice-decisions-table tr,
+  slice-whatisslice .slice-decisions-table th,
+  slice-whatisslice .slice-decisions-table td {
+    display: block;
+    width: 100%;
+  }
+
+  slice-whatisslice .slice-decisions-table tbody tr {
+    padding: 14px 0 14px 12px;
+    border-bottom: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+  }
+
+  slice-whatisslice .slice-decisions-table tbody th {
+    width: 100%;
+    padding: 0 0 8px;
+    border: 0;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  slice-whatisslice .slice-decisions-table tbody td {
+    padding: 8px 0 4px;
+    border: 0;
+  }
+
+  slice-whatisslice .slice-decisions-table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
 }

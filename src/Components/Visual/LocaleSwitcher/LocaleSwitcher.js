@@ -10,7 +10,9 @@ const CHECK = `
 `;
 
 export default class LocaleSwitcher extends HTMLElement {
-  static props = {};
+  static props = {
+    placement: { type: 'string', default: 'auto', allowedValues: ['auto', 'top', 'bottom'] }
+  };
 
   constructor(props) {
     super();
@@ -20,9 +22,10 @@ export default class LocaleSwitcher extends HTMLElement {
     this.$code = this.querySelector('.locale-switcher__code');
     this.$menu = this.querySelector('.locale-switcher__menu');
     this.$items = [];
+    this._placement = 'auto';
 
     slice.controller.setComponentProps(this, props);
-    this.debuggerProps = ['locales'];
+    this.debuggerProps = ['locales', 'placement'];
   }
 
   init() {
@@ -115,12 +118,37 @@ export default class LocaleSwitcher extends HTMLElement {
 
   open(focus = false) {
     if (this.$button.getAttribute('aria-expanded') === 'true') return;
+    this._placeMenu();
     this.$menu.dataset.open = 'true';
     this.$button.setAttribute('aria-expanded', 'true');
     if (focus) {
       const active = this.$items.find((item) => item.getAttribute('aria-checked') === 'true');
       (active || this.$items[0])?.focus();
     }
+  }
+
+  _placeMenu() {
+    if (this._placement === 'top' || this._placement === 'bottom') {
+      this.$menu.dataset.placement = this._placement;
+      return;
+    }
+
+    // Auto: abre hacia arriba cuando no hay espacio suficiente abajo.
+    const rect = this.$button.getBoundingClientRect();
+    const menuHeight = this.$menu.offsetHeight || 0;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const openUp = spaceBelow < menuHeight + 16 && spaceAbove > spaceBelow;
+
+    this.$menu.dataset.placement = openUp ? 'top' : 'bottom';
+  }
+
+  get placement() {
+    return this._placement;
+  }
+
+  set placement(value) {
+    this._placement = ['auto', 'top', 'bottom'].includes(value) ? value : 'auto';
   }
 
   close(focus = false) {
