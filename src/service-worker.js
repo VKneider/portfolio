@@ -1,4 +1,7 @@
-const CACHE_NAME = 'portfolio-pwa-v4';
+// Bump this on every deploy, or build with `--hash-filenames` so new assets get
+// new URLs. The activate handler deletes every cache with a different name, so a
+// bump is also what removes old runtime-cached bundles.
+const CACHE_NAME = 'portfolio-pwa-v5';
 const APP_SHELL = [
   '/',
   '/App/index.html',
@@ -24,8 +27,7 @@ const ASSET_PATH_PREFIXES = [
   '/Themes',
   '/Styles',
   '/images',
-  '/assets',
-  '/Components/Visual/Icon'
+  '/assets'
 ];
 
 const ASSET_EXTENSIONS = [
@@ -50,15 +52,17 @@ self.addEventListener('install', (event) => {
       // Bundles only exist after `slice build`. In dev the bundle config 404s,
       // and addAll rejects the whole batch on one miss, so these are optional.
       await Promise.allSettled(BUNDLE_URLS.map((url) => cache.add(url)));
-    })
+    }).then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.map((key) => (key === CACHE_NAME ? null : caches.delete(key))))
-    )
+    caches.keys()
+      .then((keys) =>
+        Promise.all(keys.map((key) => (key === CACHE_NAME ? null : caches.delete(key))))
+      )
+      .then(() => self.clients.claim())
   );
 });
 
