@@ -33,10 +33,13 @@ test('development mode /slice-env.json returns 200 with mode and filtered env', 
 });
 
 test('production mode /slice-env.json returns 200 with mode and filtered env', async () => {
+  // Production serves the build-time artifact, not a runtime resolver. Build
+  // with the public env so dist/slice-env.json contains the test keys.
   serverProcess = await startServer({
     cwd: projectRoot,
     port: PROD_PORT,
-    env: { NODE_ENV: 'production', ...sharedEnv }
+    env: { NODE_ENV: 'production', ...sharedEnv },
+    build: true
   });
 
   const response = await expectStatus(`http://localhost:${PROD_PORT}/slice-env.json`, 200);
